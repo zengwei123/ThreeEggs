@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="menu_H">50dp</dimen>
+    <dimen name="goodsList_H">40dp</dimen>
+    <dimen name="goodsList_RecyclerView_H">120dp</dimen>
+
+    <dimen name="Text_Size_1">12sp</dimen>
+    <dimen name="Text_Size_2">14sp</dimen>
+    <dimen name="Text_Size_3">16sp</dimen>
+    <dimen name="Text_Size_4">18sp</dimen>
+    <dimen name="Text_Size_5">20sp</dimen>
+    <dimen name="Text_Size_6">22sp</dimen>
+</resources>

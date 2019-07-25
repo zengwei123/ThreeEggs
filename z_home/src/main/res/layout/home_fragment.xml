@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            app:layout_scrollFlags="enterAlways|enterAlwaysCollapsed"
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/Home_CollapsingToolbar"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--其他的都是壳子-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp">
+
+                        <ImageView
+                            android:id="@+id/Home_Fragment_Image_Class"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="3dp"
+                            android:padding="5dp" />
+
+                        <ImageView
+                            android:id="@+id/Home_Fragment_Image_Shooting"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="3dp"
+                            android:layout_toLeftOf="@+id/Home_Fragment_Image_Class"
+                            android:padding="5dp" />
+
+                        <TextView
+                            android:id="@+id/Home_Fragment_Image_Location"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_toLeftOf="@+id/Home_Fragment_Image_Shooting"
+                            android:drawableLeft="@mipmap/home_positioning"
+                            android:gravity="center|left"
+                            android:paddingLeft="10dp" />
+
+                    </RelativeLayout>
+
+                    <EditText
+                        android:background="@drawable/home_edittext_background"
+                        android:drawableLeft="@mipmap/home_search"
+                        android:hint="  点击搜索商品/店铺"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textSize="12sp"
+                        android:paddingLeft="5dp"
+                        android:layout_margin="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <cn.bingoogolapple.bgabanner.BGABanner
+                        android:id="@+id/Home_Fragment_BGABanner"
+                        app:banner_pointAutoPlayInterval="5000"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp">
+                    </cn.bingoogolapple.bgabanner.BGABanner>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/Home_Fragment_RecyclerView"
+                        android:overScrollMode="never"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+                    <ImageView
+                        android:src="@mipmap/home_activity"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/menu_H" />
+                </LinearLayout>
+                
+                
+                
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+        <!--其他的都是壳子-->
+        <LinearLayout
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <FrameLayout
+                android:id="@+id/GoodsList_Fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+        </LinearLayout>
+        
+    </android.support.design.widget.CoordinatorLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/Home_FloatingActionButton"
+        app:rippleColor="#ffffff"
+        app:backgroundTint="#ffffff"
+        android:src="@mipmap/home_shoppingcart"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
