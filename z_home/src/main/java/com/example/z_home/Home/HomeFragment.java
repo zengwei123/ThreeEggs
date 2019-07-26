@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.MvpFragment;
-import com.example.z_base.ViewBind;
 import com.example.z_home.R;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
@@ -28,17 +26,11 @@ import cn.bingoogolapple.bgabanner.BGABanner;
  */
 
 public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView {
-    @ViewBind(R.id.Home_Fragment_Image_Class)
     private ImageView Home_Fragment_Image_Class;   //类别
-    @ViewBind(R.id.Home_Fragment_Image_Shooting)
     private ImageView Home_Fragment_Image_Shooting;  //照相
-    @ViewBind(R.id.Home_Fragment_Image_Location)
     private TextView Home_Fragment_Image_Location;  //位置
-    @ViewBind(R.id.Home_Fragment_BGABanner)
     private BGABanner Home_Fragment_BGABanner;    //轮播图
-    @ViewBind(R.id.Home_Fragment_RecyclerView)
     private RecyclerView Home_Fragment_RecyclerView;   //活动栏
-    @ViewBind(R.id.GoodsList_Fragment)
     private FrameLayout GoodsList_Fragment;  //商品列表
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,8 +44,17 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         ARouter.init(activity.getApplication());
         mvpPresenter.attachView(this);
-        injectViews(view);
+        getViews(view);
         mvpPresenter.init();
+    }
+
+    public void getViews(View view){
+        Home_Fragment_Image_Class=view.findViewById(R.id.Home_Fragment_Image_Class);
+        Home_Fragment_Image_Shooting=view.findViewById(R.id.Home_Fragment_Image_Shooting);
+        Home_Fragment_Image_Location=view.findViewById(R.id.Home_Fragment_Image_Location);
+        Home_Fragment_BGABanner=view.findViewById(R.id.Home_Fragment_BGABanner);
+        Home_Fragment_RecyclerView=view.findViewById(R.id.Home_Fragment_RecyclerView);
+        GoodsList_Fragment=view.findViewById(R.id.GoodsList_Fragment);
     }
 
     @Override

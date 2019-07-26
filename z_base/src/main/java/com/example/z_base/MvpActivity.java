@@ -1,6 +1,7 @@
 package com.example.z_base;
 
 import android.os.Bundle;
+import android.view.View;
 
 
 /**
@@ -24,4 +25,6 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
             mvpPresenter =null;
         }
     }
+
+    public abstract void getViews(View view);
 }

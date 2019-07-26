@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.MvpFragment;
-import com.example.z_base.ViewBind;
 import com.example.z_goods.R;
 
 /**
@@ -48,7 +47,8 @@ public class GoodsListListFragment extends MvpFragment<GoodsListPresenter> imple
         mvpPresenter.init();
     }
 
-    private void getViews(View view){
+    @Override
+    public void getViews(View view){
         GoodsList_Comprehensive=view.findViewById(R.id.GoodsList_Comprehensive);
         GoodsList_Sales=view.findViewById(R.id.GoodsList_Sales);
         GoodsList_Price=view.findViewById(R.id.GoodsList_Price);

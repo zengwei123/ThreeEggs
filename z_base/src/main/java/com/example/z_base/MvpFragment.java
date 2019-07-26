@@ -22,4 +22,6 @@ public abstract class MvpFragment<P extends BasePresenter> extends BaseFragment 
             mvpPresenter=null;
         }
     }
+
+    public abstract void getViews(View view);
 }

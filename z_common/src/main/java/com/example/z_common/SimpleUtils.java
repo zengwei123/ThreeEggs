@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 
 /**
@@ -12,6 +13,7 @@ import android.util.Log;
  */
 
 public class SimpleUtils {
+    /**列表的布局方式**/
     public static RecyclerView.LayoutManager getRecyclerLayoutManager(boolean isLG, Context context,int number ){
         if (isLG){
             return new LinearLayoutManager(context);
@@ -26,6 +28,12 @@ public class SimpleUtils {
             return gridLayoutManager;
         }
     }
+    /**也是列表的布局方式  瀑布流**/
+    public static RecyclerView.LayoutManager getRecyclerLayoutManager(Context context,int number ){
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(number, StaggeredGridLayoutManager.VERTICAL);
+        return layoutManager;
+    }
+
     public static void Test(){
         Log.d("zengwei123","测试");
     }

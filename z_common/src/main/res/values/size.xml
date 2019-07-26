@@ -4,6 +4,8 @@
     <dimen name="goodsList_H">40dp</dimen>
     <dimen name="goodsList_RecyclerView_H">120dp</dimen>
 
+    <dimen name="Title_Height">40dp</dimen>
+
     <dimen name="Text_Size_1">12sp</dimen>
     <dimen name="Text_Size_2">14sp</dimen>
     <dimen name="Text_Size_3">16sp</dimen>

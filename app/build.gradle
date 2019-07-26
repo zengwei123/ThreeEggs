@@ -23,6 +23,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -38,8 +43,8 @@ dependencies {
     api 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     if(!isDeBug.toBoolean()){
-        implementation project(':z_base')
-        implementation project(':z_common')
-        implementation project(path: ':z_home',configuration: 'default')
+        implementation project(':z_base')    //基础模块
+        implementation project(':z_common')   //一个些工具模块
+        implementation project(':z_home')   //主界面模块
     }
 }

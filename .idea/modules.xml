@@ -6,10 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/text/text.iml" filepath="$PROJECT_DIR$/text/text.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_base/z_base.iml" filepath="$PROJECT_DIR$/z_base/z_base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/z_circle/z_circle.iml" filepath="$PROJECT_DIR$/z_circle/z_circle.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_common/z_common.iml" filepath="$PROJECT_DIR$/z_common/z_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_goods/z_goods.iml" filepath="$PROJECT_DIR$/z_goods/z_goods.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_home/z_home.iml" filepath="$PROJECT_DIR$/z_home/z_home.iml" />
-      <module fileurl="file://$PROJECT_DIR$/z_router/z_router.iml" filepath="$PROJECT_DIR$/z_router/z_router.iml" />
     </modules>
   </component>
 </project>

@@ -3,6 +3,7 @@ package com.example.z_home;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 

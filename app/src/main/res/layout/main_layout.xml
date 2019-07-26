@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.zengwei.twoeggs.Custom.NoScrollViewPager
+    <com.example.z_common.Custom.NoScrollViewPager
         android:id="@+id/Main_ViewPager"
         android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.example.zengwei.twoeggs.Custom.NoScrollViewPager>
+    </com.example.z_common.Custom.NoScrollViewPager>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/Main_TabLayout"

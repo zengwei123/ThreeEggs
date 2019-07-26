@@ -28,17 +28,15 @@
 
                         <ImageView
                             android:id="@+id/Home_Fragment_Image_Class"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:layout_alignParentRight="true"
-                            android:layout_margin="3dp"
                             android:padding="5dp" />
 
                         <ImageView
                             android:id="@+id/Home_Fragment_Image_Shooting"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_margin="3dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:layout_toLeftOf="@+id/Home_Fragment_Image_Class"
                             android:padding="5dp" />
 

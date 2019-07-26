@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.widget.TextView;
+import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.MvpActivity;
 import com.example.z_base.ViewBind;
 import com.example.z_common.Custom.NoScrollViewPager;
@@ -32,6 +31,11 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         mvpPresenter.attachView(this);
         super.injectViews();
         mvpPresenter.init();
+    }
+
+    @Override
+    public void getViews(View view) {
+
     }
 
     @Override
