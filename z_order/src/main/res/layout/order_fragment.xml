@@ -14,7 +14,8 @@
         android:textColor="@color/CF2F2F2"
         android:textSize="@dimen/Text_Size_5" />
 
-        <android.support.design.widget.TabLayout
+    <android.support.design.widget.TabLayout
+            android:id="@+id/Order_TabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.design.widget.TabItem
@@ -48,5 +49,12 @@
                 android:layout_height="wrap_content" />
 
         </android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/Order_ViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
 
 </LinearLayout>
