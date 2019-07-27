@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.GlideUtil;
 import com.example.z_common.Model.Home.HomeGoodsRecycler;
@@ -68,8 +67,8 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
             helper.setText(R.id.GL_Recycler_information_Store,homeGoodsRecycler.getShopName());
         };
         /**准备切换的布局**/
-        RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information1,homeGoodsRecyclers,HomeGoodsRecycler.class,simpleRecyclerViewAdapterCallback);
-        RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information2,homeGoodsRecyclers,HomeGoodsRecycler.class,simpleRecyclerViewAdapterCallback);
+        RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information1, mvpView.getActivityContext(),homeGoodsRecyclers,simpleRecyclerViewAdapterCallback);
+        RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information2, mvpView.getActivityContext(),homeGoodsRecyclers,simpleRecyclerViewAdapterCallback);
 
         /**显示默认的布局状态**/
         switchRecycler(isRecyclerState,recycler,context,imageView);

@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpFragment;
+import com.example.z_circle.Circle.CircleFragment;
 import com.example.z_home.Home.HomeFragment;
 import com.example.zengwei.threeeggs.R;
 
@@ -25,7 +26,7 @@ public class MainPresenter extends BasePresenter<MainView> {
     public void setView() {
         List<MvpFragment> fragments=new ArrayList<>();
         fragments.add(new HomeFragment());
-        fragments.add(new HomeFragment());
+        fragments.add(new CircleFragment());
         fragments.add(new HomeFragment());
         fragments.add(new HomeFragment());
         MainFragmentAdapter mainFragmentAdapter=new MainFragmentAdapter( ((FragmentActivity)mvpView.getThisActivity()).getSupportFragmentManager(),fragments);

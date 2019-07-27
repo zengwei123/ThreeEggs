@@ -46,5 +46,6 @@ dependencies {
         implementation project(':z_base')    //基础模块
         implementation project(':z_common')   //一个些工具模块
         implementation project(':z_home')   //主界面模块
+        implementation project(':z_circle')   //圈子界面模块
     }
 }

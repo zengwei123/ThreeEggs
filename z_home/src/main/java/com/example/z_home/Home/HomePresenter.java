@@ -3,18 +3,13 @@ package com.example.z_home.Home;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.z_base.BaseActivity;
-import com.example.z_base.BaseFragment;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.GlideUtil;
 import com.example.z_common.Model.Home.HomeActivityMenu;
 import com.example.z_common.SimpleRecyclerViewAdapter;
-import com.example.z_common.SimpleRecyclerViewAdapterCallback;
 import com.example.z_common.SimpleUtils;
 import com.example.z_home.R;
 
@@ -69,7 +64,7 @@ class HomePresenter extends BasePresenter<HomeView>{
         list.add(new HomeActivityMenu(R.mipmap.main_circle,"","看看4",""));
         list.add(new HomeActivityMenu(R.mipmap.main_circle,"","看看5",""));
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter1 =new SimpleRecyclerViewAdapter(
-                R.layout.home_fragment_recyclerview_activitymenu, list, HomeActivityMenu.class,
+                R.layout.home_fragment_recyclerview_activitymenu, mvpView.getActivityContext(), list,
                 (helper, item) -> {
                     /**获取数据**/
                     HomeActivityMenu homeActivityMenu= (HomeActivityMenu) item;

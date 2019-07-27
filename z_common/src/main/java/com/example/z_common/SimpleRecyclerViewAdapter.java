@@ -1,9 +1,10 @@
 package com.example.z_common;
 
+import android.content.Context;
+import android.view.View;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.z_common.Model.Home.HomeActivityMenu;
-import com.example.z_common.Model.Home.HomeGoodsRecycler;
 
 import java.util.List;
 
@@ -14,12 +15,15 @@ import java.util.List;
  */
 
 public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<Object, BaseViewHolder> {
-    private Class aclass;
     private SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback;
-    public SimpleRecyclerViewAdapter(int layoutResId, List data, Class aclass,SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback) {
+    public SimpleRecyclerViewAdapter(int layoutResId, Context context, List data, SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback) {
         super(layoutResId, data);
-        this.aclass=aclass;
+        mContext=context;
         this.simpleRecyclerViewAdapterCallback=simpleRecyclerViewAdapterCallback;
+        if (mContext!=null){
+            View view=View.inflate(mContext,R.layout.common_nodata_layout,null);
+            this.setEmptyView(view);
+        }
     }
 
     @Override
