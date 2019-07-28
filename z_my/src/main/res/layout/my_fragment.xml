@@ -3,23 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <RelativeLayout
+    <TextView
         android:background="@color/C25C6FC"
+        android:text="我的"
+        android:gravity="center"
+        android:textSize="@dimen/Text_Size_4"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/Title_Height">
-        <TextView
-            android:text="我的"
-            android:gravity="center"
-            android:textSize="@dimen/Text_Size_4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <ImageView
-            android:src="@mipmap/my_message"
-            android:padding="8dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="@dimen/Title_Height"
-            android:layout_height="@dimen/Title_Height" />
-    </RelativeLayout>
+        android:layout_height="@dimen/Title_Height" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="90dp">

@@ -58,11 +58,11 @@ class HomePresenter extends BasePresenter<HomeView>{
 
         /**设置活动菜单**/
         List<HomeActivityMenu> list=new ArrayList<>();
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","看看1",""));
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","看看2",""));
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","看看3",""));
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","看看4",""));
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","看看5",""));
+        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","精选店铺",""));
+        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","清凉夏季",""));
+        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","镇店大牌",""));
+        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","附近爆款",""));
+        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","穿搭推荐",""));
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter1 =new SimpleRecyclerViewAdapter(
                 R.layout.home_fragment_recyclerview_activitymenu, mvpView.getActivityContext(), list,
                 (helper, item) -> {
