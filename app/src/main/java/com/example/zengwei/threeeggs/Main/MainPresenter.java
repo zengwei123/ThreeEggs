@@ -6,7 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpFragment;
 import com.example.z_circle.Circle.CircleFragment;
+import com.example.z_common.SimpleFragmentAdapter;
 import com.example.z_home.Home.HomeFragment;
+import com.example.z_my.my.MyFragment;
+import com.example.z_order.order.OrderFragment;
 import com.example.zengwei.threeeggs.R;
 
 import java.util.ArrayList;
@@ -27,11 +30,12 @@ public class MainPresenter extends BasePresenter<MainView> {
         List<MvpFragment> fragments=new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new CircleFragment());
-        fragments.add(new HomeFragment());
-        fragments.add(new HomeFragment());
-        MainFragmentAdapter mainFragmentAdapter=new MainFragmentAdapter( ((FragmentActivity)mvpView.getThisActivity()).getSupportFragmentManager(),fragments);
-        mvpView.getMain_ViewPager().setAdapter(mainFragmentAdapter);
-
+        fragments.add(new OrderFragment());
+        fragments.add(new MyFragment());
+        SimpleFragmentAdapter simpleFragmentAdapter=new SimpleFragmentAdapter( ((FragmentActivity)mvpView.getThisActivity()).getSupportFragmentManager(),fragments);
+        mvpView.getMain_ViewPager().setAdapter(simpleFragmentAdapter);
+        /**加载页面数量**/
+        mvpView.getMain_ViewPager().setOffscreenPageLimit(4);
         mvpView.getMain_TabLayout().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

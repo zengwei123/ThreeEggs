@@ -1,4 +1,4 @@
-package com.example.zengwei.threeeggs.Main;
+package com.example.z_common;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,9 +9,9 @@ import com.example.z_base.MvpFragment;
 import java.util.List;
 
 
-public class MainFragmentAdapter extends FragmentPagerAdapter {
+public class SimpleFragmentAdapter extends FragmentPagerAdapter {
     private List<MvpFragment> mFragmentList;//各导航的Fragment
-    public MainFragmentAdapter(FragmentManager fragmentManager, List<MvpFragment> fragments){
+    public SimpleFragmentAdapter(FragmentManager fragmentManager, List<MvpFragment> fragments){
         super(fragmentManager);
         mFragmentList=fragments;
     }

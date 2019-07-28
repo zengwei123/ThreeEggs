@@ -3,21 +3,19 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/text" />
             <option value="$PROJECT_DIR$/z_base" />
+            <option value="$PROJECT_DIR$/z_circle" />
             <option value="$PROJECT_DIR$/z_common" />
             <option value="$PROJECT_DIR$/z_goods" />
             <option value="$PROJECT_DIR$/z_home" />
-            <option value="$PROJECT_DIR$/z_router" />
+            <option value="$PROJECT_DIR$/z_my" />
+            <option value="$PROJECT_DIR$/z_order" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

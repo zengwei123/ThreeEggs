@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:background="@color/C25C6FC"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/Title_Height">
+        <TextView
+            android:text="我的"
+            android:gravity="center"
+            android:textSize="@dimen/Text_Size_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:src="@mipmap/my_message"
+            android:padding="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/Title_Height"
+            android:layout_height="@dimen/Title_Height" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <ImageView
+            android:id="@+id/OrderPage_GoodsImage"
+            android:src="@mipmap/my_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/OrderPage_GoodsImage"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/My_Name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/Text_Size_6"
+                android:gravity="left|bottom"
+                android:text="超级无敌美少女" />
+
+            <TextView
+                android:id="@+id/My_Quotes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|top"
+                android:text="中国最伟大最永久的艺术是男人扮女人" />
+            <TextView
+                android:id="@+id/OrderPage_GoodsName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/Text_Size_4"
+                android:gravity="left|bottom"
+                android:text="LV 1" />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:background="#cccccc"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" >
+        <TextView
+            android:text="优惠券"
+            android:padding="5dp"
+            android:drawableLeft="@mipmap/my_youhuiquan"
+            android:gravity="center|left"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:text="附近正在进行的福利"
+            android:gravity="center|right"
+            android:drawableRight="@mipmap/my_right"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/My_Recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>
