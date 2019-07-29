@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="消息"
+        android:gravity="center"
+        android:textColor="@color/CF2F2F2"
+        android:textSize="@dimen/Text_Size_5"
+        android:background="@color/C25C6FC"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/Title_Height" />
+</LinearLayout>

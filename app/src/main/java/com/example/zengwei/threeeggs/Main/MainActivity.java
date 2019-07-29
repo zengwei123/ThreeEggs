@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.view.View;
 
 import com.example.z_base.MvpActivity;
 import com.example.z_base.ViewBind;
@@ -34,7 +33,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     }
 
     @Override
-    public void getViews(View view) {
+    public void getViews() {
 
     }
 

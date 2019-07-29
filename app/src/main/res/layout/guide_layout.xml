@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <cn.bingoogolapple.bgabanner.BGABanner
+        android:id="@+id/Guide_BGABanner"
+        app:banner_pointAutoPlayAble="false"
+        app:banner_transitionEffect="fade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:id="@+id/Guide_NoFirst_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:src="@drawable/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:text="@string/app_name"
+            android:textColor="@color/C2B2B2B"
+            android:textSize="@dimen/Text_Size_3"
+            android:layout_marginLeft="50dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+</RelativeLayout>

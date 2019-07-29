@@ -3,38 +3,32 @@ package com.example.z_order.orderPage;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.z_base.MvpFragment;
+import com.example.z_base.MvpActivity;
 import com.example.z_order.R;
 
 /**
  * Created by zengwei on 2019/7/28.
  */
 
-public class OrderPageFragment extends MvpFragment<OrderPagePresenter> implements OrderPageView{
+@Route(path = "/Order/OrderList")
+public class OrderPageActivity extends MvpActivity<OrderPagePresenter> implements OrderPageView{
     private RecyclerView OrderPage_Recycler;
     private int RecyclerLayout;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.orderpage_fragment,null,false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        /**启动页的图片设置为空**/
+        super.onCreate(savedInstanceState);
         ARouter.openLog();     // 打印日志
         ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
-        ARouter.init(activity.getApplication());
+        ARouter.init(getApplication());
+        setContentView(R.layout.orderpage_fragment);
         mvpPresenter.attachView(this);
-        getViews(view);
+        getViews();
         mvpPresenter.init();
     }
 
@@ -44,18 +38,18 @@ public class OrderPageFragment extends MvpFragment<OrderPagePresenter> implement
     }
 
     @Override
-    public void getViews(View view) {
-        OrderPage_Recycler=view.findViewById(R.id.OrderPage_Recycler);
+    public void getViews() {
+        OrderPage_Recycler=findViewById(R.id.OrderPage_Recycler);
     }
 
     @Override
     public Context getActivityContext() {
-        return activity;
+        return this;
     }
 
     @Override
     public Activity getThisActivity() {
-        return activity;
+        return this;
     }
 
     @Override

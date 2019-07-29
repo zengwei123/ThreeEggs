@@ -1,26 +1,22 @@
-package com.example.z_order.order;
+package com.example.z_message.message;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.MvpFragment;
-import com.example.z_order.R;
+import com.example.z_message.R;
 
-public class OrderFragment extends MvpFragment <OrderPresenter> implements OrderView {
-    private TabLayout Order_Table;
-    private ViewPager Order_ViewPager;
+public class MessageFragment extends MvpFragment<MessagePresenter> implements MessageView {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.order_fragment,null,false);
+        return inflater.inflate(R.layout.message_fragment,null,false);
     }
 
     @Override
@@ -45,23 +41,12 @@ public class OrderFragment extends MvpFragment <OrderPresenter> implements Order
     }
 
     @Override
-    protected OrderPresenter createPresenter() {
-        return new OrderPresenter();
+    protected MessagePresenter createPresenter() {
+        return new MessagePresenter();
     }
 
     @Override
     public void getViews(View view) {
-        Order_Table=view.findViewById(R.id.Order_TabLayout);
-        Order_ViewPager=view.findViewById(R.id.Order_ViewPager);
-    }
 
-    @Override
-    public TabLayout getOrder_Table() {
-        return Order_Table;
-    }
-
-    @Override
-    public ViewPager getOrder_ViewPager() {
-        return Order_ViewPager;
     }
 }

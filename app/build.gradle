@@ -38,6 +38,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:design:27.1.1'
+    implementation 'cn.bingoogolapple:bga-banner:2.2.6@aar'   //引导界面
 
     //路由库
     api 'com.alibaba:arouter-api:1.4.1'
@@ -47,7 +48,8 @@ dependencies {
         implementation project(':z_common')   //一个些工具模块
         implementation project(':z_home')   //主界面模块
         implementation project(':z_circle')   //圈子界面模块
-        implementation project(':z_order')   //订单界面模块
         implementation project(':z_my')   //我的界面模块
+        implementation project(':z_order')   //消息界面模块
+        implementation project(':z_message')   //消息界面模块
     }
 }

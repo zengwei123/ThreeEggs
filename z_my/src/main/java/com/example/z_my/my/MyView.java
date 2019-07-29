@@ -1,6 +1,7 @@
 package com.example.z_my.my;
 
 import android.support.v7.widget.RecyclerView;
+import android.widget.LinearLayout;
 
 import com.example.z_base.BaseView;
 
@@ -10,4 +11,5 @@ import com.example.z_base.BaseView;
 
 interface MyView extends BaseView{
     RecyclerView getMy_Recycler();
+    LinearLayout getMy_OrderAll_Linear();
 }

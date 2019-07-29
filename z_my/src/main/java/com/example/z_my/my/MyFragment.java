@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.MvpFragment;
@@ -20,6 +21,7 @@ import com.example.z_my.R;
 
 public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     private RecyclerView My_Recycler;
+    private LinearLayout My_OrderAll_Linear;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.my_fragment,null,false);
@@ -54,10 +56,17 @@ public class MyFragment extends MvpFragment<MyPresenter> implements MyView {
     @Override
     public void getViews(View view) {
         My_Recycler=view.findViewById(R.id.My_Recycler);
+        My_OrderAll_Linear=view.findViewById(R.id.My_OrderAll_Linear);
     }
 
     @Override
     public RecyclerView getMy_Recycler() {
         return My_Recycler;
     }
+
+    @Override
+    public LinearLayout getMy_OrderAll_Linear() {
+        return My_OrderAll_Linear;
+    }
+
 }

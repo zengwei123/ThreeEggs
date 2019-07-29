@@ -8,8 +8,8 @@ import com.example.z_base.MvpFragment;
 import com.example.z_circle.Circle.CircleFragment;
 import com.example.z_common.SimpleFragmentAdapter;
 import com.example.z_home.Home.HomeFragment;
+import com.example.z_message.message.MessageFragment;
 import com.example.z_my.my.MyFragment;
-import com.example.z_order.order.OrderFragment;
 import com.example.zengwei.threeeggs.R;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class MainPresenter extends BasePresenter<MainView> {
         List<MvpFragment> fragments=new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new CircleFragment());
-        fragments.add(new OrderFragment());
+        fragments.add(new MessageFragment());
         fragments.add(new MyFragment());
         SimpleFragmentAdapter simpleFragmentAdapter=new SimpleFragmentAdapter( ((FragmentActivity)mvpView.getThisActivity()).getSupportFragmentManager(),fragments);
         mvpView.getMain_ViewPager().setAdapter(simpleFragmentAdapter);
