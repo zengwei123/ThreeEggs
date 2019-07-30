@@ -26,7 +26,7 @@ import cn.bingoogolapple.bgabanner.BGABanner;
  */
 
 public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView {
-    private ImageView Home_Fragment_Image_Class;   //类别
+    private ImageView Home_Fragment_Image_Category;   //类别
     private ImageView Home_Fragment_Image_Shooting;  //照相
     private TextView Home_Fragment_Image_Location;  //位置
     private BGABanner Home_Fragment_BGABanner;    //轮播图
@@ -49,7 +49,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     }
 
     public void getViews(View view){
-        Home_Fragment_Image_Class=view.findViewById(R.id.Home_Fragment_Image_Class);
+        Home_Fragment_Image_Category=view.findViewById(R.id.Home_Fragment_Image_Category);
         Home_Fragment_Image_Shooting=view.findViewById(R.id.Home_Fragment_Image_Shooting);
         Home_Fragment_Image_Location=view.findViewById(R.id.Home_Fragment_Image_Location);
         Home_Fragment_BGABanner=view.findViewById(R.id.Home_Fragment_BGABanner);
@@ -73,8 +73,8 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     }
 
     @Override
-    public ImageView getHome_Fragment_Image_Class() {
-        return Home_Fragment_Image_Class;
+    public ImageView getHome_Fragment_Image_Category() {
+        return Home_Fragment_Image_Category;
     }
 
     @Override

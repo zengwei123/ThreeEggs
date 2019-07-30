@@ -50,6 +50,11 @@ public class SimpleUtils {
         }
     }
 
+    /**控制 log**/
+    public static void setLog(String str){
+        Log.d("zengwei123",str);
+    }
+
     public static void Test(){
         Log.d("zengwei123","测试");
     }

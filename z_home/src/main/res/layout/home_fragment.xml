@@ -27,7 +27,7 @@
                         android:layout_height="36dp">
 
                         <ImageView
-                            android:id="@+id/Home_Fragment_Image_Class"
+                            android:id="@+id/Home_Fragment_Image_Category"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:layout_alignParentRight="true"
@@ -37,7 +37,7 @@
                             android:id="@+id/Home_Fragment_Image_Shooting"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:layout_toLeftOf="@+id/Home_Fragment_Image_Class"
+                            android:layout_toLeftOf="@+id/Home_Fragment_Image_Category"
                             android:padding="5dp" />
 
                         <TextView

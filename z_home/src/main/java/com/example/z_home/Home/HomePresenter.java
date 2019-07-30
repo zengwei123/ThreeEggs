@@ -1,14 +1,15 @@
 package com.example.z_home.Home;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.GlideUtil;
 import com.example.z_common.Model.Home.HomeActivityMenu;
+import com.example.z_common.RoutePage.RoutePageActivity;
+import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.SimpleRecyclerViewAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_home.R;
@@ -21,28 +22,22 @@ import java.util.List;
  * Created by zengwei on 2019/7/24.
  */
 
-class HomePresenter extends BasePresenter<HomeView>{
+class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListener {
     @Override
     public void init() {
         setView();
-        Fragment navigation = (Fragment) ARouter.getInstance().build("/Goods/GoodsList").navigation();
-        if(mvpView.getFragmentManagers().beginTransaction()==null){
-            Log.d("zengwei123","为空啊");
-        }else {
-            FragmentTransaction fragmentTransaction=mvpView.getFragmentManagers().beginTransaction();
-            if(navigation!=null){
-                fragmentTransaction.replace(R.id.GoodsList_Fragment,navigation).commit();
-            }else {
-                Log.d("zengwei123","界面为空");
-            }
-        }
+        /**添加推荐布局内容**/
+        FragmentTransaction fragmentTransaction=mvpView.getFragmentManagers().beginTransaction();
+        fragmentTransaction.replace(R.id.GoodsList_Fragment, RouterPageFragment.grtHomeCategory()).commit();
+        /**添加事件**/
+        setClick();
     }
 
     @Override
     public void setView() {
         mvpView.getHome_Fragment_Image_Location().setText("长沙市岳麓区茶子山");
         GlideUtil.displayImage(mvpView.getActivityContext(), R.mipmap.home_camera,mvpView.getHome_Fragment_Image_Shooting());
-        GlideUtil.displayImage(mvpView.getActivityContext(), R.mipmap.home_class,mvpView.getHome_Fragment_Image_Class());
+        GlideUtil.displayImage(mvpView.getActivityContext(), R.mipmap.home_class,mvpView.getHome_Fragment_Image_Category());
 
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(v -> {
             ARouter.getInstance().build("/Goods/cccc").navigation();
@@ -78,5 +73,15 @@ class HomePresenter extends BasePresenter<HomeView>{
         mvpView.getHome_Fragment_RecyclerView().setAdapter(simpleRecyclerViewAdapter1);
         mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,mvpView.getActivityContext(),5));
 
+    }
+    private void setClick(){
+        mvpView.getHome_Fragment_Image_Category().setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View view) {
+        int i = view.getId();
+        if (i == R.id.Home_Fragment_Image_Category) {
+            RoutePageActivity.grtHomeCategory();
+        }
     }
 }

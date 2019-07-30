@@ -26,7 +26,7 @@ public class GuidePresenter extends BasePresenter<GuideView> {
     public void init() {
         /**判断是否第一次进入**/
         boolean isOne= (boolean) new SharedPreferencesHelper(mvpView.getActivityContext(),"First").getSharedPreference("IS",true);
-        isOne=true;
+        //isOne=true;
         if (isOne){
             new SharedPreferencesHelper(mvpView.getActivityContext(),"First").put("IS",false);
             /**沉浸式 + 全屏 关闭虚拟按键**/

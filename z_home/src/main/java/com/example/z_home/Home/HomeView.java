@@ -1,6 +1,5 @@
 package com.example.z_home.Home;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.FrameLayout;
@@ -16,7 +15,7 @@ import cn.bingoogolapple.bgabanner.BGABanner;
  */
 
 interface HomeView extends BaseView{
-    ImageView getHome_Fragment_Image_Class();
+    ImageView getHome_Fragment_Image_Category();
     ImageView getHome_Fragment_Image_Shooting();
     TextView getHome_Fragment_Image_Location();
     BGABanner getHome_Fragment_BGABanner();

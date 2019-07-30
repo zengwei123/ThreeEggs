@@ -2,8 +2,8 @@ package com.example.z_my.my;
 
 import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.BasePresenter;
+import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.SimpleRecyclerViewAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_my.R;
@@ -53,7 +53,7 @@ class MyPresenter extends BasePresenter<MyView> implements View.OnClickListener 
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.My_OrderAll_Linear) {
-            ARouter.getInstance().build("/Order/OrderList").navigation();
+            RoutePageActivity.grtOrderList();
         }
     }
 }
