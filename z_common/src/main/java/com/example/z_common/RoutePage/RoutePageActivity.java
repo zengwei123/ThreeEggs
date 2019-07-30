@@ -15,4 +15,9 @@ public class RoutePageActivity {
     public static void grtOrderList(){
         ARouter.getInstance().build("/Order/OrderList").navigation();
     }
+
+    /**我的-订单**/
+    public static void grtAddress(){
+        ARouter.getInstance().build("/Home/Address").navigation();
+    }
 }

@@ -19,5 +19,6 @@
         <activity android:name=".Main.MainActivity"></activity>
         <activity android:name="com.example.z_order.orderPage.OrderPageActivity"></activity>
         <activity android:name="com.example.z_home.Category.CategoryActivity"></activity>
+        <activity android:name="com.example.z_home.Address.AddressActivity"></activity>
     </application>
 </manifest>

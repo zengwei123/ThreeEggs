@@ -40,7 +40,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         GlideUtil.displayImage(mvpView.getActivityContext(), R.mipmap.home_class,mvpView.getHome_Fragment_Image_Category());
 
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(v -> {
-            ARouter.getInstance().build("/Goods/cccc").navigation();
+           RoutePageActivity.grtAddress();
         });
 
         /**设置轮播**/

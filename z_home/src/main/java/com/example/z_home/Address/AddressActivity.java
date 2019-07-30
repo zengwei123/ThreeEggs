@@ -3,20 +3,24 @@ package com.example.z_home.Address;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.z_base.MvpActivity;
 import com.example.z_home.R;
 
 /**
  * 选择地址界面
  */
+@Route(path = "/Home/Address")
 public class AddressActivity extends MvpActivity<AddressPresenter> implements AddressView {
     private TextView Include_Title_Text;   //页面头文字
     private ImageView Include_Title_Close;  //头部关闭按钮
 
-    private TextView Address_City;   //城市列表
+    private TextView Address_City_Text;   //城市列表
+    private RecyclerView Address_City_Recycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,8 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     public void getViews() {
         Include_Title_Text=findViewById(R.id.Include_Title_Text);
         Include_Title_Close=findViewById(R.id.Include_Title_Close);
-        Address_City=findViewById(R.id.Address_City);
+        Address_City_Text=findViewById(R.id.Address_City_Text);
+        Address_City_Recycler=findViewById(R.id.Address_City_Recycler);
     }
 
     @Override
@@ -52,8 +57,13 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     }
 
     @Override
-    public TextView getAddress_City() {
-        return Address_City;
+    public TextView getAddress_City_Text() {
+        return Address_City_Text;
+    }
+
+    @Override
+    public RecyclerView getAddress_City_Recycler() {
+        return Address_City_Recycler;
     }
 
     @Override

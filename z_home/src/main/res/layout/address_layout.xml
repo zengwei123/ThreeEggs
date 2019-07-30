@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <include layout="@layout/z_include_title"></include>
@@ -11,7 +12,7 @@
         android:layout_height="@dimen/Title_Height">
 
         <TextView
-            android:id="@+id/Address_City"
+            android:id="@+id/Address_City_Text"
             android:text="下拉列表"
             android:textSize="@dimen/Text_Size_4"
             android:ellipsize="end"
@@ -27,4 +28,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Address_City_Recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>
