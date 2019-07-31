@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_common.RoutePage.RoutePageActivity;
-import com.example.z_common.SimpleRecyclerViewAdapter;
+import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_my.R;
 

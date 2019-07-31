@@ -4,13 +4,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.GlideUtil;
-import com.example.z_common.Model.Home.HomeActivityMenu;
+import com.example.z_home.Model.HomeActivityMenu;
 import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.RoutePage.RouterPageFragment;
-import com.example.z_common.SimpleRecyclerViewAdapter;
+import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_home.R;
 

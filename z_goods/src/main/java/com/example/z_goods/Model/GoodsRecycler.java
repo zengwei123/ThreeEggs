@@ -1,11 +1,11 @@
-package com.example.z_common.Model.Home;
+package com.example.z_goods.Model;
 
 /**
  * Created by zengwei on 2019/7/23.
  * 首页推荐信息的商品数据模型
  */
 
-public class HomeGoodsRecycler {
+public class GoodsRecycler {
     private String ImageUrl;  //图片
     private String Title;   //商品标题
     private String Price;   //商品推荐价格
@@ -14,7 +14,7 @@ public class HomeGoodsRecycler {
     private String Location;  //店铺位置
     private String ShopName;  //店铺名字
 
-    public HomeGoodsRecycler(String imageUrl, String title, String price, String buyNumber, String distance, String location, String shopName) {
+    public GoodsRecycler(String imageUrl, String title, String price, String buyNumber, String distance, String location, String shopName) {
         ImageUrl = imageUrl;
         Title = title;
         Price = price;

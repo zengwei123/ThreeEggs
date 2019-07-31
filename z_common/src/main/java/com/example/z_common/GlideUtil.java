@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide;
 
 /**
  * Created by zengwei on 2019/7/20.
+ * 图片请求工具类
  */
 
 public class GlideUtil {

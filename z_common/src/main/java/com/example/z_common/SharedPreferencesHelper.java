@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * Created by zengwei on 2018/11/14.
- * 存储
+ * 缓存存储工具类
  */
 
 public class SharedPreferencesHelper {

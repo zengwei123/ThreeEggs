@@ -1,4 +1,4 @@
-package com.example.z_common.Model.Circle;
+package com.example.z_circle.Model;
 
 /**
  * 圈子界面的瀑布流布局数据模型

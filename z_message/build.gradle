@@ -49,15 +49,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    implementation 'com.android.support:design:27.1.1'
-    //路由库
-    api 'com.alibaba:arouter-api:1.4.1'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-
-    implementation 'cn.bingoogolapple:bga-banner:2.2.6@aar'   //引导界面  轮播框架
-
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'   //recycler adapter库
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //阿里路由库
     implementation project(":z_base")
     implementation project(":z_common")
 }

@@ -10,6 +10,10 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 public class AllDataState<T> implements MultiItemEntity {
     private int itemType;
     private T data;
+    private int code;
+    private boolean success;
+    private String message;
+
     public AllDataState(T data,int itemType) {
         this.data=data;
         this.itemType = itemType;

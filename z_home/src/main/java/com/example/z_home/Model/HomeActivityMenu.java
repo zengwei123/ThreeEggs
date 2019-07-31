@@ -1,4 +1,4 @@
-package com.example.z_common.Model.Home;
+package com.example.z_home.Model;
 
 /**
  * Created by zengwei on 2019/7/21.

@@ -1,10 +1,6 @@
-package com.example.z_common;
-
-import android.content.Context;
-import android.view.View;
+package com.example.z_common.UtilRecyclerAdapter;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.z_common.Model.AllDataState;
 
@@ -12,8 +8,7 @@ import java.util.List;
 
 /**
  * Created by zengwei on 2019/7/21.
- * 一些简单的recycle的adapter
- * 不需要传其他的数据的
+ * 可以实现多布局的Recycler
  */
 
 public class SimpleRecyclerViewAdapter1 extends BaseMultiItemQuickAdapter<AllDataState, BaseViewHolder> {

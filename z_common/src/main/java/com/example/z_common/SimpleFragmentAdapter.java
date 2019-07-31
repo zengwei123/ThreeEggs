@@ -8,7 +8,9 @@ import com.example.z_base.MvpFragment;
 
 import java.util.List;
 
-
+/**
+ * Fragment公共Adapter
+ */
 public class SimpleFragmentAdapter extends FragmentPagerAdapter {
     private List<MvpFragment> mFragmentList;//各导航的Fragment
     public SimpleFragmentAdapter(FragmentManager fragmentManager, List<MvpFragment> fragments){

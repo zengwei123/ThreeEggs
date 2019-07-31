@@ -19,8 +19,11 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     private TextView Include_Title_Text;   //页面头文字
     private ImageView Include_Title_Close;  //头部关闭按钮
 
-    private TextView Address_City_Text;   //城市列表
-    private RecyclerView Address_City_Recycler;
+    private TextView Address_City_Text;   //城市选择按钮
+    private RecyclerView Address_City_Recycler;    //城市列表
+    private TextView Address_City_Look;  //查看更多附近
+    private RecyclerView Address_Near_Recycler;   //附近地址列表
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
         Include_Title_Close=findViewById(R.id.Include_Title_Close);
         Address_City_Text=findViewById(R.id.Address_City_Text);
         Address_City_Recycler=findViewById(R.id.Address_City_Recycler);
+        Address_City_Look=findViewById(R.id.Address_City_Look);
+        Address_Near_Recycler=findViewById(R.id.Address_Near_Recycler);
     }
 
     @Override
@@ -62,8 +67,18 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     }
 
     @Override
+    public RecyclerView getAddress_Near_Recycler() {
+        return Address_Near_Recycler;
+    }
+
+    @Override
     public RecyclerView getAddress_City_Recycler() {
         return Address_City_Recycler;
+    }
+
+    @Override
+    public TextView getAddress_City_Look() {
+        return Address_City_Look;
     }
 
     @Override

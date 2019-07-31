@@ -3,7 +3,7 @@ package com.example.z_home.Category;
 import android.graphics.Color;
 
 import com.example.z_base.BasePresenter;
-import com.example.z_common.SimpleRecyclerViewAdapter;
+import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_home.Model.CategoryList;
 import com.example.z_home.R;

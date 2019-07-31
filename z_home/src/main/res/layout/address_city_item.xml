@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/Title_Height">
     <TextView
+        android:gravity="center"
         android:id="@+id/Address_City_item_Text"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

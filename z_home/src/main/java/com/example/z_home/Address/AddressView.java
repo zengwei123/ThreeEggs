@@ -11,4 +11,6 @@ public interface AddressView extends BaseView {
     ImageView getInclude_Title_Close();
     TextView getAddress_City_Text();
     RecyclerView getAddress_City_Recycler();
+    TextView getAddress_City_Look();
+    RecyclerView getAddress_Near_Recycler();
 }
