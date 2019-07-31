@@ -1,6 +1,8 @@
 package com.example.z_common;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,7 +33,6 @@ public class SimpleUtils {
             return gridLayoutManager;
         }
     }
-
     /**也是列表的布局方式  瀑布流**/
     public static RecyclerView.LayoutManager getRecyclerLayoutManager(int number ){
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(number, StaggeredGridLayoutManager.VERTICAL);
@@ -50,12 +51,24 @@ public class SimpleUtils {
         }
     }
 
+    /**获取版本号**/
+    public static String getAppVersion(Context context){
+        try {
+            // 获取packagemanager的实例
+            PackageManager packageManager = context.getPackageManager();
+            // getPackageName()是你当前类的包名，0代表是获取版本信息
+            PackageInfo packInfo = packageManager.getPackageInfo(context.getPackageName(),0);
+            String version = packInfo.versionName;
+            return version;
+        } catch (PackageManager.NameNotFoundException e) {
+            //出错返回默认1.0版本
+            return "1.0";
+        }
+    }
+
+
     /**控制 log**/
     public static void setLog(String str){
         Log.d("zengwei123",str);
-    }
-
-    public static void Test(){
-        Log.d("zengwei123","测试");
     }
 }

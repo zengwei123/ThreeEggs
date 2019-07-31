@@ -31,4 +31,38 @@ public class AllDataState<T> implements MultiItemEntity {
     public void setData(T data) {
         this.data = data;
     }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "AllDataState{" +
+                "data=" + data +
+                ", code=" + code +
+                ", success=" + success +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

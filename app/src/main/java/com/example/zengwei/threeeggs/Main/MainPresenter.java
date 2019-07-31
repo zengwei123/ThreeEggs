@@ -10,6 +10,7 @@ import com.example.z_common.SimpleFragmentAdapter;
 import com.example.z_home.Home.HomeFragment;
 import com.example.z_message.message.MessageFragment;
 import com.example.z_my.my.MyFragment;
+import com.example.zengwei.threeeggs.MainRequestServiceFactory;
 import com.example.zengwei.threeeggs.R;
 
 import java.util.ArrayList;
@@ -23,10 +24,12 @@ public class MainPresenter extends BasePresenter<MainView> {
     @Override
     public void init() {
         setView();
+        Request();
     }
 
     @Override
     public void setView() {
+        /**主界面的4个模块**/
         List<MvpFragment> fragments=new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new CircleFragment());
@@ -64,10 +67,17 @@ public class MainPresenter extends BasePresenter<MainView> {
         /**两个控件绑定起来**/
         mvpView.getMain_TabLayout().setupWithViewPager(mvpView.getMain_ViewPager());
 
-        /**设置图标  绑定后会清除 妈的**/
+        /**设置图标  ViewPage跟Tablayout绑定后 绑定后会清除 妈的**/
         mvpView.getMain_TabLayout().getTabAt(0).setIcon(R.mipmap.main_home);
         mvpView.getMain_TabLayout().getTabAt(1).setIcon(R.mipmap.main_circle1);
         mvpView.getMain_TabLayout().getTabAt(2).setIcon(R.mipmap.main_order1);
         mvpView.getMain_TabLayout().getTabAt(3).setIcon(R.mipmap.main_personal1);
+
+    }
+
+    /**网络请求**/
+    private void Request(){
+        /**是否需要更新**/
+        MainRequestServiceFactory.ApkDetection(mvpView.getThisActivity());
     }
 }
