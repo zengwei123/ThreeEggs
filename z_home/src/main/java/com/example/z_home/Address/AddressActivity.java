@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.z_base.MvpActivity;
+import com.example.z_common.Custom.WanEditText;
 import com.example.z_home.R;
 
 /**
@@ -23,6 +24,7 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     private RecyclerView Address_City_Recycler;    //城市列表
     private TextView Address_City_Look;  //查看更多附近
     private RecyclerView Address_Near_Recycler;   //附近地址列表
+    private WanEditText Address_WanEditText_Message;  //当前定位的位置
 
 
     @Override
@@ -49,6 +51,7 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
         Address_City_Recycler=findViewById(R.id.Address_City_Recycler);
         Address_City_Look=findViewById(R.id.Address_City_Look);
         Address_Near_Recycler=findViewById(R.id.Address_Near_Recycler);
+        Address_WanEditText_Message=findViewById(R.id.Address_WanEditText_Message);
     }
 
     @Override
@@ -69,6 +72,11 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     @Override
     public RecyclerView getAddress_Near_Recycler() {
         return Address_Near_Recycler;
+    }
+
+    @Override
+    public WanEditText getAddress_WanEditText_Message() {
+        return Address_WanEditText_Message;
     }
 
     @Override

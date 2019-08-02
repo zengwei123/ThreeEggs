@@ -26,6 +26,13 @@ android {
         }
     }
 
+    defaultConfig {
+        ndk {
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
+        }
+    }
+
 }
 
 dependencies {
@@ -51,6 +58,12 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.3.0'       //retrofit2网络请求
     api 'com.squareup.retrofit2:converter-scalars:2.3.0'    //retrofit2网络请求
 
+    api 'com.amap.api:location:latest.integration'          //高德定位skd
+    api 'com.amap.api:map2d:latest.integration'             //2d地图
+    api 'com.amap.api:search:latest.integration'            //搜索功能
+
+    api 'me.jessyan:autosize:1.1.2'//今日头条适配封装库
+    api 'com.hjq:xxpermissions:5.5'    //权限获取框架
 
     api project(":z_base")
 }

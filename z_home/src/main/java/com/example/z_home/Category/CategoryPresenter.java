@@ -61,7 +61,7 @@ class CategoryPresenter extends BasePresenter<CategoryView> {
                     mvpView.getCategory_Parent().getAdapter().notifyDataSetChanged();
                 });
             });
-            mvpView.getCategory_Parent().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,mvpView.getActivityContext(),0));
+            mvpView.getCategory_Parent().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
             mvpView.getCategory_Parent().setAdapter(simpleRecyclerViewAdapter1);
         }
         /**大类下面的子类**/
@@ -69,7 +69,7 @@ class CategoryPresenter extends BasePresenter<CategoryView> {
                 mvpView.getActivityContext(), categoryLists.get(ii).getChild(), (helper, item) -> {
             helper.setText(R.id.Category_Child_Text,(String)item);
         });
-        mvpView.getCategory_Child().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,mvpView.getActivityContext(),3));
+        mvpView.getCategory_Child().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,3));
         mvpView.getCategory_Child().setAdapter(simpleRecyclerViewAdapter2);
     }
 }

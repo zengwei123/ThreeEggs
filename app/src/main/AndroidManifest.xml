@@ -3,7 +3,25 @@
     package="com.example.zengwei.threeeggs">
     <!--网络请求权限-->
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <!--获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <!--这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+    <!--用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <!--写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <!--用于申请调用A-GPS模块-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
+    <!--用于申请获取蓝牙信息进行室内定位-->
+    <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -25,5 +43,24 @@
         <activity android:name="com.example.z_order.orderPage.OrderPageActivity"></activity>
         <activity android:name="com.example.z_home.Category.CategoryActivity"></activity>
         <activity android:name="com.example.z_home.Address.AddressActivity"></activity>
+
+
+
+
+
+        <!--高德定位的服务组件-->
+        <service android:name="com.amap.api.location.APSService"></service>
+        <!--高德定位-->
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="7fdf0479ed81633a4c50d84fdb595739"></meta-data>
+
+
+
+
+        <!--适配框架-->
+        <meta-data android:name="design_width_in_dp" android:value="360"/>
+        <meta-data android:name="design_height_in_dp" android:value="640"/>
     </application>
+
+
+
 </manifest>
