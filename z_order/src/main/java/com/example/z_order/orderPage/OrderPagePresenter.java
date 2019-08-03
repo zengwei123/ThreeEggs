@@ -70,6 +70,6 @@ class OrderPagePresenter extends BasePresenter<OrderPageView>{
                     }
                 });
         mvpView.getOrderPage_Recycler().setAdapter(simpleRecyclerViewAdapter);
-        mvpView.getOrderPage_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,mvpView.getActivityContext(),0));
+        mvpView.getOrderPage_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
     }
 }

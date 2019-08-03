@@ -45,7 +45,6 @@ public class BaseActivity extends AppCompatActivity {
             return false;
         }
         NetworkInfo networkinfo = manager.getActiveNetworkInfo();
-
         if (networkinfo == null || !networkinfo.isAvailable()) {
             return false;
         }
@@ -254,5 +253,16 @@ public class BaseActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        instance = this;
+    }
+
+    private static BaseActivity instance = null;
+    public static BaseActivity getInstance() {
+        return instance;
     }
 }

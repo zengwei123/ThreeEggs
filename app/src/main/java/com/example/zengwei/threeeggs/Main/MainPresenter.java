@@ -7,6 +7,7 @@ import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpFragment;
 import com.example.z_circle.Circle.CircleFragment;
 import com.example.z_common.SimpleFragmentAdapter;
+import com.example.z_common.SimpleUtils;
 import com.example.z_home.Home.HomeFragment;
 import com.example.z_message.message.MessageFragment;
 import com.example.z_my.my.MyFragment;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MainPresenter extends BasePresenter<MainView> {
     @Override
     public void init() {
+        SimpleUtils.getPermissions();
         setView();
         Request();
     }
@@ -78,6 +80,6 @@ public class MainPresenter extends BasePresenter<MainView> {
     /**网络请求**/
     private void Request(){
         /**是否需要更新**/
-        MainRequestServiceFactory.ApkDetection(mvpView);
+        MainRequestServiceFactory.ApkDetection();
     }
 }

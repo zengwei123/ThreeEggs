@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.z_base.BaseView;
+import com.example.z_common.Custom.WanEditText;
 
 public interface AddressView extends BaseView {
     TextView getInclude_Title_Text();
@@ -13,4 +14,5 @@ public interface AddressView extends BaseView {
     RecyclerView getAddress_City_Recycler();
     TextView getAddress_City_Look();
     RecyclerView getAddress_Near_Recycler();
+    WanEditText getAddress_WanEditText_Message();
 }

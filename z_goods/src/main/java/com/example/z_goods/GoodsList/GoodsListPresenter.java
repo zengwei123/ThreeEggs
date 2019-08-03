@@ -82,12 +82,12 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
     private void switchRecycler(boolean b, RecyclerView recyclerView, Context context, ImageView imageView){
         if(b){
             recyclerView.setAdapter(RecyclerStyleState1);
-            recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,context,0));
+            recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
             isRecyclerState=false;
             GlideUtil.displayImage(context,R.mipmap.goods_class1,imageView);
         }else {
             recyclerView.setAdapter(RecyclerStyleState2);
-            recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,context,2));
+            recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,2));
             isRecyclerState=true;
             GlideUtil.displayImage(context,R.mipmap.goods_class2,imageView);
         }

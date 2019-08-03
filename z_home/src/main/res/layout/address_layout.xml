@@ -48,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <com.example.z_common.Custom.WanEditText
+            android:id="@+id/Address_WanEditText_Message"
             android:drawableLeft="@mipmap/home_positioning"
             android:gravity="center|left"
             android:drawableRight="@mipmap/home_dingwei"

@@ -40,7 +40,7 @@ public class CircleRecyclerListPresenter extends BasePresenter<CircleRecyclerLis
                     drawable.setBounds(0,0,30,35);//第一0是距左边距离，第二0是距上边距离，30、35分别是长宽
                     ((TextView)helper.getView(R.id.CircleRecyclerList_Recycler_Item_Name)).setCompoundDrawables(drawable,null,null,null);//只放左边
                     /**图标设置**/
-                    SimpleUtils.setViewTypeface(mvpView.getActivityContext(),((TextView)helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)),"\ue9cf 点赞11");
+                    SimpleUtils.setViewTypeface(((TextView)helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)),"\ue9cf 点赞11");
                 });
 
         mvpView.getCircleRecyclerList_Recycler().setAdapter(simpleRecyclerViewAdapter);

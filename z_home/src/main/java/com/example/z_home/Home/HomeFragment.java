@@ -15,8 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.MvpFragment;
+import com.example.z_common.Amap.AmapPositioningUtil;
 import com.example.z_home.R;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
@@ -107,8 +107,16 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         return getFragmentManager();
     }
 
-    @Override
     public TextView getHome_Fragment_TextView_Search() {
         return Home_Fragment_TextView_Search;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        /**在这里获取定位  防止第一次进入无法获取位置**/
+        if(!AmapPositioningUtil.isIsPosition()){
+            mvpPresenter.positioning();
+        }
     }
 }

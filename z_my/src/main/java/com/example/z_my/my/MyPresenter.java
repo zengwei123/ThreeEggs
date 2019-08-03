@@ -40,7 +40,7 @@ class MyPresenter extends BasePresenter<MyView> implements View.OnClickListener 
                 });
 
         mvpView.getMy_Recycler().setAdapter(simpleRecyclerViewAdapter);
-        mvpView.getMy_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,mvpView.getActivityContext(),0));
+        mvpView.getMy_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
 
 
     }
