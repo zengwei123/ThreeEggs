@@ -78,6 +78,6 @@ public class MainPresenter extends BasePresenter<MainView> {
     /**网络请求**/
     private void Request(){
         /**是否需要更新**/
-        MainRequestServiceFactory.ApkDetection(mvpView.getThisActivity());
+        MainRequestServiceFactory.ApkDetection(mvpView);
     }
 }

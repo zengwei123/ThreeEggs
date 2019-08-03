@@ -53,7 +53,7 @@ class MyPresenter extends BasePresenter<MyView> implements View.OnClickListener 
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.My_OrderAll_Linear) {
-            RoutePageActivity.grtOrderList();
+            RoutePageActivity.getOrderList();
         }
     }
 }

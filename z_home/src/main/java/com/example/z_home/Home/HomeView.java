@@ -22,4 +22,5 @@ interface HomeView extends BaseView{
     RecyclerView getHome_Fragment_RecyclerView();
     FrameLayout getGoodsList_Fragment();
     FragmentManager getFragmentManagers();
+    TextView getHome_Fragment_TextView_Search();
 }

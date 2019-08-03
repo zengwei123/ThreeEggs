@@ -1,12 +1,9 @@
-package com.example.zengwei.taokez.CustomView;
+package com.example.z_common.Custom;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.zengwei.taokez.Util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -52,10 +52,12 @@
 
                     </RelativeLayout>
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/Home_Fragment_TextView_Search"
                         android:background="@drawable/home_edittext_background"
                         android:drawableLeft="@mipmap/home_search"
                         android:hint="  点击搜索商品/店铺"
+                        android:gravity="center|left"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:textSize="12sp"
@@ -99,16 +101,4 @@
         </LinearLayout>
         
     </android.support.design.widget.CoordinatorLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/Home_FloatingActionButton"
-        app:rippleColor="#ffffff"
-        app:backgroundTint="#ffffff"
-        android:src="@mipmap/home_shoppingcart"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
 </RelativeLayout>

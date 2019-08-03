@@ -39,7 +39,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         GlideUtil.displayImage(mvpView.getActivityContext(), R.mipmap.home_class,mvpView.getHome_Fragment_Image_Category());
 
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(v -> {
-           RoutePageActivity.grtAddress();
+           RoutePageActivity.getAddress();
         });
 
         /**设置轮播**/
@@ -75,12 +75,15 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
     }
     private void setClick(){
         mvpView.getHome_Fragment_Image_Category().setOnClickListener(this);
+        mvpView.getHome_Fragment_TextView_Search().setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.Home_Fragment_Image_Category) {
-            RoutePageActivity.grtHomeCategory();
+            RoutePageActivity.getHomeCategory();
+        }else if(i==R.id.Home_Fragment_TextView_Search){
+            RoutePageActivity.getSearch();
         }
     }
 }
