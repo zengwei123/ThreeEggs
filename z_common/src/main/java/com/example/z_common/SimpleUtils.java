@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.z_base.BaseActivity;
-import com.example.z_common.Custom.DialogUtil;
+import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.XXPermissions;
 
@@ -88,7 +88,7 @@ public class SimpleUtils {
                     public void hasPermission(List<String> granted, boolean isAll) {
                         if (!isAll){
                             DialogUtil dialogUtil = new DialogUtil();
-                            dialogUtil.show(R.mipmap.prompt, "重要权限未授权部分功将会受限，可能会影响您的使用体验，是否手动开启权限？", new DialogUtil.DialogButtonListener() {
+                            dialogUtil.show(R.mipmap.prompt, "重要权限未授权部分功将会受限，可能会影响您的使用体验，是否手动开启权限？", "设置",new DialogUtil.DialogButtonListener() {
                                 @Override
                                 public void sure() {
                                     XXPermissions.gotoPermissionSettings(BaseActivity.getInstance());

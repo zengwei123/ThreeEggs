@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.z_base.BasePresenter;
+import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.SharedPreferencesHelper;
 import com.example.z_home.R;
 
@@ -19,11 +20,12 @@ import java.util.Map;
  * Created by zengwei on 2019/8/1.
  */
 
-class SearchPresenter extends BasePresenter<SearchView>{
+class SearchPresenter extends BasePresenter<SearchView> implements View.OnClickListener{
     @Override
     public void init() {
         setView();
         setHomeSearchEdit_HotLayout();
+        setClick();
     }
 
     @Override
@@ -31,7 +33,15 @@ class SearchPresenter extends BasePresenter<SearchView>{
 
     }
 
-    //热门控件
+    @Override
+    public void CloseRequest() {
+
+    }
+
+    private void setClick(){
+        mvpView.getSearch_Search().setOnClickListener(this);
+    }
+    /**热门控件的设置**/
     private void setHomeSearchEdit_HotLayout(){
         List<String> strings= Arrays.asList("开心过","富婆快乐求","美人鱼");
         //balalal
@@ -52,6 +62,15 @@ class SearchPresenter extends BasePresenter<SearchView>{
             textView.setOnClickListener(v -> {
                 Toast.makeText(mvpView.getActivityContext(), "点击事件", Toast.LENGTH_SHORT).show();
             });
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.Search_Search) {
+            RoutePageActivity.getGoodsSearch();
+            mvpView.getThisActivity().finish();
         }
     }
 }

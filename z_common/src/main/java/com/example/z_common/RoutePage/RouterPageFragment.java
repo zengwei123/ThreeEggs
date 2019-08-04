@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 
 public class RouterPageFragment {
     /**商品列表**/
-    public static Fragment grtHomeCategory(){
+    public static Fragment grtGoodsList(){
         return (Fragment) ARouter.getInstance().build("/Goods/GoodsList").navigation();
     }
 }

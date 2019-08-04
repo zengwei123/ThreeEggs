@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ThreeEggs.iml" filepath="$PROJECT_DIR$/ThreeEggs.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lottie/lottie.iml" filepath="$PROJECT_DIR$/lottie/lottie.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_base/z_base.iml" filepath="$PROJECT_DIR$/z_base/z_base.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_circle/z_circle.iml" filepath="$PROJECT_DIR$/z_circle/z_circle.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_common/z_common.iml" filepath="$PROJECT_DIR$/z_common/z_common.iml" />

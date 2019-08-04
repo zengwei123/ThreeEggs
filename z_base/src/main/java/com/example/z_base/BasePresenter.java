@@ -11,10 +11,10 @@ public abstract class BasePresenter<V> {
         this.mvpView = mvpView;
     }
 
-
     public void detachView() {
         this.mvpView = null;
     }
     public abstract void init();
     public abstract void setView();
+    public abstract void CloseRequest();
 }

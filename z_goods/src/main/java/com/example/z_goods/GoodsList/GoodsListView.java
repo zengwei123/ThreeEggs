@@ -19,4 +19,7 @@ public interface GoodsListView extends BaseView{
     ImageView getGoodsList_Style();
     ImageView getGoodsList_Screening();
     RecyclerView getGoodsList_Recycler();
+
+    void setSearchParameter(String SearchParameter);
+    String getSearchParameter();
 }

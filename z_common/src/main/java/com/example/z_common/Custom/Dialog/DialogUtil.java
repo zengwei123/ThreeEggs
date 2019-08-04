@@ -1,4 +1,4 @@
-package com.example.z_common.Custom;
+package com.example.z_common.Custom.Dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -25,6 +25,7 @@ public class DialogUtil {
     private Context context;
     private int imgResId = 0;
     private String text;
+    private String sure;
     private DialogButtonListener listener;
 
     public void show(String text, final DialogButtonListener listener) {
@@ -35,7 +36,8 @@ public class DialogUtil {
         setValue();
     }
 
-    public void show( int imgResId, String text, final DialogButtonListener listener) {
+    public void show( int imgResId, String text, String sure,final DialogButtonListener listener) {
+        this.sure=sure;
         this.context = BaseActivity.getInstance();
         this.text = text;
         this.listener = listener;
@@ -44,22 +46,15 @@ public class DialogUtil {
         setValue();
     }
 
-    public void show(Context context, String text, final DialogButtonListener listener) {
-        this.context = context;
+    public void show(String text, String sure, final DialogButtonListener listener) {
+        this.sure=sure;
+        this.context = BaseActivity.getInstance();
         this.text = text;
         this.listener = listener;
         createDialog();
         setValue();
     }
 
-    public void show(Context context, int imgResId, String text, final DialogButtonListener listener) {
-        this.context = context;
-        this.text = text;
-        this.listener = listener;
-        this.imgResId = imgResId;
-        createDialog();
-        setValue();
-    }
 
     //创建Dialog、初始化控件
     private void createDialog() {
@@ -89,6 +84,7 @@ public class DialogUtil {
             ivIcon.setVisibility(View.GONE);
         }
         tvText.setText(text);
+        btnSure.setText(sure);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

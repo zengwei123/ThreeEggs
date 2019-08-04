@@ -46,21 +46,39 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
                     "商品的长标题商品的长标题商品的长标题商品的长标题商品的长标题商品的长标题",
                     "88","1111","1234","北京故宫","司马的店铺"+i));
         }
+
+
+
         /**切换列表的**/
-        setGoodsListRecycler(mvpView.getGoodsList_Recycler(),
-                goodsRecyclers,
-                mvpView.getActivityContext(),
-                mvpView.getGoodsList_Screening());
+        if (mvpView.getSearchParameter()!=null&&!mvpView.getSearchParameter().equals("")){
+            /**这里是搜的   可以进行筛选**/
+            setGoodsListRecycler(mvpView.getGoodsList_Recycler(),
+                    goodsRecyclers,
+                    mvpView.getActivityContext(),
+                    mvpView.getGoodsList_Style());
+            mvpView.getGoodsList_Style().setVisibility(View.VISIBLE);
+            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_screening,  mvpView.getGoodsList_Screening());
+        }else {
+            /**这里是首页的推荐**/
+            setGoodsListRecycler(mvpView.getGoodsList_Recycler(),
+                    goodsRecyclers,
+                    mvpView.getActivityContext(),
+                    mvpView.getGoodsList_Screening());
+        }
+
+
     }
+
+    @Override
+    public void CloseRequest() {
+
+    }
+
     /**这个是布局的切换 及数据的显示**/
-    private void setGoodsListRecycler(RecyclerView recycler,
-                                            List<GoodsRecycler> goodsRecyclers,
-                                            Context context,ImageView imageView){
+    private void setGoodsListRecycler(RecyclerView recycler, List<GoodsRecycler> goodsRecyclers, Context context,ImageView imageView){
         SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback= (helper, item) -> {
             GoodsRecycler goodsRecycler = (GoodsRecycler) item;
-            GlideUtil.displayImage(mvpView.getActivityContext(),
-                    R.mipmap.beijin04,
-                   helper.getView(R.id.GL_Recycler_information_Image));
+            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.beijin04, helper.getView(R.id.GL_Recycler_information_Image));
             helper.setText(R.id.GL_Recycler_information_Title, goodsRecycler.getTitle());
             helper.setText(R.id.GL_Recycler_information_Price,"￥"+ goodsRecycler.getPrice());
             helper.setText(R.id.GL_Recycler_information_Other, goodsRecycler.getBuyNumber()+"付款  "+ goodsRecycler.getLocation());
@@ -71,25 +89,25 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
         RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information2, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
 
         /**显示默认的布局状态**/
-        switchRecycler(isRecyclerState,recycler,context,imageView);
+        switchRecycler(isRecyclerState,recycler,imageView);
         imageView.setOnClickListener(v -> {
             /**切换布局状态**/
-            switchRecycler(isRecyclerState,recycler,context,imageView);
+            switchRecycler(isRecyclerState,recycler,imageView);
         });
     }
 
     /**切换推荐商品布局状态**/
-    private void switchRecycler(boolean b, RecyclerView recyclerView, Context context, ImageView imageView){
+    private void switchRecycler(boolean b, RecyclerView recyclerView,  ImageView imageView){
         if(b){
             recyclerView.setAdapter(RecyclerStyleState1);
             recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
             isRecyclerState=false;
-            GlideUtil.displayImage(context,R.mipmap.goods_class1,imageView);
+            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_class1,imageView);
         }else {
             recyclerView.setAdapter(RecyclerStyleState2);
             recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,2));
             isRecyclerState=true;
-            GlideUtil.displayImage(context,R.mipmap.goods_class2,imageView);
+            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_class2,imageView);
         }
     }
 }

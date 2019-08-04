@@ -257,12 +257,15 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
-
         instance = this;
+        baseContext=this;
     }
 
     private static BaseActivity instance = null;
+    private static Context baseContext = null;
     public static BaseActivity getInstance() {
         return instance;
     }
+
+
 }

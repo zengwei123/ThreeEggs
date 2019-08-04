@@ -21,7 +21,7 @@ import com.example.z_goods.R;
  * Created by zengwei on 2019/7/24.
  */
 @Route(path="/Goods/GoodsList")
-public class GoodsListListFragment extends MvpFragment<GoodsListPresenter> implements GoodsListView {
+public class GoodsListFragment extends MvpFragment<GoodsListPresenter> implements GoodsListView {
     /**这里是推荐的商品**/
     private TextView GoodsList_Comprehensive;  //综合
     private TextView GoodsList_Sales;  //销量
@@ -30,6 +30,8 @@ public class GoodsListListFragment extends MvpFragment<GoodsListPresenter> imple
     private ImageView GoodsList_Style;  //排版样式
     private ImageView GoodsList_Screening;  //筛选
     private RecyclerView GoodsList_Recycler;  //推荐数据列表
+
+    private String SearchParameter=null;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -103,5 +105,15 @@ public class GoodsListListFragment extends MvpFragment<GoodsListPresenter> imple
     @Override
     public RecyclerView getGoodsList_Recycler() {
         return GoodsList_Recycler;
+    }
+
+    @Override
+    public void setSearchParameter(String SearchParameter) {
+        this.SearchParameter=SearchParameter;
+    }
+
+    @Override
+    public String getSearchParameter() {
+        return SearchParameter;
     }
 }

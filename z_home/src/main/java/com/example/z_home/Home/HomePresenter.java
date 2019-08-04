@@ -31,15 +31,15 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         setView();
         /**添加推荐布局内容**/
         FragmentTransaction fragmentTransaction=mvpView.getFragmentManagers().beginTransaction();
-        fragmentTransaction.replace(R.id.GoodsList_Fragment, RouterPageFragment.grtHomeCategory()).commit();
+        fragmentTransaction.replace(R.id.GoodsList_Fragment, RouterPageFragment.grtGoodsList()).commit();
         /**添加事件**/
         setClick();
     }
 
     @Override
     public void setView() {
-        GlideUtil.displayImage(mvpView.getActivityContext(), R.mipmap.home_camera,mvpView.getHome_Fragment_Image_Shooting());
-        GlideUtil.displayImage(mvpView.getActivityContext(), R.mipmap.home_class,mvpView.getHome_Fragment_Image_Category());
+        GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.home_camera,mvpView.getHome_Fragment_Image_Shooting());
+        GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.home_class,mvpView.getHome_Fragment_Image_Category());
 
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(v -> {
            RoutePageActivity.getAddress();
@@ -47,7 +47,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
 
         /**设置轮播**/
         mvpView.getHome_Fragment_BGABanner().setAdapter((banner, itemView, model, position) ->
-                GlideUtil.displayImage(mvpView.getActivityContext(),model,(ImageView) itemView));
+                GlideUtil.displayImage(mvpView.getThisActivity(),model,(ImageView) itemView));
         mvpView.getHome_Fragment_BGABanner().setData(
                 Arrays.asList(R.mipmap.beijin04, R.mipmap.beijin05, R.mipmap.beijin06),
                 null
@@ -66,9 +66,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
                     /**获取数据**/
                     HomeActivityMenu homeActivityMenu= (HomeActivityMenu) item;
                     /**价值图片**/
-                    GlideUtil.displayImage(mvpView.getActivityContext(),
-                            homeActivityMenu.getImageDrawable(),
-                            helper.getView(R.id.Home_Fragment_ActivityMenu_Image));
+                    GlideUtil.displayImage(mvpView.getThisActivity(),homeActivityMenu.getImageDrawable(), helper.getView(R.id.Home_Fragment_ActivityMenu_Image));
                     /**活动名称**/
                     helper.setText(R.id.Home_Fragment_ActivityMenu_TextView,homeActivityMenu.getName());
                 });
@@ -76,6 +74,12 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,5));
 
     }
+
+    @Override
+    public void CloseRequest() {
+
+    }
+
     private void setClick(){
         mvpView.getHome_Fragment_Image_Category().setOnClickListener(this);
         mvpView.getHome_Fragment_TextView_Search().setOnClickListener(this);

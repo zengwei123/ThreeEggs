@@ -27,4 +27,9 @@ public class CirclePresenter extends BasePresenter<CircleView> {
         mvpView.getCircle_TabLayout().getTabAt(0).setText("热门推荐");
         mvpView.getCircle_TabLayout().getTabAt(1).setText("离我最近");
     }
+
+    @Override
+    public void CloseRequest() {
+
+    }
 }

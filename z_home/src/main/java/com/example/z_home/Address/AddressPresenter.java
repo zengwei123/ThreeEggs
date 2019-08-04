@@ -1,6 +1,8 @@
 package com.example.z_home.Address;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Amap.AmapPoiUtil;
@@ -22,17 +24,23 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     public void init() {
         setView();
         setClick();
-        positioning();
+        positioning(true);
     }
 
     @Override
     public void setView() {
         setCityRecycle(Arrays.asList("A北京","B南京","C东京","D西京","E湖北","F湖南","G湖东","H湖西","I山北","J山南","K山东","M山西"));
         mvpView.getAddress_WanEditText_Message().setRightPicOnclickListener(editText -> {
-            positioning();
+            positioning(false);
         });
 
     }
+
+    @Override
+    public void CloseRequest() {
+
+    }
+
     /**城市选择**/
     private void setCityRecycle(List<String> CityList){
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),CityList, (helper, item) -> {
@@ -76,11 +84,16 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
 
     }
     /**定位功能  点击定位**/
-    private void positioning(){
+    private void positioning(boolean b){
         /**定位功能  如果已经定位成功  就直接用**/
-        if (AmapPositioningUtil.isIsPosition()){
-            mvpView.getAddress_WanEditText_Message().setText(AmapPositioningUtil.getOKMapLocation().getAddress());
-            getNearAddress();
+        if (AmapPositioningUtil.isIsPosition()&&b){
+            String str=AmapPositioningUtil.getOKMapLocation().getAddress();
+            mvpView.getAddress_WanEditText_Message().setText(str);
+            if(!str.equals("定位失败")){
+                getNearAddress();
+            }else {
+                setNearRecycler(NearList);
+            }
         }else {
             /**没有定位成功就定位一次**/
             mvpView.getAddress_WanEditText_Message().setText("定位中...");
@@ -88,7 +101,11 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
                 String str=AmapPositioningUtil.ParsingAMapLocation(aMapLocation);
                 mvpView.getAddress_WanEditText_Message().setText(str);
                 SimpleUtils.setToast("定位结束");
-                getNearAddress();
+                if(!str.equals("定位失败")){
+                    getNearAddress();
+                }else {
+                    setNearRecycler(NearList);
+                }
             });
         }
     }

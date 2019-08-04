@@ -1,9 +1,11 @@
 package com.example.z_common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.z_base.BaseActivity;
 
 /**
  * Created by zengwei on 2019/7/20.
@@ -11,8 +13,8 @@ import com.bumptech.glide.Glide;
  */
 
 public class GlideUtil {
-    public static void displayImage(Context context, Object path, ImageView imageView) {
+    public static void displayImage(Activity activity,Object path, ImageView imageView) {
         //Glide 加载图片简单用法
-        Glide.with(context).load(path).into(imageView);
+        Glide.with(activity).load(path).into(imageView);
     }
 }

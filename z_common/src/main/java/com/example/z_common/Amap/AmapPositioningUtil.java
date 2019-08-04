@@ -5,6 +5,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.example.z_base.BaseActivity;
+import com.example.z_common.SimpleUtils;
 
 /**高德地图工具类**/
 public class AmapPositioningUtil {
@@ -51,7 +52,7 @@ public class AmapPositioningUtil {
 
     /**定位数据的解析方法**/
     public static String ParsingAMapLocation(AMapLocation aMapLocation){
-        String LocationMessage=null;
+        String LocationMessage="定位失败";
         if (aMapLocation != null) {
             if (aMapLocation.getErrorCode() == 0) {
                 OKMapLocation=aMapLocation;

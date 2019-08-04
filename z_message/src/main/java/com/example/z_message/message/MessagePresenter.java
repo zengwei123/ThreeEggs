@@ -12,4 +12,9 @@ public class MessagePresenter extends BasePresenter<MessageView> {
     public void setView() {
 
     }
+
+    @Override
+    public void CloseRequest() {
+
+    }
 }

@@ -9,13 +9,13 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 public class AllDataState<T> implements MultiItemEntity {
     private int itemType;
-    private T data;
+    private T result;
     private int code;
     private boolean success;
     private String message;
 
     public AllDataState(T data,int itemType) {
-        this.data=data;
+        this.result=data;
         this.itemType = itemType;
     }
 
@@ -25,11 +25,11 @@ public class AllDataState<T> implements MultiItemEntity {
     }
 
     public T getData() {
-        return data;
+        return result;
     }
 
     public void setData(T data) {
-        this.data = data;
+        this.result = data;
     }
 
     public int getCode() {
@@ -59,7 +59,7 @@ public class AllDataState<T> implements MultiItemEntity {
     @Override
     public String toString() {
         return "AllDataState{" +
-                "data=" + data +
+                "result=" + result +
                 ", code=" + code +
                 ", success=" + success +
                 ", message='" + message + '\'' +

@@ -32,7 +32,7 @@ public class CircleRecyclerListPresenter extends BasePresenter<CircleRecyclerLis
 
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(
                 R.layout.circlerecyclerlist_fragment_item, mvpView.getActivityContext(),circleLists, (helper, item) -> {
-                    GlideUtil.displayImage(mvpView.getActivityContext(),((CircleList)item).getImage(),helper.getView(R.id.CircleRecyclerList_Recycler_Item_Image));
+                    GlideUtil.displayImage(mvpView.getThisActivity(),((CircleList)item).getImage(),helper.getView(R.id.CircleRecyclerList_Recycler_Item_Image));
                     helper.setText(R.id.CircleRecyclerList_Recycler_Item_Context,((CircleList)item).getBriefContent());
                     helper.setText(R.id.CircleRecyclerList_Recycler_Item_Name,((CircleList)item).getName());
                     /**头像设置**/
@@ -45,5 +45,10 @@ public class CircleRecyclerListPresenter extends BasePresenter<CircleRecyclerLis
 
         mvpView.getCircleRecyclerList_Recycler().setAdapter(simpleRecyclerViewAdapter);
         mvpView.getCircleRecyclerList_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(2));
+    }
+
+    @Override
+    public void CloseRequest() {
+
     }
 }

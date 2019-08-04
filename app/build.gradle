@@ -42,6 +42,7 @@ dependencies {
         implementation project(':z_base')    //基础模块
         implementation project(':z_common')   //一个些工具模块
         implementation project(':z_home')   //主界面模块
+        implementation project(':z_goods')   //主界面模块
         implementation project(':z_circle')   //圈子界面模块
         implementation project(':z_my')   //我的界面模块
         implementation project(':z_order')   //消息界面模块

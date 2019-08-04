@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpFragment;
 import com.example.z_circle.Circle.CircleFragment;
+import com.example.z_common.Custom.Dialog.LottieDialog;
 import com.example.z_common.SimpleFragmentAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_home.Home.HomeFragment;
@@ -77,9 +78,16 @@ public class MainPresenter extends BasePresenter<MainView> {
 
     }
 
+    @Override
+    public void CloseRequest() {
+
+    }
+
     /**网络请求**/
     private void Request(){
         /**是否需要更新**/
+        /**设置一下dialog的显示界面**/
+        LottieDialog.setDialogWindow(mvpView.getActivityContext());
         MainRequestServiceFactory.ApkDetection();
     }
 }

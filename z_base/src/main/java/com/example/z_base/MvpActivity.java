@@ -26,4 +26,10 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
     }
 
     public abstract void getViews();
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mvpPresenter.CloseRequest();
+    }
 }

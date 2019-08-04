@@ -1,5 +1,7 @@
 package com.example.z_home.Search;
 
+import android.widget.TextView;
+
 import com.example.z_base.BaseView;
 import com.example.z_common.Custom.HotLayout;
 
@@ -9,4 +11,5 @@ import com.example.z_common.Custom.HotLayout;
 
 interface SearchView extends BaseView{
     HotLayout getSearch_HotLayout();
+    TextView getSearch_Search();
 }

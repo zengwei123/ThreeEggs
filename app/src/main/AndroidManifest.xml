@@ -22,6 +22,7 @@
     <!--用于申请获取蓝牙信息进行室内定位-->
     <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:allowBackup="true"
@@ -44,6 +45,7 @@
         <activity android:name="com.example.z_home.Category.CategoryActivity"></activity>
         <activity android:name="com.example.z_home.Address.AddressActivity"></activity>
         <activity android:name="com.example.z_home.Search.SearchActivity"></activity>
+        <activity android:name="com.example.z_goods.SearchGoodsList.SearchGoodsListActivity"></activity>
 
 
         <!--高德定位的服务组件-->

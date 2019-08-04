@@ -66,4 +66,5 @@ dependencies {
     api 'com.hjq:xxpermissions:5.5'    //权限获取框架
 
     api project(":z_base")
+    api project(":lottie")
 }

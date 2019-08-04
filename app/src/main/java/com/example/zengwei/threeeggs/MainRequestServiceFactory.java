@@ -1,12 +1,13 @@
 package com.example.zengwei.threeeggs;
 
+import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.Model.AllDataState;
+import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.NET.RetrofitServiceManager;
 import com.example.z_common.SimpleUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainRequestServiceFactory {
@@ -17,6 +18,24 @@ public class MainRequestServiceFactory {
         Observable observable= mainRequestService.ApkDetection(SimpleUtils.getAppVersion());
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((Consumer<AllDataState>) o -> SimpleUtils.setLog(o.getMessage()));
+                .subscribe(new RequestObserver<AllDataState>(){
+                    @Override
+                    public void onNext(AllDataState o) {
+                        if (o.isSuccess()){
+                            new DialogUtil().show(R.mipmap.prompt,"发现新版本，是否现在更新","更新", new DialogUtil.DialogButtonListener(){
+
+                                @Override
+                                public void sure() {
+                                    SimpleUtils.setToast("开始跟新");
+                                }
+
+                                @Override
+                                public void cancel() {
+
+                                }
+                            });
+                        }
+                    }
+                });
     }
 }

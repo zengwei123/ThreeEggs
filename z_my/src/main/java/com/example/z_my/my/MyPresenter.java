@@ -45,6 +45,11 @@ class MyPresenter extends BasePresenter<MyView> implements View.OnClickListener 
 
     }
 
+    @Override
+    public void CloseRequest() {
+
+    }
+
     private void setClick(){
         mvpView.getMy_OrderAll_Linear().setOnClickListener(this);
     }

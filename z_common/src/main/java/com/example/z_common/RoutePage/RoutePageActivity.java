@@ -16,14 +16,18 @@ public class RoutePageActivity {
         ARouter.getInstance().build("/Order/OrderList").navigation();
     }
 
-    /**我的-订单**/
+    /**我的-地址**/
     public static void getAddress(){
         ARouter.getInstance().build("/Home/Address").navigation();
     }
 
-    /**我的-订单**/
+    /**我的-搜索**/
     public static void getSearch(){
         ARouter.getInstance().build("/Home/Search").navigation();
     }
 
+    /**商品-搜索列表**/
+    public static void getGoodsSearch(){
+        ARouter.getInstance().build("/Goods/GoodsSearchList").navigation();
+    }
 }

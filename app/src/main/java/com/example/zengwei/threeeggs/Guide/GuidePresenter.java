@@ -57,7 +57,7 @@ public class GuidePresenter extends BasePresenter<GuideView> {
                 case 2: image_url=R.mipmap.beijin06; break;
                 case 3: image_url=R.mipmap.beijin07; break;
             }
-            GlideUtil.displayImage(mvpView.getActivityContext(),image_url,Guide_BGABanner_Image);
+            GlideUtil.displayImage(mvpView.getThisActivity(),image_url,Guide_BGABanner_Image);
             if(i==Guide_layout_size-1){
                 TextView Guide_BGABanner_TextView=Guide_layout.findViewById(R.id.Guide_BGABanner_TextView);
                 Guide_BGABanner_TextView.setVisibility(View.VISIBLE);
@@ -69,6 +69,11 @@ public class GuidePresenter extends BasePresenter<GuideView> {
             views.add(Guide_layout);
         }
         mvpView.getGuide_BGABanner().setData(views);
+    }
+
+    @Override
+    public void CloseRequest() {
+
     }
 
     /**自动跳转**/

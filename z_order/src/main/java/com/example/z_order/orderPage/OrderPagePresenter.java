@@ -41,7 +41,7 @@ class OrderPagePresenter extends BasePresenter<OrderPageView>{
                     helper.setText(R.id.OrderPage_GoodsPrice,"￥ "+((OrderList)item).getGoodsPrice());
                     helper.setText(R.id.OrderPage_GoodsTime,((OrderList)item).getGoodsTime());
 //                    helper.setText(R.id.OrderPage_GoodsPrice,((OrderList)item).getStoreName());
-                    GlideUtil.displayImage(mvpView.getActivityContext(),R.mipmap.order_goods,helper.getView(R.id.OrderPage_GoodsImage));
+                    GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.order_goods,helper.getView(R.id.OrderPage_GoodsImage));
                     switch (((OrderList)item).getState()){
                         case 1:
                             helper.setText(R.id.OrderPage_Left,"退款");
@@ -71,5 +71,10 @@ class OrderPagePresenter extends BasePresenter<OrderPageView>{
                 });
         mvpView.getOrderPage_Recycler().setAdapter(simpleRecyclerViewAdapter);
         mvpView.getOrderPage_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
+    }
+
+    @Override
+    public void CloseRequest() {
+
     }
 }
