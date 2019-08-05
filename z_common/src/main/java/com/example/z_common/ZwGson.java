@@ -6,7 +6,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -67,21 +66,6 @@ public class ZwGson {
         List<T> list = null;
         if (gson != null) {
             list = gson.fromJson(gsonString, new TypeToken<List<T>>() {
-            }.getType());
-        }
-        return list;
-    }
-
-    /**
-     * 转成list
-     * 泛型在编译期类型被擦除导致报错
-     * @param cls
-     * @return
-     */
-    public static <T> List<T> GsonToList(BufferedReader reader, Class<T> cls) {
-        List<T> list = null;
-        if (gson != null) {
-            list = gson.fromJson(reader, new TypeToken<List<T>>() {
             }.getType());
         }
         return list;

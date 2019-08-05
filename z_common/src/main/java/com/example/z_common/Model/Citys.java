@@ -58,6 +58,18 @@ public class Citys {
         this.city = city;
     }
 
+    @Override
+    public String toString() {
+        return "Citys{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", spell='" + spell + '\'' +
+                ", abb='" + abb + '\'' +
+                ", city=" + city +
+                '}';
+    }
+
     public static class CityBean {
         /**
          * id : 2

@@ -19,14 +19,15 @@ import com.example.z_base.BaseActivity;
 import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.Model.CityList;
 import com.example.z_common.Model.Citys;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.XXPermissions;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,15 +131,20 @@ public class SimpleUtils {
 
     /**获取城市列表对象数组**/
     public static List<Citys> getCitys() throws IOException {
-        return ZwGson.GsonToList(new BufferedReader(BaseActivity.getInstance().getAssets().open("json/cities.json").),Citys.class);
+        InputStream inputStream=BaseActivity.getInstance().getAssets().open("json/cities.json");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        return new Gson().fromJson(reader, new TypeToken<List<Citys>>() {}.getType());
     }
-    /**定位界面显示城市列表**/
+    /**定位界面显示城市列表   现在只放了地级市**/
     public static List<CityList> getCitysList(){
         List<CityList> cityLists=new ArrayList<>();
         try {
             for (Citys citys:getCitys()){
                 for (Citys.CityBean cityBean:citys.getCity()){
                     cityLists.add(new CityList(cityBean.getCode(),citys.getName(),cityBean.getName(),cityBean.getAbb()));
+//                    for (Citys.CityBean.AreaBean areaBean:cityBean.getArea()){
+//                        cityLists.add(new CityList(areaBean.getCode(),cityBean.getName(),areaBean.getName(),areaBean.getAbb()));
+//                    }
                 }
             }
         }catch (Exception E){

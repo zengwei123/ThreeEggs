@@ -27,6 +27,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
 
     @Override
     public void setView() {
+        SimpleUtils.getCitysList();
         setCityRecycle();
         mvpView.getAddress_WanEditText_Message().setRightPicOnclickListener(editText -> {
             positioning(false);
@@ -41,16 +42,15 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
 
     /**城市选择**/
     private void setCityRecycle(){
-        List<CityList> CityList=SimpleUtils.getCitysList();
-
-        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),CityList, (helper, item) -> {
+        List<CityList> cityLists=SimpleUtils.getCitysList();
+        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),cityLists, (helper, item) -> {
             helper.setText(R.id.Address_City_item_Text,((CityList)item).getName());
         });
         mvpView.getAddress_City_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
         mvpView.getAddress_City_Recycler().setAdapter(simpleRecyclerViewAdapter);
         /**这个是设置字母的悬浮内容**/
-        if (CityList!=null){
-            mvpView.getAddress_City_Recycler().addItemDecoration(new AddressItemDecoration(mvpView.getActivityContext(), position -> CityList.get(position).getSname()));
+        if (cityLists!=null){
+            mvpView.getAddress_City_Recycler().addItemDecoration(new AddressItemDecoration(mvpView.getActivityContext(), position -> cityLists.get(position).getSname()));
         }
     }
 
