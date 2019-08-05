@@ -1,18 +1,16 @@
 package com.example.z_home.Address;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Amap.AmapPoiUtil;
 import com.example.z_common.Amap.AmapPositioningUtil;
+import com.example.z_common.Model.CityList;
 import com.example.z_common.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_home.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AddressPresenter extends BasePresenter<AddressView> implements View.OnClickListener {
@@ -29,7 +27,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
 
     @Override
     public void setView() {
-        setCityRecycle(Arrays.asList("A北京","B南京","C东京","D西京","E湖北","F湖南","G湖东","H湖西","I山北","J山南","K山东","M山西"));
+        setCityRecycle();
         mvpView.getAddress_WanEditText_Message().setRightPicOnclickListener(editText -> {
             positioning(false);
         });
@@ -42,17 +40,17 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     }
 
     /**城市选择**/
-    private void setCityRecycle(List<String> CityList){
+    private void setCityRecycle(){
+        List<CityList> CityList=SimpleUtils.getCitysList();
+
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),CityList, (helper, item) -> {
-            helper.setText(R.id.Address_City_item_Text,item.toString().substring(1));
+            helper.setText(R.id.Address_City_item_Text,((CityList)item).getName());
         });
         mvpView.getAddress_City_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
         mvpView.getAddress_City_Recycler().setAdapter(simpleRecyclerViewAdapter);
         /**这个是设置字母的悬浮内容**/
         if (CityList!=null){
-            if(CityList.size()!=0){
-                mvpView.getAddress_City_Recycler().addItemDecoration(new AddressItemDecoration(mvpView.getActivityContext(), position -> CityList.get(position).substring(0,1)));
-            }
+            mvpView.getAddress_City_Recycler().addItemDecoration(new AddressItemDecoration(mvpView.getActivityContext(), position -> CityList.get(position).getSname()));
         }
     }
 

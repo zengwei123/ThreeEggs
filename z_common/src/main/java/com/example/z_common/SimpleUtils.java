@@ -17,9 +17,17 @@ import android.widget.Toast;
 
 import com.example.z_base.BaseActivity;
 import com.example.z_common.Custom.Dialog.DialogUtil;
+import com.example.z_common.Model.CityList;
+import com.example.z_common.Model.Citys;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.XXPermissions;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -119,6 +127,26 @@ public class SimpleUtils {
             return dm.heightPixels;
         }
     }
+
+    /**获取城市列表对象数组**/
+    public static List<Citys> getCitys() throws IOException {
+        return ZwGson.GsonToList(new BufferedReader(BaseActivity.getInstance().getAssets().open("json/cities.json").),Citys.class);
+    }
+    /**定位界面显示城市列表**/
+    public static List<CityList> getCitysList(){
+        List<CityList> cityLists=new ArrayList<>();
+        try {
+            for (Citys citys:getCitys()){
+                for (Citys.CityBean cityBean:citys.getCity()){
+                    cityLists.add(new CityList(cityBean.getCode(),citys.getName(),cityBean.getName(),cityBean.getAbb()));
+                }
+            }
+        }catch (Exception E){
+            E.printStackTrace();
+        }
+        return cityLists;
+    }
+
 
     /**控制 log**/
     public static void setLog(String str){
