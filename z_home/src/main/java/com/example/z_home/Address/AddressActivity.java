@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -97,5 +98,14 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     @Override
     public Activity getThisActivity() {
         return this;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getAddress_City_Recycler().getVisibility()!= View.GONE){
+            getAddress_City_Recycler().setVisibility(View.GONE);
+        }else {
+            super.onBackPressed();
+        }
     }
 }

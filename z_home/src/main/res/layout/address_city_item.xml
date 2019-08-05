@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/Title_Height">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.example.z_common.Custom.HotLayout
+        android:id="@+id/Address_City_item_HotLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
+    </com.example.z_common.Custom.HotLayout>
     <TextView
-        android:gravity="center"
         android:id="@+id/Address_City_item_Text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="@dimen/Title_Height"
+        android:gravity="center" />
 </LinearLayout>

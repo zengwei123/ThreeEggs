@@ -8,35 +8,34 @@
     <include layout="@layout/z_include_title"></include>
 
     <LinearLayout
+        android:id="@+id/Address_Linear"
+        android:orientation="vertical"
         android:layout_marginTop="@dimen/Title_Height"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/Title_Height">
-
-        <TextView
-            android:id="@+id/Address_City_Text"
-            android:text="下拉列表"
-            android:textSize="@dimen/Text_Size_4"
-            android:ellipsize="end"
-            android:lines="1"
-            android:gravity="center"
-            android:textColor="@color/C2B2B2B"
-            android:layout_weight="3"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="@dimen/Title_Height">
+            <TextView
+                android:id="@+id/Address_City_Text"
+                android:text="未定位"
+                android:textSize="@dimen/Text_Size_4"
+                android:ellipsize="end"
+                android:lines="1"
+                android:gravity="center"
+                android:textColor="@color/C2B2B2B"
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        <EditText
-            android:hint="搜索地址"
-            android:background="#ffffff"
-            android:focusable="false"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="80dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            <EditText
+                android:hint="搜索地址"
+                android:background="#ffffff"
+                android:focusable="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
         <View
             android:background="#cccccc"
             android:layout_margin="5dp"
@@ -58,6 +57,12 @@
             android:text="翻斗大街翻斗花园2号楼1001室"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/Address_Linear"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
             android:padding="5dp"
             android:layout_width="match_parent"
@@ -88,7 +93,7 @@
         android:id="@+id/Address_City_Recycler"
         android:background="#ffffff"
         android:visibility="gone"
-        android:layout_marginTop="80dp"
+        android:layout_below="@+id/Address_Linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
