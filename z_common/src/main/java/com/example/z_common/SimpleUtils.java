@@ -144,7 +144,6 @@ public class SimpleUtils {
         cityLists.add(new CityList("0","热门",string,"#"));
         try {
             for (Citys citys:getCitys()){
-                setLog("省份坐标："+cityLists.size()+"-"+citys.getName());
                 for (Citys.CityBean cityBean:citys.getCity()){
                     cityLists.add(new CityList(cityBean.getCode(),citys.getName(),cityBean.getName(),cityBean.getAbb()));
 //                    for (Citys.CityBean.AreaBean areaBean:cityBean.getArea()){

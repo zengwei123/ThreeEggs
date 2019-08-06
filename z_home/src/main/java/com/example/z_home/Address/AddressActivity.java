@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ import com.example.z_home.R;
 public class AddressActivity extends MvpActivity<AddressPresenter> implements AddressView {
     private TextView Include_Title_Text;   //页面头文字
     private ImageView Include_Title_Close;  //头部关闭按钮
-
+    private AutoCompleteTextView Address_Search;
     private TextView Address_City_Text;   //城市选择按钮
     private RecyclerView Address_City_Recycler;    //城市列表
     private TextView Address_City_Look;  //查看更多附近
@@ -48,6 +49,7 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     public void getViews() {
         Include_Title_Text=findViewById(R.id.Include_Title_Text);
         Include_Title_Close=findViewById(R.id.Include_Title_Close);
+        Address_Search=findViewById(R.id.Address_Search);
         Address_City_Text=findViewById(R.id.Address_City_Text);
         Address_City_Recycler=findViewById(R.id.Address_City_Recycler);
         Address_City_Look=findViewById(R.id.Address_City_Look);
@@ -63,6 +65,11 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     @Override
     public ImageView getInclude_Title_Close() {
         return Include_Title_Close;
+    }
+
+    @Override
+    public AutoCompleteTextView getAddress_Search() {
+        return Address_Search;
     }
 
     @Override

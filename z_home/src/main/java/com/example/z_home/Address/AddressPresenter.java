@@ -2,13 +2,23 @@ package com.example.z_home.Address;
 
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.services.core.PoiItem;
+import com.amap.api.services.help.Inputtips;
+import com.amap.api.services.help.InputtipsQuery;
+import com.amap.api.services.help.Tip;
+import com.amap.api.services.poisearch.PoiResult;
+import com.amap.api.services.poisearch.PoiSearch;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Amap.AmapPoiUtil;
@@ -32,6 +42,19 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
         setView();
         setClick();
         positioning(true);
+
+        mvpView.getAddress_Search().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                SearchPoi(s.toString(),mvpView.getAddress_City_Text().getText().toString());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
     }
 
     @Override
@@ -101,12 +124,13 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
             });
         }
     }
-
+    /**热门控件点击 跳转到对应省份**/
     public static void MoveToPosition(LinearLayoutManager manager, int n) {
         manager.scrollToPositionWithOffset(SimpleUtils.caitsints[n], 0);
         manager.setStackFromEnd(true);
     }
-    
+
+
     /**附近地址**/
     private void setNearRecycler(List<String> NearList){
         this.NearList=NearList;
@@ -190,9 +214,26 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
                     isNearNumber = NearList.size();
                 }
                 mvpView.getAddress_Near_Recycler().getAdapter().notifyDataSetChanged();
-            }else {
-                SimpleUtils.setLog("未定位，无附近位置！");
             }
         }
     }
+
+    private  ArrayAdapter adapter1;
+    private List<String> strings=new ArrayList<>();
+    private void SearchPoi(String query,String city){
+        InputtipsQuery inputquery = new InputtipsQuery(query, city);
+        inputquery.setCityLimit(true);
+        Inputtips inputTips = new Inputtips(mvpView.getActivityContext(), inputquery);
+        inputTips.setInputtipsListener((list, i) -> {
+            for (Tip tip:list){
+                strings.add(tip.getName());
+                SimpleUtils.setLog(tip.toString());
+            }
+
+        });
+        adapter1 = new ArrayAdapter(mvpView.getActivityContext(),R.layout.support_simple_spinner_dropdown_item,strings);
+        mvpView.getAddress_Search().setAdapter(adapter1);
+        inputTips.requestInputtipsAsyn();
+    }
+
 }
