@@ -116,8 +116,9 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
 
     @Override
     public void onBackPressed() {
-        if (getAddress_City_Recycler().getVisibility()!= View.GONE){
+        if (getAddress_City_Recycler().getVisibility()!= View.GONE||getAddress_PoI_Recycler().getVisibility()!= View.GONE){
             getAddress_City_Recycler().setVisibility(View.GONE);
+            getAddress_PoI_Recycler().setVisibility(View.GONE);
         }else {
             super.onBackPressed();
         }

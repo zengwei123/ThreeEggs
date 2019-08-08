@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitServiceManager {
     private static final int DEFAULT_TIME_OUT = 10;//超时时间 5s
     private static final int DEFAULT_READ_TIME_OUT = 20;  //读写超时时间
-    private static final String IP="http://193.112.43.188:8081/";
+    private static final String IP="https://customer.zhangdanling.cn/";
     private Retrofit mRetrofit;
     /**创建Retrofit 请求对象**/
     private RetrofitServiceManager(){

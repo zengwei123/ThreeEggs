@@ -45,6 +45,7 @@ public abstract class RequestObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
+        e.printStackTrace();
         stopDisposable(false);
         SimpleUtils.setToast("网络错误");
         /**如果有回调接口**/

@@ -24,17 +24,23 @@ import io.reactivex.schedulers.Schedulers;
 public class HomeRequestServiceFactory {
     private static HomeRequestService homeRequestService = RetrofitServiceManager.getInstance().create(HomeRequestService.class);
 
-    private static Map<Class,List<RequestObserver>> map=new HashMap<>();
-
     /**
      * 首页分类的数据解析
      */
     public static void  CategoryFind(RequestObserver.RequestObserverNext requestObserverNext){
-
         Observable observable= homeRequestService.CategoryFind("0",true);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RequestObserver<AllDataState>(requestObserverNext){});
     }
 
+    /**
+     * 首页分类的数据解析
+     */
+    public static void  HomeHead(RequestObserver.RequestObserverNext requestObserverNext){
+        Observable observable= homeRequestService.HomeHead();
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RequestObserver<AllDataState>(requestObserverNext){});
+    }
 }

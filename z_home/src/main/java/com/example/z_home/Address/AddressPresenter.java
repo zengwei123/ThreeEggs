@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.example.z_common.Amap.AmapPoiUtil;
 import com.example.z_common.Amap.AmapPositioningUtil;
 import com.example.z_common.Custom.HotLayout;
 import com.example.z_common.Model.CityList;
+import com.example.z_common.Model.PositioningSuccessful;
 import com.example.z_common.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_home.R;
@@ -30,8 +32,8 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     private boolean GLNear=false;   //控制附近的地址的全部还是部分显示
     List<String> NearList=new ArrayList<>();   //附近地址数据
     List<String> CityList=new ArrayList<>();   //城市列表数据
-
-    private List<String> strings=new ArrayList<>();  //Poi数据列表
+    private int selectCityIndex=-1;
+    private List<Tip> tips=new ArrayList<>();  //Poi数据列表
     @Override
     public void init() {
         setView();
@@ -49,6 +51,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
 
             @Override
             public void afterTextChanged(Editable s) {
+                SimpleUtils.setLog(s.toString());
                 SearchPoi(s.toString(),mvpView.getAddress_City_Text().getText().toString());
             }
         });
@@ -93,7 +96,13 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
         simpleRecyclerViewAdapter.setOnItemClickListener((adapter, view, position) -> {
             /**手动定位城市**/
             if (position!=0)
+                selectCityIndex=position;
             mvpView.getAddress_City_Text().setText(cityLists.get(position).getName());
+
+            AmapPositioningUtil.setIsPosition(3);
+            AmapPositioningUtil.setPositioningSuccessful(new PositioningSuccessful(cityLists.get(position).getName(),
+                    cityLists.get(position).getCode()+"",
+                    "",0,0,null));
         });
         /**这个是设置字母的悬浮内容**/
         if (cityLists!=null){
@@ -143,10 +152,10 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     }
     /**获取附近的推荐地址**/
     private void getNearAddress(){
-        AmapPoiUtil.getNearPoi(AmapPositioningUtil.getOKMapLocation().getPoiName(),
-                AmapPositioningUtil.getOKMapLocation().getCity(),
-                AmapPositioningUtil.getOKMapLocation().getLatitude(),
-                AmapPositioningUtil.getOKMapLocation().getLongitude(),
+        AmapPoiUtil.getNearPoi(AmapPositioningUtil.getPositioningSuccessful().getPoiName(),
+                AmapPositioningUtil.getPositioningSuccessful().getCity(),
+                AmapPositioningUtil.getPositioningSuccessful().getLatitude(),
+                AmapPositioningUtil.getPositioningSuccessful().getLongitude(),
                 poiItems -> setNearRecycler(poiItems)
         );
     }
@@ -157,16 +166,22 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
         mvpView.getAddress_City_Look().setOnClickListener(this);
 
     }
+
+    /**
+     * 下面这一个是系统定位功能
+     * 如果已经定位成功直接就用已经定位的
+     * 如果没有使用系统定位定位
+     */
     /**定位功能  点击定位**/
     private void positioning(boolean b){
         /**定位功能  如果已经定位成功  就直接用**/
-        if (AmapPositioningUtil.isIsPosition()&&b){
-            String str=AmapPositioningUtil.getOKMapLocation().getAddress();
+        if (AmapPositioningUtil.getIsPosition()==0&&b){
+            String str=AmapPositioningUtil.getPositioningSuccessful().getAddress();
             mvpView.getAddress_WanEditText_Message().setText(str);
             if(!str.equals("定位失败")){
                 getNearAddress();
                 /**当前定位的城市**/
-                mvpView.getAddress_City_Text().setText(AmapPositioningUtil.getOKMapLocation().getCity());
+                mvpView.getAddress_City_Text().setText(AmapPositioningUtil.getPositioningSuccessful().getCity());
             }else {
                 setNearRecycler(NearList);
             }
@@ -180,13 +195,74 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
                 if(!str.equals("定位失败")){
                     getNearAddress();
                     /**当前定位的城市**/
-                    mvpView.getAddress_City_Text().setText(AmapPositioningUtil.getOKMapLocation().getCity());
+                    mvpView.getAddress_City_Text().setText(AmapPositioningUtil.getPositioningSuccessful().getCity());
                 }else {
                     setNearRecycler(NearList);
                 }
             });
         }
     }
+
+
+
+    /**
+     * 下面两个是当手动选择定位的时候
+     * 会将手动选择的的地址保存起来
+     */
+    /**搜索地址**/
+   private void setRecyclerPoi(){
+       SimpleRecyclerViewAdapter simpleFragmentAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),tips, (helper, item) -> {
+           if (helper.getAdapterPosition()<isNearNumber){
+               Tip tip=(Tip)item;
+               helper.setText(R.id.Address_City_item_Text,tip.getAddress()+"");
+               helper.getView(R.id.Address_City_item_Text).setOnClickListener(v->{
+                   /**保存手动定位的数据**/
+
+                   List<CityList> cityLists=SimpleUtils.getCitysList();
+                   if (AmapPositioningUtil.getIsPosition()==0){
+                       /**如果定位成功**/
+                       AmapPositioningUtil.getPositioningSuccessful().setAddress( tip.getAddress());
+                       AmapPositioningUtil.getPositioningSuccessful().setLongitude( tip.getPoint().getLongitude());
+                       AmapPositioningUtil.getPositioningSuccessful().setLatitude( tip.getPoint().getLatitude());
+                   }else {
+                       PositioningSuccessful positioningSuccessful=new PositioningSuccessful(cityLists.get(selectCityIndex).getName(),
+                               cityLists.get(selectCityIndex).getCode(),
+                               tip.getAddress(),
+                               tip.getPoint().getLongitude(),
+                               tip.getPoint().getLatitude(),
+                               null
+                       );
+                       AmapPositioningUtil.setPositioningSuccessful(positioningSuccessful);
+                   }
+                   AmapPositioningUtil.setIsPosition(2);
+
+               });
+           }
+       });
+
+       mvpView.getAddress_PoI_Recycler().setAdapter(simpleFragmentAdapter);
+       mvpView.getAddress_PoI_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
+   }
+    /**获得搜索的poi**/
+    private void SearchPoi(String query,String city){
+        SimpleUtils.setLog(city);
+        InputtipsQuery inputquery = new InputtipsQuery(query, city);
+        inputquery.setCityLimit(true);
+        Inputtips inputTips = new Inputtips(mvpView.getActivityContext(), inputquery);
+        inputTips.setInputtipsListener((list, i) -> {
+            tips.clear();
+            for (Tip tip:list){
+                tips.add(tip);
+                SimpleUtils.setLog(tip.toString());
+            }
+            mvpView.getAddress_PoI_Recycler().getAdapter().notifyDataSetChanged();
+            mvpView.getAddress_PoI_Recycler().setVisibility(View.VISIBLE);
+        });
+        inputTips.requestInputtipsAsyn();
+    }
+
+
+
     @Override
     public void onClick(View view) {
         int i = view.getId();
@@ -215,32 +291,6 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
                 mvpView.getAddress_Near_Recycler().getAdapter().notifyDataSetChanged();
             }
         }
-    }
-
-   private void setRecyclerPoi(){
-       SimpleRecyclerViewAdapter simpleFragmentAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),strings, (helper, item) -> {
-           if (helper.getAdapterPosition()<isNearNumber){
-               helper.setText(R.id.Address_City_item_Text,(String)item);
-           }
-       });
-
-       mvpView.getAddress_PoI_Recycler().setAdapter(simpleFragmentAdapter);
-       mvpView.getAddress_PoI_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
-   }
-
-    private void SearchPoi(String query,String city){
-        InputtipsQuery inputquery = new InputtipsQuery(query, city);
-        inputquery.setCityLimit(true);
-        Inputtips inputTips = new Inputtips(mvpView.getActivityContext(), inputquery);
-        inputTips.setInputtipsListener((list, i) -> {
-            strings.clear();
-            for (Tip tip:list){
-                strings.add(tip.getName());
-            }
-            mvpView.getAddress_PoI_Recycler().getAdapter().notifyDataSetChanged();
-            mvpView.getAddress_PoI_Recycler().setVisibility(View.VISIBLE);
-        });
-        inputTips.requestInputtipsAsyn();
     }
 
 }

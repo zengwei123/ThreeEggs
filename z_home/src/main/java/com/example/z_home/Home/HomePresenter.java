@@ -8,11 +8,14 @@ import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Amap.AmapPositioningUtil;
 import com.example.z_common.GlideUtil;
+import com.example.z_common.Model.AllDataState;
+import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_home.Model.HomeActivityMenu;
+import com.example.z_home.Net.HomeRequestServiceFactory;
 import com.example.z_home.R;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
@@ -21,11 +24,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by zengwei on 2019/7/24.
  */
 
 class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListener {
+    private List<Disposable> disposables;
     @Override
     public void init() {
         setView();
@@ -38,6 +44,9 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
 
     @Override
     public void setView() {
+        disposables=new ArrayList<>();
+
+
         GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.home_camera,mvpView.getHome_Fragment_Image_Shooting());
         GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.home_class,mvpView.getHome_Fragment_Image_Category());
 
@@ -73,11 +82,14 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         mvpView.getHome_Fragment_RecyclerView().setAdapter(simpleRecyclerViewAdapter1);
         mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,5));
 
+        HomeHead();
     }
 
     @Override
     public void CloseRequest() {
-
+        for (Disposable disposable:disposables){
+            disposable.dispose();
+        }
     }
 
     private void setClick(){
@@ -94,7 +106,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             RoutePageActivity.getSearch();
         }else if(i==R.id.Home_Fragment_Image_Location){
             /**当没用定位的时候 停止定位**/
-            if (!AmapPositioningUtil.isIsPosition()){
+            if (AmapPositioningUtil.getIsPosition()==-1){
                 AmapPositioningUtil.getAmapPositioningUtil().StopPositioning();
             }
             RoutePageActivity.getAddress();
@@ -113,5 +125,25 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         }else {
             mvpView.getHome_Fragment_Image_Location().setText("定位失败");
         }
+    }
+
+    /**获取首页活动和轮播图**/
+    public void HomeHead(){
+        HomeRequestServiceFactory.HomeHead(new RequestObserver.RequestObserverNext<AllDataState>() {
+            @Override
+            public void Next(AllDataState o) {
+                SimpleUtils.setLog(o.toString());
+            }
+
+            @Override
+            public void onError() {
+                SimpleUtils.setLog("错误了");
+            }
+
+            @Override
+            public void getDisposable(Disposable d) {
+                disposables.add(d);
+            }
+        });
     }
 }

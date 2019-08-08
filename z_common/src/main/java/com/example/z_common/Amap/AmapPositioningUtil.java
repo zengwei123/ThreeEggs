@@ -5,13 +5,14 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.example.z_base.BaseActivity;
+import com.example.z_common.Model.PositioningSuccessful;
 import com.example.z_common.SimpleUtils;
 
 /**高德地图工具类**/
 public class AmapPositioningUtil {
     //保存的定位信息  是否定位成功   全部定位信息
-    private static boolean isPosition=false;
-    private static AMapLocation OKMapLocation;
+    private static int isPosition=-1;    //-1 没有定位   0定位成功   1定位失败   2手动定位  3未获取具体位置 只拿到城市
+    private static PositioningSuccessful positioningSuccessful;
 
 
     private static AmapPositioningUtil amapPositioningUtil=null;
@@ -45,8 +46,8 @@ public class AmapPositioningUtil {
     public void StopPositioning(){
         if(null != mLocationClient){
             mLocationClient.stopLocation();  //设置场景模式后最好调用一次stop，再调用start以保证场景模式生效
-            isPosition=false;   //清除定位信息
-            OKMapLocation=null;  //清除定位信息
+            isPosition=-1;   //清除定位信息
+            positioningSuccessful=null;
        }
     }
 
@@ -55,29 +56,37 @@ public class AmapPositioningUtil {
         String LocationMessage="定位失败";
         if (aMapLocation != null) {
             if (aMapLocation.getErrorCode() == 0) {
-                OKMapLocation=aMapLocation;
-                isPosition=true;
+                positioningSuccessful=new PositioningSuccessful(aMapLocation.getCity(),
+                        aMapLocation.getCityCode(),
+                        aMapLocation.getAddress(),
+                        aMapLocation.getLongitude(),
+                        aMapLocation.getLatitude(),
+                        aMapLocation.getPoiName());
+
+                isPosition=0;
                 LocationMessage=aMapLocation.getAddress();
             }else {
                 LocationMessage="定位失败";
-                isPosition=false;
+                isPosition=1;
             }
         }
         return LocationMessage;
     }
 
 
-
-    public static boolean isIsPosition() {
+    public static int getIsPosition() {
         return isPosition;
     }
-    public static void setIsPosition(boolean isPosition) {
+
+    public static void setIsPosition(int isPosition) {
         AmapPositioningUtil.isPosition = isPosition;
     }
-    public static AMapLocation getOKMapLocation() {
-        return OKMapLocation;
+
+    public static PositioningSuccessful getPositioningSuccessful() {
+        return positioningSuccessful;
     }
-    public static void setOKMapLocation(AMapLocation OKMapLocation) {
-        AmapPositioningUtil.OKMapLocation = OKMapLocation;
+
+    public static void setPositioningSuccessful(PositioningSuccessful positioningSuccessful) {
+        AmapPositioningUtil.positioningSuccessful = positioningSuccessful;
     }
 }
