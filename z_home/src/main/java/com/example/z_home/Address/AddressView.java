@@ -17,4 +17,5 @@ public interface AddressView extends BaseView {
     TextView getAddress_City_Look();
     RecyclerView getAddress_Near_Recycler();
     WanEditText getAddress_WanEditText_Message();
+    RecyclerView getAddress_PoI_Recycler();
 }

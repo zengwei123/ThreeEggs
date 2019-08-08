@@ -27,6 +27,7 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     private TextView Address_City_Look;  //查看更多附近
     private RecyclerView Address_Near_Recycler;   //附近地址列表
     private WanEditText Address_WanEditText_Message;  //当前定位的位置
+    private RecyclerView Address_PoI_Recycler;   //搜索附近的poi
 
 
     @Override
@@ -55,6 +56,7 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
         Address_City_Look=findViewById(R.id.Address_City_Look);
         Address_Near_Recycler=findViewById(R.id.Address_Near_Recycler);
         Address_WanEditText_Message=findViewById(R.id.Address_WanEditText_Message);
+        Address_PoI_Recycler=findViewById(R.id.Address_PoI_Recycler);
     }
 
     @Override
@@ -85,6 +87,11 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     @Override
     public WanEditText getAddress_WanEditText_Message() {
         return Address_WanEditText_Message;
+    }
+
+    @Override
+    public RecyclerView getAddress_PoI_Recycler() {
+        return Address_PoI_Recycler;
     }
 
     @Override

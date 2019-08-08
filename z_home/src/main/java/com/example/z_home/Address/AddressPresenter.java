@@ -5,21 +5,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.help.Inputtips;
 import com.amap.api.services.help.InputtipsQuery;
 import com.amap.api.services.help.Tip;
-import com.amap.api.services.poisearch.PoiResult;
-import com.amap.api.services.poisearch.PoiSearch;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Amap.AmapPoiUtil;
 import com.example.z_common.Amap.AmapPositioningUtil;
@@ -37,6 +30,8 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     private boolean GLNear=false;   //控制附近的地址的全部还是部分显示
     List<String> NearList=new ArrayList<>();   //附近地址数据
     List<String> CityList=new ArrayList<>();   //城市列表数据
+
+    private List<String> strings=new ArrayList<>();  //Poi数据列表
     @Override
     public void init() {
         setView();
@@ -46,14 +41,16 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
         mvpView.getAddress_Search().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                SearchPoi(s.toString(),mvpView.getAddress_City_Text().getText().toString());
+
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+                SearchPoi(s.toString(),mvpView.getAddress_City_Text().getText().toString());
+            }
         });
     }
 
@@ -68,6 +65,8 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
         mvpView.getAddress_WanEditText_Message().setRightPicOnclickListener(editText -> {
             positioning(false);
         });
+
+        setRecyclerPoi();
     }
     /**关闭请求**/
     @Override
@@ -218,21 +217,29 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
         }
     }
 
-    private  ArrayAdapter adapter1;
-    private List<String> strings=new ArrayList<>();
+   private void setRecyclerPoi(){
+       SimpleRecyclerViewAdapter simpleFragmentAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),strings, (helper, item) -> {
+           if (helper.getAdapterPosition()<isNearNumber){
+               helper.setText(R.id.Address_City_item_Text,(String)item);
+           }
+       });
+
+       mvpView.getAddress_PoI_Recycler().setAdapter(simpleFragmentAdapter);
+       mvpView.getAddress_PoI_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
+   }
+
     private void SearchPoi(String query,String city){
         InputtipsQuery inputquery = new InputtipsQuery(query, city);
         inputquery.setCityLimit(true);
         Inputtips inputTips = new Inputtips(mvpView.getActivityContext(), inputquery);
         inputTips.setInputtipsListener((list, i) -> {
+            strings.clear();
             for (Tip tip:list){
                 strings.add(tip.getName());
-                SimpleUtils.setLog(tip.toString());
             }
-
+            mvpView.getAddress_PoI_Recycler().getAdapter().notifyDataSetChanged();
+            mvpView.getAddress_PoI_Recycler().setVisibility(View.VISIBLE);
         });
-        adapter1 = new ArrayAdapter(mvpView.getActivityContext(),R.layout.support_simple_spinner_dropdown_item,strings);
-        mvpView.getAddress_Search().setAdapter(adapter1);
         inputTips.requestInputtipsAsyn();
     }
 
