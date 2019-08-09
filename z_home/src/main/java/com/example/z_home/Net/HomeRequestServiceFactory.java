@@ -1,20 +1,12 @@
 package com.example.z_home.Net;
 
-import android.app.Activity;
-
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.NET.RetrofitServiceManager;
-import com.example.z_home.Category.CategoryActivity;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.example.z_home.Model.HomeHead;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -41,6 +33,6 @@ public class HomeRequestServiceFactory {
         Observable observable= homeRequestService.HomeHead();
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RequestObserver<AllDataState>(requestObserverNext){});
+                .subscribe(new RequestObserver<AllDataState<HomeHead>>(requestObserverNext){});
     }
 }

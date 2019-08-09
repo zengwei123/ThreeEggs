@@ -5,6 +5,9 @@ import com.example.z_common.NET.ConvertersFractory.StringConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -25,10 +28,18 @@ public class RetrofitServiceManager {
                 .retryOnConnectionFailure(true)//默认重试一次，若需要重试N次，则要实现拦截器。
                 //.addInterceptor(new Retry(5))                        //拦截器  重试拦截器
                 //.addInterceptor(new AddQueryParameterInterceptor())  //拦截器  添加请求头
+              //  .sslSocketFactory(MySSLSocketFactory.getSSLSocketFactory(BaseActivity.getInstance()))
                 .connectTimeout(DEFAULT_TIME_OUT, TimeUnit.SECONDS)     //连接超时时间
                 .readTimeout(DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)   //读取超时时间
                 .writeTimeout(DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)  //写超时时间
+                .hostnameVerifier(new HostnameVerifier() {   //验证https证书  全部允许通过
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+                    }
+                })
                 .build();
+
         // 创建Retrofit
         mRetrofit = new Retrofit.Builder()
                 .client(client)

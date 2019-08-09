@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +31,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     private TextView Home_Fragment_Image_Location;  //位置
     private BGABanner Home_Fragment_BGABanner;    //轮播图
     private RecyclerView Home_Fragment_RecyclerView;   //活动栏
+    private ImageView Home_activity;
     private FrameLayout GoodsList_Fragment;  //商品列表
     private TextView Home_Fragment_TextView_Search;  //搜索界面按钮
     @Override
@@ -53,6 +53,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         Home_Fragment_Image_Location=view.findViewById(R.id.Home_Fragment_Image_Location);
         Home_Fragment_BGABanner=view.findViewById(R.id.Home_Fragment_BGABanner);
         Home_Fragment_RecyclerView=view.findViewById(R.id.Home_Fragment_RecyclerView);
+        Home_activity=view.findViewById(R.id.Home_activity);
         GoodsList_Fragment=view.findViewById(R.id.GoodsList_Fragment);
         Home_Fragment_TextView_Search=view.findViewById(R.id.Home_Fragment_TextView_Search);
     }
@@ -95,6 +96,11 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     @Override
     public RecyclerView getHome_Fragment_RecyclerView() {
         return Home_Fragment_RecyclerView;
+    }
+
+    @Override
+    public ImageView getHome_activity() {
+        return Home_activity;
     }
 
     @Override

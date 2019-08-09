@@ -14,14 +14,13 @@ import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
-import com.example.z_home.Model.HomeActivityMenu;
+import com.example.z_home.Model.HomeHead;
 import com.example.z_home.Net.HomeRequestServiceFactory;
 import com.example.z_home.R;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -54,33 +53,6 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
            RoutePageActivity.getAddress();
         });
 
-        /**设置轮播**/
-        mvpView.getHome_Fragment_BGABanner().setAdapter((banner, itemView, model, position) ->
-                GlideUtil.displayImage(mvpView.getThisActivity(),model,(ImageView) itemView));
-        mvpView.getHome_Fragment_BGABanner().setData(
-                Arrays.asList(R.mipmap.beijin04, R.mipmap.beijin05, R.mipmap.beijin06),
-                null
-        );
-
-        /**设置活动菜单**/
-        List<HomeActivityMenu> list=new ArrayList<>();
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","精选店铺",""));
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","清凉夏季",""));
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","镇店大牌",""));
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","附近爆款",""));
-        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","穿搭推荐",""));
-        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter1 =new SimpleRecyclerViewAdapter(
-                R.layout.home_fragment_recyclerview_activitymenu, mvpView.getActivityContext(), list,
-                (helper, item) -> {
-                    /**获取数据**/
-                    HomeActivityMenu homeActivityMenu= (HomeActivityMenu) item;
-                    /**价值图片**/
-                    GlideUtil.displayImage(mvpView.getThisActivity(),homeActivityMenu.getImageDrawable(), helper.getView(R.id.Home_Fragment_ActivityMenu_Image));
-                    /**活动名称**/
-                    helper.setText(R.id.Home_Fragment_ActivityMenu_TextView,homeActivityMenu.getName());
-                });
-        mvpView.getHome_Fragment_RecyclerView().setAdapter(simpleRecyclerViewAdapter1);
-        mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,5));
 
         HomeHead();
     }
@@ -129,21 +101,56 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
 
     /**获取首页活动和轮播图**/
     public void HomeHead(){
-        HomeRequestServiceFactory.HomeHead(new RequestObserver.RequestObserverNext<AllDataState>() {
+        HomeRequestServiceFactory.HomeHead(new RequestObserver.RequestObserverNext<AllDataState<HomeHead>>() {
             @Override
-            public void Next(AllDataState o) {
+            public void Next(AllDataState<HomeHead> o) {
                 SimpleUtils.setLog(o.toString());
+                setHeadMenu(o.getData().getMenu());   //菜单设置
+                setHeadShuffling(o.getData().getIndex());  //轮播图设置
+                /**活动图  只拿第一个**/
+                GlideUtil.displayImage(mvpView.getThisActivity(),o.getData().getAd().get(0).getImagePath(),mvpView.getHome_activity());
             }
-
             @Override
-            public void onError() {
-                SimpleUtils.setLog("错误了");
-            }
-
+            public void onError() { }
             @Override
             public void getDisposable(Disposable d) {
                 disposables.add(d);
             }
         });
     }
+
+    /**设置菜单**/
+    private void setHeadMenu(List<HomeHead.MenuBean> menus){
+        /**设置活动菜单**/
+//        List<HomeActivityMenu> list=new ArrayList<>();
+//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","精选店铺",""));
+//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","清凉夏季",""));
+//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","镇店大牌",""));
+//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","附近爆款",""));
+//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","穿搭推荐",""));
+        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter =new SimpleRecyclerViewAdapter(
+                R.layout.home_fragment_recyclerview_activitymenu, mvpView.getActivityContext(), menus,
+                (helper, item) -> {
+                    /**获取数据**/
+                    HomeHead.MenuBean menuBean= ( HomeHead.MenuBean) item;
+                    /**价值图片**/
+                    GlideUtil.displayImage(mvpView.getThisActivity(),menuBean.getImagePath(), helper.getView(R.id.Home_Fragment_ActivityMenu_Image));
+                    /**活动名称**/
+                    helper.setText(R.id.Home_Fragment_ActivityMenu_TextView,menuBean.getTitle());
+                });
+        mvpView.getHome_Fragment_RecyclerView().setAdapter(simpleRecyclerViewAdapter);
+        mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,menus.size()));
+    }
+    /**设置轮播**/
+    private void setHeadShuffling(List<HomeHead.IndexBean> indexBeans){
+        /**设置轮播**/
+        mvpView.getHome_Fragment_BGABanner().setAdapter((banner, itemView, model, position) ->
+                GlideUtil.displayImage(mvpView.getThisActivity(),model,(ImageView) itemView));
+        List<String> sf=new ArrayList<>();
+        for (HomeHead.IndexBean indexBean:indexBeans){
+            sf.add(indexBean.getImagePath());
+        }
+        mvpView.getHome_Fragment_BGABanner().setData(sf, null);
+    }
+
 }

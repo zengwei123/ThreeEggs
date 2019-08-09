@@ -20,6 +20,7 @@ interface HomeView extends BaseView{
     TextView getHome_Fragment_Image_Location();
     BGABanner getHome_Fragment_BGABanner();
     RecyclerView getHome_Fragment_RecyclerView();
+    ImageView getHome_activity();
     FrameLayout getGoodsList_Fragment();
     FragmentManager getFragmentManagers();
     TextView getHome_Fragment_TextView_Search();

@@ -2,6 +2,7 @@ package com.example.z_home.Net;
 
 import com.example.z_common.Model.AllDataState;
 import com.example.z_home.Model.CategoryList;
+import com.example.z_home.Model.HomeHead;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -22,5 +23,5 @@ public interface HomeRequestService {
     Observable<AllDataState<CategoryList>> CategoryFind(@Field("pid")String pid, @Field("stratum")boolean stratum);
 
     @GET("ad/index")
-    Observable<AllDataState> HomeHead();
+    Observable<AllDataState<HomeHead>> HomeHead();
 }

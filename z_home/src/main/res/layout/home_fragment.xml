@@ -80,6 +80,7 @@
                         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
                     <ImageView
+                        android:id="@+id/Home_activity"
                         android:src="@mipmap/home_activity"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/menu_H" />
