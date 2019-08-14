@@ -1,6 +1,7 @@
 package com.example.zengwei.threeeggs;
 
 import com.example.z_common.Model.AllDataState;
+import com.example.z_common.Model.Token;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -15,4 +16,18 @@ public interface MainRequestService {
     @FormUrlEncoded
     @POST("apk/detection")
     Observable<AllDataState> ApkDetection(@Field("version")String version);  /**apk更新接口**/
+
+    /**
+     * token接口
+     */
+    @FormUrlEncoded
+    @POST("devices/token")
+    Observable<AllDataState<Token>> Token(@Field("systemName")String systemName,   //系统名称
+                                          @Field("operator")String operator,       //运行商
+                                          @Field("seriesNumber")String seriesNumber,   //序列号
+                                          @Field("wlan")String wlan,            //无线局域网地址
+                                          @Field("bluetooth")String bluetooth,  //蓝牙
+                                          @Field("imei")String imei,           //手机imei
+                                          @Field("iccid")String iccid,          //手机iccid
+                                          @Field("meid")String meid);          //手机meid
 }

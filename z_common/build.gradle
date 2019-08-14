@@ -65,6 +65,8 @@ dependencies {
     api 'me.jessyan:autosize:1.1.2'//今日头条适配封装库
     api 'com.hjq:xxpermissions:5.5'    //权限获取框架
 
+    api 'com.necer.ncalendar:ncalendar:4.3.3'  //日期选择库
+
     api project(":z_base")
     api project(":lottie")
 }

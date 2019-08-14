@@ -27,6 +27,7 @@ public class LottieDialog {
     }
 
     public static void stopDialogView(){
+        if (dialog!=null)
         dialog.dismiss();
     }
 

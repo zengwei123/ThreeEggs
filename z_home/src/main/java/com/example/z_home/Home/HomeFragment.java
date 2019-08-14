@@ -123,7 +123,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         /**在这里获取定位  防止第一次进入无法获取位置**/
         if(AmapPositioningUtil.getIsPosition()==-1){
             mvpPresenter.positioning();
-        }else  if(AmapPositioningUtil.getIsPosition()==2||AmapPositioningUtil.getIsPosition()==0){
+        }else  if(AmapPositioningUtil.getIsPosition()==2||AmapPositioningUtil.getIsPosition()==0||AmapPositioningUtil.getIsPosition()==3){
             getHome_Fragment_Image_Location().setText(AmapPositioningUtil.getPositioningSuccessful().getCity()+
                     AmapPositioningUtil.getPositioningSuccessful().getAddress());
         }

@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/z_common" />
             <option value="$PROJECT_DIR$/z_goods" />
             <option value="$PROJECT_DIR$/z_home" />
+            <option value="$PROJECT_DIR$/z_login_register" />
             <option value="$PROJECT_DIR$/z_message" />
             <option value="$PROJECT_DIR$/z_my" />
             <option value="$PROJECT_DIR$/z_order" />

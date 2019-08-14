@@ -21,7 +21,9 @@ public abstract class RequestObserver<T> implements Observer<T> {
     }
     private RequestObserverNext next=null;
     public RequestObserver(RequestObserverNext requestObserverNext){
-        LottieDialog.showDialogView();
+        try {
+            LottieDialog.showDialogView();
+        }catch (Exception e){}
         next=requestObserverNext;
     }
 
@@ -51,6 +53,7 @@ public abstract class RequestObserver<T> implements Observer<T> {
         /**如果有回调接口**/
         if (next!=null){
             next.onError();
+            e.printStackTrace();
         }
     }
 

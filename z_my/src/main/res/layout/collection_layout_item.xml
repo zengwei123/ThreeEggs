@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    android:translationZ="2dp"
+    android:layout_height="140dp">
+    <ImageView
+        android:padding="5dp"
+        android:layout_width="@dimen/goodsList_RecyclerView_H"
+        android:layout_height="@dimen/goodsList_RecyclerView_H" />
+    <LinearLayout
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:text="标题"
+            android:layout_width="match_parent"
+            android:lines="2"
+            android:gravity="center|left"
+            android:ellipsize="end"
+            android:layout_height="40dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="收藏人数"
+                android:layout_width="match_parent"
+                android:lines="1"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="时间"
+                android:layout_width="match_parent"
+                android:lines="1"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="价格"
+                android:layout_width="match_parent"
+                android:lines="1"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -7,6 +7,8 @@ import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpFragment;
 import com.example.z_circle.Circle.CircleFragment;
 import com.example.z_common.Custom.Dialog.LottieDialog;
+import com.example.z_common.NoLR.NoLRFragment;
+import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.SimpleFragmentAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_home.Home.HomeFragment;
@@ -36,8 +38,13 @@ public class MainPresenter extends BasePresenter<MainView> {
         List<MvpFragment> fragments=new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new CircleFragment());
-        fragments.add(new MessageFragment());
-        fragments.add(new MyFragment());
+        if (SimpleUtils.IsLogin()){
+            fragments.add(new MessageFragment());
+            fragments.add(new MyFragment());
+        }else {
+            fragments.add(new NoLRFragment());
+            fragments.add(new NoLRFragment());
+        }
         SimpleFragmentAdapter simpleFragmentAdapter=new SimpleFragmentAdapter( ((FragmentActivity)mvpView.getThisActivity()).getSupportFragmentManager(),fragments);
         mvpView.getMain_ViewPager().setAdapter(simpleFragmentAdapter);
         /**加载页面数量**/
@@ -48,7 +55,7 @@ public class MainPresenter extends BasePresenter<MainView> {
                 switch (tab.getPosition()){
                     case 0: tab.setIcon(R.mipmap.main_home); break;
                     case 1: tab.setIcon(R.mipmap.main_circle); break;
-                    case 2: tab.setIcon(R.mipmap.main_order);break;
+                    case 2: tab.setIcon(R.mipmap.main_order); break;
                     case 3: tab.setIcon(R.mipmap.main_personal); break;
                 }
             }
@@ -57,13 +64,12 @@ public class MainPresenter extends BasePresenter<MainView> {
                 switch (tab.getPosition()){
                     case 0: tab.setIcon(R.mipmap.main_home1); break;
                     case 1: tab.setIcon(R.mipmap.main_circle1); break;
-                    case 2: tab.setIcon(R.mipmap.main_order1); break;
+                    case 2: tab.setIcon(R.mipmap.main_order1);break;
                     case 3: tab.setIcon(R.mipmap.main_personal1); break;
                 }
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 

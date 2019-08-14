@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:padding="5dp" />
+
+    <TextView
+        android:id="@+id/History_Price"
+        android:text="￥120"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -19,6 +19,7 @@ import com.example.z_base.BaseActivity;
 import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.Model.CityList;
 import com.example.z_common.Model.Citys;
+import com.example.z_common.Model.Token;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hjq.permissions.OnPermission;
@@ -158,6 +159,21 @@ public class SimpleUtils {
         return cityLists;
     }
 
+    /**验证是否登陆**/
+    public static boolean IsLogin(){
+        return true;
+    }
+
+    /**获取设备token**/
+    public static String getToken(Context context){
+        Token token=((Token)new SharedPreferencesHelper(context,"TOKEN").getBase64("key"));
+        if (token==null){
+            return null;
+        }else {
+            SimpleUtils.setLog(token.getToken());
+            return token.getToken();
+        }
+    }
 
     /**控制 log**/
     public static void setLog(String str){

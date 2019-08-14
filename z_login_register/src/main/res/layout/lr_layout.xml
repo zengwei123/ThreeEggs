@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/z_include_title"></include>
+
+    <com.example.z_common.Custom.NoScrollViewPager
+        android:id="@+id/LR_ViewPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.example.z_common.Custom.NoScrollViewPager>
+</LinearLayout>

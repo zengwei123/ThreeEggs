@@ -2,6 +2,7 @@ package com.example.z_my.my;
 
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
@@ -41,7 +42,16 @@ class MyPresenter extends BasePresenter<MyView> implements View.OnClickListener 
 
         mvpView.getMy_Recycler().setAdapter(simpleRecyclerViewAdapter);
         mvpView.getMy_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
-
+        simpleRecyclerViewAdapter.setOnItemClickListener((adapter, view, position) -> {
+           switch (position){
+               case 0:
+                   RoutePageActivity.getCollection();
+                   break;
+               case 1:
+                   RoutePageActivity.getHistory();
+                   break;
+           }
+        });
 
     }
 

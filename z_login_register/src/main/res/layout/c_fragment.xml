@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/LR_code_1"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:background="@drawable/edittext_style"
+            android:layout_margin="5dp"
+            android:layout_height="50dp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/LR_code_2"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:background="@drawable/edittext_style1"
+            android:layout_margin="5dp"
+            android:layout_height="50dp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/LR_code_3"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:background="@drawable/edittext_style1"
+            android:layout_margin="5dp"
+            android:layout_height="50dp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/LR_code_4"
+            android:layout_width="match_parent"
+            android:enabled="false"
+            android:background="@drawable/edittext_style1"
+            android:layout_margin="5dp"
+            android:layout_height="50dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/LR_code_keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

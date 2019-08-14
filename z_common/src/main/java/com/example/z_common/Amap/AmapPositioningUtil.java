@@ -5,8 +5,13 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.example.z_base.BaseActivity;
+import com.example.z_common.CommonRequestServiceFactory;
+import com.example.z_common.Model.AllDataState;
 import com.example.z_common.Model.PositioningSuccessful;
+import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.SimpleUtils;
+
+import io.reactivex.disposables.Disposable;
 
 /**高德地图工具类**/
 public class AmapPositioningUtil {
@@ -87,6 +92,27 @@ public class AmapPositioningUtil {
     }
 
     public static void setPositioningSuccessful(PositioningSuccessful positioningSuccessful) {
+        //只要设置了这个我就给你保存定位信息
         AmapPositioningUtil.positioningSuccessful = positioningSuccessful;
+        CommonRequestServiceFactory.orientation(new RequestObserver.RequestObserverNext<AllDataState>() {
+            @Override
+            public void Next(AllDataState o) {
+                if (o.isSuccess()){
+
+                }else {
+                    SimpleUtils.setLog("定位错误"+o.getMessage());
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void getDisposable(Disposable d) {
+
+            }
+        },AmapPositioningUtil.positioningSuccessful);
     }
 }

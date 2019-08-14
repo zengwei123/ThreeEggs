@@ -38,4 +38,20 @@ public class MainRequestServiceFactory {
                     }
                 });
     }
+
+    /**获取用token**/
+    public static void  Token(RequestObserver.RequestObserverNext requestObserverNext){
+        Observable observable= mainRequestService.Token(
+                TOKEnUtil.getsystemName(),
+                TOKEnUtil.getoperator(),
+                TOKEnUtil.getseriesNumber(),
+                TOKEnUtil.getwlan(),
+                TOKEnUtil.getbluetooth(),
+                TOKEnUtil.getimei(),
+                TOKEnUtil.geticcid(),
+                TOKEnUtil.getmeid());
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RequestObserver<AllDataState>(requestObserverNext){});
+    }
 }

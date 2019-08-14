@@ -30,4 +30,20 @@ public class RoutePageActivity {
     public static void getGoodsSearch(){
         ARouter.getInstance().build("/Goods/GoodsSearchList").navigation();
     }
+
+    /**登陆界面**/
+    public static void getLRActivity(){
+        ARouter.getInstance().build("/LR/LRActivity").navigation();
+    }
+
+    /**收藏界面**/
+    public static void getCollection(){
+        ARouter.getInstance().build("/Me/Collection").navigation();
+    }
+
+    /**历史浏览界面**/
+    public static void getHistory(){
+        ARouter.getInstance().build("/Me/History").navigation();
+    }
+
 }
