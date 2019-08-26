@@ -2,14 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical">
 
-    <include layout="@layout/z_include_title"></include>
-
+    <ImageView
+        android:layout_margin="5dp"
+        android:id="@+id/LR_Close"
+        android:src="@mipmap/close"
+        android:padding="7dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
     <com.example.z_common.Custom.NoScrollViewPager
         android:id="@+id/LR_ViewPage"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </com.example.z_common.Custom.NoScrollViewPager>
 </LinearLayout>

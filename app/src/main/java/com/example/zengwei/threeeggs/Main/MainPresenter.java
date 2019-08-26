@@ -2,6 +2,7 @@ package com.example.zengwei.threeeggs.Main;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpFragment;
@@ -25,6 +26,7 @@ import java.util.List;
  */
 
 public class MainPresenter extends BasePresenter<MainView> {
+    private int fragmentid=0;
     @Override
     public void init() {
         SimpleUtils.getPermissions();
@@ -38,29 +40,34 @@ public class MainPresenter extends BasePresenter<MainView> {
         List<MvpFragment> fragments=new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new CircleFragment());
-        if (SimpleUtils.IsLogin()){
-            fragments.add(new MessageFragment());
-            fragments.add(new MyFragment());
-        }else {
-            fragments.add(new NoLRFragment());
-            fragments.add(new NoLRFragment());
-        }
+        fragments.add(new MessageFragment());
+        fragments.add(new MyFragment());
         SimpleFragmentAdapter simpleFragmentAdapter=new SimpleFragmentAdapter( ((FragmentActivity)mvpView.getThisActivity()).getSupportFragmentManager(),fragments);
         mvpView.getMain_ViewPager().setAdapter(simpleFragmentAdapter);
+
         /**加载页面数量**/
         mvpView.getMain_ViewPager().setOffscreenPageLimit(4);
         mvpView.getMain_TabLayout().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition()==3){
+                    if(!SimpleUtils.IsLogin()){
+                        mvpView.getMain_TabLayout().getTabAt(fragmentid).select();
+                        RoutePageActivity.getLRActivity();
+                        return;
+                    }
+                }
                 switch (tab.getPosition()){
-                    case 0: tab.setIcon(R.mipmap.main_home); break;
+                    case 0: tab.setIcon(R.mipmap.main_home);  break;
                     case 1: tab.setIcon(R.mipmap.main_circle); break;
                     case 2: tab.setIcon(R.mipmap.main_order); break;
                     case 3: tab.setIcon(R.mipmap.main_personal); break;
                 }
+                mvpView.getMain_ViewPager().setCurrentItem(tab.getPosition());
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                fragmentid=tab.getPosition();
                 switch (tab.getPosition()){
                     case 0: tab.setIcon(R.mipmap.main_home1); break;
                     case 1: tab.setIcon(R.mipmap.main_circle1); break;
@@ -73,14 +80,14 @@ public class MainPresenter extends BasePresenter<MainView> {
             }
         });
 
-        /**两个控件绑定起来**/
-        mvpView.getMain_TabLayout().setupWithViewPager(mvpView.getMain_ViewPager());
-
-        /**设置图标  ViewPage跟Tablayout绑定后 绑定后会清除 妈的**/
-        mvpView.getMain_TabLayout().getTabAt(0).setIcon(R.mipmap.main_home);
-        mvpView.getMain_TabLayout().getTabAt(1).setIcon(R.mipmap.main_circle1);
-        mvpView.getMain_TabLayout().getTabAt(2).setIcon(R.mipmap.main_order1);
-        mvpView.getMain_TabLayout().getTabAt(3).setIcon(R.mipmap.main_personal1);
+//        /**两个控件绑定起来**/
+//        mvpView.getMain_TabLayout().setupWithViewPager(mvpView.getMain_ViewPager());
+//
+//        /**设置图标  ViewPage跟Tablayout绑定后 绑定后会清除 妈的**/
+//        mvpView.getMain_TabLayout().getTabAt(0).setIcon(R.mipmap.main_home);
+//        mvpView.getMain_TabLayout().getTabAt(1).setIcon(R.mipmap.main_circle1);
+//        mvpView.getMain_TabLayout().getTabAt(2).setIcon(R.mipmap.main_order1);
+//        mvpView.getMain_TabLayout().getTabAt(3).setIcon(R.mipmap.main_personal1);
 
     }
 

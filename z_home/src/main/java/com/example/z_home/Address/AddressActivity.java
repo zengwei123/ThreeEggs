@@ -24,11 +24,11 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     private AutoCompleteTextView Address_Search;
     private TextView Address_City_Text;   //城市选择按钮
     private RecyclerView Address_City_Recycler;    //城市列表
-    private TextView Address_City_Look;  //查看更多附近
     private RecyclerView Address_Near_Recycler;   //附近地址列表
-    private WanEditText Address_WanEditText_Message;  //当前定位的位置
+    private TextView Address_TextView_Message;  //当前定位的位置
     private RecyclerView Address_PoI_Recycler;   //搜索附近的poi
 
+    private TextView Address_TextView_dingwei; //定位按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +53,10 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
         Address_Search=findViewById(R.id.Address_Search);
         Address_City_Text=findViewById(R.id.Address_City_Text);
         Address_City_Recycler=findViewById(R.id.Address_City_Recycler);
-        Address_City_Look=findViewById(R.id.Address_City_Look);
         Address_Near_Recycler=findViewById(R.id.Address_Near_Recycler);
-        Address_WanEditText_Message=findViewById(R.id.Address_WanEditText_Message);
+        Address_TextView_Message=findViewById(R.id.Address_TextView_Message);
         Address_PoI_Recycler=findViewById(R.id.Address_PoI_Recycler);
+        Address_TextView_dingwei=findViewById(R.id.Address_TextView_dingwei);
     }
 
     @Override
@@ -85,8 +85,8 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     }
 
     @Override
-    public WanEditText getAddress_WanEditText_Message() {
-        return Address_WanEditText_Message;
+    public TextView getAddress_TextView_Message() {
+        return Address_TextView_Message;
     }
 
     @Override
@@ -95,13 +95,13 @@ public class AddressActivity extends MvpActivity<AddressPresenter> implements Ad
     }
 
     @Override
-    public RecyclerView getAddress_City_Recycler() {
-        return Address_City_Recycler;
+    public TextView getAddress_TextView_dingwei() {
+        return Address_TextView_dingwei;
     }
 
     @Override
-    public TextView getAddress_City_Look() {
-        return Address_City_Look;
+    public RecyclerView getAddress_City_Recycler() {
+        return Address_City_Recycler;
     }
 
     @Override

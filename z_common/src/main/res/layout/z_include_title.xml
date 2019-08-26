@@ -2,17 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/Title_Height">
-    <ImageView
-        android:id="@+id/Include_Title_Close"
-        android:src="@mipmap/exam_right"
-        android:layout_width="@dimen/Title_Height"
-        android:layout_height="@dimen/Title_Height" />
+
     <TextView
         android:id="@+id/Include_Title_Text"
-        android:gravity="center|left"
-        android:layout_marginLeft="@dimen/Title_Height"
+        android:gravity="center"
         android:textSize="@dimen/Text_Size_5"
+        android:textColor="@color/C2B2B2B"
         android:text="标题标题"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/Include_Title_Close"
+        android:src="@mipmap/exam_right"
+        android:padding="5dp"
+        android:layout_width="@dimen/Title_Height"
+        android:layout_height="@dimen/Title_Height" />
 </RelativeLayout>

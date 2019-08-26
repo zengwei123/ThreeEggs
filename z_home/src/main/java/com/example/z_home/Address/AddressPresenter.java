@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -28,9 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddressPresenter extends BasePresenter<AddressView> implements View.OnClickListener {
-    private int isNearNumber=5;    //附近地址部分显示的默认数量
     private boolean GLNear=false;   //控制附近的地址的全部还是部分显示
-    List<String> NearList=new ArrayList<>();   //附近地址数据
+    List<PositioningSuccessful> NearList=new ArrayList<>();   //附近地址数据
     List<String> CityList=new ArrayList<>();   //城市列表数据
     private int selectCityIndex=-1;
     private List<Tip> tips=new ArrayList<>();  //Poi数据列表
@@ -42,9 +42,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
 
         mvpView.getAddress_Search().addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
@@ -59,16 +57,11 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
 
     @Override
     public void setView() {
-        mvpView.getInclude_Title_Text().setText("选择地址");
+        mvpView.getInclude_Title_Text().setText("选择定位");
         mvpView.getInclude_Title_Close().setOnClickListener(view -> {
             mvpView.getThisActivity().finish();
         });
         setCityRecycle();
-        /**定位按钮**/
-        mvpView.getAddress_WanEditText_Message().setRightPicOnclickListener(editText -> {
-            positioning(false);
-        });
-
         setRecyclerPoi();
     }
     /**关闭请求**/
@@ -140,14 +133,17 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
 
 
     /**附近地址**/
-    private void setNearRecycler(List<String> NearList){
+    private void setNearRecycler(List<PositioningSuccessful> NearList){
         this.NearList=NearList;
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),NearList, (helper, item) -> {
-            if (helper.getAdapterPosition()<isNearNumber){
-                helper.setText(R.id.Address_City_item_Text,item.toString().substring(1));
-            }
+            helper.setText(R.id.Address_City_item_Text,((PositioningSuccessful)item).getAddress());
+            helper.getView(R.id.Address_City_item_Text).setOnClickListener(v->{
+                SimpleUtils.setToast(((PositioningSuccessful)item).getAddress());
+                mvpView.getAddress_TextView_Message().setText(((PositioningSuccessful)item).getAddress());
+                AmapPositioningUtil.setPositioningSuccessful((PositioningSuccessful)item);
+            });
         });
-        mvpView.getAddress_Near_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,3));
+        mvpView.getAddress_Near_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
         mvpView.getAddress_Near_Recycler().setAdapter(simpleRecyclerViewAdapter);
     }
     /**获取附近的推荐地址**/
@@ -163,8 +159,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     /**点击事件**/
     private void setClick(){
         mvpView.getAddress_City_Text().setOnClickListener(this);
-        mvpView.getAddress_City_Look().setOnClickListener(this);
-
+        mvpView.getAddress_TextView_dingwei().setOnClickListener(this);
     }
 
     /**
@@ -177,7 +172,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
         /**定位功能  如果已经定位成功  就直接用**/
         if (AmapPositioningUtil.getIsPosition()==0&&b){
             String str=AmapPositioningUtil.getPositioningSuccessful().getAddress();
-            mvpView.getAddress_WanEditText_Message().setText(str);
+            mvpView.getAddress_TextView_Message().setText(str);
             if(!str.equals("定位失败")){
                 getNearAddress();
                 /**当前定位的城市**/
@@ -187,10 +182,10 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
             }
         }else {
             /**没有定位成功就定位一次**/
-            mvpView.getAddress_WanEditText_Message().setText("定位中...");
+            mvpView.getAddress_TextView_Message().setText("定位中...");
             AmapPositioningUtil.getAmapPositioningUtil().StartPositioning(aMapLocation -> {
                 String str=AmapPositioningUtil.ParsingAMapLocation(aMapLocation);
-                mvpView.getAddress_WanEditText_Message().setText(str);
+                mvpView.getAddress_TextView_Message().setText(str);
                 SimpleUtils.setToast("定位结束");
                 if(!str.equals("定位失败")){
                     getNearAddress();
@@ -212,34 +207,34 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     /**搜索地址**/
    private void setRecyclerPoi(){
        SimpleRecyclerViewAdapter simpleFragmentAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),tips, (helper, item) -> {
-           if (helper.getAdapterPosition()<isNearNumber){
                Tip tip=(Tip)item;
-               helper.setText(R.id.Address_City_item_Text,tip.getAddress()+"");
+               helper.setText(R.id.Address_City_item_Text,tip.getName()+"");
                helper.getView(R.id.Address_City_item_Text).setOnClickListener(v->{
                    /**保存手动定位的数据**/
-
                    List<CityList> cityLists=SimpleUtils.getCitysList();
                    if (AmapPositioningUtil.getIsPosition()==0){
                        /**如果定位成功**/
-                       AmapPositioningUtil.getPositioningSuccessful().setAddress( tip.getAddress());
+                       AmapPositioningUtil.getPositioningSuccessful().setCityCode( tip.getAdcode());
+                       AmapPositioningUtil.getPositioningSuccessful().setAddress( tip.getName());
                        AmapPositioningUtil.getPositioningSuccessful().setLongitude( tip.getPoint().getLongitude());
                        AmapPositioningUtil.getPositioningSuccessful().setLatitude( tip.getPoint().getLatitude());
                    }else {
-                       PositioningSuccessful positioningSuccessful=new PositioningSuccessful(cityLists.get(selectCityIndex).getName(),
-                               cityLists.get(selectCityIndex).getCode(),
-                               tip.getAddress(),
-                               tip.getPoint().getLongitude(),
-                               tip.getPoint().getLatitude(),
-                               null
-                       );
-                       AmapPositioningUtil.setPositioningSuccessful(positioningSuccessful);
+                       try{
+                           PositioningSuccessful positioningSuccessful=new PositioningSuccessful(cityLists.get(selectCityIndex).getName(),
+                                   tip.getAdcode(),
+                                   tip.getName(),
+                                   tip.getPoint().getLongitude(),
+                                   tip.getPoint().getLatitude(),
+                                   null
+                           );
+                           AmapPositioningUtil.setPositioningSuccessful(positioningSuccessful);
+                       }catch (Exception e){
+                           e.printStackTrace();
+                       }
                    }
                    AmapPositioningUtil.setIsPosition(2);
-
                });
-           }
        });
-
        mvpView.getAddress_PoI_Recycler().setAdapter(simpleFragmentAdapter);
        mvpView.getAddress_PoI_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
    }
@@ -270,26 +265,9 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
         if (i == R.id.Address_City_Text) {
             mvpView.getAddress_City_Recycler().setVisibility(View.VISIBLE);
         }
-        /**控制更多附近的显示的显示**/
-        else if(i==R.id.Address_City_Look){
-            /**表格还是列表  表格的时候是部分  列表的时候是全部  第一次加载的时候就全部加载出来**/
-            if (NearList.size()!=0) {
-                mvpView.getAddress_Near_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(!GLNear, 3));
-                if (GLNear) {
-                    GLNear = false;
-                    /**附近的地址小于5个数字的时候就显示全部 否则最多5个**/
-                    if (NearList.size() < 5) {
-                        isNearNumber = NearList.size();
-                    } else {
-                        isNearNumber = 5;
-                    }
-                } else {
-                    /**列表状态下显示全部附近地址**/
-                    GLNear = true;
-                    isNearNumber = NearList.size();
-                }
-                mvpView.getAddress_Near_Recycler().getAdapter().notifyDataSetChanged();
-            }
+        /**重新定位**/
+        else if(i==R.id.Address_TextView_dingwei){
+            positioning(false);
         }
     }
 

@@ -2,23 +2,39 @@ package com.example.z_login_register.LR;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.z_base.MvpActivity;
+import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.Custom.NoScrollViewPager;
+import com.example.z_common.Model.AllDataState;
+import com.example.z_common.NET.RequestObserver;
+import com.example.z_common.SimpleUtils;
+import com.example.z_login_register.LR.ViewPage.LRViewPageFragment_C;
+import com.example.z_login_register.LR.ViewPage.LRViewPageFragment_p;
+import com.example.z_login_register.Net.LRRequestServiceFactory;
+import com.example.z_login_register.QQUiListener;
 import com.example.z_login_register.R;
+import com.tencent.tauth.Tencent;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by zengwei on 2019/8/11.
  */
 @Route(path = "/LR/LRActivity")
 public class LRActivity extends MvpActivity<LRPresenter> implements LRView{
-    private TextView Include_Title_Text;   //页面头文字
-    private ImageView Include_Title_Close;  //头部关闭按钮
+    private ImageView LR_Close;  //头部关闭按钮
     private NoScrollViewPager LR_ViewPage;
+    private Tencent tencent;
+
+    private String qqOpenId="";   //qq登录的openid
+    private String weixinOpenId="";   //微信登录的openid
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +42,7 @@ public class LRActivity extends MvpActivity<LRPresenter> implements LRView{
         mvpPresenter.attachView(this);
         getViews();
         mvpPresenter.init();
+        tencent = Tencent.createInstance("101770446", this);
     }
 
     @Override
@@ -46,22 +63,32 @@ public class LRActivity extends MvpActivity<LRPresenter> implements LRView{
     @Override
     public void getViews() {
         LR_ViewPage=findViewById(R.id.LR_ViewPage);
-        Include_Title_Text=findViewById(R.id.Include_Title_Text);
-        Include_Title_Close=findViewById(R.id.Include_Title_Close);
+        LR_Close=findViewById(R.id.LR_Close);
     }
 
     @Override
-    public TextView getInclude_Title_Text() {
-        return Include_Title_Text;
-    }
-
-    @Override
-    public ImageView getInclude_Title_Close() {
-        return Include_Title_Close;
+    public ImageView getLR_Close() {
+        return LR_Close;
     }
 
     @Override
     public NoScrollViewPager getNoScrollViewPager() {
         return LR_ViewPage;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        tencent.onActivityResultData(requestCode,resultCode,data,new QQUiListener(new QQUiListener.QQListener() {
+            @Override
+            public void onComplete(String openid) {}
+            @Override
+            public void onError() {}
+        }));
+        try{
+            qqOpenId= ((LRViewPageFragment_p)mvpPresenter.getFragments().get(0)).getQqOpenid();
+            ((LRViewPageFragment_C)mvpPresenter.getFragments().get(1)).setQqOpenId(qqOpenId);
+            SimpleUtils.setToast(qqOpenId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -14,8 +14,8 @@ public interface AddressView extends BaseView {
     AutoCompleteTextView getAddress_Search();
     TextView getAddress_City_Text();
     RecyclerView getAddress_City_Recycler();
-    TextView getAddress_City_Look();
     RecyclerView getAddress_Near_Recycler();
-    WanEditText getAddress_WanEditText_Message();
+    TextView getAddress_TextView_Message();
     RecyclerView getAddress_PoI_Recycler();
+    TextView getAddress_TextView_dingwei();
 }

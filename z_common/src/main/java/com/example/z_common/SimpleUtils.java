@@ -10,7 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.Model.CityList;
 import com.example.z_common.Model.Citys;
 import com.example.z_common.Model.Token;
+import com.example.z_common.NET.RequestObserver;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hjq.permissions.OnPermission;
@@ -161,7 +164,20 @@ public class SimpleUtils {
 
     /**验证是否登陆**/
     public static boolean IsLogin(){
-        return true;
+        boolean b= (boolean) new SharedPreferencesHelper(BaseActivity.getInstance(),"TOKEN").getSharedPreference("ISLogin",false);
+        return b;
+    }
+
+    /**
+     * 隐藏输入软键盘
+     * @param context
+     * @param view
+     */
+    public static void hideInputManager(Context context,View view){
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (view !=null && imm != null){
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);  //强制隐藏
+        }
     }
 
     /**获取设备token**/

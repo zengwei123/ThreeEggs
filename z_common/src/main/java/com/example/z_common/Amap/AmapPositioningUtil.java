@@ -1,5 +1,7 @@
 package com.example.z_common.Amap;
 
+import android.util.Log;
+
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -62,7 +64,7 @@ public class AmapPositioningUtil {
         if (aMapLocation != null) {
             if (aMapLocation.getErrorCode() == 0) {
                 positioningSuccessful=new PositioningSuccessful(aMapLocation.getCity(),
-                        aMapLocation.getCityCode(),
+                        aMapLocation.getAdCode(),
                         aMapLocation.getAddress(),
                         aMapLocation.getLongitude(),
                         aMapLocation.getLatitude(),
@@ -94,6 +96,10 @@ public class AmapPositioningUtil {
     public static void setPositioningSuccessful(PositioningSuccessful positioningSuccessful) {
         //只要设置了这个我就给你保存定位信息
         AmapPositioningUtil.positioningSuccessful = positioningSuccessful;
+    }
+
+    public static void setServicePositioning(){
+        SimpleUtils.setLog("定位信息上传");
         CommonRequestServiceFactory.orientation(new RequestObserver.RequestObserverNext<AllDataState>() {
             @Override
             public void Next(AllDataState o) {

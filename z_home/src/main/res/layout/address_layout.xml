@@ -13,51 +13,70 @@
         android:layout_marginTop="@dimen/Title_Height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
+        <RelativeLayout
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/Title_Height">
             <TextView
                 android:id="@+id/Address_City_Text"
                 android:text="未定位"
-                android:textSize="@dimen/Text_Size_4"
+                android:textSize="@dimen/Text_Size_2"
+                android:drawableLeft="@mipmap/home_positioning"
+                android:drawableRight="@mipmap/bottom"
                 android:ellipsize="end"
                 android:lines="1"
                 android:gravity="center"
                 android:textColor="@color/C2B2B2B"
-                android:layout_weight="3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
-
             <AutoCompleteTextView
                 android:id="@+id/Address_Search"
-                android:hint="搜索地址"
-                android:background="#ffffff"
-                android:lines="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
+                android:drawableLeft="@mipmap/address_search"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="10dp"
+                android:hint="搜索详细地址"
+                android:lines="1"
+                android:layout_toRightOf="@+id/Address_City_Text"
+                android:textSize="@dimen/Text_Size_2"
+                android:background="@drawable/address_edittext" />
+        </RelativeLayout>
         <View
             android:background="#cccccc"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"></View>
-        <TextView
-            android:text="当前定位"
-            android:layout_margin="5dp"
+       <RelativeLayout
+           android:paddingLeft="5dp"
+           android:layout_width="match_parent"
+           android:layout_height="30dp">
+           <TextView
+               android:id="@+id/Address_TextView_Message"
+               android:gravity="center|left"
+               android:layout_toLeftOf="@+id/Address_TextView_dingwei"
+               android:focusable="false"
+               android:enabled="false"
+               android:textColor="#626262"
+               android:text="翻斗大街翻斗花园2号楼1001室"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent" />
+           <TextView
+               android:id="@+id/Address_TextView_dingwei"
+               android:drawableLeft="@mipmap/home_dingwei"
+               android:text="重新定位"
+               android:gravity="center"
+               android:layout_alignParentRight="true"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent" />
+       </RelativeLayout>
+        <View
+            android:background="#cccccc"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <com.example.z_common.Custom.WanEditText
-            android:id="@+id/Address_WanEditText_Message"
-            android:drawableLeft="@mipmap/home_positioning"
-            android:gravity="center|left"
-            android:drawableRight="@mipmap/home_dingwei"
-            android:focusable="false"
-            android:enabled="false"
-            android:textColor="@color/C2B2B2B"
-            android:text="翻斗大街翻斗花园2号楼1001室"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="1dp"></View>
     </LinearLayout>
     <LinearLayout
         android:layout_below="@+id/Address_Linear"
@@ -71,16 +90,11 @@
             <TextView
                 android:text="附近地址"
                 android:gravity="center|left"
+                android:drawableLeft="@mipmap/home_positioning"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-            <TextView
-                android:id="@+id/Address_City_Look"
-                android:text="查看更多 >"
-                android:gravity="center|right"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+
         </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:background="#ffffff"

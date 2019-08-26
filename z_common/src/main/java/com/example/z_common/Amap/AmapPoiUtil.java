@@ -2,9 +2,12 @@ package com.example.z_common.Amap;
 
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
+import com.amap.api.services.help.Tip;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.example.z_base.BaseActivity;
+import com.example.z_common.Model.CityList;
+import com.example.z_common.Model.PositioningSuccessful;
 import com.example.z_common.SimpleUtils;
 
 import java.util.ArrayList;
@@ -22,10 +25,13 @@ public class AmapPoiUtil {
             @Override
             public void onPoiSearched(PoiResult poiResult, int i) {
                 SimpleUtils.setLog("这里了2");
-                List<String> strings=new ArrayList();
+                List<PositioningSuccessful> strings=new ArrayList();
                 if(poiResult!=null){
                     for (PoiItem poiItem:poiResult.getPois()){
-                        strings.add(poiItem.toString());
+                        SimpleUtils.setLog(poiItem.toString());
+                        strings.add(new PositioningSuccessful(poiItem.getCityName(),poiItem.getAdCode(),
+                                poiItem.getCityName()+poiItem.getAdName()+poiItem.toString(),
+                                poiItem.getLatLonPoint().getLongitude(),poiItem.getLatLonPoint().getLatitude(),""));
                     }
                 }
                 poiAddreess.getPoiAddreess(strings);
@@ -40,6 +46,6 @@ public class AmapPoiUtil {
     }
 
     public interface PoiAddreess{
-        void getPoiAddreess(List<String> poiItems);
+        void getPoiAddreess(List<PositioningSuccessful> poiItems);
     }
 }

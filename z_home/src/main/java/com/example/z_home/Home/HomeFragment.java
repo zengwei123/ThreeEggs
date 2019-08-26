@@ -126,6 +126,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         }else  if(AmapPositioningUtil.getIsPosition()==2||AmapPositioningUtil.getIsPosition()==0||AmapPositioningUtil.getIsPosition()==3){
             getHome_Fragment_Image_Location().setText(AmapPositioningUtil.getPositioningSuccessful().getCity()+
                     AmapPositioningUtil.getPositioningSuccessful().getAddress());
+            AmapPositioningUtil.setServicePositioning();
         }
     }
 }

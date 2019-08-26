@@ -1,54 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="20dp"
     android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:text="请输入验证码"
+        android:textColor="@color/C2B2B2B"
+        android:gravity="center|left"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:textSize="@dimen/Text_Size_4"
         android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <LinearLayout
+        android:id="@+id/asdzz"
+        android:layout_marginTop="80dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
         android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/LR_code_1"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:enabled="false"
+            android:gravity="center"
             android:background="@drawable/edittext_style"
-            android:layout_margin="5dp"
-            android:layout_height="50dp"
-            android:layout_weight="1" />
+            android:layout_margin="10dp"
+            android:layout_height="50dp" />
 
         <EditText
             android:id="@+id/LR_code_2"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:enabled="false"
+            android:gravity="center"
             android:background="@drawable/edittext_style1"
-            android:layout_margin="5dp"
-            android:layout_height="50dp"
-            android:layout_weight="1" />
+            android:layout_margin="10dp"
+            android:layout_height="50dp" />
 
         <EditText
             android:id="@+id/LR_code_3"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:enabled="false"
+            android:gravity="center"
             android:background="@drawable/edittext_style1"
-            android:layout_margin="5dp"
-            android:layout_height="50dp"
-            android:layout_weight="1" />
+            android:layout_margin="10dp"
+            android:layout_height="50dp" />
 
         <EditText
             android:id="@+id/LR_code_4"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:enabled="false"
+            android:gravity="center"
             android:background="@drawable/edittext_style1"
-            android:layout_margin="5dp"
-            android:layout_height="50dp"
-            android:layout_weight="1" />
+            android:layout_margin="10dp"
+            android:layout_height="50dp" />
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/c_code_time"
+        android:textColor="@color/C2B2B2B"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="55dp"
+        android:layout_below="@+id/asdzz"
+        android:textSize="@dimen/Text_Size_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/LR_code_keyboard"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+</RelativeLayout>

@@ -11,7 +11,6 @@ import com.example.z_common.Custom.NoScrollViewPager;
  */
 
 interface LRView extends BaseView{
-    TextView getInclude_Title_Text();
-    ImageView getInclude_Title_Close();
+    ImageView getLR_Close();
     NoScrollViewPager getNoScrollViewPager();
 }

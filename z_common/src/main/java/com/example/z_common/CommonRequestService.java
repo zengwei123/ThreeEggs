@@ -20,4 +20,11 @@ public interface CommonRequestService {
                                          @Field("cityName") String cityName,
                                          @Field("address") String address);
 
+
+    /**
+     * 设备定位接口
+     */
+    @FormUrlEncoded
+    @POST("checkLogin")
+    Observable<AllDataState> checkLogin(@Field("devicesToken") String devicesToken);
 }

@@ -22,6 +22,7 @@ public interface HomeRequestService {
     @POST("item/category/find")
     Observable<AllDataState<CategoryList>> CategoryFind(@Field("pid")String pid, @Field("stratum")boolean stratum);
 
+    /**首页信息获取**/
     @GET("ad/index")
     Observable<AllDataState<HomeHead>> HomeHead();
 }

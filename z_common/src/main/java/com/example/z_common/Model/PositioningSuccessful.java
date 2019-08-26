@@ -68,4 +68,16 @@ public class PositioningSuccessful {
     public void setPoiName(String poiName) {
         PoiName = poiName;
     }
+
+    @Override
+    public String toString() {
+        return "PositioningSuccessful{" +
+                "City='" + City + '\'' +
+                ", CityCode='" + CityCode + '\'' +
+                ", Address='" + Address + '\'' +
+                ", Longitude=" + Longitude +
+                ", Latitude=" + Latitude +
+                ", PoiName='" + PoiName + '\'' +
+                '}';
+    }
 }

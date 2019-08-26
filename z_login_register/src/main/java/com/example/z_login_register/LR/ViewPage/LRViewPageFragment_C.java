@@ -1,25 +1,38 @@
 package com.example.z_login_register.LR.ViewPage;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.BoolRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.z_base.BaseActivity;
+import com.example.z_common.Model.AllDataState;
+import com.example.z_common.NET.RequestObserver;
+import com.example.z_common.SharedPreferencesHelper;
 import com.example.z_common.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
+import com.example.z_login_register.Net.LRRequestServiceFactory;
 import com.example.z_login_register.R;
 
 import java.util.Arrays;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by zengwei on 2019/8/11.
@@ -32,6 +45,12 @@ public class LRViewPageFragment_C extends Fragment {
     private EditText LR_code_3;
     private EditText LR_code_4;
 
+    private TextView c_code_time;
+    private int times=60;
+
+    private String phone="";
+    private String qqOpenId="";
+    private String weixinOpenId="";
     private RecyclerView LR_code_keyboard;
 
     private int codeindex=0;
@@ -43,13 +62,14 @@ public class LRViewPageFragment_C extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         LR_code_1=view.findViewById(R.id.LR_code_1);
         LR_code_2=view.findViewById(R.id.LR_code_2);
         LR_code_3=view.findViewById(R.id.LR_code_3);
         LR_code_4=view.findViewById(R.id.LR_code_4);
+        c_code_time=view.findViewById(R.id.c_code_time);
         LR_code_keyboard=view.findViewById(R.id.LR_code_keyboard);
-        List<String> strings= Arrays.asList("9","8","7","6","5","4","3","2","1","C","0","BACK");
+        List<String> strings= Arrays.asList("1","2","3","4","5","6","7","8","9","C","0","BACK");
 
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter( R.layout.c_recycler_item,getActivity(),strings , (helper, item) -> {
             helper.setText(R.id.C_Recycler_Item_Text, (String) item);
@@ -77,6 +97,9 @@ public class LRViewPageFragment_C extends Fragment {
                     LR_code_4.setText(strings.get(position));
                     LR_code_4.setBackground(getActivity().getDrawable(R.drawable.edittext_style1));
                     codeindex=4;
+
+                    String string=LR_code_1.getText().toString().trim()+LR_code_2.getText().toString().trim()+LR_code_3.getText().toString().trim()+LR_code_4.getText().toString().trim();
+                    login(string);
                 }
             }else {
                 LR_code_1.setBackground(getActivity().getDrawable(R.drawable.edittext_style1));
@@ -100,5 +123,94 @@ public class LRViewPageFragment_C extends Fragment {
                 }
             }
         });
+        c_code_time.setOnClickListener(v->{
+            if (!phone.toString().trim().equals("")){
+                LRRequestServiceFactory.validateCode(new RequestObserver.RequestObserverNext<AllDataState>() {
+                    @Override
+                    public void Next(AllDataState o) {
+                        if (o.isSuccess()){
+                            SimpleUtils.setToast("验证码已发送");
+                        }else {
+                            SimpleUtils.setToast(o.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                    @Override
+                    public void getDisposable(Disposable d) {
+
+                    }
+                },phone.toString().trim());
+            }else {
+                SimpleUtils.setToast("手机号不允许为空");
+            }
+            CountDownTimerStart();
+        });
+    }
+
+    public void CountDownTimerStart(){
+        countDownTimer.start();
+    }
+
+    private CountDownTimer countDownTimer = new CountDownTimer(60000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            String value = String.valueOf((int) (millisUntilFinished / 1000));
+            c_code_time.setText(value);
+        }
+
+        @Override
+        public void onFinish() {
+            c_code_time.setText("重新获取验证码");
+        }
+    };
+
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getQqOpenId() {
+        return qqOpenId;
+    }
+    public void setQqOpenId(String qqOpenId) {
+        this.qqOpenId = qqOpenId;
+    }
+    public String getWeixinOpenId() {
+        return weixinOpenId;
+    }
+    public void setWeixinOpenId(String weixinOpenId) {
+        this.weixinOpenId = weixinOpenId;
+    }
+
+    private void login(String code){
+        SimpleUtils.setToast(getQqOpenId());
+        LRRequestServiceFactory.login(new RequestObserver.RequestObserverNext<AllDataState>() {
+            @Override
+            public void Next(AllDataState o) {
+                if (o.isSuccess()){
+                    SimpleUtils.setToast("登陆成功");
+                    new SharedPreferencesHelper(BaseActivity.getInstance(),"TOKEN").put("ISLogin",true);
+                    getActivity().finish();
+                }else {
+                    SimpleUtils.setToast(o.getMessage());
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void getDisposable(Disposable d) {
+
+            }
+        },getPhone(),code,getQqOpenId(),getWeixinOpenId());
     }
 }

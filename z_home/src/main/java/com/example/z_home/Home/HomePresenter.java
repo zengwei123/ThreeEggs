@@ -93,6 +93,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
                 String str=AmapPositioningUtil.ParsingAMapLocation(aMapLocation);
                 mvpView.getHome_Fragment_Image_Location().setText(str);
                 SimpleUtils.setLog("定位位置："+str);
+                AmapPositioningUtil.setServicePositioning();
             });
         }else {
             mvpView.getHome_Fragment_Image_Location().setText("定位失败");
@@ -104,11 +105,11 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         HomeRequestServiceFactory.HomeHead(new RequestObserver.RequestObserverNext<AllDataState<HomeHead>>() {
             @Override
             public void Next(AllDataState<HomeHead> o) {
-                SimpleUtils.setLog(o.toString());
-                setHeadMenu(o.getData().getMenu());   //菜单设置
-                setHeadShuffling(o.getData().getIndex());  //轮播图设置
-                /**活动图  只拿第一个**/
-                GlideUtil.displayImage(mvpView.getThisActivity(),o.getData().getAd().get(0).getImagePath(),mvpView.getHome_activity());
+//                SimpleUtils.setLog(o.toString());
+//                setHeadMenu(o.getData().getMenu());   //菜单设置
+//                setHeadShuffling(o.getData().getIndex());  //轮播图设置
+//                /**活动图  只拿第一个**/
+//                GlideUtil.displayImage(mvpView.getThisActivity(),o.getData().getAd().get(0).getImagePath(),mvpView.getHome_activity());
             }
             @Override
             public void onError() { }

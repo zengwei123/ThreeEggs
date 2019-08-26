@@ -28,12 +28,15 @@ public class DialogUtil {
     private String sure;
     private DialogButtonListener listener;
 
-    public void show(String text, final DialogButtonListener listener) {
+    public void showAlert(int imgResId, String text, final DialogButtonListener listener) {
+        this.sure="确定";
         this.context = BaseActivity.getInstance();
         this.text = text;
         this.listener = listener;
+        this.imgResId = imgResId;
         createDialog();
         setValue();
+        btnCancel.setVisibility(View.GONE);
     }
 
     public void show( int imgResId, String text, String sure,final DialogButtonListener listener) {
@@ -88,14 +91,18 @@ public class DialogUtil {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.cancel();
+                if (listener!=null){
+                    listener.cancel();
+                }
                 dlg.dismiss();
             }
         });
         btnSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.sure();
+                if (listener!=null){
+                    listener.sure();
+                }
                 dlg.dismiss();
             }
         });
