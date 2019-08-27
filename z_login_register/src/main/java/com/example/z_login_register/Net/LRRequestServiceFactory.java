@@ -37,7 +37,7 @@ public class LRRequestServiceFactory {
     }
 
     /**
-     * 短信验证码
+     * QQ登录
      */
     public static void  qqLogin(RequestObserver.RequestObserverNext requestObserverNext,String openId){
         Observable observable= lrRequestService.qqLogin(SimpleUtils.getToken(BaseActivity.getInstance()),openId);

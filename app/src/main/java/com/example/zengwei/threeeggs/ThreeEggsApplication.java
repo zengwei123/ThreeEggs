@@ -5,11 +5,10 @@ import android.app.Application;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_common.CommonRequestServiceFactory;
 import com.example.z_common.Model.AllDataState;
+import com.example.z_common.Model.Token;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.SharedPreferencesHelper;
 import com.example.z_common.SimpleUtils;
-import com.example.z_common.Model.Token;
-import com.tencent.tauth.Tencent;
 
 import io.reactivex.disposables.Disposable;
 

@@ -4,21 +4,13 @@
     android:layout_height="wrap_content"
     android:id="@+id/Layout_ids"
     android:orientation="vertical">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/Address_City_item_RecyclerView"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
     <TextView
         android:id="@+id/Address_City_item_Text"
         android:layout_width="match_parent"
         android:layout_height="@dimen/Title_Height"
-        android:background="@drawable/address_item1"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="10dp"
+        android:background="@drawable/hotcity"
+        android:layout_margin="10dp"
         android:textSize="@dimen/Text_Size_3"
         android:textColor="#666666"
-        android:gravity="center|left" />
+        android:gravity="center" />
 </LinearLayout>

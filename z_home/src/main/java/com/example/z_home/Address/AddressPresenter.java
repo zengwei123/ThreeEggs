@@ -1,16 +1,9 @@
 package com.example.z_home.Address;
 
-import android.graphics.Color;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.services.help.Inputtips;
 import com.amap.api.services.help.InputtipsQuery;
@@ -18,7 +11,6 @@ import com.amap.api.services.help.Tip;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Amap.AmapPoiUtil;
 import com.example.z_common.Amap.AmapPositioningUtil;
-import com.example.z_common.Custom.HotLayout;
 import com.example.z_common.Model.CityList;
 import com.example.z_common.Model.PositioningSuccessful;
 import com.example.z_common.SimpleUtils;
@@ -32,7 +24,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     private boolean GLNear=false;   //控制附近的地址的全部还是部分显示
     List<PositioningSuccessful> NearList=new ArrayList<>();   //附近地址数据
     List<String> CityList=new ArrayList<>();   //城市列表数据
-    private int selectCityIndex=-1;
+    private int selectCityIndex=0;
     private List<Tip> tips=new ArrayList<>();  //Poi数据列表
     @Override
     public void init() {
@@ -73,62 +65,59 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     private void setCityRecycle(){
         List<CityList> cityLists=SimpleUtils.getCitysList();
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(R.layout.address_city_item, mvpView.getActivityContext(),cityLists, (helper, item) -> {
+            /**这里市设置热门城市 因为只要执行一次**/
             if(helper.getAdapterPosition()==0){
-                setCityRecyclerHotLayout(helper.getView(R.id.Address_City_item_HotLayout),((CityList)item).getName().split("#"));
-                helper.getView(R.id.Address_City_item_HotLayout).setVisibility(View.VISIBLE);
+                List<CityList> cityLists1=new ArrayList<>();
+                for (int i=0;i<8;i++){
+                    cityLists1.add(cityLists.get(i));
+                }
+                /**热门城市的布局**/
+                SimpleRecyclerViewAdapter simpleRecyclerViewAdapter1=new SimpleRecyclerViewAdapter(R.layout.address_city_hot_item, mvpView.getActivityContext(), cityLists1, (helper1, item1) -> {
+                    helper1.setText(R.id.Address_City_item_Text,((CityList)item1).getName());
+                });
+                ((RecyclerView)helper.getView(R.id.Address_City_item_RecyclerView)).setAdapter(simpleRecyclerViewAdapter1);
+                ((RecyclerView)helper.getView(R.id.Address_City_item_RecyclerView)).setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,4));
+                helper.getView(R.id.Address_City_item_RecyclerView).setVisibility(View.VISIBLE);
                 helper.getView(R.id.Address_City_item_Text).setVisibility(View.GONE);
+                /**选择事件**/
+                simpleRecyclerViewAdapter1.setOnItemClickListener((adapter, view, position) -> {
+                    /**手动定位城市**/
+                    selectCityIndex=position;
+                    mvpView.getAddress_City_Text().setText(cityLists.get(position).getName());
 
-            }else {
-                helper.getView(R.id.Address_City_item_HotLayout).setVisibility(View.GONE);
+                    AmapPositioningUtil.setIsPosition(3);
+                    AmapPositioningUtil.setPositioningSuccessful(new PositioningSuccessful(cityLists.get(position).getName(),
+                            cityLists.get(position).getCode()+"",
+                            "",0,0,null));
+                    mvpView.getAddress_City_Recycler().setVisibility(View.GONE);
+                });
+
+            }else if(helper.getAdapterPosition()>7){ /**普通的城市**/
+                helper.getView(R.id.Address_City_item_RecyclerView).setVisibility(View.GONE);
                 helper.getView(R.id.Address_City_item_Text).setVisibility(View.VISIBLE);
                 helper.setText(R.id.Address_City_item_Text,((CityList)item).getName());
+            }else {  /**前8个数据市热门城市的  因为只要执行一次就可以了所以隐藏**/
+                helper.getView(R.id.Address_City_item_RecyclerView).setVisibility(View.GONE);
+                helper.getView(R.id.Address_City_item_Text).setVisibility(View.GONE);
             }
         });
         mvpView.getAddress_City_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
         mvpView.getAddress_City_Recycler().setAdapter(simpleRecyclerViewAdapter);
         simpleRecyclerViewAdapter.setOnItemClickListener((adapter, view, position) -> {
             /**手动定位城市**/
-            if (position!=0)
-                selectCityIndex=position;
+            selectCityIndex=position;
             mvpView.getAddress_City_Text().setText(cityLists.get(position).getName());
 
             AmapPositioningUtil.setIsPosition(3);
             AmapPositioningUtil.setPositioningSuccessful(new PositioningSuccessful(cityLists.get(position).getName(),
                     cityLists.get(position).getCode()+"",
                     "",0,0,null));
+            mvpView.getAddress_City_Recycler().setVisibility(View.GONE);
         });
         /**这个是设置字母的悬浮内容**/
         if (cityLists!=null){
             mvpView.getAddress_City_Recycler().addItemDecoration(new AddressItemDecoration(mvpView.getActivityContext(), position -> cityLists.get(position).getSname()));
         }
-    }
-    /**热门城市或省份的布局**/
-    private void setCityRecyclerHotLayout(HotLayout hotLayout,String[] strings){
-        //balalal
-        ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(20, 35, 20, 10);// 设置边距
-        for (int i = 0; i < strings.length; i++) {
-            final TextView textView = new TextView(mvpView.getActivityContext());
-            textView.setTag(i);
-            textView.setTextSize(15);
-            textView.setText(strings[i]);
-            textView.setPadding(24, 11, 24, 11);
-            textView.setTextColor(Color.parseColor("#666666"));
-            textView.setBackgroundResource(R.drawable.home_edittext_background);
-            textView.setEllipsize(TextUtils.TruncateAt.END);
-            textView.setSingleLine(true);
-            hotLayout.addView(textView, layoutParams);
-            // 标签点击事件
-            textView.setOnClickListener(v -> {
-                MoveToPosition((LinearLayoutManager) mvpView.getAddress_City_Recycler().getLayoutManager(), (Integer) v.getTag());
-                Toast.makeText(mvpView.getActivityContext(), "点击事件", Toast.LENGTH_SHORT).show();
-            });
-        }
-    }
-    /**热门控件点击 跳转到对应省份**/
-    public static void MoveToPosition(LinearLayoutManager manager, int n) {
-        manager.scrollToPositionWithOffset(SimpleUtils.caitsints[n], 0);
-        manager.setStackFromEnd(true);
     }
 
 
@@ -141,6 +130,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
                 SimpleUtils.setToast(((PositioningSuccessful)item).getAddress());
                 mvpView.getAddress_TextView_Message().setText(((PositioningSuccessful)item).getAddress());
                 AmapPositioningUtil.setPositioningSuccessful((PositioningSuccessful)item);
+                mvpView.getThisActivity().finish();
             });
         });
         mvpView.getAddress_Near_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
@@ -170,7 +160,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
     /**定位功能  点击定位**/
     private void positioning(boolean b){
         /**定位功能  如果已经定位成功  就直接用**/
-        if (AmapPositioningUtil.getIsPosition()==0&&b){
+        if (AmapPositioningUtil.getIsPosition()!=-1&&b){
             String str=AmapPositioningUtil.getPositioningSuccessful().getAddress();
             mvpView.getAddress_TextView_Message().setText(str);
             if(!str.equals("定位失败")){
@@ -186,7 +176,6 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
             AmapPositioningUtil.getAmapPositioningUtil().StartPositioning(aMapLocation -> {
                 String str=AmapPositioningUtil.ParsingAMapLocation(aMapLocation);
                 mvpView.getAddress_TextView_Message().setText(str);
-                SimpleUtils.setToast("定位结束");
                 if(!str.equals("定位失败")){
                     getNearAddress();
                     /**当前定位的城市**/
@@ -233,6 +222,7 @@ public class AddressPresenter extends BasePresenter<AddressView> implements View
                        }
                    }
                    AmapPositioningUtil.setIsPosition(2);
+                   mvpView.getThisActivity().finish();
                });
        });
        mvpView.getAddress_PoI_Recycler().setAdapter(simpleFragmentAdapter);

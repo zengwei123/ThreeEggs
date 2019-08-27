@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.z_base.BaseView;
+import com.example.z_common.Custom.WanTextView;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
@@ -15,13 +16,12 @@ import cn.bingoogolapple.bgabanner.BGABanner;
  */
 
 interface HomeView extends BaseView{
-    ImageView getHome_Fragment_Image_Category();
-    ImageView getHome_Fragment_Image_Shooting();
+    TextView getHome_Fragment_Image_weather();
     TextView getHome_Fragment_Image_Location();
     BGABanner getHome_Fragment_BGABanner();
     RecyclerView getHome_Fragment_RecyclerView();
     ImageView getHome_activity();
     FrameLayout getGoodsList_Fragment();
     FragmentManager getFragmentManagers();
-    TextView getHome_Fragment_TextView_Search();
+    WanTextView getHome_Fragment_TextView_Search();
 }

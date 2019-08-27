@@ -11,7 +11,7 @@
         android:layout_height="50dp" />
     <TextView
         android:id="@+id/Home_Fragment_ActivityMenu_TextView"
-        android:textSize="16sp"
+        android:textSize="@dimen/Text_Size_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

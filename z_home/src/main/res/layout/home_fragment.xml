@@ -26,49 +26,46 @@
                         android:layout_width="match_parent"
                         android:layout_height="36dp">
 
-                        <ImageView
-                            android:id="@+id/Home_Fragment_Image_Category"
-                            android:layout_width="32dp"
+                        <TextView
+                            android:id="@+id/Home_Fragment_Image_weather"
+                            android:layout_width="wrap_content"
                             android:layout_height="32dp"
                             android:layout_alignParentRight="true"
-                            android:padding="5dp" />
-
-                        <ImageView
-                            android:id="@+id/Home_Fragment_Image_Shooting"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_toLeftOf="@+id/Home_Fragment_Image_Category"
+                            android:layout_marginRight="10dp"
+                            android:text="31°C"
                             android:padding="5dp" />
 
                         <TextView
                             android:id="@+id/Home_Fragment_Image_Location"
+                            android:ellipsize="end"
                             android:layout_width="match_parent"
+                            android:lines="1"
+                            android:paddingLeft="120dp"
+                            android:paddingRight="120dp"
                             android:layout_height="match_parent"
-                            android:layout_alignParentLeft="true"
-                            android:layout_toLeftOf="@+id/Home_Fragment_Image_Shooting"
-                            android:drawableLeft="@mipmap/home_positioning"
-                            android:gravity="center|left"
-                            android:paddingLeft="10dp" />
+                            android:gravity="center" />
 
                     </RelativeLayout>
 
-                    <TextView
+                    <com.example.z_common.Custom.WanTextView
                         android:id="@+id/Home_Fragment_TextView_Search"
                         android:background="@drawable/home_edittext_background"
-                        android:drawableLeft="@mipmap/home_search"
-                        android:hint="  点击搜索商品/店铺"
-                        android:gravity="center|left"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
+                        android:hint=""
+                        android:gravity="center"
                         android:textSize="12sp"
-                        android:paddingLeft="5dp"
-                        android:layout_margin="5dp"
                         android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:textColor="#acacac"
+                        android:drawableRight="@mipmap/home_camera"
                         android:layout_height="30dp" />
 
                     <cn.bingoogolapple.bgabanner.BGABanner
                         android:id="@+id/Home_Fragment_BGABanner"
                         app:banner_pointAutoPlayInterval="5000"
+                        app:banner_pointContainerBackground="#ffffff"
                         android:layout_width="match_parent"
                         android:layout_height="150dp">
                     </cn.bingoogolapple.bgabanner.BGABanner>
@@ -76,14 +73,41 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/Home_Fragment_RecyclerView"
                         android:overScrollMode="never"
+                        android:layout_margin="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
-                    <ImageView
-                        android:id="@+id/Home_activity"
-                        android:src="@mipmap/home_activity"
+                    
+                    <LinearLayout
+                        android:layout_margin="10dp"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/menu_H" />
+                        android:layout_height="150dp">
+                        <ImageView
+                            android:layout_weight="1"
+                            android:id="@+id/Home_activity"
+                            android:src="@mipmap/common_nodata"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_weight="1"
+                                android:src="@mipmap/common_nodata"
+                                android:paddingBottom="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                            <ImageView
+                                android:layout_weight="1"
+                                android:paddingTop="5dp"
+                                android:src="@mipmap/common_nodata"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
                 
                 

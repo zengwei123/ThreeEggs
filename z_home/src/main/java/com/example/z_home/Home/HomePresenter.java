@@ -8,6 +8,7 @@ import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Amap.AmapPositioningUtil;
 import com.example.z_common.GlideUtil;
+import com.example.z_common.ImageGallery;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.RoutePage.RoutePageActivity;
@@ -44,16 +45,11 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
     @Override
     public void setView() {
         disposables=new ArrayList<>();
-
-
-        GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.home_camera,mvpView.getHome_Fragment_Image_Shooting());
-        GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.home_class,mvpView.getHome_Fragment_Image_Category());
-
+        GlideUtil.drawableImage(56, ImageGallery.weather_1,mvpView.getHome_Fragment_Image_weather(),true);
+        SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_TextView_Search(),"\uea65搜索商品/店铺");
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(v -> {
            RoutePageActivity.getAddress();
         });
-
-
         HomeHead();
     }
 
@@ -65,16 +61,14 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
     }
 
     private void setClick(){
-        mvpView.getHome_Fragment_Image_Category().setOnClickListener(this);
         mvpView.getHome_Fragment_TextView_Search().setOnClickListener(this);
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
         int i = view.getId();
-        if (i == R.id.Home_Fragment_Image_Category) {
-            RoutePageActivity.getHomeCategory();
-        }else if(i==R.id.Home_Fragment_TextView_Search){
+        // RoutePageActivity.getHomeCategory();
+        if(i==R.id.Home_Fragment_TextView_Search){
             RoutePageActivity.getSearch();
         }else if(i==R.id.Home_Fragment_Image_Location){
             /**当没用定位的时候 停止定位**/
@@ -91,12 +85,11 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             mvpView.getHome_Fragment_Image_Location().setText("定位中");
             AmapPositioningUtil.getAmapPositioningUtil().StartPositioning(aMapLocation -> {
                 String str=AmapPositioningUtil.ParsingAMapLocation(aMapLocation);
-                mvpView.getHome_Fragment_Image_Location().setText(str);
-                SimpleUtils.setLog("定位位置："+str);
+                SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_Image_Location(),"\uec74"+str);
                 AmapPositioningUtil.setServicePositioning();
             });
         }else {
-            mvpView.getHome_Fragment_Image_Location().setText("定位失败");
+            SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_Image_Location(),"\uec74定位失败");
         }
     }
 
@@ -105,11 +98,9 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         HomeRequestServiceFactory.HomeHead(new RequestObserver.RequestObserverNext<AllDataState<HomeHead>>() {
             @Override
             public void Next(AllDataState<HomeHead> o) {
-//                SimpleUtils.setLog(o.toString());
-//                setHeadMenu(o.getData().getMenu());   //菜单设置
-//                setHeadShuffling(o.getData().getIndex());  //轮播图设置
-//                /**活动图  只拿第一个**/
-//                GlideUtil.displayImage(mvpView.getThisActivity(),o.getData().getAd().get(0).getImagePath(),mvpView.getHome_activity());
+                setHeadMenu(o.getData().getMenu());   //菜单设置
+                setHeadShuffling(o.getData().getIndex());  //轮播图设置
+               // GlideUtil.displayImage(mvpView.getThisActivity(),o.getData().getAd().get(0).getImagePath(),mvpView.getHome_activity()); //活动图
             }
             @Override
             public void onError() { }
@@ -123,24 +114,16 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
     /**设置菜单**/
     private void setHeadMenu(List<HomeHead.MenuBean> menus){
         /**设置活动菜单**/
-//        List<HomeActivityMenu> list=new ArrayList<>();
-//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","精选店铺",""));
-//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","清凉夏季",""));
-//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","镇店大牌",""));
-//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","附近爆款",""));
-//        list.add(new HomeActivityMenu(R.mipmap.main_circle,"","穿搭推荐",""));
-        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter =new SimpleRecyclerViewAdapter(
-                R.layout.home_fragment_recyclerview_activitymenu, mvpView.getActivityContext(), menus,
-                (helper, item) -> {
+        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter =new SimpleRecyclerViewAdapter(R.layout.home_fragment_recyclerview_activitymenu, mvpView.getActivityContext(), menus, (helper, item) -> {
                     /**获取数据**/
                     HomeHead.MenuBean menuBean= ( HomeHead.MenuBean) item;
                     /**价值图片**/
-                    GlideUtil.displayImage(mvpView.getThisActivity(),menuBean.getImagePath(), helper.getView(R.id.Home_Fragment_ActivityMenu_Image));
+                    GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.common_nodata, helper.getView(R.id.Home_Fragment_ActivityMenu_Image));
                     /**活动名称**/
                     helper.setText(R.id.Home_Fragment_ActivityMenu_TextView,menuBean.getTitle());
                 });
         mvpView.getHome_Fragment_RecyclerView().setAdapter(simpleRecyclerViewAdapter);
-        mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,menus.size()));
+        mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,menus.size()/2));
     }
     /**设置轮播**/
     private void setHeadShuffling(List<HomeHead.IndexBean> indexBeans){

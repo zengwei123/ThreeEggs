@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.example.z_base.MvpFragment;
 import com.example.z_common.Amap.AmapPositioningUtil;
+import com.example.z_common.Custom.WanTextView;
+import com.example.z_common.SimpleUtils;
 import com.example.z_home.R;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
@@ -26,14 +28,13 @@ import cn.bingoogolapple.bgabanner.BGABanner;
  */
 
 public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView {
-    private ImageView Home_Fragment_Image_Category;   //类别
-    private ImageView Home_Fragment_Image_Shooting;  //照相
+    private TextView Home_Fragment_Image_weather;   //天气
     private TextView Home_Fragment_Image_Location;  //位置
     private BGABanner Home_Fragment_BGABanner;    //轮播图
     private RecyclerView Home_Fragment_RecyclerView;   //活动栏
     private ImageView Home_activity;
     private FrameLayout GoodsList_Fragment;  //商品列表
-    private TextView Home_Fragment_TextView_Search;  //搜索界面按钮
+    private WanTextView Home_Fragment_TextView_Search;  //搜索界面按钮
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.home_fragment,null,false);
@@ -48,8 +49,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     }
 
     public void getViews(View view){
-        Home_Fragment_Image_Category=view.findViewById(R.id.Home_Fragment_Image_Category);
-        Home_Fragment_Image_Shooting=view.findViewById(R.id.Home_Fragment_Image_Shooting);
+        Home_Fragment_Image_weather=view.findViewById(R.id.Home_Fragment_Image_weather);
         Home_Fragment_Image_Location=view.findViewById(R.id.Home_Fragment_Image_Location);
         Home_Fragment_BGABanner=view.findViewById(R.id.Home_Fragment_BGABanner);
         Home_Fragment_RecyclerView=view.findViewById(R.id.Home_Fragment_RecyclerView);
@@ -74,14 +74,10 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     }
 
     @Override
-    public ImageView getHome_Fragment_Image_Category() {
-        return Home_Fragment_Image_Category;
+    public TextView getHome_Fragment_Image_weather() {
+        return Home_Fragment_Image_weather;
     }
 
-    @Override
-    public ImageView getHome_Fragment_Image_Shooting() {
-        return Home_Fragment_Image_Shooting;
-    }
 
     @Override
     public TextView getHome_Fragment_Image_Location() {
@@ -113,7 +109,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         return getFragmentManager();
     }
 
-    public TextView getHome_Fragment_TextView_Search() {
+    public WanTextView getHome_Fragment_TextView_Search() {
         return Home_Fragment_TextView_Search;
     }
 
@@ -123,9 +119,11 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         /**在这里获取定位  防止第一次进入无法获取位置**/
         if(AmapPositioningUtil.getIsPosition()==-1){
             mvpPresenter.positioning();
-        }else  if(AmapPositioningUtil.getIsPosition()==2||AmapPositioningUtil.getIsPosition()==0||AmapPositioningUtil.getIsPosition()==3){
-            getHome_Fragment_Image_Location().setText(AmapPositioningUtil.getPositioningSuccessful().getCity()+
-                    AmapPositioningUtil.getPositioningSuccessful().getAddress());
+        }else  if(AmapPositioningUtil.getIsPosition()==2||AmapPositioningUtil.getIsPosition()==0){
+            SimpleUtils.setViewTypeface(getHome_Fragment_Image_Location(),"\uec74"+AmapPositioningUtil.getPositioningSuccessful().getAddress());
+            AmapPositioningUtil.setServicePositioning();
+        }else if (AmapPositioningUtil.getIsPosition()==3){
+            SimpleUtils.setViewTypeface(getHome_Fragment_Image_Location(),"\uec74"+AmapPositioningUtil.getPositioningSuccessful().getCity());
             AmapPositioningUtil.setServicePositioning();
         }
     }

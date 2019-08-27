@@ -1,8 +1,9 @@
 package com.example.z_common;
 
 import android.app.Activity;
-import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.z_base.BaseActivity;
@@ -17,4 +18,15 @@ public class GlideUtil {
         //Glide 加载图片简单用法
         Glide.with(activity).load(path).into(imageView);
     }
+    /**设置textview图片**/
+    public  static void drawableImage(int WH,int imageid, TextView textView,boolean b) {
+        Drawable drawable = BaseActivity.getInstance().getResources().getDrawable(imageid);
+        drawable.setBounds(0, 0, WH, WH);
+        if (b){
+            textView.setCompoundDrawables(drawable,null,null,null);
+        }else {
+            textView.setCompoundDrawables(null,null,drawable,null);
+        }
+    }
+
 }

@@ -22,7 +22,6 @@ import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.Model.CityList;
 import com.example.z_common.Model.Citys;
 import com.example.z_common.Model.Token;
-import com.example.z_common.NET.RequestObserver;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hjq.permissions.OnPermission;
@@ -33,7 +32,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zengwei on 2019/7/21.
@@ -139,25 +141,43 @@ public class SimpleUtils {
     public static List<Citys> getCitys() throws IOException {
         InputStream inputStream=BaseActivity.getInstance().getAssets().open("json/cities.json");
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        return new Gson().fromJson(reader, new TypeToken<List<Citys>>() {}.getType());
+        List<Citys> cityse=new Gson().fromJson(reader, new TypeToken<List<Citys>>() {}.getType());
+        return cityse;
     }
     /**定位界面显示城市列表   现在只放了地级市**/
     public static List<CityList> getCitysList(){
         List<CityList> cityLists=new ArrayList<>();
-        String string="北京市#天津市#河北省#山西省#内蒙古#辽宁省#吉林省#黑龙江#上海市#江苏省#浙江省#安徽省#福建省#江西省#山东省#河南省#湖北省#湖南省#广东省#海南省#重庆市#四川省#贵州省#云南省#陕西省#甘肃省#青海省#台湾省#广西自治区#西藏自治区#宁夏自治区#新疆自治区#香港行政区#澳门行政区";
-        cityLists.add(new CityList("0","热门",string,"#"));
         try {
-            for (Citys citys:getCitys()){
-                for (Citys.CityBean cityBean:citys.getCity()){
-                    cityLists.add(new CityList(cityBean.getCode(),citys.getName(),cityBean.getName(),cityBean.getAbb()));
-//                    for (Citys.CityBean.AreaBean areaBean:cityBean.getArea()){
-//                        cityLists.add(new CityList(areaBean.getCode(),cityBean.getName(),areaBean.getName(),areaBean.getAbb()));
-//                    }
+            List<String> strings=new ArrayList<>();
+            Map<String,CityList> cityListMap=new HashMap<>();
+            for (Citys citys1:getCitys()){
+                for (Citys.CityBean cityBean:citys1.getCity()){
+                    cityListMap.put(cityBean.getSpell(),new CityList(cityBean.getCode(),cityBean.getAbb().substring(0,1).toUpperCase(),cityBean.getName(),cityBean.getSpell()));
+                    strings.add(cityBean.getSpell());
                 }
             }
-            setLog(string.toString());
+            Collections.sort(strings);
+            cityLists.add(cityListMap.get("beijingshi"));
+            cityLists.get(0).setSname("#");
+            cityLists.add(cityListMap.get("shanghaishi"));
+            cityLists.get(1).setSname("#");
+            cityLists.add(cityListMap.get("guangzhoushi"));
+            cityLists.get(2).setSname("#");
+            cityLists.add(cityListMap.get("shenzhenshi"));
+            cityLists.get(3).setSname("#");
+            cityLists.add(cityListMap.get("hangzhoushi"));
+            cityLists.get(4).setSname("#");
+            cityLists.add(cityListMap.get("changshashi"));
+            cityLists.get(5).setSname("#");
+            cityLists.add(cityListMap.get("nanjingshi"));
+            cityLists.get(6).setSname("#");
+            cityLists.add(cityListMap.get("wuhanshi"));
+            cityLists.get(7).setSname("#");
+            for (String s:strings){
+                cityLists.add(cityListMap.get(s));
+            }
         }catch (Exception E){
-            E.printStackTrace();
+
         }
         return cityLists;
     }

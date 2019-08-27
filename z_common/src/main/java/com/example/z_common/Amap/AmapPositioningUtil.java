@@ -1,7 +1,5 @@
 package com.example.z_common.Amap;
 
-import android.util.Log;
-
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -18,7 +16,7 @@ import io.reactivex.disposables.Disposable;
 /**高德地图工具类**/
 public class AmapPositioningUtil {
     //保存的定位信息  是否定位成功   全部定位信息
-    private static int isPosition=-1;    //-1 没有定位   0定位成功   1定位失败   2手动定位  3未获取具体位置 只拿到城市
+    private static int isPosition=-1;    //-1 没有定位   0定位成功   2手动定位  3未获取具体位置 只拿到城市
     private static PositioningSuccessful positioningSuccessful;
 
 
@@ -74,7 +72,7 @@ public class AmapPositioningUtil {
                 LocationMessage=aMapLocation.getAddress();
             }else {
                 LocationMessage="定位失败";
-                isPosition=1;
+                isPosition=-1;
             }
         }
         return LocationMessage;
@@ -104,7 +102,6 @@ public class AmapPositioningUtil {
             @Override
             public void Next(AllDataState o) {
                 if (o.isSuccess()){
-
                 }else {
                     SimpleUtils.setLog("定位错误"+o.getMessage());
                 }
