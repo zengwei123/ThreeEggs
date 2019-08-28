@@ -5,12 +5,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,7 +31,6 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     private BGABanner Home_Fragment_BGABanner;    //轮播图
     private RecyclerView Home_Fragment_RecyclerView;   //活动栏
     private ImageView Home_activity;
-    private FrameLayout GoodsList_Fragment;  //商品列表
     private WanTextView Home_Fragment_TextView_Search;  //搜索界面按钮
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,7 +51,6 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         Home_Fragment_BGABanner=view.findViewById(R.id.Home_Fragment_BGABanner);
         Home_Fragment_RecyclerView=view.findViewById(R.id.Home_Fragment_RecyclerView);
         Home_activity=view.findViewById(R.id.Home_activity);
-        GoodsList_Fragment=view.findViewById(R.id.GoodsList_Fragment);
         Home_Fragment_TextView_Search=view.findViewById(R.id.Home_Fragment_TextView_Search);
     }
 
@@ -97,16 +93,6 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     @Override
     public ImageView getHome_activity() {
         return Home_activity;
-    }
-
-    @Override
-    public FrameLayout getGoodsList_Fragment() {
-        return GoodsList_Fragment;
-    }
-
-    @Override
-    public FragmentManager getFragmentManagers() {
-        return getFragmentManager();
     }
 
     public WanTextView getHome_Fragment_TextView_Search() {

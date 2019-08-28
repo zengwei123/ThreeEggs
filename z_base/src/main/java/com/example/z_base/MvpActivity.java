@@ -31,15 +31,10 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
         super.onDestroy();
         if (mvpPresenter != null) {
             mvpPresenter.detachView();
+            mvpPresenter.CloseRequest();
             mvpPresenter =null;
         }
     }
 
     public abstract void getViews();
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        mvpPresenter.CloseRequest();
-    }
 }

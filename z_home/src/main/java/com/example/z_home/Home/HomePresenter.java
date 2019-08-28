@@ -1,6 +1,5 @@
 package com.example.z_home.Home;
 
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -12,7 +11,6 @@ import com.example.z_common.ImageGallery;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.RoutePage.RoutePageActivity;
-import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_home.Model.HomeHead;
@@ -31,33 +29,21 @@ import io.reactivex.disposables.Disposable;
  */
 
 class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListener {
-    private List<Disposable> disposables;
     @Override
     public void init() {
         setView();
-        /**添加推荐布局内容**/
-        FragmentTransaction fragmentTransaction=mvpView.getFragmentManagers().beginTransaction();
-        fragmentTransaction.replace(R.id.GoodsList_Fragment, RouterPageFragment.grtGoodsList()).commit();
-        /**添加事件**/
         setClick();
     }
 
     @Override
     public void setView() {
-        disposables=new ArrayList<>();
+        /**天气**/
         GlideUtil.drawableImage(56, ImageGallery.weather_1,mvpView.getHome_Fragment_Image_weather(),true);
         SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_TextView_Search(),"\uea65搜索商品/店铺");
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(v -> {
            RoutePageActivity.getAddress();
         });
         HomeHead();
-    }
-
-    @Override
-    public void CloseRequest() {
-        for (Disposable disposable:disposables){
-            disposable.dispose();
-        }
     }
 
     private void setClick(){

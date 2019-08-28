@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:text="标题标题标题标题标题标题标题标题标题标题标题标题"
+            android:textSize="@dimen/Text_Size_2"
+            android:lines="1"
+            android:ellipsize="end"
+            android:gravity="center|left"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/Title_Height" />
+        <TextView
+            android:text="内容内容内内容内容内内容内容内内容内容内内容内容内内容内容内内容内容内内容内容内内容内容内内容内容内内容内容内内容内容内"
+            android:textSize="@dimen/Text_Size_2"
+            android:lines="3"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <ImageView
+        android:src="@mipmap/common_nodata"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+</LinearLayout>
