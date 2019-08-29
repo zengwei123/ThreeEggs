@@ -38,7 +38,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
     @Override
     public void setView() {
         /**天气**/
-        GlideUtil.drawableImage(56, ImageGallery.weather_1,mvpView.getHome_Fragment_Image_weather(),true);
+        GlideUtil.drawableImage(46, ImageGallery.weather_1,mvpView.getHome_Fragment_Image_weather(),true);
         SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_TextView_Search(),"\uea65搜索商品/店铺");
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(v -> {
            RoutePageActivity.getAddress();

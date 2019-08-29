@@ -59,9 +59,47 @@ public class SimpleUtils {
         }
     }
     /**也是列表的布局方式  瀑布流**/
-    public static RecyclerView.LayoutManager getRecyclerLayoutManager(int number ){
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(number, StaggeredGridLayoutManager.VERTICAL);
+    public static RecyclerView.LayoutManager getRecyclerLayoutManager(int number, final boolean isScroll){
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(number, StaggeredGridLayoutManager.VERTICAL){
+            @Override
+            public boolean canScrollVertically() {
+                if(isScroll){
+                    return false;
+                }else {
+                    return super.canScrollVertically();
+                }
+            }
+        };
         return layoutManager;
+    }
+
+    /**列表的布局方式**/
+    public static RecyclerView.LayoutManager getNoScrollRecyclerLayoutManager(boolean isLG,int number){
+        if (isLG){
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BaseActivity.getInstance(),
+                    LinearLayoutManager.VERTICAL, false) {
+                @Override
+                public boolean canScrollVertically() {
+                    return false;
+                }
+            };
+
+            return linearLayoutManager;
+        }else {
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(BaseActivity.getInstance(), number){
+                @Override
+                public boolean canScrollVertically() {
+                    return false;
+                }
+            };
+            //设置表格，根据position计算在该position处1列占几格数据
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override public int getSpanSize(int position) {
+                    return 1;
+                }
+            });
+            return gridLayoutManager;
+        }
     }
 
     /**设置字体图标**/

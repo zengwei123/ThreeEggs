@@ -162,7 +162,33 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="标题标题标题标题标题标题标题标题标题"
+                            android:gravity="center|left"
+                            android:maxLines="2"
+                            android:textSize="@dimen/Text_Size_3"
+                            android:textColor="@color/C2B2B2B"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                            android:gravity="center|left|top"
+                            android:maxLines="3"
+                            android:textSize="@dimen/Text_Size_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@mipmap/common_nodata"
+                        android:layout_width="160dp"
+                        android:layout_height="120dp">
 
+                    </ImageView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
