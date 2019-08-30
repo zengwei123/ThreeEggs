@@ -1,78 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <android.support.v4.widget.NestedScrollView
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/Home_CoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            app:layout_scrollFlags="enterAlways|enterAlways"
+            android:id="@+id/Home_AppBar"
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/Home_CollapsingToolbar"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--内容开始-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp">
+
+                        <TextView
+                            android:id="@+id/Circle_Fragment_Address"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:ellipsize="end"
+                            android:gravity="center|left"
+                            android:lines="1"
+                            android:paddingLeft="120dp"
+                            android:paddingRight="120dp"
+                            android:textColor="@color/C2B2B2B"
+                            android:visibility="gone" />
+
+                        <com.example.z_common.Custom.WanTextView
+                            android:id="@+id/Circle_Fragment_TextView_Search"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_toRightOf="@+id/Circle_Fragment_Address"
+                            android:background="@drawable/circle_edittext_background"
+                            android:gravity="center"
+                            android:hint=""
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textColor="#acacac"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+                    <!--item-->
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/Circle_Fragment_RecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+                    <!--轮播-->
+                    <cn.bingoogolapple.bgabanner.BGABanner
+                        android:id="@+id/Circle_Fragment_BGABanner"
+                        app:banner_pointAutoPlayInterval="5000"
+                        app:banner_pointContainerBackground="#ffffff"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp">
+                    </cn.bingoogolapple.bgabanner.BGABanner>
+                </LinearLayout>
+                <!--内容结束-->
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+        <!--内容开始-->
         <LinearLayout
             android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="36dp">
-
-                <TextView
-                    android:id="@+id/Circle_Fragment_Address"
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:ellipsize="end"
-                    android:gravity="center|left"
-                    android:lines="1"
-                    android:paddingLeft="120dp"
-                    android:paddingRight="120dp"
-                    android:textColor="@color/C2B2B2B"
-                    android:visibility="gone" />
-
-                <com.example.z_common.Custom.WanTextView
-                    android:id="@+id/Circle_Fragment_TextView_Search"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_toRightOf="@+id/Circle_Fragment_Address"
-                    android:background="@drawable/circle_edittext_background"
-                    android:gravity="center"
-                    android:hint=""
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textColor="#acacac"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-            <!--item-->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/Circle_Fragment_RecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
-            <!--轮播-->
-            <cn.bingoogolapple.bgabanner.BGABanner
-                android:id="@+id/Circle_Fragment_BGABanner"
-                app:banner_pointAutoPlayInterval="5000"
-                app:banner_pointContainerBackground="#ffffff"
-                android:layout_width="match_parent"
-                android:layout_height="120dp">
-            </cn.bingoogolapple.bgabanner.BGABanner>
+            android:layout_height="wrap_content">
             <android.support.design.widget.TabLayout
                 android:id="@+id/Circle_Fragment_TabLayout"
                 app:tabBackground="@drawable/circle_tablayout_tab"
                 app:tabIndicatorHeight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
             </android.support.design.widget.TabLayout>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/Circle_Fragment_ContentRecyclerView"
+            <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+                android:id="@+id/Circle_Fragment_TwinklingRefreshLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/Circle_Fragment_ContentRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            </android.support.v7.widget.RecyclerView>
+                </android.support.v7.widget.RecyclerView>
+            </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-
-
-</LinearLayout>
+        <!--内容结束-->
+    </android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

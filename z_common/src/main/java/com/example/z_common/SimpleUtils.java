@@ -72,7 +72,6 @@ public class SimpleUtils {
         };
         return layoutManager;
     }
-
     /**列表的布局方式**/
     public static RecyclerView.LayoutManager getNoScrollRecyclerLayoutManager(boolean isLG,int number){
         if (isLG){

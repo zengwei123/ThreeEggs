@@ -38,7 +38,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -52,10 +51,9 @@ dependencies {
 
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'              //rxjava 库
     api "io.reactivex.rxjava2:rxjava:2.2.10"                //rxjava 库
-    api 'com.squareup.retrofit2:converter-gson:2.3.0'       //转换器，请求结果转换成Model
     api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'      //配合Rxjava 使用
     api 'com.squareup.retrofit2:retrofit:2.3.0'             //retrofit2网络请求
-    api 'com.squareup.retrofit2:converter-gson:2.3.0'       //retrofit2网络请求
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'       //转换器，请求结果转换成Model
     api 'com.squareup.retrofit2:converter-scalars:2.3.0'    //retrofit2网络请求
 
     api 'com.amap.api:location:latest.integration'          //高德定位skd
@@ -64,7 +62,7 @@ dependencies {
 
     api 'me.jessyan:autosize:1.1.2'//今日头条适配封装库
     api 'com.hjq:xxpermissions:5.5'    //权限获取框架
-
+    api 'com.lcodecorex:tkrefreshlayout:1.0.7'   //上拉加载库
     api 'com.necer.ncalendar:ncalendar:4.3.3'  //日期选择库
 
     api project(":z_base")

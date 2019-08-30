@@ -1,19 +1,18 @@
 package com.example.z_circle.Circle;
 
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
+import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.z_base.BasePresenter;
-import com.example.z_base.MvpFragment;
 import com.example.z_circle.Model.CircleList;
 import com.example.z_circle.R;
 import com.example.z_common.GlideUtil;
-import com.example.z_common.SimpleFragmentAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +29,7 @@ public class CirclePresenter extends BasePresenter<CircleView> {
         setHeadMenu();
         setHeadShuffling();
         setContentRecycler();
+        SimpleUtils.setViewTypeface(mvpView.getCircle_Fragment_TextView_Search(),"\uea65搜索感兴趣的内容");
         mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("推荐"));
         mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("关注"));
         mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("附近"));
@@ -74,6 +74,7 @@ public class CirclePresenter extends BasePresenter<CircleView> {
         circleLists.add(new CircleList(R.mipmap.a6,"","他也真怪，即使在最睛朗的日子，也穿上雨鞋，带上雨伞，而且一定穿着暖和的棉大衣。他总是把雨伞装在套子里，把表放在一个灰色的鹿皮套子里；就连削铅笔的小刀也是装在一个小套子里的。他的脸也好像蒙着套子，因为他老是把它藏在竖起的衣领里。","爸爸爸爸爸爸爸爸爸爸爸爸",""));
         circleLists.add(new CircleList(R.mipmap.a5,"","女主人公德拉和她的丈夫詹姆斯都很贫穷。他们都有一件最珍贵的礼物。圣诞节到来之际，他们为了给对方买一件与之相配的礼物，不惜卖掉了自己珍贵的东西。而他们所准备的礼物此时也失去了意义。","爸爸爸爸",""));
         circleLists.add(new CircleList(R.mipmap.a5,"","女主人公德拉和她的丈夫詹姆斯都很贫穷。他们都有一件最珍贵的礼物。圣诞节到来之际，他们为了给对方买一件与之相配的礼物，不惜卖掉了自己珍贵的东西。而他们所准备的礼物此时也失去了意义。","爸爸爸爸",""));
+        circleLists.add(new CircleList(R.mipmap.a5,"","女主人公德拉和她的丈夫詹姆斯都很贫穷。他们都有一件最珍贵的礼物。圣诞节到来之际，他们为了给对方买一件与之相配的礼物，不惜卖掉了自己珍贵的东西。而他们所准备的礼物此时也失去了意义。","爸爸爸爸",""));
 
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(
                 R.layout.circlerecyclerlist_fragment_item, mvpView.getActivityContext(),circleLists, (helper, item) -> {
@@ -85,10 +86,22 @@ public class CirclePresenter extends BasePresenter<CircleView> {
             drawable.setBounds(0,0,30,35);//第一0是距左边距离，第二0是距上边距离，30、35分别是长宽
             ((TextView)helper.getView(R.id.CircleRecyclerList_Recycler_Item_Name)).setCompoundDrawables(drawable,null,null,null);//只放左边
             /**图标设置**/
-            SimpleUtils.setViewTypeface(((TextView)helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)),"\ue9cf 点赞11");
+            SimpleUtils.setViewTypeface((helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)),"\ue9cf 点赞11");
         });
 
         mvpView.getCircle_Fragment_ContentRecyclerView().setAdapter(simpleRecyclerViewAdapter);
-        mvpView.getCircle_Fragment_ContentRecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(2,true));
+        mvpView.getCircle_Fragment_ContentRecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(2,false));
+        mvpView.getCircle_Fragment_TwinklingRefreshLayout().setEnableRefresh(false);
+        mvpView.getCircle_Fragment_TwinklingRefreshLayout().setEnableOverScroll(false);
+        mvpView.getCircle_Fragment_TwinklingRefreshLayout().setOnRefreshListener(new RefreshListenerAdapter(){
+            @Override
+            public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
+
+            }
+            @Override
+            public void onLoadMore(final TwinklingRefreshLayout refreshLayout) {
+                new Handler().postDelayed(() -> refreshLayout.finishLoadmore(),2000);
+            }
+        });
     }
 }

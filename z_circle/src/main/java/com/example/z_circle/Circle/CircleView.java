@@ -1,13 +1,12 @@
 package com.example.z_circle.Circle;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.z_base.BaseView;
 import com.example.z_common.Custom.WanTextView;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
@@ -18,4 +17,5 @@ public interface CircleView extends BaseView {
     BGABanner getCircle_Fragment_BGABanner();
     TabLayout getCircle_Fragment_TabLayout();
     RecyclerView getCircle_Fragment_ContentRecyclerView();
+    TwinklingRefreshLayout getCircle_Fragment_TwinklingRefreshLayout();
 }
