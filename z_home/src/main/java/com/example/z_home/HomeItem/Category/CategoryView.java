@@ -1,4 +1,4 @@
-package com.example.z_home.Category;
+package com.example.z_home.HomeItem.Category;
 
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;

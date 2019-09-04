@@ -31,7 +31,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     private BGABanner Home_Fragment_BGABanner;    //轮播图
     private RecyclerView Home_Fragment_RecyclerView;   //活动栏
     private ImageView Home_activity;
-    private WanTextView Home_Fragment_TextView_Search;  //搜索界面按钮
+    private TextView Home_Fragment_TextView_Search;  //搜索界面按钮
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.home_fragment,null,false);
@@ -95,7 +95,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         return Home_activity;
     }
 
-    public WanTextView getHome_Fragment_TextView_Search() {
+    public TextView getHome_Fragment_TextView_Search() {
         return Home_Fragment_TextView_Search;
     }
 

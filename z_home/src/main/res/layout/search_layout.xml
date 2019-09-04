@@ -16,7 +16,7 @@
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textColor="#ffffff"
+            android:textColor="#666666"
             android:textSize="25dp" />
 
         <EditText
@@ -37,7 +37,6 @@
 
         <TextView
             android:id="@+id/Search_Search"
-            android:background="@drawable/home_edittext_background"
             android:layout_width="60dp"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
@@ -58,9 +57,9 @@
             android:layout_height="match_parent" />
 
         <TextView
+            android:id="@+id/Search_Delete"
             android:text="删除按钮"
             android:textColor="#2b2b2b"
-            android:id="@+id/Search_Delete"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"

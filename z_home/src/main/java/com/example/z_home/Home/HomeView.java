@@ -21,5 +21,5 @@ interface HomeView extends BaseView{
     BGABanner getHome_Fragment_BGABanner();
     RecyclerView getHome_Fragment_RecyclerView();
     ImageView getHome_activity();
-    WanTextView getHome_Fragment_TextView_Search();
+    TextView getHome_Fragment_TextView_Search();
 }

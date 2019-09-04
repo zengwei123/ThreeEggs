@@ -78,7 +78,6 @@ public class CircleListUtil{
             helper.setText(R.id.CircleRecyclerList_Recycler_Item_Name,((CircleList)item).getName());
             /**图标设置**/
             SimpleUtils.setViewTypeface((helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)),"\ue872");
-
             helper.addOnClickListener(R.id.CircleRecyclerList_Recycler_Item_Praise);
         });
         recyclerView.setAdapter(simpleRecyclerViewAdapter);

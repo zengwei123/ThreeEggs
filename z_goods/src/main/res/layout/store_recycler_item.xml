@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/store_style2"
+    android:layout_margin="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/Store_Recycler_HeadImage"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/Store_Recycler_Enter"
+            android:layout_toRightOf="@+id/Store_Recycler_HeadImage"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/Store_Recycler_StoreName"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center|left"
+                android:text="什么什么店铺"
+                android:textColor="@color/C2B2B2B"
+                android:textSize="@dimen/Text_Size_2" />
+
+            <TextView
+                android:id="@+id/Store_Recycler_StoreCollection"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="123收藏"
+                android:textSize="@dimen/Text_Size_1" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Store_Recycler_Enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/store_style"
+            android:gravity="center"
+            android:text="进店" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/Store_Recycler_Recommended"
+        android:text="推荐理由：高奢品牌，当时尚遇上闪街，高雅与时尚"
+        android:background="@drawable/store_style1"
+        android:layout_marginTop="10dp"
+        android:gravity="center|left"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/Text_Size_2" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <ImageView
+            android:padding="5dp"
+            android:src="@mipmap/common_nodata"
+            android:layout_width="240dp"
+            android:layout_height="150dp" />
+        <LinearLayout
+            android:src="@mipmap/common_nodata"
+            android:orientation="vertical"
+            android:layout_width="120dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:src="@mipmap/common_nodata"
+                android:layout_weight="1"
+                android:layout_width="120dp"
+                android:padding="5dp"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:src="@mipmap/common_nodata"
+                android:layout_weight="1"
+                android:layout_width="120dp"
+                android:padding="5dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

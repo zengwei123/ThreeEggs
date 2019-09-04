@@ -11,6 +11,11 @@ public class RouterPageFragment {
         return (Fragment) ARouter.getInstance().build("/Goods/GoodsList").navigation();
     }
 
+    /**商品-店铺列表**/
+    public static Fragment getStoreList(){
+        return (Fragment) ARouter.getInstance().build("/Goods/StoreList").navigation();
+    }
+
     /**消息列表**/
     public static MvpFragment grtMessageFragment(){
         return (MvpFragment) ARouter.getInstance().build("/Message/MessageFragment").navigation();

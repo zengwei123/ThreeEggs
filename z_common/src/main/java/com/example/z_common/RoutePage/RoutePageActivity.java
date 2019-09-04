@@ -22,6 +22,11 @@ public class RoutePageActivity {
     }
 
     /**我的-搜索**/
+    public static void getFineStore(){
+        ARouter.getInstance().build("/Home/FineStoreActivity").navigation();
+    }
+
+    /**我的-精选店铺**/
     public static void getSearch(){
         ARouter.getInstance().build("/Home/Search").navigation();
     }

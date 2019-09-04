@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.MvpFragment;
 import com.example.z_goods.R;
 
@@ -35,7 +34,7 @@ public class GoodsListFragment extends MvpFragment<GoodsListPresenter> implement
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.goodslis_layout,null,false);
+        return inflater.inflate(R.layout.goodslis_fragment,null,false);
     }
 
     @Override

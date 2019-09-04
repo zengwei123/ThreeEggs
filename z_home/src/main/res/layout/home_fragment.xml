@@ -29,7 +29,7 @@
             android:gravity="center" />
 
     </RelativeLayout>
-    <com.example.z_common.Custom.WanTextView
+    <TextView
         android:id="@+id/Home_Fragment_TextView_Search"
         android:background="@drawable/home_edittext_background"
         android:hint=""
@@ -41,7 +41,6 @@
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:textColor="#acacac"
-        android:drawableRight="@mipmap/home_camera"
         android:layout_height="30dp" />
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

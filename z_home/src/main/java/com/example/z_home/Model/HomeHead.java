@@ -7,7 +7,7 @@ public class HomeHead {
     private List<AdBean> ad;
     private List<IndexBean> index;
     private List<MenuBean> menu;
-
+    private Weather weather;
     public List<AdBean> getAd() {
         return ad;
     }
@@ -30,6 +30,14 @@ public class HomeHead {
 
     public void setMenu(List<MenuBean> menu) {
         this.menu = menu;
+    }
+
+    public Weather getWeather() {
+        return weather;
+    }
+
+    public void setWeather(Weather weather) {
+        this.weather = weather;
     }
 
     public static class AdBean {
@@ -317,6 +325,63 @@ public class HomeHead {
 
         public void setProvinceCode(String provinceCode) {
             this.provinceCode = provinceCode;
+        }
+    }
+
+    public static class Weather{
+
+        /**
+         * city : 深圳市
+         * text : 2
+         * temperature : 28℃
+         * windSpeed : 13.9km/h
+         * humidity : 76%
+         */
+
+        private String city;
+        private String text;
+        private String temperature;
+        private String windSpeed;
+        private String humidity;
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public String getTemperature() {
+            return temperature;
+        }
+
+        public void setTemperature(String temperature) {
+            this.temperature = temperature;
+        }
+
+        public String getWindSpeed() {
+            return windSpeed;
+        }
+
+        public void setWindSpeed(String windSpeed) {
+            this.windSpeed = windSpeed;
+        }
+
+        public String getHumidity() {
+            return humidity;
+        }
+
+        public void setHumidity(String humidity) {
+            this.humidity = humidity;
         }
     }
 }

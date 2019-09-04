@@ -1,9 +1,7 @@
-package com.example.z_home.Category;
+package com.example.z_home.HomeItem.Category;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Custom.Dialog.LottieDialog;
@@ -17,7 +15,6 @@ import com.example.z_home.Net.HomeRequestServiceFactory;
 import com.example.z_home.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;

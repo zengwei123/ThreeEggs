@@ -3,6 +3,7 @@ package com.example.z_home.Home;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Amap.AmapPositioningUtil;
@@ -38,7 +39,6 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
     @Override
     public void setView() {
         /**天气**/
-        GlideUtil.drawableImage(46, ImageGallery.weather_1,mvpView.getHome_Fragment_Image_weather(),true);
         SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_TextView_Search(),"\uea65搜索商品/店铺");
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(v -> {
            RoutePageActivity.getAddress();
@@ -87,6 +87,9 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
                 setHeadMenu(o.getData().getMenu());   //菜单设置
                 setHeadShuffling(o.getData().getIndex());  //轮播图设置
                // GlideUtil.displayImage(mvpView.getThisActivity(),o.getData().getAd().get(0).getImagePath(),mvpView.getHome_activity()); //活动图
+                if (o.getData().getWeather()!=null){
+                    setWeather(Integer.parseInt(o.getData().getWeather().getText()),o.getData().getWeather().getTemperature()); //天气
+                }
             }
             @Override
             public void onError() { }
@@ -110,6 +113,13 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
                 });
         mvpView.getHome_Fragment_RecyclerView().setAdapter(simpleRecyclerViewAdapter);
         mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,menus.size()/2));
+
+        simpleRecyclerViewAdapter.setOnItemClickListener((adapter, view, position) -> {
+           switch (position){
+               case 0:RoutePageActivity.getFineStore();break;
+               case 6:RoutePageActivity.getHomeCategory();break;
+           }
+        });
     }
     /**设置轮播**/
     private void setHeadShuffling(List<HomeHead.IndexBean> indexBeans){
@@ -122,5 +132,41 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         }
         mvpView.getHome_Fragment_BGABanner().setData(sf, null);
     }
-
+    /**天气设置**/
+    private void setWeather(int code,String wndu){
+        int image=ImageGallery.weather_10;
+        switch (code){
+            case 0: image=ImageGallery.weather_10;break;
+            case 1: image=ImageGallery.weather_7;break;
+            case 2: image=ImageGallery.weather_16;break;
+            case 3: image=ImageGallery.weather_19;break;
+            case 4: image=ImageGallery.weather_8;break;
+            case 5: image=ImageGallery.weather_9;break;
+            case 6: image=ImageGallery.weather_17;break;
+            case 7: image=ImageGallery.weather_15;break;
+            case 8: image=ImageGallery.weather_21;break;
+            case 9: image=ImageGallery.weather_5;break;
+            case 10: image=ImageGallery.weather_2;break;
+            case 11: image=ImageGallery.weather_3;break;
+            case 12: image=ImageGallery.weather_12;break;
+            case 13: image=ImageGallery.weather_18;break;
+            case 14: image=ImageGallery.weather_14;break;
+            case 15: image=ImageGallery.weather_20;break;
+            case 16: image=ImageGallery.weather_4;break;
+            case 17: image=ImageGallery.weather_1;break;
+            case 18: image=ImageGallery.weather_13;break;
+            case 19: image=ImageGallery.weather_6;break;
+            case 20: image=ImageGallery.weather_11;break;
+            case 21: image=ImageGallery.weather_15;break;
+            case 22: image=ImageGallery.weather_21;break;
+            case 23: image=ImageGallery.weather_5;break;
+            case 24: image=ImageGallery.weather_2;break;
+            case 25: image=ImageGallery.weather_3;break;
+            case 26: image=ImageGallery.weather_14;break;
+            case 27: image=ImageGallery.weather_20;break;
+            case 28: image=ImageGallery.weather_4;break;
+        }
+        GlideUtil.drawableImage(46,image,mvpView.getHome_Fragment_Image_weather(),true);
+        mvpView.getHome_Fragment_Image_weather().setText(wndu);
+    }
 }

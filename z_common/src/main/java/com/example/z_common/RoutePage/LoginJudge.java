@@ -15,11 +15,11 @@ import com.alibaba.android.arouter.facade.template.IInterceptor;
 public class LoginJudge implements IInterceptor {
     @Override
     public void process(Postcard postcard, InterceptorCallback callback) {
-        if(postcard.getPath().equals("/Home/Category")){
-            callback.onInterrupt(new RuntimeException("我觉得有点异常"));
-        }else {
-            callback.onContinue(postcard);  // 处理完成，交还控制权
-        }
+//        if(postcard.getPath().equals("/Home/Category")){
+//            callback.onInterrupt(new RuntimeException("我觉得有点异常"));
+//        }else {
+//        }
+        callback.onContinue(postcard);  // 处理完成，交还控制权
     }
 
     @Override

@@ -7,11 +7,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
+import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.SharedPreferencesHelper;
+import com.example.z_common.SimpleUtils;
+import com.example.z_common.ZwGson;
 import com.example.z_home.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +29,14 @@ class SearchPresenter extends BasePresenter<SearchView> implements View.OnClickL
     @Override
     public void init() {
         setView();
-        setHomeSearchEdit_HotLayout();
         setClick();
     }
 
     @Override
     public void setView() {
-
+        SimpleUtils.setViewTypeface(mvpView.getSearch_Back(),"\ue907");
+        SimpleUtils.setViewTypeface(mvpView.getSearch_Delete(),"\ue872");
+        setHomeSearchEdit_HotLayout(getSearchString());  //添加搜索记录
     }
 
     @Override
@@ -40,14 +46,52 @@ class SearchPresenter extends BasePresenter<SearchView> implements View.OnClickL
 
     private void setClick(){
         mvpView.getSearch_Search().setOnClickListener(this);
+        mvpView.getSearch_Delete().setOnClickListener(this);
+        mvpView.getSearch_Back().setOnClickListener(this);
     }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.Search_Search) {
+            if (mvpView.getSearch_Edit().getText().toString().trim().equals("")){
+                SimpleUtils.setToast("搜索内容不能为空");
+            }else{
+                AddSearchString(mvpView.getSearch_Edit().getText().toString().trim());
+                RoutePageActivity.getGoodsSearch();
+                mvpView.getThisActivity().finish();
+            }
+        }else if(i == R.id.Search_Delete){
+            new DialogUtil().show(R.mipmap.prompt,"是否清除历史搜索记录","确定", new DialogUtil.DialogButtonListener(){
+
+                @Override
+                public void sure() {
+                    new SharedPreferencesHelper(BaseActivity.getInstance(),"SEARCHLIST").remove("key");
+                }
+
+                @Override
+                public void cancel() {
+
+                }
+            });
+
+        }else if(i==R.id.Search_Back){
+            mvpView.getThisActivity().finish();
+        }
+    }
+
     /**热门控件的设置**/
-    private void setHomeSearchEdit_HotLayout(){
-        List<String> strings= Arrays.asList("开心过","富婆快乐求","美人鱼");
+    private void setHomeSearchEdit_HotLayout(List<String> strings){
         //balalal
         ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(20, 35, 20, 10);// 设置边距
-        for (int i = 0; i < strings.size(); i++) {
+        int indexs;
+        if (strings.size()>10){
+            indexs=10;
+        }else {
+            indexs=strings.size();
+        }
+        for (int i = 0; i < indexs; i++) {
             final TextView textView = new TextView(mvpView.getActivityContext());
             textView.setTag(i);
             textView.setTextSize(15);
@@ -64,13 +108,27 @@ class SearchPresenter extends BasePresenter<SearchView> implements View.OnClickL
             });
         }
     }
-
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.Search_Search) {
-            RoutePageActivity.getGoodsSearch();
-            mvpView.getThisActivity().finish();
+    /**添加搜索内容**/
+    private void AddSearchString(String sc){
+        String str = (String) new SharedPreferencesHelper(BaseActivity.getInstance(),"SEARCHLIST").getSharedPreference("key","");
+        List<String> strings;
+        if (str.equals("")){
+            strings =new ArrayList<>();
+        }else {
+            strings= ZwGson.GsonToList(str,String.class);
         }
+        strings.add(sc);
+       new SharedPreferencesHelper(BaseActivity.getInstance(),"SEARCHLIST").put("key", ZwGson.GsonString(strings));
+    }
+    /**添加搜索内容**/
+    private List<String> getSearchString(){
+        String str = (String) new SharedPreferencesHelper(BaseActivity.getInstance(),"SEARCHLIST").getSharedPreference("key","");
+        List<String> strings;
+        if (str.equals("")){
+            strings =new ArrayList<>();
+        }else {
+            strings= ZwGson.GsonToList(str,String.class);
+        }
+        return strings;
     }
 }
