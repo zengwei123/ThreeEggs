@@ -46,4 +46,22 @@ public class RoutePageActivity {
         ARouter.getInstance().build("/Me/History").navigation();
     }
 
+    /**信息修改界面**/
+    public static void getUserEditorActivity(){
+        ARouter.getInstance().build("/Me/UserEditorActivity").navigation();
+    }
+
+    /**文章发布界面**/
+    public static void getIssueActivity(){
+        ARouter.getInstance().build("/Issue/IssueActivity").navigation();
+    }
+
+    /**主界面**/
+    public static void getMainActivity(){
+        ARouter.getInstance().build("/Main/MainActivity").navigation();
+    }
+
+
+
+
 }

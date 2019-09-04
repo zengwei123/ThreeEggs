@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,9 @@ import com.example.z_base.MvpFragment;
 import com.example.z_message.R;
 
 public class MessageFragment extends MvpFragment<MessagePresenter> implements MessageView {
+    private ViewPager Message_ViewPage;
+    private TabLayout Message_TabLayout;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.message_fragment,null,false);
@@ -44,6 +49,17 @@ public class MessageFragment extends MvpFragment<MessagePresenter> implements Me
 
     @Override
     public void getViews(View view) {
+        Message_ViewPage=view.findViewById(R.id.Message_ViewPage);
+        Message_TabLayout=view.findViewById(R.id.Message_TabLayout);
+    }
 
+    @Override
+    public ViewPager getMessage_ViewPage() {
+        return Message_ViewPage;
+    }
+
+    @Override
+    public TabLayout getMessage_TabLayout() {
+        return Message_TabLayout;
     }
 }

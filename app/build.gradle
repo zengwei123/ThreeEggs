@@ -45,8 +45,10 @@ dependencies {
         implementation project(':z_goods')   //主界面模块
         implementation project(':z_circle')   //圈子界面模块
         implementation project(':z_my')   //我的界面模块
-        implementation project(':z_order')   //消息界面模块
+        implementation project(':z_order')   //订单界面模块
         implementation project(':z_message')   //消息界面模块
         implementation project(':z_login_register')   //登陆界面模块
+        implementation project(':z_issue')   //发布文字界面模块
+        implementation project(':z_drawer')   //登陆界面模块
     }
 }

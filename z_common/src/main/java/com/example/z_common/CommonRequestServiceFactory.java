@@ -1,5 +1,6 @@
 package com.example.z_common;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.example.z_base.BaseActivity;
@@ -8,6 +9,7 @@ import com.example.z_common.Model.AllDataState;
 import com.example.z_common.Model.PositioningSuccessful;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.NET.RetrofitServiceManager;
+import com.example.z_common.RoutePage.RoutePageActivity;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,11 +33,19 @@ public class CommonRequestServiceFactory {
         }
     }
 
-    /**设备定位更新**/
+    /**验证设备是否登录**/
     public static void  checkLogin(RequestObserver.RequestObserverNext requestObserverNext, Context context){
             Observable observable= commonRequestService.checkLogin(SimpleUtils.getToken(context));
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new RequestObserver<AllDataState>(requestObserverNext){});
+    }
+
+    /**退出登录**/
+    public static void  logout(RequestObserver.RequestObserverNext requestObserverNext,Context Context){
+        Observable observable= commonRequestService.logout(SimpleUtils.getToken(Context));
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RequestObserver<AllDataState>(requestObserverNext){});
     }
 }

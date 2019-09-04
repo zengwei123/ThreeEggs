@@ -1,1 +1,1 @@
-include ':app', ':z_base', ':z_common', ':z_goods', ':z_home', ':z_circle', ':z_order', ':z_my', ':z_message',':lottie', ':z_login_register'
+include ':app', ':z_base', ':z_common', ':z_goods', ':z_home', ':z_circle', ':z_order', ':z_my', ':z_message',':lottie', ':z_login_register', ':z_issue', ':z_drawer'

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/Issue_Close"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:padding="7dp"
+        android:src="@mipmap/close" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_above="@+id/Issue_Add_Layout"
+        android:layout_below="@+id/Issue_Close"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="#ffffff"
+                android:hint="请填写标题哦"
+                android:textSize="@dimen/Text_Size_2" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#cccccc"></View>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:gravity="top"
+                android:hint="添加正文"
+                android:textSize="@dimen/Text_Size_2" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/Issue_Recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Issue_Goods_Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:drawableRight="@mipmap/left"
+                    android:gravity="center|left"
+                    android:text="关联商品"
+                    android:textSize="@dimen/Text_Size_2" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#cccccc"></View>
+
+                <TextView
+                    android:id="@+id/Issue_Plate_Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:drawableRight="@mipmap/left"
+                    android:gravity="center|left"
+                    android:text="文章板块"
+                    android:textSize="@dimen/Text_Size_2" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#cccccc"></View>
+
+                <TextView
+                    android:id="@+id/Issue_Positioning_Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:drawableRight="@mipmap/left"
+                    android:gravity="center|left"
+                    android:text="添加地点"
+                    android:textSize="@dimen/Text_Size_2" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#cccccc"></View>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/Issue_Add_Layout"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <RelativeLayout
+            android:id="@+id/Issue_Add_Layout_BaoCun"
+            android:layout_width="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom">
+            <ImageView
+                android:id="@+id/Issue_Add_Layout_Image"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/baocun" />
+            <TextView
+                android:padding="2dp"
+                android:textSize="10sp"
+                android:layout_centerInParent="true"
+                android:text="存草稿"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Issue_Add_Layout_Image"/>
+
+        </RelativeLayout>
+        <TextView
+            android:text="发布分享"
+            android:gravity="center"
+            android:background="@drawable/issue_fabu_style"
+            android:textColor="#ffffff"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</RelativeLayout>

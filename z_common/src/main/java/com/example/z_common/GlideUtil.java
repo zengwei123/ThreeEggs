@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.z_base.BaseActivity;
 
 /**
@@ -29,4 +31,8 @@ public class GlideUtil {
         }
     }
 
+    /**加载圆形图片**/
+    public static void roundImage(Activity activity,Object path, ImageView imageView){
+        Glide.with(activity).load(path).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(imageView);
+    }
 }

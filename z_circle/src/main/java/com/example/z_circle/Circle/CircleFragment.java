@@ -5,11 +5,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.z_base.MvpFragment;
@@ -27,8 +29,8 @@ public class CircleFragment extends MvpFragment<CirclePresenter> implements Circ
     private RecyclerView Circle_Fragment_RecyclerView;  //栏目item
     private BGABanner Circle_Fragment_BGABanner;// 轮播图
     private TabLayout Circle_Fragment_TabLayout;
-    private RecyclerView Circle_Fragment_ContentRecyclerView;  //内容Recycler
     private TwinklingRefreshLayout Circle_Fragment_TwinklingRefreshLayout;  //上拉加载框架
+    private RecyclerView Circle_Fragment_ContentRecyclerView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.circle_fragment,null,false);
@@ -64,8 +66,8 @@ public class CircleFragment extends MvpFragment<CirclePresenter> implements Circ
         Circle_Fragment_RecyclerView=view.findViewById(R.id.Circle_Fragment_RecyclerView);
         Circle_Fragment_BGABanner=view.findViewById(R.id.Circle_Fragment_BGABanner);
         Circle_Fragment_TabLayout=view.findViewById(R.id.Circle_Fragment_TabLayout);
-        Circle_Fragment_ContentRecyclerView=view.findViewById(R.id.Circle_Fragment_ContentRecyclerView);
         Circle_Fragment_TwinklingRefreshLayout=view.findViewById(R.id.Circle_Fragment_TwinklingRefreshLayout);
+        Circle_Fragment_ContentRecyclerView=view.findViewById(R.id.Circle_Fragment_ContentRecyclerView);
     }
 
     @Override
@@ -94,15 +96,14 @@ public class CircleFragment extends MvpFragment<CirclePresenter> implements Circ
     }
 
     @Override
-    public RecyclerView getCircle_Fragment_ContentRecyclerView() {
-        return Circle_Fragment_ContentRecyclerView;
-    }
-
-    @Override
     public TwinklingRefreshLayout getCircle_Fragment_TwinklingRefreshLayout() {
         return Circle_Fragment_TwinklingRefreshLayout;
     }
 
+    @Override
+    public RecyclerView getCircle_Fragment_ContentRecyclerView() {
+        return Circle_Fragment_ContentRecyclerView;
+    }
 
     @Override
     public void onResume() {

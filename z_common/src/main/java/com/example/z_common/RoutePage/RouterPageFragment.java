@@ -15,4 +15,9 @@ public class RouterPageFragment {
     public static MvpFragment grtMessageFragment(){
         return (MvpFragment) ARouter.getInstance().build("/Message/MessageFragment").navigation();
     }
+
+    /**侧滑布局**/
+    public static MvpFragment grtDrawerFragment(){
+        return (MvpFragment) ARouter.getInstance().build("/Drawer/DrawerFragment").navigation();
+    }
 }

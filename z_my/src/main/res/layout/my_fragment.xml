@@ -3,158 +3,176 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
     android:orientation="vertical">
-    <TextView
-        android:background="@color/C25C6FC"
-        android:text="我的"
-        android:gravity="center"
-        android:textSize="@dimen/Text_Size_4"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/Title_Height" />
-    <android.support.v4.widget.NestedScrollView
+        android:layout_height="@dimen/Title_Height">
+        <TextView
+            android:id="@+id/My_UserName"
+            android:text="用户名"
+            android:gravity="center"
+            android:textSize="@dimen/Text_Size_3"
+            android:textColor="@color/C2B2B2B"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/My_OpenDrawer"
+            android:textColor="@color/C2B2B2B"
+            android:gravity="center"
+            android:layout_width="@dimen/Title_Height"
+            android:layout_height="@dimen/Title_Height" />
+    </RelativeLayout>
+
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/My_Fragment_TwinklingRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <RelativeLayout
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/My_AppBar"
+                app:layout_scrollFlags="enterAlways|enterAlways"
+                android:background="#FFFFFF"
                 android:layout_width="match_parent"
-                android:layout_height="90dp">
-
-                <ImageView
-                    android:id="@+id/OrderPage_GoodsImage"
-                    android:src="@mipmap/my_image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="5dp" />
-
-                <LinearLayout
+                android:layout_height="wrap_content">
+                <android.support.design.widget.CollapsingToolbarLayout
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toRightOf="@+id/OrderPage_GoodsImage"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_margin="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp">
+                            <ImageView
+                                android:id="@+id/My_UserHead"
+                                android:layout_gravity="center_vertical"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp" />
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp">
+                                    <LinearLayout
+                                        android:layout_marginLeft="20dp"
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent">
+                                        <TextView
+                                            android:layout_weight="1"
+                                            android:text="8"
+                                            android:gravity="center"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                        <TextView
+                                            android:layout_weight="1"
+                                            android:text="关注店铺"
+                                            android:gravity="center|top"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_marginLeft="20dp"
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent">
+                                        <TextView
+                                            android:layout_weight="1"
+                                            android:text="8"
+                                            android:gravity="center"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                        <TextView
+                                            android:layout_weight="1"
+                                            android:text="赞与收藏"
+                                            android:gravity="center|top"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/My_Name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/Text_Size_6"
-                        android:gravity="left|bottom"
-                        android:text="超级无敌美少女" />
+                                </LinearLayout>
+                                <TextView
+                                    android:id="@+id/My_UserEditor"
+                                    android:layout_weight="2"
+                                    android:layout_margin="5dp"
+                                    android:textColor="#ffffff"
+                                    android:text="编 辑"
+                                    android:gravity="center"
+                                    android:background="@drawable/my_editor_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"></TextView>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/My_Signature"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:textSize="@dimen/Text_Size_2"
+                            android:maxLines="2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/My_Quotes"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="left|top"
-                        android:text="中国最伟大最永久的艺术是男人扮女人" />
-                    <TextView
-                        android:id="@+id/OrderPage_GoodsName"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/Text_Size_4"
-                        android:gravity="left|bottom"
-                        android:text="LV 1" />
-                </LinearLayout>
-            </RelativeLayout>
+                </android.support.design.widget.CollapsingToolbarLayout>
+            </android.support.design.widget.AppBarLayout>
             <LinearLayout
-                android:layout_margin="5dp"
-                android:background="#cccccc"
-                android:layout_width="match_parent"
-                android:layout_height="50dp" >
-                <TextView
-                    android:text="优惠券"
-                    android:padding="5dp"
-                    android:drawableLeft="@mipmap/my_youhuiquan"
-                    android:gravity="center|left"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:text="附近正在进行的福利"
-                    android:gravity="center|right"
-                    android:drawableRight="@mipmap/my_right"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/My_OrderAll_Linear"
-                android:layout_marginTop="5dp"
-                android:background="#cccccc"
-                android:layout_width="match_parent"
-                android:layout_height="30dp" >
-                <TextView
-                    android:text="我的订单"
-                    android:gravity="center|left"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:text="查看全部订单"
-                    android:gravity="center|right"
-                    android:drawableRight="@mipmap/my_right"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-            <android.support.design.widget.TabLayout
-                android:id="@+id/Main_TabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="#cccccc"
-                app:tabBackground="@android:color/transparent"
-                android:focusable="true"
-                app:tabGravity="fill"
-                app:tabMode="fixed"
-                app:tabIndicatorHeight="0dp"
-                app:tabTextColor="#666666"
-                app:tabIndicatorColor="#ffffff"
-                app:tabSelectedTextColor="#2b2b2b"
-                android:layout_alignParentBottom="true">
-                <android.support.design.widget.TabItem
-                    android:icon="@mipmap/goods_logo"
-                    android:text="待付款"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <android.support.design.widget.TabItem
-                    android:icon="@mipmap/goods_logo"
-                    android:text="待使用"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <android.support.design.widget.TabItem
-                    android:icon="@mipmap/goods_logo"
-                    android:text="待送达"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <android.support.design.widget.TabItem
-                    android:icon="@mipmap/goods_logo"
-                    android:text="待评价"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <android.support.design.widget.TabItem
-                    android:icon="@mipmap/goods_logo"
-                    android:text="售后"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </android.support.design.widget.TabLayout>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/My_Recycler"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:translationZ="999dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:background="#f2f2f2"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"></View>
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/My_TabLayout_Class"
+                        app:tabSelectedTextColor="@color/C2B2B2B"
+                        app:tabTextColor="#666666"
+                        app:tabIndicatorColor="#666666"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </android.support.design.widget.TabLayout>
+                    <View
+                        android:background="#f2f2f2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"></View>
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/My_TabLayout_Item"
+                        app:tabBackground="@drawable/my_tablayout_tab"
+                        app:tabIndicatorHeight="0dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+                    </android.support.design.widget.TabLayout>
+                </LinearLayout>
 
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/My_RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
 
+        </android.support.design.widget.CoordinatorLayout>
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 </LinearLayout>

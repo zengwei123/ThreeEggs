@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_height="60dp">
+
+    <ImageView
+        android:id="@+id/MessagePage_UserHead"
+        android:padding="8dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:id="@+id/MessagePage_UserName"
+                android:text="用户名"
+                android:gravity="center|left"
+                android:textSize="@dimen/Text_Size_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:text="12:30"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:textSize="@dimen/Text_Size_1"
+            android:gravity="center|left|top"
+            android:layout_weight="1"
+            android:text="这个是发送的消息内容" />
+        <View
+            android:background="#cccccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"></View>
+    </LinearLayout>
+</LinearLayout>

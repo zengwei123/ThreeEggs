@@ -1,7 +1,9 @@
 package com.example.z_circle.Circle;
 
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.z_base.BaseView;
@@ -16,6 +18,6 @@ public interface CircleView extends BaseView {
     RecyclerView getCircle_Fragment_RecyclerView();
     BGABanner getCircle_Fragment_BGABanner();
     TabLayout getCircle_Fragment_TabLayout();
-    RecyclerView getCircle_Fragment_ContentRecyclerView();
     TwinklingRefreshLayout getCircle_Fragment_TwinklingRefreshLayout();
+    RecyclerView getCircle_Fragment_ContentRecyclerView();
 }

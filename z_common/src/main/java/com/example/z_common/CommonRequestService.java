@@ -27,4 +27,13 @@ public interface CommonRequestService {
     @FormUrlEncoded
     @POST("checkLogin")
     Observable<AllDataState> checkLogin(@Field("devicesToken") String devicesToken);
+
+
+    /**
+     * 啊  这个是退出登录哟
+     */
+    @FormUrlEncoded
+    @POST("logout")
+    Observable<AllDataState> logout(@Field("devicesToken") String devicesToken);
+
 }

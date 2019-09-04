@@ -2,16 +2,26 @@ package com.example.zengwei.threeeggs.Main;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 
+import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpFragment;
 import com.example.z_circle.Circle.CircleFragment;
 import com.example.z_common.Custom.Dialog.LottieDialog;
+import com.example.z_common.GlideUtil;
+import com.example.z_common.Main_Me_Listener;
 import com.example.z_common.NoLR.NoLRFragment;
 import com.example.z_common.RoutePage.RoutePageActivity;
+import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.SimpleFragmentAdapter;
 import com.example.z_common.SimpleUtils;
+import com.example.z_drawer.Drawer.DrawerFragment;
+import com.example.z_goods.GoodsList.GoodsListFragment;
 import com.example.z_home.Home.HomeFragment;
 import com.example.z_message.message.MessageFragment;
 import com.example.z_my.my.MyFragment;
@@ -25,8 +35,7 @@ import java.util.List;
  * Created by zengwei on 2019/7/21.
  */
 
-public class MainPresenter extends BasePresenter<MainView> {
-    private int fragmentid=0;
+public class MainPresenter extends BasePresenter<MainView> implements View.OnClickListener{
     @Override
     public void init() {
         SimpleUtils.getPermissions();
@@ -41,53 +50,19 @@ public class MainPresenter extends BasePresenter<MainView> {
         fragments.add(new HomeFragment());
         fragments.add(new CircleFragment());
         fragments.add(new MessageFragment());
-        fragments.add(new MyFragment());
+        MyFragment myFragment=new MyFragment();
+        myFragment.setMain_Me_Listener(() -> {
+            mvpView.getMain_DrawerLayout().openDrawer(Gravity.LEFT);
+        });
+        fragments.add(myFragment);
         SimpleFragmentAdapter simpleFragmentAdapter=new SimpleFragmentAdapter( ((FragmentActivity)mvpView.getThisActivity()).getSupportFragmentManager(),fragments);
         mvpView.getMain_ViewPager().setAdapter(simpleFragmentAdapter);
-
         /**加载页面数量**/
         mvpView.getMain_ViewPager().setOffscreenPageLimit(4);
-        mvpView.getMain_TabLayout().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition()==3){
-                    if(!SimpleUtils.IsLogin()){
-                        mvpView.getMain_TabLayout().getTabAt(fragmentid).select();
-                        RoutePageActivity.getLRActivity();
-                        return;
-                    }
-                }
-                switch (tab.getPosition()){
-                    case 0: tab.setIcon(R.mipmap.main_home);  break;
-                    case 1: tab.setIcon(R.mipmap.main_circle); break;
-                    case 2: tab.setIcon(R.mipmap.main_order); break;
-                    case 3: tab.setIcon(R.mipmap.main_personal); break;
-                }
-                mvpView.getMain_ViewPager().setCurrentItem(tab.getPosition());
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                fragmentid=tab.getPosition();
-                switch (tab.getPosition()){
-                    case 0: tab.setIcon(R.mipmap.main_home1); break;
-                    case 1: tab.setIcon(R.mipmap.main_circle1); break;
-                    case 2: tab.setIcon(R.mipmap.main_order1);break;
-                    case 3: tab.setIcon(R.mipmap.main_personal1); break;
-                }
-            }
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
 
-//        /**两个控件绑定起来**/
-//        mvpView.getMain_TabLayout().setupWithViewPager(mvpView.getMain_ViewPager());
-//
-//        /**设置图标  ViewPage跟Tablayout绑定后 绑定后会清除 妈的**/
-//        mvpView.getMain_TabLayout().getTabAt(0).setIcon(R.mipmap.main_home);
-//        mvpView.getMain_TabLayout().getTabAt(1).setIcon(R.mipmap.main_circle1);
-//        mvpView.getMain_TabLayout().getTabAt(2).setIcon(R.mipmap.main_order1);
-//        mvpView.getMain_TabLayout().getTabAt(3).setIcon(R.mipmap.main_personal1);
+        setClick();
+        setDrawer();
+
 
     }
 
@@ -103,4 +78,75 @@ public class MainPresenter extends BasePresenter<MainView> {
         LottieDialog.setDialogWindow(mvpView.getActivityContext());
         MainRequestServiceFactory.ApkDetection();
     }
+    /**侧滑菜单**/
+    private void setDrawer(){
+        /**设置侧滑布局的退出登录事件**/
+        FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
+        DrawerFragment fragment= (DrawerFragment) RouterPageFragment.grtDrawerFragment();
+        fragment.setMain_Me_Listener(() -> {
+            mvpView.getMain_DrawerLayout().closeDrawers();
+            mvpView.getMain_Home_Tab().callOnClick();
+        });
+        fragmentTransaction.add(R.id.Main_DrawerFragment, fragment,DrawerFragment.class.getName()).commit();
+        /**侧滑菜单控制**/
+        mvpView.getMain_DrawerLayout().setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        mvpView.getMain_DrawerLayout().addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {}
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                mvpView.getMain_DrawerLayout().setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            }
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                mvpView.getMain_DrawerLayout().setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            }
+            @Override
+            public void onDrawerStateChanged(int newState) {}
+        });
+    }
+
+    private void setClick(){
+        mvpView.getMain_Home_Tab().setOnClickListener(this);
+        mvpView.getMain_Circle_Tab().setOnClickListener(this);
+        mvpView.getMain_Message_Tab().setOnClickListener(this);
+        mvpView.getMain_Personal_Tab().setOnClickListener(this);
+        mvpView.getMain_Add_Tab().setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+        int i=v.getId();
+        if (i==R.id.Main_Home_Tab){
+            TabImage();
+            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.main_home,mvpView.getMain_Home_Tab_Image());
+            mvpView.getMain_ViewPager().setCurrentItem(0);
+        }else if (i==R.id.Main_Circle_Tab){
+            TabImage();
+            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.main_circle,mvpView.getMain_Circle_Tab_Image());
+            mvpView.getMain_ViewPager().setCurrentItem(1);
+        }else if (i==R.id.Main_Add_Tab){
+            RoutePageActivity.getIssueActivity();
+        }else if (i==R.id.Main_Message_Tab){
+            TabImage();
+            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.main_order,mvpView.getMain_Message_Tab_Image());
+            mvpView.getMain_ViewPager().setCurrentItem(2);
+        }else if (i==R.id.Main_Personal_Tab){
+            if(!SimpleUtils.IsLogin()){
+                RoutePageActivity.getLRActivity();
+                return;
+            }else {
+                TabImage();
+                GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.main_personal,mvpView.getMain_Personal_Tab_Image());
+                mvpView.getMain_ViewPager().setCurrentItem(3);
+            }
+        }
+    }
+
+    private void TabImage(){
+        GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.main_home1,mvpView.getMain_Home_Tab_Image());
+        GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.main_circle1,mvpView.getMain_Circle_Tab_Image());
+        GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.main_order1,mvpView.getMain_Message_Tab_Image());
+        GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.main_personal1,mvpView.getMain_Personal_Tab_Image());
+    }
+
 }

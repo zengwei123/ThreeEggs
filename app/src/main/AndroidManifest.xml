@@ -48,7 +48,8 @@
         <activity android:name="com.example.z_login_register.LR.LRActivity"></activity>
         <activity android:name="com.example.z_my.Collection.CollectionActivity"></activity>
         <activity android:name="com.example.z_my.History.HistoryActivity"></activity>
-
+        <activity android:name="com.example.z_issue.Issue.IssueActivity"></activity>
+        <activity android:name="com.example.z_my.UserEditor.UserEditorActivity"></activity>
 
         <!--高德定位的服务组件-->
         <service android:name="com.amap.api.location.APSService"></service>
