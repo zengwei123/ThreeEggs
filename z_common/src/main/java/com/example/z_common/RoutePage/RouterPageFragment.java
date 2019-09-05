@@ -7,8 +7,11 @@ import com.example.z_base.MvpFragment;
 
 public class RouterPageFragment {
     /**商品列表**/
-    public static Fragment grtGoodsList(){
-        return (Fragment) ARouter.getInstance().build("/Goods/GoodsList").navigation();
+    public static Fragment grtGoodsList(int GoodsType,String SearchParameter){
+        return (Fragment) ARouter.getInstance().build("/Goods/GoodsList")
+                .withInt("GoodsType",GoodsType)
+                .withString("SearchParameter",SearchParameter)
+                .navigation();
     }
 
     /**商品-店铺列表**/

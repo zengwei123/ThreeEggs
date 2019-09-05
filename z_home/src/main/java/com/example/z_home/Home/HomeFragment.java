@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.z_base.MvpFragment;
 import com.example.z_common.Amap.AmapPositioningUtil;
-import com.example.z_common.Custom.WanTextView;
 import com.example.z_common.SimpleUtils;
 import com.example.z_home.R;
 
@@ -29,6 +28,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     private TextView Home_Fragment_Image_weather;   //天气
     private TextView Home_Fragment_Image_Location;  //位置
     private BGABanner Home_Fragment_BGABanner;    //轮播图
+    private ImageView Home_HuoDong;  //活动item下面的图片
     private RecyclerView Home_Fragment_RecyclerView;   //活动栏
     private ImageView Home_activity;
     private TextView Home_Fragment_TextView_Search;  //搜索界面按钮
@@ -49,6 +49,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         Home_Fragment_Image_weather=view.findViewById(R.id.Home_Fragment_Image_weather);
         Home_Fragment_Image_Location=view.findViewById(R.id.Home_Fragment_Image_Location);
         Home_Fragment_BGABanner=view.findViewById(R.id.Home_Fragment_BGABanner);
+        Home_HuoDong=view.findViewById(R.id.Home_HuoDong);
         Home_Fragment_RecyclerView=view.findViewById(R.id.Home_Fragment_RecyclerView);
         Home_activity=view.findViewById(R.id.Home_activity);
         Home_Fragment_TextView_Search=view.findViewById(R.id.Home_Fragment_TextView_Search);
@@ -83,6 +84,11 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     @Override
     public BGABanner getHome_Fragment_BGABanner() {
         return Home_Fragment_BGABanner;
+    }
+
+    @Override
+    public ImageView getHome_HuoDong() {
+        return Home_HuoDong;
     }
 
     @Override

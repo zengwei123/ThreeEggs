@@ -35,4 +35,7 @@ public class HomeRequestServiceFactory {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RequestObserver<AllDataState<HomeHead>>(requestObserverNext){});
     }
+
+
+
 }

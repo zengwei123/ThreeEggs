@@ -52,6 +52,8 @@
             <!--轮播-->
             <cn.bingoogolapple.bgabanner.BGABanner
                 android:id="@+id/Home_Fragment_BGABanner"
+                android:scaleType="fitXY"
+                android:layout_marginTop="15dp"
                 app:banner_pointAutoPlayInterval="5000"
                 app:banner_pointContainerBackground="#ffffff"
                 android:layout_width="match_parent"
@@ -64,6 +66,13 @@
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            <ImageView
+                android:id="@+id/Home_HuoDong"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
             <!--活动广告图-->
             <LinearLayout
                 android:layout_margin="10dp"
@@ -134,6 +143,7 @@
                 android:background="#f2f2f2"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"></View>
+            <!--热文推荐-->
             <LinearLayout
                 android:layout_margin="10dp"
                 android:orientation="vertical"

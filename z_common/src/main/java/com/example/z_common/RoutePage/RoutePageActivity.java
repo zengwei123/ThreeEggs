@@ -21,12 +21,17 @@ public class RoutePageActivity {
         ARouter.getInstance().build("/Home/Address").navigation();
     }
 
-    /**我的-搜索**/
+    /**我的-精选店铺**/
     public static void getFineStore(){
         ARouter.getInstance().build("/Home/FineStoreActivity").navigation();
     }
 
-    /**我的-精选店铺**/
+    /**我的-商品的列表信息**/
+    public static void getGoodsItem(String title){
+        ARouter.getInstance().build("/Home/GoodsItemActivity").withString("title",title).navigation();
+    }
+
+    /**我的-搜索**/
     public static void getSearch(){
         ARouter.getInstance().build("/Home/Search").navigation();
     }

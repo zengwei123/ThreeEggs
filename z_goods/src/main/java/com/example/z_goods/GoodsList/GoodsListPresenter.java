@@ -1,20 +1,22 @@
 package com.example.z_goods.GoodsList;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_common.GlideUtil;
+import com.example.z_common.Model.AllDataState;
+import com.example.z_common.NET.RequestObserver;
+import com.example.z_common.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
-import com.example.z_common.SimpleUtils;
-import com.example.z_goods.Model.GoodsRecycler;
+import com.example.z_goods.Model.GoodsModel;
+import com.example.z_goods.Net.GoodsRequestServiceFactory;
 import com.example.z_goods.R;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by zengwei on 2019/7/24.
@@ -23,6 +25,7 @@ import java.util.List;
 public class GoodsListPresenter extends BasePresenter<GoodsListView>{
     private boolean isRecyclerState=true;
     private SimpleRecyclerViewAdapter RecyclerStyleState1,RecyclerStyleState2;   //切换咨询的
+    private GoodsModel goodsModel;
 
     @Override
     public void init() {
@@ -31,83 +34,92 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
 
     @Override
     public void setView() {
-        mvpView.getGoodsList_Comprehensive().setText("综合");
-        mvpView.getGoodsList_Sales().setText("销量");
-        mvpView.getGoodsList_Price().setText("价格");
-        mvpView.getGoodsList_Distance().setText("距离");
-
-        /**首页的推荐不需要筛选  这里吧筛选当作样式切换**/
-        mvpView.getGoodsList_Style().setVisibility(View.INVISIBLE);
-
-        /**设置推挤数据**/
-        List<GoodsRecycler> goodsRecyclers =new ArrayList<>();
-        for (int i=0;i<10;i++){
-            goodsRecyclers.add(new GoodsRecycler("",
-                    "商品的长标题商品的长标题商品的长标题商品的长标题商品的长标题商品的长标题",
-                    "88","1111","1234","北京故宫","司马的店铺"+i));
-        }
-
-
-
-        /**切换列表的**/
-        if (mvpView.getSearchParameter()!=null&&!mvpView.getSearchParameter().equals("")){
-            /**这里是搜的   可以进行筛选**/
-            setGoodsListRecycler(mvpView.getGoodsList_Recycler(),
-                    goodsRecyclers,
-                    mvpView.getActivityContext(),
-                    mvpView.getGoodsList_Style());
-            mvpView.getGoodsList_Style().setVisibility(View.VISIBLE);
-            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_screening,  mvpView.getGoodsList_Screening());
-        }else {
-            /**这里是首页的推荐**/
-            setGoodsListRecycler(mvpView.getGoodsList_Recycler(),
-                    goodsRecyclers,
-                    mvpView.getActivityContext(),
-                    mvpView.getGoodsList_Screening());
-        }
-
-
+        setRecycler(mvpView.getGoodsType());
     }
 
     @Override
     public void CloseRequest() {
 
     }
+    /**获取数据**/
+    private void setRecycler(int GoodsType){
+        switch (GoodsType){
+            case 0:
+
+                break;
+            case 1:  //首页item 新品首发
+                setHomeItemGoods(1);
+                break;
+        }
+    }
+    /**首页item 新品首发**/
+    private void setHomeItemGoods(int page){
+        GoodsRequestServiceFactory.HomeItemGoods(new RequestObserver.RequestObserverNext<AllDataState<GoodsModel>>() {
+            @Override
+            public void Next(AllDataState<GoodsModel> o) {
+                if (o.isSuccess()){
+                    goodsModel=o.getData();
+                    SimpleUtils.setLog(o.toString());
+                    SimpleUtils.setLog(goodsModel.toString());
+                    setGoodsListRecycler(goodsModel.getPage().getList());
+                }else {
+                    SimpleUtils.setToast(o.getMessage());
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void getDisposable(Disposable d) {
+
+            }
+        },page);
+    }
 
     /**这个是布局的切换 及数据的显示**/
-    private void setGoodsListRecycler(RecyclerView recycler, List<GoodsRecycler> goodsRecyclers, Context context,ImageView imageView){
+    public void setGoodsListRecycler(List<GoodsModel.PageBean.ListBean> goodsRecyclers){
         SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback= (helper, item) -> {
-            GoodsRecycler goodsRecycler = (GoodsRecycler) item;
+            GoodsModel.PageBean.ListBean goodsRecycler = (GoodsModel.PageBean.ListBean) item;
             GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.beijin04, helper.getView(R.id.GL_Recycler_information_Image));
             helper.setText(R.id.GL_Recycler_information_Title, goodsRecycler.getTitle());
             helper.setText(R.id.GL_Recycler_information_Price,"￥"+ goodsRecycler.getPrice());
-            helper.setText(R.id.GL_Recycler_information_Other, goodsRecycler.getBuyNumber()+"付款  "+ goodsRecycler.getLocation());
-            helper.setText(R.id.GL_Recycler_information_Store, goodsRecycler.getShopName());
+            helper.setText(R.id.GL_Recycler_information_Other, "---");
+            helper.setText(R.id.GL_Recycler_information_Store, "---");
         };
         /**准备切换的布局**/
         RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information1, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
         RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information2, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
-
-        /**显示默认的布局状态**/
-        switchRecycler(isRecyclerState,recycler,imageView);
-        imageView.setOnClickListener(v -> {
-            /**切换布局状态**/
-            switchRecycler(isRecyclerState,recycler,imageView);
-        });
+        switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),null);
     }
 
+    /**切换布局状态方法**/
+    public void setSWitch(ImageView imageView){
+        /**显示默认的布局状态**/
+        switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),imageView);
+        if (imageView!=null){
+            imageView.setOnClickListener(v -> {
+                /**切换布局状态**/
+                switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),imageView);
+            });
+        }
+    }
     /**切换推荐商品布局状态**/
     private void switchRecycler(boolean b, RecyclerView recyclerView,  ImageView imageView){
         if(b){
             recyclerView.setAdapter(RecyclerStyleState1);
             recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
             isRecyclerState=false;
-            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_class1,imageView);
+            if (imageView!=null)
+                GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_class1,imageView);
         }else {
             recyclerView.setAdapter(RecyclerStyleState2);
             recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,2));
             isRecyclerState=true;
-            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_class2,imageView);
+            if (imageView!=null)
+                GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_class2,imageView);
         }
     }
 }

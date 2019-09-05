@@ -55,5 +55,5 @@ dependencies {
     implementation project(":z_base")
     implementation project(":z_common")
     implementation project(":z_order")
-    compile project(path: ':z_circle')
+    implementation project(path: ':z_circle')
 }

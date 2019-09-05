@@ -9,8 +9,10 @@
       <module fileurl="file://$PROJECT_DIR$/z_circle/z_circle.iml" filepath="$PROJECT_DIR$/z_circle/z_circle.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_common/z_common.iml" filepath="$PROJECT_DIR$/z_common/z_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_drawer/z_drawer.iml" filepath="$PROJECT_DIR$/z_drawer/z_drawer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/z_drawer/z_drawer.iml" filepath="$PROJECT_DIR$/z_drawer/z_drawer.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_goods/z_goods.iml" filepath="$PROJECT_DIR$/z_goods/z_goods.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_home/z_home.iml" filepath="$PROJECT_DIR$/z_home/z_home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/z_issue/z_issue.iml" filepath="$PROJECT_DIR$/z_issue/z_issue.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_issue/z_issue.iml" filepath="$PROJECT_DIR$/z_issue/z_issue.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_login_register/z_login_register.iml" filepath="$PROJECT_DIR$/z_login_register/z_login_register.iml" />
       <module fileurl="file://$PROJECT_DIR$/z_message/z_message.iml" filepath="$PROJECT_DIR$/z_message/z_message.iml" />

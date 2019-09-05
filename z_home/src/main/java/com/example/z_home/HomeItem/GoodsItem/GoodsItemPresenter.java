@@ -1,4 +1,4 @@
-package com.example.z_goods.SearchGoodsList;
+package com.example.z_home.HomeItem.GoodsItem;
 
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -8,43 +8,35 @@ import com.example.z_base.BasePresenter;
 import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_goods.GoodsList.GoodsListFragment;
-import com.example.z_goods.R;
+import com.example.z_home.R;
 
-/**
- * Created by zengwei on 2019/8/3.
- */
-
-public class SearchGoodsListPresenter extends BasePresenter<SearchGoodsListView> implements View.OnClickListener{
-
+public class GoodsItemPresenter extends BasePresenter<GoodsItemView> implements View.OnClickListener {
     @Override
     public void init() {
         setView();
-        setClick();
     }
 
     @Override
     public void setView() {
         /**添加推荐布局内容**/
         FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
-        GoodsListFragment fragment= (GoodsListFragment) RouterPageFragment.grtGoodsList(0,"123");
-        fragmentTransaction.add(R.id.SearchGoodsList_Frame, fragment,GoodsListFragment.class.getName()).commit();
-
+        GoodsListFragment fragment= (GoodsListFragment) RouterPageFragment.grtGoodsList(1,null);
+        fragmentTransaction.add(R.id.GoodsList_layout, fragment,GoodsListFragment.class.getName()).commit();
+        mvpView.getInclude_Title_Text().setText(mvpView.getTitlec());
+        click();
     }
 
-    @Override
-    public void CloseRequest() {
-
-    }
-
-    public void setClick(){
-        mvpView.getSearchGoodsList_TextView().setOnClickListener(this);
+    private void click(){
+        mvpView.getGoodsList_Search().setOnClickListener(this);
+        mvpView.getInclude_Title_Close().setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.SearchGoodsList_TextView) {
+        if (i == R.id.GoodsList_Search) {
             RoutePageActivity.getSearch();
+        } else if (i == R.id.Include_Title_Close) {
             mvpView.getThisActivity().finish();
         }
     }

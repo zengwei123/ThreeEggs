@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/z_include_title"></include>
+    <ImageView
+        android:id="@+id/GoodsList_Search"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/home_search"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+    <android.support.design.widget.TabLayout
+        android:id="@+id/GoodsList_TabLayout"
+        android:layout_marginTop="40dp"
+        app:tabMode="scrollable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/Title_Height">
+        <android.support.design.widget.TabItem
+            android:text="1234"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="1234"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="1234"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="1234"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="1234"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="1234"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="1234"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.design.widget.TabLayout>
+    <FrameLayout
+        android:id="@+id/GoodsList_layout"
+        android:layout_below="@+id/GoodsList_TabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+</RelativeLayout>

@@ -3,7 +3,6 @@ package com.example.z_home.Home;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Amap.AmapPositioningUtil;
@@ -45,7 +44,6 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         });
         HomeHead();
     }
-
     private void setClick(){
         mvpView.getHome_Fragment_TextView_Search().setOnClickListener(this);
         mvpView.getHome_Fragment_Image_Location().setOnClickListener(this);
@@ -53,7 +51,6 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
     @Override
     public void onClick(View view) {
         int i = view.getId();
-        // RoutePageActivity.getHomeCategory();
         if(i==R.id.Home_Fragment_TextView_Search){
             RoutePageActivity.getSearch();
         }else if(i==R.id.Home_Fragment_Image_Location){
@@ -86,7 +83,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             public void Next(AllDataState<HomeHead> o) {
                 setHeadMenu(o.getData().getMenu());   //菜单设置
                 setHeadShuffling(o.getData().getIndex());  //轮播图设置
-               // GlideUtil.displayImage(mvpView.getThisActivity(),o.getData().getAd().get(0).getImagePath(),mvpView.getHome_activity()); //活动图
+                GlideUtil.roundAngleImage(mvpView.getThisActivity(),o.getData().getAd().get(0).getImagePath(),mvpView.getHome_HuoDong(),80); //活动图
                 if (o.getData().getWeather()!=null){
                     setWeather(Integer.parseInt(o.getData().getWeather().getText()),o.getData().getWeather().getTemperature()); //天气
                 }
@@ -99,7 +96,6 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             }
         });
     }
-
     /**设置菜单**/
     private void setHeadMenu(List<HomeHead.MenuBean> menus){
         /**设置活动菜单**/
@@ -112,20 +108,25 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
                     helper.setText(R.id.Home_Fragment_ActivityMenu_TextView,menuBean.getTitle());
                 });
         mvpView.getHome_Fragment_RecyclerView().setAdapter(simpleRecyclerViewAdapter);
-        mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,menus.size()/2));
+        mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,4));
 
         simpleRecyclerViewAdapter.setOnItemClickListener((adapter, view, position) -> {
            switch (position){
                case 0:RoutePageActivity.getFineStore();break;
-               case 6:RoutePageActivity.getHomeCategory();break;
+               case 1:RoutePageActivity.getGoodsItem("新品首发");break;
+               case 2:RoutePageActivity.getGoodsItem("新品首发");break;
+               case 3:RoutePageActivity.getHomeCategory();break;
            }
         });
     }
     /**设置轮播**/
     private void setHeadShuffling(List<HomeHead.IndexBean> indexBeans){
         /**设置轮播**/
-        mvpView.getHome_Fragment_BGABanner().setAdapter((banner, itemView, model, position) ->
-                GlideUtil.displayImage(mvpView.getThisActivity(),model,(ImageView) itemView));
+        mvpView.getHome_Fragment_BGABanner().setAdapter((banner, itemView, model, position) ->{
+            ImageView imageView= (ImageView) itemView;
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            GlideUtil.displayImage(mvpView.getThisActivity(),model,imageView);
+        });
         List<String> sf=new ArrayList<>();
         for (HomeHead.IndexBean indexBean:indexBeans){
             sf.add(indexBean.getImagePath());

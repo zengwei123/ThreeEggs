@@ -51,6 +51,7 @@
         <activity android:name="com.example.z_issue.Issue.IssueActivity"></activity>
         <activity android:name="com.example.z_my.UserEditor.UserEditorActivity"></activity>
         <activity android:name="com.example.z_home.HomeItem.FineStore.FineStoreActivity"></activity>
+        <activity android:name="com.example.z_home.HomeItem.GoodsItem.GoodsItemActivity"></activity>
 
         <!--高德定位的服务组件-->
         <service android:name="com.amap.api.location.APSService"></service>

@@ -1,20 +1,10 @@
 package com.example.z_circle.CircleList;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.z_base.MvpFragment;
 import com.example.z_circle.Model.CircleList;
 import com.example.z_circle.R;
 import com.example.z_common.Custom.Dialog.DialogUtil;
@@ -27,6 +17,8 @@ import java.util.List;
 
 /**
  * Created by zengwei on 2019/8/31.
+ * 这个就是设置文字列表Recycler的个工具类
+ *
  */
 
 public class CircleListUtil{
