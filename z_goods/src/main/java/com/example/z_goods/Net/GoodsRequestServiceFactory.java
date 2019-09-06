@@ -22,7 +22,7 @@ public class GoodsRequestServiceFactory {
      * 首页新品
      */
     public static void  HomeItemGoods(RequestObserver.RequestObserverNext requestObserverNext,int pageNum ){
-        Observable observable= homeRequestService.HomeItemGoods(SimpleUtils.getToken(BaseActivity.getInstance()),pageNum,10);
+        Observable observable= homeRequestService.HomeItemGoods(SimpleUtils.getToken(BaseActivity.getInstance()),100000000,pageNum,10);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RequestObserver<AllDataState<GoodsModel>>(requestObserverNext){});

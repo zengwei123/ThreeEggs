@@ -113,8 +113,8 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         simpleRecyclerViewAdapter.setOnItemClickListener((adapter, view, position) -> {
            switch (position){
                case 0:RoutePageActivity.getFineStore();break;
-               case 1:RoutePageActivity.getGoodsItem("新品首发");break;
-               case 2:RoutePageActivity.getGoodsItem("新品首发");break;
+               case 1:RoutePageActivity.getGoodsItem(menus.get(position).getTitle(),null);break;
+               case 2:RoutePageActivity.getGoodsItem(menus.get(position).getTitle(),menus.get(position).getKeywords());break;
                case 3:RoutePageActivity.getHomeCategory();break;
            }
         });

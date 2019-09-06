@@ -10,55 +10,56 @@ public class RoutePageActivity {
     public static void getHomeCategory(){
         ARouter.getInstance().build("/Home/Category").navigation();
     }
-
-    /**我的-订单**/
-    public static void getOrderList(){
-        ARouter.getInstance().build("/Order/OrderList").navigation();
-    }
-
-    /**我的-地址**/
+    /**首页-地址**/
     public static void getAddress(){
         ARouter.getInstance().build("/Home/Address").navigation();
     }
-
-    /**我的-精选店铺**/
+    /**首页-精选店铺**/
     public static void getFineStore(){
         ARouter.getInstance().build("/Home/FineStoreActivity").navigation();
     }
-
-    /**我的-商品的列表信息**/
-    public static void getGoodsItem(String title){
-        ARouter.getInstance().build("/Home/GoodsItemActivity").withString("title",title).navigation();
+    /**首页-商品的列表信息**/
+    public static void getGoodsItem(String title,String classification){
+        ARouter.getInstance().build("/Home/GoodsItemActivity")
+                .withString("title",title)
+                .withString("classification",classification)
+                .navigation();
     }
-
-    /**我的-搜索**/
+    /**首页-搜索**/
     public static void getSearch(){
         ARouter.getInstance().build("/Home/Search").navigation();
     }
+
+    /********************************************************************************************************************************************************************/
+    /********************************************************************************************************************************************************************/
+    /**我的-订单(无用)**/
+    public static void getOrderList(){
+        ARouter.getInstance().build("/Order/OrderList").navigation();
+    }
+    /**我的-收藏界面**/
+    public static void getCollection(){
+        ARouter.getInstance().build("/Me/Collection").navigation();
+    }
+    /**我的-历史浏览界面**/
+    public static void getHistory(){
+        ARouter.getInstance().build("/Me/History").navigation();
+    }
+    /**我的-信息修改界面**/
+    public static void getUserEditorActivity(){
+        ARouter.getInstance().build("/Me/UserEditorActivity").navigation();
+    }
+    /********************************************************************************************************************************************************************/
+    /********************************************************************************************************************************************************************/
+
 
     /**商品-搜索列表**/
     public static void getGoodsSearch(){
         ARouter.getInstance().build("/Goods/GoodsSearchList").navigation();
     }
 
-    /**登陆界面**/
+    /**LR-登陆界面**/
     public static void getLRActivity(){
         ARouter.getInstance().build("/LR/LRActivity").navigation();
-    }
-
-    /**收藏界面**/
-    public static void getCollection(){
-        ARouter.getInstance().build("/Me/Collection").navigation();
-    }
-
-    /**历史浏览界面**/
-    public static void getHistory(){
-        ARouter.getInstance().build("/Me/History").navigation();
-    }
-
-    /**信息修改界面**/
-    public static void getUserEditorActivity(){
-        ARouter.getInstance().build("/Me/UserEditorActivity").navigation();
     }
 
     /**文章发布界面**/

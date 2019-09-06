@@ -17,5 +17,8 @@ public interface GoodsRequestService {
     /**首页新品首发**/
     @FormUrlEncoded
     @POST("item/search")
-    Observable<AllDataState<GoodsModel>> HomeItemGoods(@Field("devicesToken") String pid, @Field("pageNum") int pageNum, @Field("pageNum") int pageSize);
+    Observable<AllDataState<GoodsModel>> HomeItemGoods(@Field("devicesToken") String devicesToken,
+                                                       @Field("distance") Integer distance,
+                                                       @Field("pageNum") int pageNum,
+                                                       @Field("pageSize") int pageSize);
 }

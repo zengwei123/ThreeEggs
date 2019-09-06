@@ -22,10 +22,19 @@ public class GoodsItemPresenter extends BasePresenter<GoodsItemView> implements 
         FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
         GoodsListFragment fragment= (GoodsListFragment) RouterPageFragment.grtGoodsList(1,null);
         fragmentTransaction.add(R.id.GoodsList_layout, fragment,GoodsListFragment.class.getName()).commit();
+
         mvpView.getInclude_Title_Text().setText(mvpView.getTitlec());
+
+        setTabLayout();
         click();
     }
-
+    private void setTabLayout(){
+        String[] strings=mvpView.getclassification().split(",");
+        mvpView.getGoodsList_TabLayout().addTab(mvpView.getGoodsList_TabLayout().newTab().setText("全部"));
+        for (String s:strings){
+            mvpView.getGoodsList_TabLayout().addTab(mvpView.getGoodsList_TabLayout().newTab().setText(s));
+        }
+    }
     private void click(){
         mvpView.getGoodsList_Search().setOnClickListener(this);
         mvpView.getInclude_Title_Close().setOnClickListener(this);
