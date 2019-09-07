@@ -7,7 +7,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpActivity;
 import com.example.z_goods.R;
@@ -19,13 +21,17 @@ import com.example.z_goods.R;
 @Route(path = "/Goods/GoodsSearchList")
 public class SearchGoodsListActivity extends MvpActivity<SearchGoodsListPresenter> implements SearchGoodsListView{
     private FrameLayout SearchGoodsList_Frame;
-    private TextView SearchGoodsList_Back;
-    private TextView SearchGoodsList_TextView;
+    private TextView SearchGoodsList_Back;   //返回
+    private TextView SearchGoodsList_TextView;   //搜索
+    private TextView SearchGoodsList_Switch;   //切换
+    @Autowired
+    public String SearchKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /**启动页的图片设置为空**/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchgoodslist_layout);
+        ARouter.getInstance().inject(this);
         mvpPresenter.attachView(this);
         getViews();
         mvpPresenter.init();
@@ -41,6 +47,7 @@ public class SearchGoodsListActivity extends MvpActivity<SearchGoodsListPresente
         SearchGoodsList_Frame=findViewById(R.id.SearchGoodsList_Frame);
         SearchGoodsList_Back=findViewById(R.id.SearchGoodsList_Back);
         SearchGoodsList_TextView=findViewById(R.id.SearchGoodsList_TextView);
+        SearchGoodsList_Switch=findViewById(R.id.SearchGoodsList_Switch);
     }
 
     @Override
@@ -66,5 +73,15 @@ public class SearchGoodsListActivity extends MvpActivity<SearchGoodsListPresente
     @Override
     public TextView getSearchGoodsList_Back() {
         return SearchGoodsList_Back;
+    }
+
+    @Override
+    public TextView getSearchGoodsList_Switch() {
+        return SearchGoodsList_Switch;
+    }
+
+    @Override
+    public String getSearchKey() {
+        return SearchKey;
     }
 }

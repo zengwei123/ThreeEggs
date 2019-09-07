@@ -53,8 +53,10 @@ public class RoutePageActivity {
 
 
     /**商品-搜索列表**/
-    public static void getGoodsSearch(){
-        ARouter.getInstance().build("/Goods/GoodsSearchList").navigation();
+    public static void getGoodsSearch(String SearchKey){
+        ARouter.getInstance().build("/Goods/GoodsSearchList")
+                .withString("SearchKey",SearchKey)
+                .navigation();
     }
 
     /**LR-登陆界面**/

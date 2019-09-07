@@ -21,4 +21,19 @@ public interface GoodsRequestService {
                                                        @Field("distance") Integer distance,
                                                        @Field("pageNum") int pageNum,
                                                        @Field("pageSize") int pageSize);
+
+    /**搜索商品列表**/
+    @FormUrlEncoded
+    @POST("item/search")
+    Observable<AllDataState<GoodsModel>> setSearchGoodsPage(@Field("devicesToken") String devicesToken,
+                                                            @Field("type") String type,   //查询类型
+                                                            @Field("keyword") String keyword,   //关键字
+                                                            @Field("distance") String distance,  //查询距离
+                                                            @Field("minPrice") String minPrice,  //最小价格
+                                                            @Field("maxPrice") String maxPrice,  //最大价格
+                                                            @Field("brandName") String brandName,  //品牌
+                                                            @Field("itemCategoryId") String itemCategoryId,  //分类id
+                                                            @Field("categoryName") String categoryName,  //多个分类
+                                                            @Field("pageNum") String pageNum,  //查询页码
+                                                            @Field("pageSize") String pageSize);
 }

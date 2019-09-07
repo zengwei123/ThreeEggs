@@ -58,7 +58,7 @@ class SearchPresenter extends BasePresenter<SearchView> implements View.OnClickL
                 SimpleUtils.setToast("搜索内容不能为空");
             }else{
                 AddSearchString(mvpView.getSearch_Edit().getText().toString().trim());
-                RoutePageActivity.getGoodsSearch();
+                RoutePageActivity.getGoodsSearch(mvpView.getSearch_Edit().getText().toString().trim());
                 mvpView.getThisActivity().finish();
             }
         }else if(i == R.id.Search_Delete){
@@ -103,8 +103,9 @@ class SearchPresenter extends BasePresenter<SearchView> implements View.OnClickL
             textView.setSingleLine(true);
             mvpView.getSearch_HotLayout().addView(textView, layoutParams);
             // 标签点击事件
+            int finalI = i;
             textView.setOnClickListener(v -> {
-                Toast.makeText(mvpView.getActivityContext(), "点击事件", Toast.LENGTH_SHORT).show();
+                RoutePageActivity.getGoodsSearch(strings.get(finalI));
             });
         }
     }

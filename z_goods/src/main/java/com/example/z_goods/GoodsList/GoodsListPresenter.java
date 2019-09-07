@@ -2,6 +2,7 @@ package com.example.z_goods.GoodsList;
 
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_common.GlideUtil;
@@ -45,7 +46,7 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
     private void setRecycler(int GoodsType){
         switch (GoodsType){
             case 0:
-
+                setSearchGoodsPage(mvpView.getSearchParameter());
                 break;
             case 1:  //首页item 新品首发
                 setHomeItemGoods(1);
@@ -76,18 +77,46 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
             public void getDisposable(Disposable d) {
 
             }
-        },page);
+        },mvpView.getActivityContext(),page);
+    }
+    /**首页item 新品首发**/
+    private void setSearchGoodsPage(String keyword){
+        GoodsRequestServiceFactory.setSearchGoodsPage(new RequestObserver.RequestObserverNext<AllDataState<GoodsModel>>() {
+            @Override
+            public void Next(AllDataState<GoodsModel> o) {
+                if (o.isSuccess()){
+                    goodsModel=o.getData();
+                    SimpleUtils.setLog(o.toString());
+                    SimpleUtils.setLog(goodsModel.toString());
+                    setGoodsListRecycler(goodsModel.getPage().getList());
+                }else {
+                    SimpleUtils.setToast(o.getMessage());
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void getDisposable(Disposable d) {
+
+            }
+        },mvpView.getActivityContext(),null,keyword,100000000+"",
+                null,null,null,null,null,1+"");
     }
 
     /**这个是布局的切换 及数据的显示**/
     public void setGoodsListRecycler(List<GoodsModel.PageBean.ListBean> goodsRecyclers){
         SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback= (helper, item) -> {
             GoodsModel.PageBean.ListBean goodsRecycler = (GoodsModel.PageBean.ListBean) item;
-            GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.beijin04, helper.getView(R.id.GL_Recycler_information_Image));
+            GlideUtil.displayImage(mvpView.getThisActivity(),goodsRecycler.getImage(), helper.getView(R.id.GL_Recycler_information_Image));
             helper.setText(R.id.GL_Recycler_information_Title, goodsRecycler.getTitle());
+            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Collection),"\ue83a"+goodsRecycler.getCollectNum()+"人收藏");
             helper.setText(R.id.GL_Recycler_information_Price,"￥"+ goodsRecycler.getPrice());
-            helper.setText(R.id.GL_Recycler_information_Other, "---");
-            helper.setText(R.id.GL_Recycler_information_Store, "---");
+            helper.setText(R.id.GL_Recycler_information_Introduce, "商品特色..");
+            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Address),"\uea7c"+goodsRecycler.getAddress());
         };
         /**准备切换的布局**/
         RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information1, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
@@ -96,30 +125,30 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
     }
 
     /**切换布局状态方法**/
-    public void setSWitch(ImageView imageView){
+    public void setSWitch(TextView textView){
         /**显示默认的布局状态**/
-        switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),imageView);
-        if (imageView!=null){
-            imageView.setOnClickListener(v -> {
+        switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),textView);
+        if (textView!=null){
+            textView.setOnClickListener(v -> {
                 /**切换布局状态**/
-                switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),imageView);
+                switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),textView);
             });
         }
     }
     /**切换推荐商品布局状态**/
-    private void switchRecycler(boolean b, RecyclerView recyclerView,  ImageView imageView){
+    private void switchRecycler(boolean b, RecyclerView recyclerView,  TextView textView){
         if(b){
             recyclerView.setAdapter(RecyclerStyleState1);
             recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
             isRecyclerState=false;
-            if (imageView!=null)
-                GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_class1,imageView);
+            if (textView!=null)
+                SimpleUtils.setViewTypeface(textView,"\ue90d");
         }else {
             recyclerView.setAdapter(RecyclerStyleState2);
             recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,2));
             isRecyclerState=true;
-            if (imageView!=null)
-                GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.goods_class2,imageView);
+            if (textView!=null)
+                SimpleUtils.setViewTypeface(textView,"\ue90c");
         }
     }
 }

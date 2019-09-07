@@ -3,6 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
+    android:elevation="4dp"
+    android:translationZ="4dp"
+    android:background="#ffffff"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="160dp"
@@ -35,19 +38,36 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/GL_Recycler_information_Price"
-                    style="@style/Z_GoodsList_Recycler_TextStyle"
-                    android:textColor="#ff0000" />
-
+                    android:id="@+id/GL_Recycler_information_Introduce"
+                    android:textSize="@dimen/Text_Size_2"
+                    style="@style/Z_GoodsList_Recycler_TextStyle" />
                 <TextView
-                    android:id="@+id/GL_Recycler_information_Other"
+                    android:id="@+id/GL_Recycler_information_Address"
+                    android:textSize="@dimen/Text_Size_1"
                     style="@style/Z_GoodsList_Recycler_TextStyle" />
 
-                <TextView
-                    android:id="@+id/GL_Recycler_information_Store"
-                    style="@style/Z_GoodsList_Recycler_TextStyle" />
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/GL_Recycler_information_Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:textSize="@dimen/Text_Size_3"
+                        android:textColor="#ff0000" />
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/GL_Recycler_information_Collection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:textSize="@dimen/Text_Size_1" />
+                </RelativeLayout>
 
             </LinearLayout>
+
+
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

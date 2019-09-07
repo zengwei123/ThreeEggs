@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -77,5 +78,9 @@ public class GoodsListFragment extends MvpFragment<GoodsListPresenter> implement
     @Override
     public int getGoodsType() {
         return GoodsType;
+    }
+
+    public void setSWitch(TextView textView){
+        mvpPresenter.setSWitch(textView);
     }
 }

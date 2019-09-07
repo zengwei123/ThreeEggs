@@ -14,4 +14,6 @@ interface SearchGoodsListView extends BaseView{
     FrameLayout getSearchGoodsList_Frame();
     TextView getSearchGoodsList_TextView();
     TextView getSearchGoodsList_Back();
+    TextView getSearchGoodsList_Switch();
+    String getSearchKey();
 }
