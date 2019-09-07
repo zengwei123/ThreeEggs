@@ -1,6 +1,5 @@
 package com.example.z_common.Custom.Dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
@@ -32,16 +31,27 @@ public class LottieDialog {
     }
 
     public static void setDialogWindow(Context context){
-        dialog = new Dialog(context, R.style.NormalDialogStyle);
-        dialogWindow = dialog.getWindow();
-        lp = dialogWindow.getAttributes();
+        if (context!=null){
+            dialog = new Dialog(context, R.style.NormalDialogStyle);
+            dialogWindow = dialog.getWindow();
+            lp = dialogWindow.getAttributes();
 
-        view = View.inflate(BaseActivity.getInstance(), R.layout.z_dialog_lottie, null);
-        lottieAnimationView1=view.findViewById(R.id.animation_view1);
+            view = View.inflate(BaseActivity.getInstance(), R.layout.z_dialog_lottie, null);
+            lottieAnimationView1=view.findViewById(R.id.animation_view1);
 
-        dialog.setContentView(view);
-        dialog.setCanceledOnTouchOutside(true);
-        lp.gravity = Gravity.CENTER;
-        dialogWindow.setAttributes(lp);
+            dialog.setContentView(view);
+            dialog.setCanceledOnTouchOutside(true);
+            lp.gravity = Gravity.CENTER;
+            dialogWindow.setAttributes(lp);
+        }else {
+            dialog=null;
+        }
+    }
+
+    public static Dialog getDialog() {
+        return dialog;
+    }
+    public static void setDialog(Dialog dialog) {
+        LottieDialog.dialog = dialog;
     }
 }

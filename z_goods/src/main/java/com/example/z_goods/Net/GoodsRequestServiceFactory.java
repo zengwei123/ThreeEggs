@@ -13,7 +13,6 @@ import com.example.z_goods.Model.GoodsModel;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.http.Field;
 
 /**
  * Created by zengwei on 2019/8/4.
@@ -25,9 +24,9 @@ public class GoodsRequestServiceFactory {
     /**
      * 首页新品
      */
-    public static void  HomeItemGoods(RequestObserver.RequestObserverNext requestObserverNext, Context context, int pageNum ){
+    public static void  HomeItemGoods(RequestObserver.RequestObserverNext requestObserverNext, Context context, int pageNum ,String categoryName ){
         LottieDialog.setDialogWindow(context);
-        Observable observable= homeRequestService.HomeItemGoods(SimpleUtils.getToken(BaseActivity.getInstance()),100000000,pageNum,10);
+        Observable observable= homeRequestService.HomeItemGoods(SimpleUtils.getToken(BaseActivity.getInstance()),categoryName,100000000,pageNum,10);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RequestObserver<AllDataState<GoodsModel>>(requestObserverNext){});

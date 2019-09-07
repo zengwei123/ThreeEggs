@@ -6,7 +6,6 @@ import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.internal.functions.ObjectHelper;
 
 /**
  * Created by zengwei on 2019/8/3.
@@ -17,13 +16,15 @@ public abstract class RequestObserver<T> implements Observer<T> {
 
     public RequestObserver(){
         /**网络请求dialog 打开**/
-        LottieDialog.showDialogView();
+        if (LottieDialog.getDialog()!=null){
+            LottieDialog.showDialogView();
+        }
     }
     private RequestObserverNext next=null;
     public RequestObserver(RequestObserverNext requestObserverNext){
-        try {
+        if (LottieDialog.getDialog()!=null){
             LottieDialog.showDialogView();
-        }catch (Exception e){}
+        }
         next=requestObserverNext;
     }
 
@@ -64,7 +65,10 @@ public abstract class RequestObserver<T> implements Observer<T> {
     }
     /**请求调用**/
     public void stopDisposable(boolean b){
-        LottieDialog.stopDialogView();
+        /**关闭网络请求**/
+        if (LottieDialog.getDialog()!=null){
+            LottieDialog.stopDialogView();
+        }
         /**设置网络错误列表显示图片提示内容**/
         SimpleRecyclerViewAdapter.setIsNoNetWork(b);
         d.dispose();

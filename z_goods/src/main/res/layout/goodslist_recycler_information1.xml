@@ -15,6 +15,7 @@
             android:id="@+id/GL_Recycler_information_Image"
             android:layout_width="@dimen/goodsList_RecyclerView_H"
             android:layout_height="@dimen/goodsList_RecyclerView_H"
+            android:paddingRight="5dp"
             android:padding="5dp" />
 
         <RelativeLayout
@@ -61,6 +62,7 @@
                     <TextView
                         android:layout_alignParentRight="true"
                         android:id="@+id/GL_Recycler_information_Collection"
+                        android:layout_marginRight="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textSize="@dimen/Text_Size_1" />

@@ -12,12 +12,13 @@
 
         <TextView
             android:id="@+id/SearchGoodsList_Back"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_centerVertical="true"
-            android:textColor="#2b2b2b"
-            android:textSize="30sp" />
+            android:textColor="#666666"
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/SearchGoodsList_TextView"
@@ -29,7 +30,6 @@
             android:layout_centerVertical="true"
             android:paddingLeft="5dp"
             android:drawableLeft="@mipmap/home_search"
-            android:layout_marginRight="5dp"
             android:gravity="left|center"
             android:text="输入关键字或商品标题"
             android:textColor="#2b2b2b"
@@ -37,13 +37,14 @@
 
         <TextView
             android:id="@+id/SearchGoodsList_Switch"
-            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:gravity="center"
-            android:textSize="30sp"
-            android:layout_width="35dp"
-            android:layout_height="35dp" />
+            android:textColor="#2b2b2b"
+            android:textSize="25sp" />
     </RelativeLayout>
 
     <FrameLayout

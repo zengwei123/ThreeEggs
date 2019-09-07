@@ -1,7 +1,6 @@
 package com.example.z_goods.GoodsList;
 
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.z_base.BasePresenter;
@@ -14,6 +13,8 @@ import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallbac
 import com.example.z_goods.Model.GoodsModel;
 import com.example.z_goods.Net.GoodsRequestServiceFactory;
 import com.example.z_goods.R;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import java.util.List;
 
@@ -21,12 +22,14 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * Created by zengwei on 2019/7/24.
+ * 这个是商品模块的
  */
 
 public class GoodsListPresenter extends BasePresenter<GoodsListView>{
-    private boolean isRecyclerState=true;
+    public boolean isRecyclerState=true;   //当前布局形态
+    public int pageindex=1;   //页数
     private SimpleRecyclerViewAdapter RecyclerStyleState1,RecyclerStyleState2;   //切换咨询的
-    private GoodsModel goodsModel;
+    private GoodsModel goodsModel;   //商品数据
 
     @Override
     public void init() {
@@ -35,6 +38,21 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
 
     @Override
     public void setView() {
+        /**上拉刷新**/
+        mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setEnableRefresh(false);
+        mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setEnableOverScroll(false);
+        mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setOnRefreshListener(new RefreshListenerAdapter(){
+            @Override
+            public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
+
+            }
+            @Override
+            public void onLoadMore(final TwinklingRefreshLayout refreshLayout) {
+                pageindex++;
+                setRecycler(mvpView.getGoodsType());
+            }
+        });
+
         setRecycler(mvpView.getGoodsType());
     }
 
@@ -46,15 +64,21 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
     private void setRecycler(int GoodsType){
         switch (GoodsType){
             case 0:
-                setSearchGoodsPage(mvpView.getSearchParameter());
+                setSearchGoodsPage(pageindex,mvpView.getSearchParameter());
                 break;
             case 1:  //首页item 新品首发
-                setHomeItemGoods(1);
+                setHomeItemGoods(pageindex,null);
                 break;
         }
     }
+
+
+
+
+
     /**首页item 新品首发**/
-    private void setHomeItemGoods(int page){
+    private void setHomeItemGoods(int page,String categoryName){
+        SimpleUtils.setLog("看看："+mvpView.getGoodsType());
         GoodsRequestServiceFactory.HomeItemGoods(new RequestObserver.RequestObserverNext<AllDataState<GoodsModel>>() {
             @Override
             public void Next(AllDataState<GoodsModel> o) {
@@ -77,10 +101,26 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
             public void getDisposable(Disposable d) {
 
             }
-        },mvpView.getActivityContext(),page);
+        },mvpView.getActivityContext(),page,categoryName);
     }
-    /**首页item 新品首发**/
-    private void setSearchGoodsPage(String keyword){
+    /**首页新品首发按分类查询**/
+    public void  categoryName(String categoryName){
+        isRecyclerState=true;    //设置显示布局
+        pageindex=1;   //设置初始页面
+        mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().finishLoadmore();  //设置结束加载跟多  允许加载
+        mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setEnableLoadmore(true);   //设置允许上拉
+        setHomeItemGoods(pageindex,categoryName);
+    }
+
+
+
+
+
+
+
+
+    /**搜索商品**/
+    private void setSearchGoodsPage(int page,String keyword){
         GoodsRequestServiceFactory.setSearchGoodsPage(new RequestObserver.RequestObserverNext<AllDataState<GoodsModel>>() {
             @Override
             public void Next(AllDataState<GoodsModel> o) {
@@ -104,8 +144,25 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
 
             }
         },mvpView.getActivityContext(),null,keyword,100000000+"",
-                null,null,null,null,null,1+"");
+                null,null,null,null,null,page+"");
     }
+    /**首页新品首发按分类查询**/
+    public void  keywordName(String keywordName){
+        isRecyclerState=true;    //设置显示布局
+        pageindex=1;   //设置初始页面
+        mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().finishLoadmore();  //设置结束加载跟多  允许加载
+        mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setEnableLoadmore(true);   //设置允许上拉
+        setSearchGoodsPage(pageindex,keywordName);
+    }
+
+
+
+
+
+
+
+
+
 
     /**这个是布局的切换 及数据的显示**/
     public void setGoodsListRecycler(List<GoodsModel.PageBean.ListBean> goodsRecyclers){
@@ -115,15 +172,31 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
             helper.setText(R.id.GL_Recycler_information_Title, goodsRecycler.getTitle());
             SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Collection),"\ue83a"+goodsRecycler.getCollectNum()+"人收藏");
             helper.setText(R.id.GL_Recycler_information_Price,"￥"+ goodsRecycler.getPrice());
-            helper.setText(R.id.GL_Recycler_information_Introduce, "商品特色..");
+            helper.setText(R.id.GL_Recycler_information_Introduce, goodsRecycler.getSellPoint());
             SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Address),"\uea7c"+goodsRecycler.getAddress());
         };
-        /**准备切换的布局**/
-        RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information1, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
-        RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information2, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
-        switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),null);
-    }
+        /**页面数为1的时候是第一次加载**/
+        if (pageindex==1){
+            /**准备切换的布局**/
+            RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information1, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
+            RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information2, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
+            switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),null);
+        }else {
+            /**其他的时候是加载更多**/
+            if (goodsModel.getPage().getPages()>pageindex){
+                mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().finishLoadmore();
+            }else {
+                mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().finishRefreshing();
+                mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setEnableLoadmore(false);
+                SimpleUtils.setToast("数据全部加载完成");
+            }
+            for (GoodsModel.PageBean.ListBean listBean:goodsRecyclers){
+                RecyclerStyleState1.addData(listBean);
+                RecyclerStyleState2.addData(listBean);
+            }
+        }
 
+    }
     /**切换布局状态方法**/
     public void setSWitch(TextView textView){
         /**显示默认的布局状态**/

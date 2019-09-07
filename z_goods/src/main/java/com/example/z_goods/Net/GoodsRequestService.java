@@ -18,6 +18,7 @@ public interface GoodsRequestService {
     @FormUrlEncoded
     @POST("item/search")
     Observable<AllDataState<GoodsModel>> HomeItemGoods(@Field("devicesToken") String devicesToken,
+                                                       @Field("categoryName") String categoryName,
                                                        @Field("distance") Integer distance,
                                                        @Field("pageNum") int pageNum,
                                                        @Field("pageSize") int pageSize);

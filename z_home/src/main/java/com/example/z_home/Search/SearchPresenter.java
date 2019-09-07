@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
@@ -17,9 +16,7 @@ import com.example.z_common.ZwGson;
 import com.example.z_home.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zengwei on 2019/8/1.
@@ -34,7 +31,7 @@ class SearchPresenter extends BasePresenter<SearchView> implements View.OnClickL
 
     @Override
     public void setView() {
-        SimpleUtils.setViewTypeface(mvpView.getSearch_Back(),"\ue907");
+        SimpleUtils.setViewTypeface(mvpView.getSearch_Back(),"\ue314");
         SimpleUtils.setViewTypeface(mvpView.getSearch_Delete(),"\ue872");
         setHomeSearchEdit_HotLayout(getSearchString());  //添加搜索记录
     }

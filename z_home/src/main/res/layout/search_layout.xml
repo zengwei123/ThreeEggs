@@ -5,15 +5,16 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:gravity="center">
 
         <TextView
             android:id="@+id/Search_Back"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="#666666"
@@ -21,30 +22,35 @@
 
         <EditText
             android:id="@+id/Search_Edit"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/home_edittext_background"
             android:drawableLeft="@mipmap/home_search"
-            android:layout_marginLeft="5dp"
             android:cursorVisible="true"
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
             android:hint="输入关键字或商品标题"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
             android:textColor="#2b2b2b"
             android:textColorHint="#666666"
-            android:textSize="12dp" />
+            android:layout_toRightOf="@+id/Search_Back"
+            android:layout_toLeftOf="@+id/Search_Search"
+            android:textSize="@dimen/Text_Size_1" />
 
         <TextView
             android:id="@+id/Search_Search"
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:gravity="center"
             android:text="搜索"
             android:textColor="#2b2b2b"
-            android:textSize="12dp" />
-    </LinearLayout>
+            android:textSize="@dimen/Text_Size_2" />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">

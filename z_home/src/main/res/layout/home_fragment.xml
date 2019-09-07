@@ -15,7 +15,8 @@
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:text="31°C"
+            android:gravity="center"
+            android:text="？°C"
             android:padding="5dp" />
 
         <TextView
@@ -55,7 +56,7 @@
                 android:scaleType="fitXY"
                 android:layout_marginTop="15dp"
                 app:banner_pointAutoPlayInterval="5000"
-                app:banner_pointContainerBackground="#ffffff"
+                app:banner_pointContainerBackground="#802b2b2b"
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
             </cn.bingoogolapple.bgabanner.BGABanner>
