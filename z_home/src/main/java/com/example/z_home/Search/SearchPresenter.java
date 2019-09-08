@@ -103,6 +103,7 @@ class SearchPresenter extends BasePresenter<SearchView> implements View.OnClickL
             int finalI = i;
             textView.setOnClickListener(v -> {
                 RoutePageActivity.getGoodsSearch(strings.get(finalI));
+                mvpView.getThisActivity().finish();
             });
         }
     }

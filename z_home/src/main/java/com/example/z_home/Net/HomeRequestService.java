@@ -1,6 +1,7 @@
 package com.example.z_home.Net;
 
 import com.example.z_common.Model.AllDataState;
+import com.example.z_goods.Model.GoodsModel;
 import com.example.z_home.Model.CategoryList;
 import com.example.z_home.Model.HomeHead;
 
@@ -25,4 +26,6 @@ public interface HomeRequestService {
     /**首页信息获取**/
     @GET("ad/index")
     Observable<AllDataState<HomeHead>> HomeHead();
+
+
 }

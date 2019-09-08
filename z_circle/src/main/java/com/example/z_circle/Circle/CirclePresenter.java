@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 import com.example.z_base.BasePresenter;
-import com.example.z_circle.CircleList.CircleListUtil;
+import com.example.z_circle.CircleUtil.CircleListUtil;
 import com.example.z_circle.R;
 import com.example.z_common.GlideUtil;
 import com.example.z_common.SimpleUtils;

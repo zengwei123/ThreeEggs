@@ -13,6 +13,7 @@ import com.example.z_home.R;
 
 /**
  * Created by zengwei on 2019/9/4.
+ * 精选店铺
  */
 @Route(path = "/Home/FineStoreActivity")
 public class FineStoreActivity extends MvpActivity<FineStorePresenter> implements FineStoreView {

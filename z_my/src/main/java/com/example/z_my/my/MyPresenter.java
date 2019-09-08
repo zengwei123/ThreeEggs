@@ -1,25 +1,17 @@
 package com.example.z_my.my;
 
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.view.View;
-import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.z_base.BasePresenter;
-import com.example.z_circle.CircleList.CircleListUtil;
-import com.example.z_circle.Model.CircleList;
+import com.example.z_circle.CircleUtil.CircleListUtil;
 import com.example.z_common.GlideUtil;
 import com.example.z_common.RoutePage.RoutePageActivity;
-import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_my.R;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by zengwei on 2019/7/28.

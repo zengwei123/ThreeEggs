@@ -75,7 +75,7 @@ public class MainPresenter extends BasePresenter<MainView> implements View.OnCli
     private void Request(){
         /**是否需要更新**/
         /**设置一下dialog的显示界面**/
-        LottieDialog.setDialogWindow(mvpView.getActivityContext());
+       // LottieDialog.setDialogWindow(mvpView.getActivityContext());
         MainRequestServiceFactory.ApkDetection();
     }
     /**侧滑菜单**/

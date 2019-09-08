@@ -16,6 +16,8 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.z_base.BaseActivity;
 
 import java.security.MessageDigest;
@@ -39,6 +41,26 @@ public class GlideUtil {
         }else {
             textView.setCompoundDrawables(null,null,drawable,null);
         }
+    }
+    /** url图片设置textview图片**/
+    public  static void drawableUrlImage(Activity activity,final int WH, Object url, final TextView textView, final boolean b,boolean isr) {
+        SimpleTarget<Drawable> simpleTarget = new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                resource.setBounds(0, 0, WH, WH);
+                if (b){
+                    textView.setCompoundDrawables(resource,null,null,null);
+                }else {
+                    textView.setCompoundDrawables(null,null,resource,null);
+                }
+            }
+        };
+        if (isr){
+            Glide.with(activity).load(url).into(simpleTarget);
+        }else {
+            Glide.with(activity).load(url).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(simpleTarget);
+        }
+
     }
 
     /**加载圆形图片**/

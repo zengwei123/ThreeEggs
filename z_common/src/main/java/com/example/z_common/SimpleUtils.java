@@ -31,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -247,6 +248,14 @@ public class SimpleUtils {
             return token.getToken();
         }
     }
+
+    /**价格单位换算  单位：分 ---单外：元**/
+    public static String getPrice(int price){
+        DecimalFormat df=new DecimalFormat("0.00");//设置保留位数
+        return df.format((double) price/(double)100);
+    }
+
+
 
     /**控制 log**/
     public static void setLog(String str){

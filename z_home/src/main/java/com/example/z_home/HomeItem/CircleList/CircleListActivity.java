@@ -1,4 +1,4 @@
-package com.example.z_home.HomeItem.GoodsItem;
+package com.example.z_home.HomeItem.CircleList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,16 +14,18 @@ import com.example.z_base.MvpActivity;
 import com.example.z_home.R;
 
 /**
- * 新品首发
+ * Created by zengwei on 2019/9/8.
  */
-@Route(path = "/Home/GoodsItemActivity")
-public class GoodsItemActivity extends MvpActivity<GoodsItemPresenter> implements GoodsItemView{
+
+@Route(path = "/Home/CircleListActivity")
+public class CircleListActivity extends MvpActivity<CircleListPresenter> implements CircleListView {
     private TextView Include_Title_Text;   //页面头文字
     private ImageView Include_Title_Close;  //头部关闭按钮
-    private ImageView GoodsList_Search;
-    private TabLayout GoodsList_TabLayout;
+    private ImageView CircleList_Search;
+    private TabLayout CircleList_TabLayout;
+
     @Autowired
-    public String title;
+    public String titlec;
     @Autowired
     public String classification;
     @Override
@@ -31,7 +33,7 @@ public class GoodsItemActivity extends MvpActivity<GoodsItemPresenter> implement
         /**启动页的图片设置为空**/
         getWindow().setBackgroundDrawable(null);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.goodsitem_layout);
+        setContentView(R.layout.circlelsit_layout);
         ARouter.getInstance().inject(this);
         mvpPresenter.attachView(this);
         getViews();
@@ -49,16 +51,16 @@ public class GoodsItemActivity extends MvpActivity<GoodsItemPresenter> implement
     }
 
     @Override
-    protected GoodsItemPresenter createPresenter() {
-        return new GoodsItemPresenter();
+    protected CircleListPresenter createPresenter() {
+        return new CircleListPresenter();
     }
 
     @Override
     public void getViews() {
         Include_Title_Text=findViewById(R.id.Include_Title_Text);
         Include_Title_Close=findViewById(R.id.Include_Title_Close);
-        GoodsList_Search=findViewById(R.id.GoodsList_Search);
-        GoodsList_TabLayout=findViewById(R.id.GoodsList_TabLayout);
+        CircleList_Search=findViewById(R.id.CircleList_Search);
+        CircleList_TabLayout=findViewById(R.id.CircleList_TabLayout);
     }
 
     @Override
@@ -72,18 +74,18 @@ public class GoodsItemActivity extends MvpActivity<GoodsItemPresenter> implement
     }
 
     @Override
-    public ImageView getGoodsList_Search() {
-        return GoodsList_Search;
+    public ImageView getCircleList_Search() {
+        return CircleList_Search;
     }
 
     @Override
-    public TabLayout getGoodsList_TabLayout() {
-        return GoodsList_TabLayout;
+    public TabLayout getCircleList_TabLayout() {
+        return CircleList_TabLayout;
     }
 
     @Override
     public String getTitlec() {
-        return title;
+        return titlec;
     }
 
     @Override

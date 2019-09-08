@@ -1,8 +1,14 @@
 package com.example.z_home.Net;
 
+import android.content.Context;
+
+import com.example.z_base.BaseActivity;
+import com.example.z_common.Custom.Dialog.LottieDialog;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.NET.RetrofitServiceManager;
+import com.example.z_common.SimpleUtils;
+import com.example.z_goods.Model.GoodsModel;
 import com.example.z_home.Model.HomeHead;
 
 import io.reactivex.Observable;
@@ -19,7 +25,8 @@ public class HomeRequestServiceFactory {
     /**
      * 首页分类的数据解析
      */
-    public static void  CategoryFind(RequestObserver.RequestObserverNext requestObserverNext){
+    public static void  CategoryFind(RequestObserver.RequestObserverNext requestObserverNext, Context context){
+        LottieDialog.setDialogWindow(context);
         Observable observable= homeRequestService.CategoryFind("0",true);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -35,6 +42,7 @@ public class HomeRequestServiceFactory {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RequestObserver<AllDataState<HomeHead>>(requestObserverNext){});
     }
+
 
 
 

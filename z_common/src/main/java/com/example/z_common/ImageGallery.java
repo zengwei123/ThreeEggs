@@ -22,4 +22,7 @@ public class ImageGallery {
     public static int weather_19=R.mipmap.weather_19;   //阵雨
     public static int weather_20=R.mipmap.weather_20;   //中雪
     public static int weather_21=R.mipmap.weather_21;   //中雨
+
+
+    public static int praise=R.mipmap.praise;   //未点赞
 }

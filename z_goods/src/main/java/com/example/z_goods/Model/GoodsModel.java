@@ -233,10 +233,10 @@ public class GoodsModel {
              * upNew : false
              */
 
-            private int id;
-            private int goodsId;
-            private int sellerId;
-            private int itemCategoryId;
+            private long id;
+            private long goodsId;
+            private long sellerId;
+            private long itemCategoryId;
             private String title;
             private String sellPoint;
             private int price;
@@ -260,35 +260,35 @@ public class GoodsModel {
             private boolean hot;
             private boolean upNew;
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
-            public int getGoodsId() {
+            public long getGoodsId() {
                 return goodsId;
             }
 
-            public void setGoodsId(int goodsId) {
+            public void setGoodsId(long goodsId) {
                 this.goodsId = goodsId;
             }
 
-            public int getSellerId() {
+            public long getSellerId() {
                 return sellerId;
             }
 
-            public void setSellerId(int sellerId) {
+            public void setSellerId(long sellerId) {
                 this.sellerId = sellerId;
             }
 
-            public int getItemCategoryId() {
+            public long getItemCategoryId() {
                 return itemCategoryId;
             }
 
-            public void setItemCategoryId(int itemCategoryId) {
+            public void setItemCategoryId(long itemCategoryId) {
                 this.itemCategoryId = itemCategoryId;
             }
 

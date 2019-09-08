@@ -76,30 +76,40 @@
                 android:layout_height="80dp" />
             <!--活动广告图-->
             <LinearLayout
+                android:id="@+id/Home_HuoDong_Layout1"
+                android:visibility="gone"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
                 <ImageView
+                    android:id="@+id/Home_HuoDong1"
                     android:layout_weight="1"
-                    android:id="@+id/Home_activity"
+                    android:scaleType="fitXY"
                     android:src="@mipmap/common_nodata"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
                 <LinearLayout
+                    android:id="@+id/Home_HuoDong_Layout2"
                     android:layout_weight="1"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <ImageView
+                        android:id="@+id/Home_HuoDong2"
                         android:layout_weight="1"
+                        android:scaleType="fitXY"
                         android:src="@mipmap/common_nodata"
                         android:paddingBottom="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                     <ImageView
+                        android:id="@+id/Home_HuoDong3"
                         android:layout_weight="1"
+                        android:scaleType="fitXY"
                         android:paddingTop="5dp"
+                        android:visibility="gone"
                         android:src="@mipmap/common_nodata"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
@@ -130,6 +140,7 @@
                         android:layout_width="wrap_content"/>
                 </RelativeLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -139,6 +150,10 @@
                         android:layout_height="10dp"></View>
                     <include layout="@layout/home_fragment_hotstuff"></include>
                 </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/Home_HotGoods"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></FrameLayout>
             </LinearLayout>
             <View
                 android:background="#f2f2f2"
@@ -177,6 +192,7 @@
                         android:layout_width="200dp"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:id="@+id/Home_HotArticle_Title"
                             android:text="标题标题标题标题标题标题标题标题标题"
                             android:gravity="center|left"
                             android:maxLines="2"
@@ -185,6 +201,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                         <TextView
+                            android:id="@+id/Home_HotArticle_Content"
                             android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                             android:gravity="center|left|top"
                             android:maxLines="3"
@@ -193,6 +210,7 @@
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                     <ImageView
+                        android:id="@+id/Home_HotArticle_Image"
                         android:layout_gravity="center"
                         android:src="@mipmap/common_nodata"
                         android:layout_width="160dp"

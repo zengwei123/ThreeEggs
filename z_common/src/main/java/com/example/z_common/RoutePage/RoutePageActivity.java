@@ -18,6 +18,13 @@ public class RoutePageActivity {
     public static void getFineStore(){
         ARouter.getInstance().build("/Home/FineStoreActivity").navigation();
     }
+    /**首页-精选店铺**/
+    public static void getCircleList(String title,String classification){
+        ARouter.getInstance().build("/Home/CircleListActivity")
+                .withString("titlec",title)
+                .withString("classification",classification)
+                .navigation();
+    }
     /**首页-商品的列表信息**/
     public static void getGoodsItem(String title,String classification){
         ARouter.getInstance().build("/Home/GoodsItemActivity")

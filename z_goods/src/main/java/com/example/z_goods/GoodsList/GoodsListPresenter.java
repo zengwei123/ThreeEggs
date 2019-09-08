@@ -48,8 +48,14 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
             }
             @Override
             public void onLoadMore(final TwinklingRefreshLayout refreshLayout) {
-                pageindex++;
-                setRecycler(mvpView.getGoodsType());
+                if (pageindex<goodsModel.getPage().getPages()){
+                    pageindex++;
+                    setRecycler(mvpView.getGoodsType());
+                }else {
+                    mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().finishRefreshing();
+                    mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setEnableLoadmore(false);
+                    SimpleUtils.setToast("数据全部加载完成");
+                }
             }
         });
 
@@ -69,6 +75,9 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
             case 1:  //首页item 新品首发
                 setHomeItemGoods(pageindex,null);
                 break;
+            case 2:  //首页好物热购
+                setHomeHotGoods();
+                break;
         }
     }
 
@@ -86,7 +95,7 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
                     goodsModel=o.getData();
                     SimpleUtils.setLog(o.toString());
                     SimpleUtils.setLog(goodsModel.toString());
-                    setGoodsListRecycler(goodsModel.getPage().getList());
+                    setGoodsListRecycler(goodsModel.getPage().getList(),true);
                 }else {
                     SimpleUtils.setToast(o.getMessage());
                 }
@@ -128,7 +137,7 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
                     goodsModel=o.getData();
                     SimpleUtils.setLog(o.toString());
                     SimpleUtils.setLog(goodsModel.toString());
-                    setGoodsListRecycler(goodsModel.getPage().getList());
+                    setGoodsListRecycler(goodsModel.getPage().getList(),true);
                 }else {
                     SimpleUtils.setToast(o.getMessage());
                 }
@@ -159,19 +168,50 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
 
 
 
+    /**首页好物热购**/
+    private void setHomeHotGoods(){
+        mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setEnableLoadmore(false);   //设置允许上拉
+        GoodsRequestServiceFactory.HomeHotGoods(new RequestObserver.RequestObserverNext<AllDataState<GoodsModel>>() {
+            @Override
+            public void Next(AllDataState<GoodsModel> o) {
+                if (o.isSuccess()){
+                    goodsModel=o.getData();
+                    isRecyclerState=false;
+                    SimpleUtils.setLog(o.toString());
+                    SimpleUtils.setLog(goodsModel.toString());
+                    setGoodsListRecycler(goodsModel.getPage().getList(),false);
+                }else {
+                    SimpleUtils.setToast(o.getMessage());
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void getDisposable(Disposable d) {
+
+            }
+        },1,2);
+
+    }
+
+
 
 
 
 
 
     /**这个是布局的切换 及数据的显示**/
-    public void setGoodsListRecycler(List<GoodsModel.PageBean.ListBean> goodsRecyclers){
+    public void setGoodsListRecycler(List<GoodsModel.PageBean.ListBean> goodsRecyclers,boolean isNoScroll){
         SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback= (helper, item) -> {
             GoodsModel.PageBean.ListBean goodsRecycler = (GoodsModel.PageBean.ListBean) item;
             GlideUtil.displayImage(mvpView.getThisActivity(),goodsRecycler.getImage(), helper.getView(R.id.GL_Recycler_information_Image));
             helper.setText(R.id.GL_Recycler_information_Title, goodsRecycler.getTitle());
             SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Collection),"\ue83a"+goodsRecycler.getCollectNum()+"人收藏");
-            helper.setText(R.id.GL_Recycler_information_Price,"￥"+ goodsRecycler.getPrice());
+            helper.setText(R.id.GL_Recycler_information_Price,"￥"+ SimpleUtils.getPrice(goodsRecycler.getPrice()));
             helper.setText(R.id.GL_Recycler_information_Introduce, goodsRecycler.getSellPoint());
             SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Address),"\uea7c"+goodsRecycler.getAddress());
         };
@@ -180,16 +220,14 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
             /**准备切换的布局**/
             RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information1, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
             RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.goodslist_recycler_information2, mvpView.getActivityContext(), goodsRecyclers,simpleRecyclerViewAdapterCallback);
-            switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),null);
+            if (isNoScroll){
+                switchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),null);
+            }else {
+                NoScrollswitchRecycler(isRecyclerState,mvpView.getGoodsList_Recycler(),null);
+            }
         }else {
             /**其他的时候是加载更多**/
-            if (goodsModel.getPage().getPages()>pageindex){
-                mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().finishLoadmore();
-            }else {
-                mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().finishRefreshing();
-                mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setEnableLoadmore(false);
-                SimpleUtils.setToast("数据全部加载完成");
-            }
+            mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().finishLoadmore();
             for (GoodsModel.PageBean.ListBean listBean:goodsRecyclers){
                 RecyclerStyleState1.addData(listBean);
                 RecyclerStyleState2.addData(listBean);
@@ -219,6 +257,23 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
         }else {
             recyclerView.setAdapter(RecyclerStyleState2);
             recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,2));
+            isRecyclerState=true;
+            if (textView!=null)
+                SimpleUtils.setViewTypeface(textView,"\ue90c");
+        }
+    }
+
+    /**切换推荐商品布局状态**/
+    private void NoScrollswitchRecycler(boolean b, RecyclerView recyclerView,  TextView textView){
+        if(b){
+            recyclerView.setAdapter(RecyclerStyleState1);
+            recyclerView.setLayoutManager(SimpleUtils.getNoScrollRecyclerLayoutManager(false,2));
+            isRecyclerState=false;
+            if (textView!=null)
+                SimpleUtils.setViewTypeface(textView,"\ue90d");
+        }else {
+            recyclerView.setAdapter(RecyclerStyleState2);
+            recyclerView.setLayoutManager(SimpleUtils.getNoScrollRecyclerLayoutManager(false,2));
             isRecyclerState=true;
             if (textView!=null)
                 SimpleUtils.setViewTypeface(textView,"\ue90c");

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.z_base.MvpFragment;
@@ -28,10 +29,14 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     private TextView Home_Fragment_Image_weather;   //天气
     private TextView Home_Fragment_Image_Location;  //位置
     private BGABanner Home_Fragment_BGABanner;    //轮播图
-    private ImageView Home_HuoDong;  //活动item下面的图片
+    private ImageView Home_HuoDong,Home_HuoDong1,Home_HuoDong2,Home_HuoDong3;  //活动item下面的图片
+    private LinearLayout Home_HuoDong_Layout1,Home_HuoDong_Layout2;//活动图片布局的  用来显示隐藏
     private RecyclerView Home_Fragment_RecyclerView;   //活动栏
-    private ImageView Home_activity;
     private TextView Home_Fragment_TextView_Search;  //搜索界面按钮
+
+    private TextView Home_HotArticle_Title;    //热文推荐的标题
+    private TextView Home_HotArticle_Content;   //热文的简略内容
+    private ImageView Home_HotArticle_Image;    //文章图片
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.home_fragment,null,false);
@@ -50,9 +55,18 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         Home_Fragment_Image_Location=view.findViewById(R.id.Home_Fragment_Image_Location);
         Home_Fragment_BGABanner=view.findViewById(R.id.Home_Fragment_BGABanner);
         Home_HuoDong=view.findViewById(R.id.Home_HuoDong);
+        Home_HuoDong1=view.findViewById(R.id.Home_HuoDong1);
+        Home_HuoDong2=view.findViewById(R.id.Home_HuoDong2);
+        Home_HuoDong3=view.findViewById(R.id.Home_HuoDong3);
+        Home_HuoDong_Layout1=view.findViewById(R.id.Home_HuoDong_Layout1);
+        Home_HuoDong_Layout2=view.findViewById(R.id.Home_HuoDong_Layout2);
+
         Home_Fragment_RecyclerView=view.findViewById(R.id.Home_Fragment_RecyclerView);
-        Home_activity=view.findViewById(R.id.Home_activity);
         Home_Fragment_TextView_Search=view.findViewById(R.id.Home_Fragment_TextView_Search);
+
+        Home_HotArticle_Title=view.findViewById(R.id.Home_HotArticle_Title);
+        Home_HotArticle_Content=view.findViewById(R.id.Home_HotArticle_Content);
+        Home_HotArticle_Image=view.findViewById(R.id.Home_HotArticle_Image);
     }
 
     @Override
@@ -92,17 +106,52 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     }
 
     @Override
+    public ImageView getHome_HuoDong1() {
+        return Home_HuoDong1;
+    }
+
+    @Override
+    public ImageView getHome_HuoDong2() {
+        return Home_HuoDong2;
+    }
+
+    @Override
+    public ImageView getHome_HuoDong3() {
+        return Home_HuoDong3;
+    }
+
+    @Override
+    public LinearLayout getHome_HuoDong_layout1() {
+        return Home_HuoDong_Layout1;
+    }
+
+    @Override
+    public LinearLayout getHome_HuoDong_layout2() {
+        return Home_HuoDong_Layout2;
+    }
+
+    @Override
     public RecyclerView getHome_Fragment_RecyclerView() {
         return Home_Fragment_RecyclerView;
     }
 
-    @Override
-    public ImageView getHome_activity() {
-        return Home_activity;
-    }
-
     public TextView getHome_Fragment_TextView_Search() {
         return Home_Fragment_TextView_Search;
+    }
+
+    @Override
+    public TextView getHome_HotArticle_Title() {
+        return Home_HotArticle_Title;
+    }
+
+    @Override
+    public TextView getHome_HotArticle_Content() {
+        return Home_HotArticle_Content;
+    }
+
+    @Override
+    public ImageView getHome_HotArticle_Image() {
+        return Home_HotArticle_Image;
     }
 
     @Override

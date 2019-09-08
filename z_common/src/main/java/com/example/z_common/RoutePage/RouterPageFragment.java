@@ -13,11 +13,22 @@ public class RouterPageFragment {
                 .withString("SearchParameter",SearchParameter)
                 .navigation();
     }
-
     /**商品-店铺列表**/
     public static Fragment getStoreList(){
         return (Fragment) ARouter.getInstance().build("/Goods/StoreList").navigation();
     }
+
+
+
+
+    /**圈子-文章列表数据**/
+    public static Fragment grtCircleList(int CircleType,String SearchParameter){
+        return (Fragment) ARouter.getInstance().build("/Circle/CircleListFragment")
+                .withInt("CircleType",CircleType)
+                .withString("SearchParameter",SearchParameter)
+                .navigation();
+    }
+
 
     /**消息列表**/
     public static MvpFragment grtMessageFragment(){

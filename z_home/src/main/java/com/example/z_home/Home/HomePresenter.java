@@ -1,18 +1,23 @@
 package com.example.z_home.Home;
 
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
+import com.example.z_circle.CircleUtil.HomeHotArticle;
 import com.example.z_common.Amap.AmapPositioningUtil;
 import com.example.z_common.GlideUtil;
 import com.example.z_common.ImageGallery;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.RoutePage.RoutePageActivity;
+import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
+import com.example.z_goods.GoodsList.GoodsListFragment;
+import com.example.z_goods.Model.GoodsModel;
 import com.example.z_home.Model.HomeHead;
 import com.example.z_home.Net.HomeRequestServiceFactory;
 import com.example.z_home.R;
@@ -43,6 +48,8 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
            RoutePageActivity.getAddress();
         });
         HomeHead();
+        setHomeHotArticle();
+        setHomeHotGoods();
     }
     private void setClick(){
         mvpView.getHome_Fragment_TextView_Search().setOnClickListener(this);
@@ -61,6 +68,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             RoutePageActivity.getAddress();
         }
     }
+
     /**定位功能**/
     public void positioning(){
         /**判断是否有定位权限**/
@@ -76,6 +84,8 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         }
     }
 
+
+
     /**获取首页活动和轮播图**/
     public void HomeHead(){
         HomeRequestServiceFactory.HomeHead(new RequestObserver.RequestObserverNext<AllDataState<HomeHead>>() {
@@ -83,7 +93,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             public void Next(AllDataState<HomeHead> o) {
                 setHeadMenu(o.getData().getMenu());   //菜单设置
                 setHeadShuffling(o.getData().getIndex());  //轮播图设置
-                GlideUtil.roundAngleImage(mvpView.getThisActivity(),o.getData().getAd().get(0).getImagePath(),mvpView.getHome_HuoDong(),80); //活动图
+                setHeadHuoDong(o.getData().getAd());
                 if (o.getData().getWeather()!=null){
                     setWeather(Integer.parseInt(o.getData().getWeather().getText()),o.getData().getWeather().getTemperature()); //天气
                 }
@@ -103,21 +113,42 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
                     /**获取数据**/
                     HomeHead.MenuBean menuBean= ( HomeHead.MenuBean) item;
                     /**价值图片**/
-                    GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.common_nodata, helper.getView(R.id.Home_Fragment_ActivityMenu_Image));
+                    GlideUtil.displayImage(mvpView.getThisActivity(),menuBean.getImagePath(), helper.getView(R.id.Home_Fragment_ActivityMenu_Image));
                     /**活动名称**/
                     helper.setText(R.id.Home_Fragment_ActivityMenu_TextView,menuBean.getTitle());
                 });
         mvpView.getHome_Fragment_RecyclerView().setAdapter(simpleRecyclerViewAdapter);
-        mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,4));
+        mvpView.getHome_Fragment_RecyclerView().setLayoutManager(SimpleUtils.getNoScrollRecyclerLayoutManager(false,4));
 
         simpleRecyclerViewAdapter.setOnItemClickListener((adapter, view, position) -> {
            switch (position){
                case 0:RoutePageActivity.getFineStore();break;
-               case 1:RoutePageActivity.getGoodsItem(menus.get(position).getTitle(),null);break;
+               case 1:RoutePageActivity.getCircleList(menus.get(position).getTitle(),menus.get(position).getKeywords());break;
                case 2:RoutePageActivity.getGoodsItem(menus.get(position).getTitle(),menus.get(position).getKeywords());break;
                case 3:RoutePageActivity.getHomeCategory();break;
            }
         });
+    }
+    /**官方活动图片**/
+    private void setHeadHuoDong(List<HomeHead.AdBean> adBeans){
+        GlideUtil.roundAngleImage(mvpView.getThisActivity(),adBeans.get(0).getImagePath(),mvpView.getHome_HuoDong(),80); //活动图
+        for (int i=1;i<adBeans.size();i++){
+            mvpView.getHome_HuoDong_layout1().setVisibility(View.VISIBLE);
+            switch (i){
+                case 1:
+                    GlideUtil.roundAngleImage(mvpView.getThisActivity(),adBeans.get(i).getImagePath(),mvpView.getHome_HuoDong1(),10); //活动图
+                    break;
+                case 2:
+                    mvpView.getHome_HuoDong_layout2().setVisibility(View.VISIBLE);
+                    GlideUtil.roundAngleImage(mvpView.getThisActivity(),adBeans.get(i).getImagePath(),mvpView.getHome_HuoDong2(),10); //活动图
+                    break;
+                case 3:
+                    mvpView.getHome_HuoDong3().setVisibility(View.VISIBLE);
+                    GlideUtil.roundAngleImage(mvpView.getThisActivity(),adBeans.get(i).getImagePath(),mvpView.getHome_HuoDong3(),10); //活动图
+                    break;
+            }
+        }
+
     }
     /**设置轮播**/
     private void setHeadShuffling(List<HomeHead.IndexBean> indexBeans){
@@ -169,5 +200,18 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
         }
         GlideUtil.drawableImage(46,image,mvpView.getHome_Fragment_Image_weather(),true);
         mvpView.getHome_Fragment_Image_weather().setText(wndu);
+    }
+
+
+    /**设置热文推荐**/
+    private void setHomeHotArticle(){
+        HomeHotArticle.setHomeHotArticle(mvpView.getThisActivity(),mvpView.getHome_HotArticle_Title(),mvpView.getHome_HotArticle_Content(),mvpView.getHome_HotArticle_Image());
+    }
+    /**设置好物热购**/
+    private void setHomeHotGoods(){
+        /**添加推荐布局内容**/
+        FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
+        GoodsListFragment fragment= (GoodsListFragment) RouterPageFragment.grtGoodsList(2,null);
+        fragmentTransaction.add(R.id.Home_HotGoods, fragment,GoodsListFragment.class.getName()).commit();
     }
 }

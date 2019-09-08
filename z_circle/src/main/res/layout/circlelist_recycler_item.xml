@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/CircleList_Image"
+        android:layout_gravity="center"
+        android:src="@mipmap/common_nodata"
+        android:layout_width="120dp"
+        android:layout_height="120dp">
+    </ImageView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+        <TextView
+            android:id="@+id/CircleList_Title"
+            android:text="标题标题标题标题标题标题标题标题标题"
+            android:gravity="center|left"
+            android:maxLines="1"
+            android:textSize="@dimen/Text_Size_3"
+            android:textColor="@color/C2B2B2B"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+        <TextView
+            android:id="@+id/CircleList_Content"
+            android:layout_below="@+id/CircleList_Title"
+            android:layout_above="@+id/afafaf"
+            android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+            android:gravity="center|left|top"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textSize="@dimen/Text_Size_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:id="@+id/afafaf"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            <TextView
+                android:id="@+id/CircleList_Name"
+                android:textSize="@dimen/Text_Size_1"
+                android:ellipsize="end"
+                android:lines="1"
+                android:gravity="center"
+                android:maxLength="8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/CircleList_Praise"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/Text_Size_1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

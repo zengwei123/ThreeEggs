@@ -77,7 +77,7 @@ class CategoryPresenter extends BasePresenter<CategoryView> {
             public void getDisposable(Disposable d) {
                 disposables.add(d);
             }
-        });
+        },mvpView.getActivityContext());
     }
     /**设置子布局**/
     private void setRecycler_Child(List<CategoryList.ItemCategoriesBeanX.ItemCategoriesBean> categoriesBeans){
