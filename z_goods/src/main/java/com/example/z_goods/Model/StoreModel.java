@@ -8,9 +8,8 @@ import java.util.List;
 
 public class StoreModel {
 
-
     /**
-     * page : {"records":[{"id":1,"name":"百度公司","follow":2,"logoPic":"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1700741544,1951185347&fm=26&gp=0.jpg","goodsList":[{"id":149187842867924,"goodsName":"华为手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"},{"id":149187842867933,"goodsName":"大米手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"}]},{"id":2,"name":"华为公司","follow":1,"logoPic":"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1820523987,3798556096&fm=26&gp=0.jpg","goodsList":[]}],"total":3,"size":2,"current":1,"orders":[],"searchCount":true,"pages":2}
+     * page : {"records":[{"id":1,"name":"猫猫旗舰店","follow":2,"storeDesc":"小编推荐：该商家有2关注，可以去关照下哦.","logoPic":"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1700741544,1951185347&fm=26&gp=0.jpg","goodsList":[{"id":149187842867924,"goodsName":"华为手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"},{"id":149187842867933,"goodsName":"大米手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"}]}],"total":1,"size":1,"current":1,"orders":[],"searchCount":true,"pages":1}
      */
 
     private PageBean page;
@@ -25,13 +24,13 @@ public class StoreModel {
 
     public static class PageBean {
         /**
-         * records : [{"id":1,"name":"百度公司","follow":2,"logoPic":"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1700741544,1951185347&fm=26&gp=0.jpg","goodsList":[{"id":149187842867924,"goodsName":"华为手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"},{"id":149187842867933,"goodsName":"大米手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"}]},{"id":2,"name":"华为公司","follow":1,"logoPic":"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1820523987,3798556096&fm=26&gp=0.jpg","goodsList":[]}]
-         * total : 3
-         * size : 2
+         * records : [{"id":1,"name":"猫猫旗舰店","follow":2,"storeDesc":"小编推荐：该商家有2关注，可以去关照下哦.","logoPic":"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1700741544,1951185347&fm=26&gp=0.jpg","goodsList":[{"id":149187842867924,"goodsName":"华为手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"},{"id":149187842867933,"goodsName":"大米手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"}]}]
+         * total : 1
+         * size : 1
          * current : 1
          * orders : []
          * searchCount : true
-         * pages : 2
+         * pages : 1
          */
 
         private int total;
@@ -101,8 +100,9 @@ public class StoreModel {
         public static class RecordsBean {
             /**
              * id : 1
-             * name : 百度公司
+             * name : 猫猫旗舰店
              * follow : 2
+             * storeDesc : 小编推荐：该商家有2关注，可以去关照下哦.
              * logoPic : https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1700741544,1951185347&fm=26&gp=0.jpg
              * goodsList : [{"id":149187842867924,"goodsName":"华为手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"},{"id":149187842867933,"goodsName":"大米手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"}]
              */
@@ -110,6 +110,7 @@ public class StoreModel {
             private int id;
             private String name;
             private int follow;
+            private String storeDesc;
             private String logoPic;
             private List<GoodsListBean> goodsList;
 
@@ -135,6 +136,14 @@ public class StoreModel {
 
             public void setFollow(int follow) {
                 this.follow = follow;
+            }
+
+            public String getStoreDesc() {
+                return storeDesc;
+            }
+
+            public void setStoreDesc(String storeDesc) {
+                this.storeDesc = storeDesc;
             }
 
             public String getLogoPic() {

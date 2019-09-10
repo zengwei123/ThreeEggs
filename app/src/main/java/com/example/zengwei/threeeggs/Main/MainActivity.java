@@ -132,4 +132,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         return Main_DrawerLayout;
     }
 
+    @Override
+    public void onBackPressed() {
+        OnTwoBack();
+    }
 }

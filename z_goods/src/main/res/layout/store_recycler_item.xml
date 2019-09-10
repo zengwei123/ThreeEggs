@@ -65,28 +65,39 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/Text_Size_2" />
     <LinearLayout
+        android:id="@+id/Store_Recycler_ImageLayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="150dp">
         <ImageView
+            android:id="@+id/Store_Recycler_Image1"
             android:padding="5dp"
             android:src="@mipmap/common_nodata"
-            android:layout_width="240dp"
-            android:layout_height="150dp" />
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <LinearLayout
+            android:id="@+id/Store_Recycler_ImageLayout1"
             android:src="@mipmap/common_nodata"
             android:orientation="vertical"
-            android:layout_width="120dp"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
+                android:id="@+id/Store_Recycler_Image2"
                 android:src="@mipmap/common_nodata"
                 android:layout_weight="1"
-                android:layout_width="120dp"
+                android:visibility="gone"
+                android:layout_width="match_parent"
                 android:padding="5dp"
                 android:layout_height="match_parent" />
             <ImageView
+                android:id="@+id/Store_Recycler_Image3"
+                android:visibility="gone"
                 android:src="@mipmap/common_nodata"
                 android:layout_weight="1"
-                android:layout_width="120dp"
+                android:layout_width="match_parent"
                 android:padding="5dp"
                 android:layout_height="match_parent" />
         </LinearLayout>

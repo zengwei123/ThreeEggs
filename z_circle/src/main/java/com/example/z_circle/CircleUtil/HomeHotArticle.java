@@ -1,6 +1,7 @@
 package com.example.z_circle.CircleUtil;
 
 import android.app.Activity;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,11 +24,15 @@ public class HomeHotArticle {
         CircleRequestServiceFactory.HomeItemCircle(new RequestObserver.RequestObserverNext<AllDataState<CircleModel>>() {
             @Override
             public void Next(AllDataState<CircleModel> o) {
-                CircleModel.PageBean.ListBean listBean=o.getData().getPage().getList().get(0);
-                title.setText(listBean.getRoundTitle());
-                content.setText(listBean.getRoundDesc());
-                GlideUtil.displayImage(activity,listBean.getPosterUrl(),image);
-                title.setText(listBean.getRoundTitle());
+                try {
+                    CircleModel.PageBean.ListBean listBean=o.getData().getPage().getList().get(0);
+                    title.setText(listBean.getRoundTitle());
+                    content.setText(listBean.getRoundDesc());
+                    GlideUtil.displayImage(activity,listBean.getPosterUrl(),image);
+                    title.setText(listBean.getRoundTitle());
+                }catch (Exception e){
+
+                }
             }
 
             @Override
