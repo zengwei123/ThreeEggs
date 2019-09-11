@@ -17,12 +17,14 @@ public abstract class RequestObserver<T> implements Observer<T> {
     public RequestObserver(){
         /**网络请求dialog 打开**/
         if (LottieDialog.getDialog()!=null){
+            LottieDialog.stopDialogView();
             LottieDialog.showDialogView();
         }
     }
     private RequestObserverNext next=null;
     public RequestObserver(RequestObserverNext requestObserverNext){
         if (LottieDialog.getDialog()!=null){
+            LottieDialog.stopDialogView();
             LottieDialog.showDialogView();
         }
         next=requestObserverNext;
@@ -68,6 +70,7 @@ public abstract class RequestObserver<T> implements Observer<T> {
         /**关闭网络请求**/
         if (LottieDialog.getDialog()!=null){
             LottieDialog.stopDialogView();
+            LottieDialog.setDialog(null);
         }
         /**设置网络错误列表显示图片提示内容**/
         SimpleRecyclerViewAdapter.setIsNoNetWork(b);

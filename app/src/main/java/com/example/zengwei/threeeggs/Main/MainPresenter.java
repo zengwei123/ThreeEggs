@@ -1,10 +1,8 @@
 package com.example.zengwei.threeeggs.Main;
 
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -12,21 +10,18 @@ import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpFragment;
 import com.example.z_circle.Circle.CircleFragment;
-import com.example.z_common.Custom.Dialog.LottieDialog;
 import com.example.z_common.GlideUtil;
-import com.example.z_common.Main_Me_Listener;
-import com.example.z_common.NoLR.NoLRFragment;
 import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.SimpleFragmentAdapter;
 import com.example.z_common.SimpleUtils;
 import com.example.z_drawer.Drawer.DrawerFragment;
-import com.example.z_goods.GoodsList.GoodsListFragment;
 import com.example.z_home.Home.HomeFragment;
 import com.example.z_message.message.MessageFragment;
 import com.example.z_my.my.MyFragment;
 import com.example.zengwei.threeeggs.MainRequestServiceFactory;
 import com.example.zengwei.threeeggs.R;
+import com.example.zengwei.threeeggs.Service.MyNotificationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +72,7 @@ public class MainPresenter extends BasePresenter<MainView> implements View.OnCli
         /**设置一下dialog的显示界面**/
        // LottieDialog.setDialogWindow(mvpView.getActivityContext());
         MainRequestServiceFactory.ApkDetection();
+        MyNotificationUtils.showNotificationProgressApkDown(mvpView.getActivityContext(),50);
     }
     /**侧滑菜单**/
     private void setDrawer(){

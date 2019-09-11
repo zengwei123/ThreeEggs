@@ -31,20 +31,22 @@ public class LottieDialog {
     }
 
     public static void setDialogWindow(Context context){
-        if (context!=null){
-            dialog = new Dialog(context, R.style.NormalDialogStyle);
-            dialogWindow = dialog.getWindow();
-            lp = dialogWindow.getAttributes();
+        if (dialog==null){
+            if (context!=null){
+                dialog = new Dialog(context, R.style.NormalDialogStyle);
+                dialogWindow = dialog.getWindow();
+                lp = dialogWindow.getAttributes();
 
-            view = View.inflate(BaseActivity.getInstance(), R.layout.z_dialog_lottie, null);
-            lottieAnimationView1=view.findViewById(R.id.animation_view1);
+                view = View.inflate(BaseActivity.getInstance(), R.layout.z_dialog_lottie, null);
+                lottieAnimationView1=view.findViewById(R.id.animation_view1);
 
-            dialog.setContentView(view);
-            dialog.setCanceledOnTouchOutside(true);
-            lp.gravity = Gravity.CENTER;
-            dialogWindow.setAttributes(lp);
-        }else {
-            dialog=null;
+                dialog.setContentView(view);
+                dialog.setCanceledOnTouchOutside(true);
+                lp.gravity = Gravity.CENTER;
+                dialogWindow.setAttributes(lp);
+            }else {
+                dialog=null;
+            }
         }
     }
 

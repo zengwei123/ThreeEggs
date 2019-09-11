@@ -65,6 +65,9 @@ dependencies {
     api 'com.lcodecorex:tkrefreshlayout:1.0.7'   //上拉加载库
     api 'com.necer.ncalendar:ncalendar:4.3.3'  //日期选择库
 
+    api 'com.arialyy.aria:aria-core:3.6.6'   //文件下载
+    annotationProcessor 'com.arialyy.aria:aria-compiler:3.6.6'   //文件下载
+
     api project(":z_base")
     api project(":lottie")
 
