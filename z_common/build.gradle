@@ -31,7 +31,13 @@ android {
             //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
             abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
         }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
+
 
 }
 
@@ -64,9 +70,6 @@ dependencies {
     api 'com.hjq:xxpermissions:5.5'    //权限获取框架
     api 'com.lcodecorex:tkrefreshlayout:1.0.7'   //上拉加载库
     api 'com.necer.ncalendar:ncalendar:4.3.3'  //日期选择库
-
-    api 'com.arialyy.aria:aria-core:3.6.6'   //文件下载
-    annotationProcessor 'com.arialyy.aria:aria-compiler:3.6.6'   //文件下载
 
     api project(":z_base")
     api project(":lottie")

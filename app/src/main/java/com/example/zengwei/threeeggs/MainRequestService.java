@@ -4,9 +4,14 @@ import com.example.z_common.Model.AllDataState;
 import com.example.z_common.Model.Token;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**主model的一些网络请求**/
 public interface MainRequestService {
@@ -30,4 +35,8 @@ public interface MainRequestService {
                                           @Field("imei")String imei,           //手机imei
                                           @Field("iccid")String iccid,          //手机iccid
                                           @Field("meid")String meid);          //手机meid
+
+    @Streaming //添加这个注解用来下载大文件
+    @GET()
+    Observable<ResponseBody> downloadFileUrl(@Url String fileUrl);
 }

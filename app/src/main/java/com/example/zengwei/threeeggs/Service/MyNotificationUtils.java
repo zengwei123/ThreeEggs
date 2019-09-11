@@ -19,8 +19,7 @@ public class MyNotificationUtils {
         }
         return manager;
     }
-    private static NotificationCompat.Builder getNotificationBuilder(Context mContext,String title
-            , String content, String channelId) {
+    private static NotificationCompat.Builder getNotificationBuilder(Context mContext,String title, String content, String channelId) {
         //大于8.0
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //id随便指定
@@ -58,9 +57,7 @@ public class MyNotificationUtils {
      * @param progress
      * @param maxProgress
      */
-    public static void showNotificationProgress(Context mContext, String title
-            , String content, int manageId, String channelId
-            , int progress, int maxProgress) {
+    public static void showNotificationProgress(Context mContext, String title, String content, int manageId, String channelId, int progress, int maxProgress) {
         final NotificationCompat.Builder builder = getNotificationBuilder(mContext,title,content,channelId);
        /* Intent intent = new Intent(this, SecondeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
@@ -73,15 +70,21 @@ public class MyNotificationUtils {
     }
 
 
-    public static void showNotificationProgressApkDown(Context mContext
-            , int progress) {
+    public static NotificationCompat.Builder showNotificationProgressApkDown(Context mContext, int progress) {
         final NotificationCompat.Builder builder = getNotificationBuilder(mContext,"正在下载","悠游云驾","yunjia");
         builder.setOnlyAlertOnce(true);
         builder.setDefaults(Notification.FLAG_ONLY_ALERT_ONCE);
         builder.setProgress(100, progress, false);
         builder.setWhen(System.currentTimeMillis());
         getManager(mContext).notify(R.mipmap.baocun, builder.build());
+        builder.setProgress(100, 70, false);
+        return builder;
     }
+    public static void setProgress(int progress,NotificationCompat.Builder builder){
+        builder.setProgress(100, progress, false);
+        manager.notify(R.mipmap.baocun, builder.build());
+    }
+
 
     public static void cancleNotification(Context mContext,int manageId) {
         getManager(mContext).cancel(manageId);

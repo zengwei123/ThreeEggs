@@ -2,6 +2,7 @@ package com.example.zengwei.threeeggs.Main;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
@@ -72,7 +73,7 @@ public class MainPresenter extends BasePresenter<MainView> implements View.OnCli
         /**设置一下dialog的显示界面**/
        // LottieDialog.setDialogWindow(mvpView.getActivityContext());
         MainRequestServiceFactory.ApkDetection();
-        MyNotificationUtils.showNotificationProgressApkDown(mvpView.getActivityContext(),50);
+
     }
     /**侧滑菜单**/
     private void setDrawer(){
