@@ -1,15 +1,13 @@
 package com.example.z_common;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.example.z_base.BaseActivity;
-import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.Model.PositioningSuccessful;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.NET.RetrofitServiceManager;
-import com.example.z_common.RoutePage.RoutePageActivity;
+import com.example.z_common.Util.SimpleUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

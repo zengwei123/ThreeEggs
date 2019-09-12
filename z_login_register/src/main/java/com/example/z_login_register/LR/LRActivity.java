@@ -4,25 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.z_base.MvpActivity;
-import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.Custom.NoScrollViewPager;
-import com.example.z_common.Model.AllDataState;
-import com.example.z_common.NET.RequestObserver;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_login_register.LR.ViewPage.LRViewPageFragment_C;
 import com.example.z_login_register.LR.ViewPage.LRViewPageFragment_p;
-import com.example.z_login_register.Net.LRRequestServiceFactory;
 import com.example.z_login_register.QQUiListener;
 import com.example.z_login_register.R;
 import com.tencent.tauth.Tencent;
-
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by zengwei on 2019/8/11.

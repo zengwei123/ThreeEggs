@@ -1,7 +1,7 @@
 package com.example.z_common.NET;
 
 import com.example.z_common.Custom.Dialog.LottieDialog;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 
 import io.reactivex.Observer;

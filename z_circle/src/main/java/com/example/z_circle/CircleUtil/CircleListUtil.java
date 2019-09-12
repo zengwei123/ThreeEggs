@@ -8,8 +8,8 @@ import android.widget.TextView;
 import com.example.z_circle.Model.CircleList;
 import com.example.z_circle.R;
 import com.example.z_common.Custom.Dialog.DialogUtil;
-import com.example.z_common.GlideUtil;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.GlideUtil;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 
 import java.util.ArrayList;

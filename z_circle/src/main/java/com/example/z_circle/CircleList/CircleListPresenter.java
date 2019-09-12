@@ -4,15 +4,14 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.z_base.BasePresenter;
-import com.example.z_circle.Model.CircleList;
 import com.example.z_circle.Model.CircleModel;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
 import com.example.z_circle.R;
-import com.example.z_common.GlideUtil;
+import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.ImageGallery;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;

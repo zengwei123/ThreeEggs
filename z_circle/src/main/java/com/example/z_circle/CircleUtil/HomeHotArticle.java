@@ -1,14 +1,12 @@
 package com.example.z_circle.CircleUtil;
 
 import android.app.Activity;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.z_circle.Model.CircleList;
 import com.example.z_circle.Model.CircleModel;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
-import com.example.z_common.GlideUtil;
+import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 
@@ -31,7 +29,7 @@ public class HomeHotArticle {
                     GlideUtil.displayImage(activity,listBean.getPosterUrl(),image);
                     title.setText(listBean.getRoundTitle());
                 }catch (Exception e){
-
+                    e.printStackTrace();
                 }
             }
 

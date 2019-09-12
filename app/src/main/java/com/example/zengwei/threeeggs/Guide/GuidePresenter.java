@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
-import com.example.z_common.GlideUtil;
-import com.example.z_common.SharedPreferencesHelper;
+import com.example.z_common.Util.GlideUtil;
+import com.example.z_common.Util.SharedPreferencesHelper;
 import com.example.zengwei.threeeggs.Main.MainActivity;
 import com.example.zengwei.threeeggs.R;
 

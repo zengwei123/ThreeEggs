@@ -2,14 +2,10 @@ package com.example.z_login_register.LR.ViewPage;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.BoolRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +13,12 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.z_base.BaseActivity;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
-import com.example.z_common.SharedPreferencesHelper;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SharedPreferencesHelper;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
-import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
 import com.example.z_login_register.Net.LRRequestServiceFactory;
 import com.example.z_login_register.R;
 

@@ -1,6 +1,6 @@
 package com.example.z_login_register;
 
-import com.example.z_common.ZwGson;
+import com.example.z_common.Util.ZwGson;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.UiError;
 

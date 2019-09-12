@@ -1,15 +1,12 @@
 package com.example.z_drawer.Drawer;
 
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.z_base.BasePresenter;
 import com.example.z_common.CommonRequestServiceFactory;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
-import com.example.z_common.SharedPreferencesHelper;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SharedPreferencesHelper;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
-import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter1;
-import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
 import com.example.z_drawer.R;
 
 import java.util.Arrays;

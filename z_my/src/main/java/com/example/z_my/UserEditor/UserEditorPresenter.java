@@ -1,8 +1,7 @@
 package com.example.z_my.UserEditor;
 
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.z_base.BasePresenter;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
 import com.example.z_my.R;

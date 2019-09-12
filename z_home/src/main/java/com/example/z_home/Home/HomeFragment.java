@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.z_base.MvpFragment;
 import com.example.z_common.Amap.AmapPositioningUtil;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_home.R;
 
 import cn.bingoogolapple.bgabanner.BGABanner;

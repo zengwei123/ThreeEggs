@@ -9,7 +9,7 @@ import com.example.z_common.CommonRequestServiceFactory;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.Model.PositioningSuccessful;
 import com.example.z_common.NET.RequestObserver;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 
 import io.reactivex.disposables.Disposable;
 

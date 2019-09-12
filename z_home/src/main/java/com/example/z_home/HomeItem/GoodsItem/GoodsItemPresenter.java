@@ -9,7 +9,7 @@ import com.example.z_base.BasePresenter;
 import com.example.z_common.Model.KeyWords;
 import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.RoutePage.RouterPageFragment;
-import com.example.z_common.ZwGson;
+import com.example.z_common.Util.ZwGson;
 import com.example.z_goods.GoodsList.GoodsListFragment;
 import com.example.z_home.R;
 

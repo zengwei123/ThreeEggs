@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.z_base.BaseActivity;
 import com.example.z_common.R;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 
 public class DialogUtil {
     private AlertDialog dlg;

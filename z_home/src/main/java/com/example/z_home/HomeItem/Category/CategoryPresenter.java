@@ -5,11 +5,11 @@ import android.view.View;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_common.Custom.Dialog.LottieDialog;
-import com.example.z_common.GlideUtil;
+import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_home.Model.CategoryList;
 import com.example.z_home.Net.HomeRequestServiceFactory;
 import com.example.z_home.R;

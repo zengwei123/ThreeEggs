@@ -5,20 +5,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.z_base.MvpFragment;
 import com.example.z_circle.R;
 import com.example.z_common.Amap.AmapPositioningUtil;
 import com.example.z_common.Custom.WanTextView;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import cn.bingoogolapple.bgabanner.BGABanner;

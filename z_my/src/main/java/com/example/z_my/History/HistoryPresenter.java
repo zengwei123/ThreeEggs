@@ -1,15 +1,9 @@
 package com.example.z_my.History;
 
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.z_base.BasePresenter;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
-import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
 import com.example.z_my.R;
-import com.necer.calendar.BaseCalendar;
-import com.necer.listener.OnCalendarChangedListener;
-
-import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.Arrays;

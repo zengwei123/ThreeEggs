@@ -13,7 +13,7 @@ import com.example.z_common.Amap.AmapPoiUtil;
 import com.example.z_common.Amap.AmapPositioningUtil;
 import com.example.z_common.Model.CityList;
 import com.example.z_common.Model.PositioningSuccessful;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_home.R;
 

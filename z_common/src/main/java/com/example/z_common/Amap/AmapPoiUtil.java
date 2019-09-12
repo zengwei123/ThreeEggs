@@ -2,13 +2,11 @@ package com.example.z_common.Amap;
 
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
-import com.amap.api.services.help.Tip;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.example.z_base.BaseActivity;
-import com.example.z_common.Model.CityList;
 import com.example.z_common.Model.PositioningSuccessful;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 
 import java.util.ArrayList;
 import java.util.List;

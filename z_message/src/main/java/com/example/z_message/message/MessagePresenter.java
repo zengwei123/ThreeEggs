@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpFragment;
 import com.example.z_common.SimpleFragmentAdapter;
-import com.example.z_common.SimpleUtils;
 import com.example.z_message.MessagePage.MessagePageFragment;
 
 import java.util.ArrayList;

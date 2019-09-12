@@ -4,10 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.z_base.BasePresenter;
-import com.example.z_common.GlideUtil;
+import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
 import com.example.z_goods.Model.GoodsModel;

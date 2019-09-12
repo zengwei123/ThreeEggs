@@ -1,31 +1,26 @@
 package com.example.z_login_register.LR.ViewPage;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.z_common.Custom.Dialog.DialogUtil;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_login_register.Net.LRRequestServiceFactory;
 import com.example.z_login_register.QQUiListener;
 import com.example.z_login_register.R;
 import com.tencent.tauth.Tencent;
 
 import io.reactivex.disposables.Disposable;
-import retrofit2.Callback;
 
 /**
  * Created by zengwei on 2019/8/11.

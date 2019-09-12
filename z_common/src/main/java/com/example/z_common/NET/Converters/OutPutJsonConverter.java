@@ -2,7 +2,7 @@ package com.example.z_common.NET.Converters;
 
 
 import com.example.z_common.Model.AllDataState;
-import com.example.z_common.ZwGson;
+import com.example.z_common.Util.ZwGson;
 
 import java.io.IOException;
 

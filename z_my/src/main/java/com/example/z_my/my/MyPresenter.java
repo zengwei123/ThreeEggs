@@ -6,9 +6,9 @@ import android.view.View;
 
 import com.example.z_base.BasePresenter;
 import com.example.z_circle.CircleUtil.CircleListUtil;
-import com.example.z_common.GlideUtil;
+import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.RoutePage.RoutePageActivity;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_my.R;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;

@@ -3,9 +3,9 @@ package com.example.z_order.orderPage;
 import android.view.View;
 
 import com.example.z_base.BasePresenter;
-import com.example.z_common.GlideUtil;
+import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
-import com.example.z_common.SimpleUtils;
+import com.example.z_common.Util.SimpleUtils;
 import com.example.z_order.Model.OrderList;
 import com.example.z_order.R;
 
