@@ -107,18 +107,18 @@ public class StoreModel {
              * goodsList : [{"id":149187842867924,"goodsName":"华为手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"},{"id":149187842867933,"goodsName":"大米手机","smallPic":"https://img30.360buyimg.com/popWaterMark/jfs/t1/66034/10/5411/93643/5d382afcE5f106069/89d489bc5eca71f0.jpg"}]
              */
 
-            private int id;
+            private long id;
             private String name;
             private int follow;
             private String storeDesc;
             private String logoPic;
             private List<GoodsListBean> goodsList;
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 

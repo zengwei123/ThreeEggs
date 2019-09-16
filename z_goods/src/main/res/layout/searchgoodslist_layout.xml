@@ -46,9 +46,30 @@
             android:textColor="#2b2b2b"
             android:textSize="25sp" />
     </RelativeLayout>
-
+    <android.support.design.widget.TabLayout
+        android:id="@+id/SearchGoods_TabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <android.support.design.widget.TabItem
+            android:text="商品"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="店铺"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.TabItem
+            android:text="文章"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.design.widget.TabLayout>
+    <com.example.z_common.Custom.NoScrollViewPager
+        android:id="@+id/SearchGoodsList_Page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.example.z_common.Custom.NoScrollViewPager>
     <FrameLayout
         android:id="@+id/SearchGoodsList_Frame"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></FrameLayout>
 </LinearLayout>

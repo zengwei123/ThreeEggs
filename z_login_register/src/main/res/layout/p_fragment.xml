@@ -31,11 +31,11 @@
             android:inputType="number"
             android:background="#ffffff"
             android:hint="请输入手机号"
-            android:paddingLeft="5dp"
             android:textColor="@color/C2B2B2B"
             android:textSize="@dimen/Text_Size_1" />
         <View
-            android:background="#666666"
+            android:background="#EDEDED"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"></View>
         <TextView
@@ -55,13 +55,38 @@
             android:text="获取短信验证码"
             android:textColor="#ffffff"
             android:textSize="@dimen/Text_Size_2" />
+        <TextView
+            android:id="@+id/LR_Privacy"
+            android:textColor="#B0B0B0"
+            android:text="登录代表同意闪街用户协议、隐私协议"
+            android:gravity="center"
+            android:textSize="@dimen/Text_Size_1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
-
+    
+    <TextView
+        android:textSize="@dimen/Text_Size_2"
+        android:layout_above="@+id/QW_layout"
+        android:text="    社交账户登录    "
+        android:gravity="center"
+        android:drawableLeft="@mipmap/heng"
+        android:drawableRight="@mipmap/heng"
+        android:paddingTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="5dp"
+        android:textColor="#999999"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <LinearLayout
+        android:id="@+id/QW_layout"
         android:orientation="horizontal"
         android:gravity="center"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_above="@+id/LR_Privacy"
         android:layout_height="50dp">
         <ImageView
             android:id="@+id/QQ_Login"
@@ -72,18 +97,9 @@
         <ImageView
             android:src="@mipmap/weixin"
             android:layout_margin="8dp"
+            android:padding="2dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/LR_Privacy"
-        android:textColor="#666666"
-        android:text="登录代表同意闪街用户协议、隐私协议"
-        android:gravity="center"
-        android:textSize="@dimen/Text_Size_1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 </RelativeLayout>

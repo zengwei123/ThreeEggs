@@ -21,7 +21,6 @@ public class CircleListFragment extends MvpFragment<CircleListPresenter> impleme
     /**这里是推荐的商品**/
     private RecyclerView CircleList_Recycler;  //推荐数据列表
     private TwinklingRefreshLayout CircleList_Fragment_TwinklingRefreshLayout;  //上拉刷新
-
     @Autowired
     public String SearchParameter=null;   //搜索内容
     @Autowired
@@ -81,7 +80,6 @@ public class CircleListFragment extends MvpFragment<CircleListPresenter> impleme
     public int getCircleType() {
         return CircleType;
     }
-
 
     /**首页传达推荐按分类查询**/
     public void categoryName(String categoryName){

@@ -127,8 +127,8 @@ public class HomeHead {
          * updateTime : 2019-09-06 11:02:02
          */
 
-        private int id;
-        private int contentCategoryId;
+        private long id;
+        private long contentCategoryId;
         private String title;
         private String url;
         private String imagePath;
@@ -146,19 +146,19 @@ public class HomeHead {
         private boolean isDelete;
         private String updateTime;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
-        public int getContentCategoryId() {
+        public long getContentCategoryId() {
             return contentCategoryId;
         }
 
-        public void setContentCategoryId(int contentCategoryId) {
+        public void setContentCategoryId(long contentCategoryId) {
             this.contentCategoryId = contentCategoryId;
         }
 
@@ -313,8 +313,8 @@ public class HomeHead {
          * updateTime : 2019-09-06 11:02:02
          */
 
-        private int id;
-        private int contentCategoryId;
+        private long id;
+        private long contentCategoryId;
         private String title;
         private String url;
         private String imagePath;
@@ -332,19 +332,19 @@ public class HomeHead {
         private boolean isDelete;
         private String updateTime;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
-        public int getContentCategoryId() {
+        public long getContentCategoryId() {
             return contentCategoryId;
         }
 
-        public void setContentCategoryId(int contentCategoryId) {
+        public void setContentCategoryId(long contentCategoryId) {
             this.contentCategoryId = contentCategoryId;
         }
 
@@ -501,8 +501,8 @@ public class HomeHead {
          * createTime : 2019-08-27 16:14:52
          */
 
-        private int id;
-        private int contentCategoryId;
+        private long id;
+        private long contentCategoryId;
         private String title;
         private String url;
         private String imagePath;
@@ -522,19 +522,19 @@ public class HomeHead {
         private String keywords;
         private String createTime;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
-        public int getContentCategoryId() {
+        public long getContentCategoryId() {
             return contentCategoryId;
         }
 
-        public void setContentCategoryId(int contentCategoryId) {
+        public void setContentCategoryId(long contentCategoryId) {
             this.contentCategoryId = contentCategoryId;
         }
 

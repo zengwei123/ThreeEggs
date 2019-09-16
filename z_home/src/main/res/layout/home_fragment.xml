@@ -39,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:textColor="#acacac"
@@ -54,7 +55,6 @@
             <cn.bingoogolapple.bgabanner.BGABanner
                 android:id="@+id/Home_Fragment_BGABanner"
                 android:scaleType="fitXY"
-                android:layout_marginTop="15dp"
                 app:banner_pointAutoPlayInterval="5000"
                 app:banner_pointContainerBackground="#802b2b2b"
                 android:layout_width="match_parent"

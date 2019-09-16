@@ -4,7 +4,7 @@ package com.example.z_circle.Model;
  * 圈子界面的瀑布流布局数据模型
  */
 public class CircleList {
-    private int Image;
+    private long Image;
     private String ImageUrl;
     private String BriefContent;
     private String Name;
@@ -18,11 +18,11 @@ public class CircleList {
         UserImage = userImage;
     }
 
-    public int getImage() {
+    public long getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(long image) {
         Image = image;
     }
 

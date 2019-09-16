@@ -24,11 +24,8 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 public class CircleFragment extends MvpFragment<CirclePresenter> implements CircleView {
     private TextView Circle_Fragment_Address;   //位置
     private WanTextView Circle_Fragment_TextView_Search;  //圈子搜索
-    private RecyclerView Circle_Fragment_RecyclerView;  //栏目item
     private BGABanner Circle_Fragment_BGABanner;// 轮播图
     private TabLayout Circle_Fragment_TabLayout;
-    private TwinklingRefreshLayout Circle_Fragment_TwinklingRefreshLayout;  //上拉加载框架
-    private RecyclerView Circle_Fragment_ContentRecyclerView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.circle_fragment,null,false);
@@ -61,11 +58,8 @@ public class CircleFragment extends MvpFragment<CirclePresenter> implements Circ
     public void getViews(View view) {
         Circle_Fragment_Address=view.findViewById(R.id.Circle_Fragment_Address);
         Circle_Fragment_TextView_Search=view.findViewById(R.id.Circle_Fragment_TextView_Search);
-        Circle_Fragment_RecyclerView=view.findViewById(R.id.Circle_Fragment_RecyclerView);
         Circle_Fragment_BGABanner=view.findViewById(R.id.Circle_Fragment_BGABanner);
         Circle_Fragment_TabLayout=view.findViewById(R.id.Circle_Fragment_TabLayout);
-        Circle_Fragment_TwinklingRefreshLayout=view.findViewById(R.id.Circle_Fragment_TwinklingRefreshLayout);
-        Circle_Fragment_ContentRecyclerView=view.findViewById(R.id.Circle_Fragment_ContentRecyclerView);
     }
 
     @Override
@@ -79,11 +73,6 @@ public class CircleFragment extends MvpFragment<CirclePresenter> implements Circ
     }
 
     @Override
-    public RecyclerView getCircle_Fragment_RecyclerView() {
-        return Circle_Fragment_RecyclerView;
-    }
-
-    @Override
     public BGABanner getCircle_Fragment_BGABanner() {
         return Circle_Fragment_BGABanner;
     }
@@ -91,16 +80,6 @@ public class CircleFragment extends MvpFragment<CirclePresenter> implements Circ
     @Override
     public TabLayout getCircle_Fragment_TabLayout() {
         return Circle_Fragment_TabLayout;
-    }
-
-    @Override
-    public TwinklingRefreshLayout getCircle_Fragment_TwinklingRefreshLayout() {
-        return Circle_Fragment_TwinklingRefreshLayout;
-    }
-
-    @Override
-    public RecyclerView getCircle_Fragment_ContentRecyclerView() {
-        return Circle_Fragment_ContentRecyclerView;
     }
 
     @Override
@@ -113,4 +92,6 @@ public class CircleFragment extends MvpFragment<CirclePresenter> implements Circ
             SimpleUtils.setViewTypeface(getCircle_Fragment_Address(),"\uec74未定位");
         }
     }
+
+
 }

@@ -96,31 +96,26 @@ class CategoryPresenter extends BasePresenter<CategoryView> {
     private void setRecycler_Parent(List<CategoryList.ItemCategoriesBeanX> categoryLists){
         simpleRecyclerViewAdapter1=new SimpleRecyclerViewAdapter(R.layout.category_recycler_item1,
                 mvpView.getActivityContext(), categoryLists, (helper, item) -> {
-
-
             /**父类的名字**/
             helper.setText(R.id.Category_Parent_Text,((CategoryList.ItemCategoriesBeanX)item).getName());
             /**选中背景色**/
             if (helper.getAdapterPosition()==SelcetParent){
-                helper.getView(R.id.Category_Parent_Text).setBackgroundColor(Color.parseColor("#25C6FC"));
-            }else {
                 helper.getView(R.id.Category_Parent_Text).setBackgroundColor(Color.parseColor("#ffffff"));
+            }else {
+                helper.getView(R.id.Category_Parent_Text).setBackgroundColor(Color.parseColor("#f9f9f9"));
             }
             /**点击事件  更新子类内容**/
             helper.getView(R.id.Category_Parent_Text).setOnClickListener(view -> {
-                view.setBackgroundColor(Color.parseColor("#25C6FC"));
+                view.setBackgroundColor(Color.parseColor("#ffffff"));
                 setRecycler_Child( categoryLists.get(helper.getAdapterPosition()).getItemCategories());
                 SelcetParent=helper.getAdapterPosition();
                 mvpView.getCategory_Parent().getAdapter().notifyDataSetChanged();
             });
 
-
         });
         /**设置父类item显示**/
         mvpView.getCategory_Parent().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
         mvpView.getCategory_Parent().setAdapter(simpleRecyclerViewAdapter1);
-
-
         if(categoryLists!=null){
             mvpView.getCategory_Child().setVisibility(View.VISIBLE);
             /**设置子类显示**/

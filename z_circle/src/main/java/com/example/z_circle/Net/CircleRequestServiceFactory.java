@@ -32,6 +32,16 @@ public class CircleRequestServiceFactory {
                 .subscribe(new RequestObserver<AllDataState<CircleModel>>(requestObserverNext){});
     }
 
+    /**
+     * 首页穿搭推荐
+     */
+    public static void  Roundhome(RequestObserver.RequestObserverNext requestObserverNext, Context context ){
+        LottieDialog.setDialogWindow(context);
+        Observable observable= homeRequestService.RoundHome(SimpleUtils.getToken(BaseActivity.getInstance()));
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RequestObserver<AllDataState<CircleModel>>(requestObserverNext){});
+    }
 
 
 //    /**

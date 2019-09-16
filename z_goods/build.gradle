@@ -62,4 +62,5 @@ dependencies {
 
     implementation project(":z_base")
     implementation project(":z_common")
+    implementation project(":z_circle")
 }

@@ -44,7 +44,7 @@ public class CircleModel {
          * navigateLastPage : 2
          */
 
-        private int total;
+        private long total;
         private int pageNum;
         private int pageSize;
         private int size;
@@ -63,11 +63,11 @@ public class CircleModel {
         private List<ListBean> list;
         private List<Integer> navigatepageNums;
 
-        public int getTotal() {
+        public long getTotal() {
             return total;
         }
 
-        public void setTotal(int total) {
+        public void setTotal(long total) {
             this.total = total;
         }
 
@@ -235,14 +235,14 @@ public class CircleModel {
              * commentNum : 0
              */
 
-            private int id;
+            private long id;
             private String roundTitle;
             private String roundDesc;
             private String posterUrl;
-            private int sellerId;
+            private long sellerId;
             private long goodsId;
-            private int labelId;
-            private int categoryId;
+            private long labelId;
+            private long categoryId;
             private int weight;
             private double latitude;
             private double longitude;
@@ -260,11 +260,11 @@ public class CircleModel {
             private int collectNum;
             private int commentNum;
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
@@ -292,11 +292,11 @@ public class CircleModel {
                 this.posterUrl = posterUrl;
             }
 
-            public int getSellerId() {
+            public long getSellerId() {
                 return sellerId;
             }
 
-            public void setSellerId(int sellerId) {
+            public void setSellerId(long sellerId) {
                 this.sellerId = sellerId;
             }
 
@@ -308,19 +308,19 @@ public class CircleModel {
                 this.goodsId = goodsId;
             }
 
-            public int getLabelId() {
+            public long getLabelId() {
                 return labelId;
             }
 
-            public void setLabelId(int labelId) {
+            public void setLabelId(long labelId) {
                 this.labelId = labelId;
             }
 
-            public int getCategoryId() {
+            public long getCategoryId() {
                 return categoryId;
             }
 
-            public void setCategoryId(int categoryId) {
+            public void setCategoryId(long categoryId) {
                 this.categoryId = categoryId;
             }
 
@@ -450,6 +450,36 @@ public class CircleModel {
 
             public void setCommentNum(int commentNum) {
                 this.commentNum = commentNum;
+            }
+
+            @Override
+            public String toString() {
+                return "ListBean{" +
+                        "id=" + id +
+                        ", roundTitle='" + roundTitle + '\'' +
+                        ", roundDesc='" + roundDesc + '\'' +
+                        ", posterUrl='" + posterUrl + '\'' +
+                        ", sellerId=" + sellerId +
+                        ", goodsId=" + goodsId +
+                        ", labelId=" + labelId +
+                        ", categoryId=" + categoryId +
+                        ", weight=" + weight +
+                        ", latitude=" + latitude +
+                        ", longitude=" + longitude +
+                        ", address='" + address + '\'' +
+                        ", isPublish=" + isPublish +
+                        ", isAudit=" + isAudit +
+                        ", isDelete=" + isDelete +
+                        ", createTime='" + createTime + '\'' +
+                        ", updateTime='" + updateTime + '\'' +
+                        ", distance=" + distance +
+                        ", userName='" + userName + '\'' +
+                        ", handImg='" + handImg + '\'' +
+                        ", likeNum=" + likeNum +
+                        ", lookNum=" + lookNum +
+                        ", collectNum=" + collectNum +
+                        ", commentNum=" + commentNum +
+                        '}';
             }
         }
     }

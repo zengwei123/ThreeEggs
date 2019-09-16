@@ -1,6 +1,8 @@
 package com.example.z_goods.GoodsList;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.z_base.BasePresenter;
@@ -171,6 +173,7 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
     /**首页好物热购**/
     private void setHomeHotGoods(){
         mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setEnableLoadmore(false);   //设置允许上拉
+        mvpView.getGoodsList_Fragment_TwinklingRefreshLayout().setNestedScrollingEnabled(false);   //这里设置为false,放弃自己的滑动,交给外部的NestedScrollView处理,
         GoodsRequestServiceFactory.HomeHotGoods(new RequestObserver.RequestObserverNext<AllDataState<GoodsModel>>() {
             @Override
             public void Next(AllDataState<GoodsModel> o) {

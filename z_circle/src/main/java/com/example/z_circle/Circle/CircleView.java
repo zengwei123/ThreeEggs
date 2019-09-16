@@ -15,9 +15,6 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 public interface CircleView extends BaseView {
     TextView getCircle_Fragment_Address();
     WanTextView getCircle_Fragment_TextView_Search();
-    RecyclerView getCircle_Fragment_RecyclerView();
     BGABanner getCircle_Fragment_BGABanner();
     TabLayout getCircle_Fragment_TabLayout();
-    TwinklingRefreshLayout getCircle_Fragment_TwinklingRefreshLayout();
-    RecyclerView getCircle_Fragment_ContentRecyclerView();
 }

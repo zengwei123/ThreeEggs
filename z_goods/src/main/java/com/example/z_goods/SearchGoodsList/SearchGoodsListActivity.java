@@ -3,6 +3,8 @@ package com.example.z_goods.SearchGoodsList;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -24,6 +26,8 @@ public class SearchGoodsListActivity extends MvpActivity<SearchGoodsListPresente
     private TextView SearchGoodsList_Back;   //返回
     private TextView SearchGoodsList_TextView;   //搜索
     private TextView SearchGoodsList_Switch;   //切换
+    private TabLayout SearchGoods_TabLayout;
+    private ViewPager SearchGoodsList_Page;   //页面
     @Autowired
     public String SearchKey;
     @Override
@@ -48,6 +52,8 @@ public class SearchGoodsListActivity extends MvpActivity<SearchGoodsListPresente
         SearchGoodsList_Back=findViewById(R.id.SearchGoodsList_Back);
         SearchGoodsList_TextView=findViewById(R.id.SearchGoodsList_TextView);
         SearchGoodsList_Switch=findViewById(R.id.SearchGoodsList_Switch);
+        SearchGoods_TabLayout=findViewById(R.id.SearchGoods_TabLayout);
+        SearchGoodsList_Page=findViewById(R.id.SearchGoodsList_Page);
     }
 
     @Override
@@ -83,5 +89,15 @@ public class SearchGoodsListActivity extends MvpActivity<SearchGoodsListPresente
     @Override
     public String getSearchKey() {
         return SearchKey;
+    }
+
+    @Override
+    public TabLayout getSearchGoods_TabLayout() {
+        return SearchGoods_TabLayout;
+    }
+
+    @Override
+    public ViewPager getSearchGoodsList_Page() {
+        return SearchGoodsList_Page;
     }
 }

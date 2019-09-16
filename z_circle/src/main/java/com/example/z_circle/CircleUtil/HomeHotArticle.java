@@ -9,6 +9,7 @@ import com.example.z_circle.Net.CircleRequestServiceFactory;
 import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
+import com.example.z_common.Util.SimpleUtils;
 
 import io.reactivex.disposables.Disposable;
 
@@ -42,6 +43,6 @@ public class HomeHotArticle {
             public void getDisposable(Disposable d) {
 
             }
-        },null,1,1,"7");
+        },null,1,1,null);
     }
 }

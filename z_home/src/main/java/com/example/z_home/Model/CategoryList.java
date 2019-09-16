@@ -21,16 +21,16 @@ public class CategoryList {
          * itemCategories : [{"id":8,"parentId":1,"name":"男装1"},{"id":9,"parentId":1,"name":"男装2"},{"id":10,"parentId":1,"name":"男装3"}]
          */
 
-        private int id;   //分类的自动
+        private long id;   //分类的自动
         private int parentId;    //
         private String name;     //父类名字
         private List<ItemCategoriesBean> itemCategories;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
