@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/GoodsList_Search"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/home_search"
+        android:src="@mipmap/search_icon"
         android:layout_marginRight="10dp"
         android:padding="10dp"
         android:layout_width="40dp"

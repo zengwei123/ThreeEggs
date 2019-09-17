@@ -18,6 +18,8 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import java.util.List;
 
+import javax.microedition.khronos.opengles.GL;
+
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -214,13 +216,14 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
             //标题
             helper.setText(R.id.GL_Recycler_information_Title, goodsRecycler.getTitle());
             //收藏
-            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Collection),"\ue83a"+goodsRecycler.getCollectNum()+"人");
+            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Collection)," "+goodsRecycler.getCollectNum()+"人");
+            GlideUtil.drawableImage(30,R.mipmap.collection_9_icon,helper.getView(R.id.GL_Recycler_information_Collection),true);
             //价格
             helper.setText(R.id.GL_Recycler_information_Price,"￥"+ SimpleUtils.getPrice(goodsRecycler.getPrice()));
             //标签
             helper.setText(R.id.GL_Recycler_information_Introduce, goodsRecycler.getSellPoint());
             //地址
-            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Address),goodsRecycler.getAddress());
+            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Address)," "+goodsRecycler.getAddress());
             GlideUtil.drawableImage(30,R.mipmap.positioning_icon,helper.getView(R.id.GL_Recycler_information_Address),true);
         };
         /**页面数为1的时候是第一次加载**/

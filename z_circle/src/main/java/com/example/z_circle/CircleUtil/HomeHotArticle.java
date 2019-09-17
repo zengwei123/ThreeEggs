@@ -28,7 +28,7 @@ public class HomeHotArticle {
                     CircleModel.PageBean.ListBean listBean=o.getData().getPage().getList().get(0);
                     title.setText(listBean.getRoundTitle());
                     content.setText(listBean.getRoundDesc());
-                    GlideUtil.roundAngleImage(activity,listBean.getPosterUrl(),image,8);
+                    new GlideUtil().roundAngleImage(activity,listBean.getPosterUrl(),image,8);
                     title.setText(listBean.getRoundTitle());
                     SimpleUtils.setViewTypeface(Collection," "+listBean.getCollectNum());
                     GlideUtil.drawableImage(30, R.mipmap.collection_9_icon,Collection,true);

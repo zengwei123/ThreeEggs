@@ -42,6 +42,17 @@ public class GlideUtil {
             textView.setCompoundDrawables(null,null,drawable,null);
         }
     }
+    /**设置textview 两边图片**/
+    public  static void drawableImage(int WH,int WH1,int imageid,int imageid1, TextView textView) {
+        Drawable drawable = BaseActivity.getInstance().getResources().getDrawable(imageid);
+        drawable.setBounds(0, 0, WH, WH);
+        Drawable drawable1 = BaseActivity.getInstance().getResources().getDrawable(imageid1);
+        drawable1.setBounds(0, 0, WH1, WH1);
+        textView.setCompoundDrawables(drawable,null,drawable1,null);
+
+    }
+
+
     /** url图片设置textview图片**/
     public  static void drawableUrlImage(Activity activity,final int WH, Object url, final TextView textView, final boolean b,boolean isr) {
         SimpleTarget<Drawable> simpleTarget = new SimpleTarget<Drawable>() {
@@ -69,14 +80,14 @@ public class GlideUtil {
     }
 
     /**圆角**/
-    public static void roundAngleImage(Activity activity,Object path, ImageView imageView,int rdp){
+    public void roundAngleImage(Activity activity,Object path, ImageView imageView,int rdp){
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .transform(new GlideRoundTransform(rdp));
         Glide.with(activity).load(path).apply(options).into(imageView);
     }
-    public static class GlideRoundTransform extends BitmapTransformation {
-        private static float radius = 0f;
+    public class GlideRoundTransform extends BitmapTransformation {
+        private float radius = 0f;
 
         public GlideRoundTransform() {
             this(8);
@@ -91,7 +102,7 @@ public class GlideUtil {
             return roundCrop(pool, toTransform);
         }
 
-        private static Bitmap roundCrop(BitmapPool pool, Bitmap source) {
+        private  Bitmap roundCrop(BitmapPool pool, Bitmap source) {
             if (source == null) return null;
 
             Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);

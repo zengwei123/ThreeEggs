@@ -73,10 +73,10 @@
 
             <RelativeLayout
                 android:id="@+id/Main_Add_Tab"
-                android:layout_width="100dp"
-                android:layout_height="90dp"
+                android:layout_width="85dp"
+                android:background="@drawable/add_icon"
+                android:layout_height="60dp"
                 android:layout_gravity="bottom">
-
                 <ImageView
                     android:id="@+id/dd5"
                     android:layout_width="50dp"

@@ -1,5 +1,6 @@
 package com.example.z_circle.CircleList;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -76,8 +77,12 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
         }
     }
 
-    /**首页item 新品首发**/
+    /**首页item 穿搭推荐**/
     private void setHomeItemCircle(int page,String labelId){
+        Context context=mvpView.getActivityContext();
+        if (page!=1){
+            context=null;
+        }
         CircleRequestServiceFactory.HomeItemCircle(new RequestObserver.RequestObserverNext<AllDataState<CircleModel>>() {
             @Override
             public void Next(AllDataState<CircleModel> o) {
@@ -98,9 +103,9 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
             public void getDisposable(Disposable d) {
 
             }
-        },mvpView.getActivityContext(),page,10,labelId);
+        },context,page,10,labelId);
     }
-    /**首页新品首发按分类查询**/
+    /**首页穿搭推荐发按分类查询**/
     public void  categoryName(String categoryName){
         isRecyclerState=true;    //设置显示布局
         pageindex=1;   //设置初始页面
@@ -112,6 +117,10 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
 
     /**主界面圈子列表item**/
     private void setRoundHome(int page,String labelId){
+        Context context=mvpView.getActivityContext();
+        if (page!=1){
+            context=null;
+        }
         CircleRequestServiceFactory.HomeItemCircle(new RequestObserver.RequestObserverNext<AllDataState<CircleModel>>() {
             @Override
             public void Next(AllDataState<CircleModel> o) {
@@ -132,7 +141,7 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
             public void getDisposable(Disposable d) {
 
             }
-        },mvpView.getActivityContext(),page,10,labelId);
+        },context,page,10,labelId);
     }
     /**主界面圈子列表item布局  瀑布流**/
     public void setRoundHomeGoodsListRecycler(List<CircleModel.PageBean.ListBean> circleRecyclers){
@@ -140,15 +149,19 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
             SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(
                     R.layout.circlerecyclerlist_fragment_item, mvpView.getActivityContext(),circleRecyclers, (helper, item) -> {
                 CircleModel.PageBean.ListBean circleRecycler = (CircleModel.PageBean.ListBean) item;
-                GlideUtil.displayImage(mvpView.getThisActivity(),circleRecycler.getPosterUrl(),helper.getView(R.id.CircleRecyclerList_Recycler_Item_Image));
+                //图片
+                new GlideUtil().roundAngleImage(mvpView.getThisActivity(),circleRecycler.getPosterUrl(),helper.getView(R.id.CircleRecyclerList_Recycler_Item_Image),8);
+                //标签
+                helper.setText(R.id.CircleRecyclerList_Recycler_Item_Label,circleRecycler.getAddress());
+                //标题内容
                 helper.setText(R.id.CircleRecyclerList_Recycler_Item_Context,circleRecycler.getRoundTitle());
-                helper.setText(R.id.CircleRecyclerList_Recycler_Item_Name,circleRecycler.getUserName());
-                /**头像设置**/
-
-                GlideUtil.drawableUrlImage(mvpView.getThisActivity(),30, ImageGallery.praise,helper.getView(R.id.CircleRecyclerList_Recycler_Item_Name),true,true);
-
-                /**图标设置**/
-                SimpleUtils.setViewTypeface((helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)),"点赞"+circleRecycler.getLikeNum());
+                //用户名
+                helper.setText(R.id.CircleRecyclerList_Recycler_Item_Name," "+circleRecycler.getUserName());
+                //头像
+                GlideUtil.drawableUrlImage(mvpView.getThisActivity(),50, circleRecycler.getHandImg(),helper.getView(R.id.CircleRecyclerList_Recycler_Item_Name),true,false);
+                //点赞
+                SimpleUtils.setViewTypeface((helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise))," "+circleRecycler.getLikeNum());
+                GlideUtil.drawableImage(40,R.mipmap.praise_9_icon,helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise),true);
             });
             mvpView.getCircleList_Recycler().setAdapter(simpleRecyclerViewAdapter);
             mvpView.getCircleList_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(2,false));
@@ -166,15 +179,20 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
     public void setGoodsListRecycler(List<CircleModel.PageBean.ListBean> circleRecyclers){
         SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback= (helper, item) -> {
             CircleModel.PageBean.ListBean circleRecycler = (CircleModel.PageBean.ListBean) item;
-            GlideUtil.displayImage(mvpView.getThisActivity(),circleRecycler.getPosterUrl(), helper.getView(R.id.CircleList_Image));   //海报图片
-            helper.setText(R.id.CircleList_Title, circleRecycler.getRoundTitle());   //标题
+            new GlideUtil().roundAngleImage(mvpView.getThisActivity(),circleRecycler.getPosterUrl(),helper.getView(R.id.CircleList_Image),8);
+            //标签
+            helper.setText(R.id.CircleRecyclerList_Label,circleRecycler.getAddress());
+            //标题内容
+            helper.setText(R.id.CircleList_Title,circleRecycler.getRoundTitle());
+            //简略内容
             helper.setText(R.id.CircleList_Content,circleRecycler.getRoundDesc());
-            helper.setText(R.id.CircleList_Name, " "+circleRecycler.getUserName());
-            GlideUtil.drawableUrlImage(mvpView.getThisActivity(),30,circleRecycler.getHandImg(),helper.getView(R.id.CircleList_Name),true,false);
-            SimpleUtils.setViewTypeface(helper.getView(R.id.CircleList_Praise),"点赞"+circleRecycler.getLikeNum());
-            GlideUtil.drawableUrlImage(mvpView.getThisActivity(),30, ImageGallery.praise,helper.getView(R.id.CircleList_Praise),true,true);
-
-            SimpleUtils.setLog(circleRecycler.getPosterUrl()+"--"+circleRecycler.getRoundTitle()+"--"+circleRecycler.getCollectNum());
+            //用户名
+            helper.setText(R.id.CircleList_Name," "+circleRecycler.getUserName());
+            //头像
+            GlideUtil.drawableUrlImage(mvpView.getThisActivity(),50, circleRecycler.getHandImg(),helper.getView(R.id.CircleList_Name),true,false);
+            //点赞
+            SimpleUtils.setViewTypeface((helper.getView(R.id.CircleList_Praise))," "+circleRecycler.getLikeNum());
+            GlideUtil.drawableImage(40,R.mipmap.praise_9_icon,helper.getView(R.id.CircleList_Praise),true);
         };
         /**页面数为1的时候是第一次加载**/
         if (pageindex==1){

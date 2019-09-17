@@ -76,12 +76,12 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             AmapPositioningUtil.getAmapPositioningUtil().StartPositioning(aMapLocation -> {
                 String str=AmapPositioningUtil.ParsingAMapLocation(aMapLocation);
                 SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_Image_Location(),str);
-                GlideUtil.drawableImage(48,R.mipmap.positioning_icon,mvpView.getHome_Fragment_Image_Location(),true);
+                GlideUtil.drawableImage(48,40,R.mipmap.positioning_icon,R.mipmap.bottom_icon,mvpView.getHome_Fragment_Image_Location());
                 AmapPositioningUtil.setServicePositioning();
             });
         }else {
             SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_Image_Location(),"定位失败");
-            GlideUtil.drawableImage(48,R.mipmap.positioning_icon,mvpView.getHome_Fragment_Image_Location(),true);
+            GlideUtil.drawableImage(48,40,R.mipmap.positioning_icon,R.mipmap.bottom_icon,mvpView.getHome_Fragment_Image_Location());
         }
     }
 
@@ -132,7 +132,7 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
     }
     /**官方活动图片**/
     private void setHeadHuoDong(List<HomeHead.AdBean> adBeans){
-        GlideUtil.roundAngleImage(mvpView.getThisActivity(),adBeans.get(0).getImagePath(),mvpView.getHome_HuoDong(),80); //活动图
+        new GlideUtil().roundAngleImage(mvpView.getThisActivity(),adBeans.get(0).getImagePath(),mvpView.getHome_HuoDong(),80); //活动图
         for (int i=1;i<adBeans.size();i++){
             mvpView.getHome_HuoDong_layout1().setVisibility(View.VISIBLE);
             switch (i){

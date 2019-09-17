@@ -21,7 +21,7 @@ import com.example.z_common.Util.SimpleUtils;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
 /**
- * 主界面的fragment
+ * 主界面的fragment  圈子
  */
 public class CircleFragment extends MvpFragment<CirclePresenter> implements CircleView {
     private TextView Circle_Fragment_Address;   //位置

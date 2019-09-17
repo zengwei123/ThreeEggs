@@ -15,7 +15,7 @@
     <ImageView
         android:id="@+id/Include_Title_Close"
         android:src="@mipmap/exam_right"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_width="@dimen/Title_Height"
         android:layout_height="@dimen/Title_Height" />
 </RelativeLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ImageView
@@ -13,6 +13,7 @@
         android:layout_height="120dp">
     </ImageView>
     <RelativeLayout
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="120dp">
         <TextView
@@ -20,29 +21,41 @@
             android:text="标题标题标题标题标题标题标题标题标题"
             android:gravity="center|left"
             android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="@dimen/Text_Size_3"
             android:textColor="@color/C2B2B2B"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/CircleList_Content"
             android:layout_below="@+id/CircleList_Title"
-            android:layout_above="@+id/afafaf"
+            android:layout_above="@+id/CircleRecyclerList_Label"
             android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
             android:gravity="center|left|top"
-            android:maxLines="3"
+            android:maxLines="2"
             android:ellipsize="end"
             android:textSize="@dimen/Text_Size_2"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/CircleRecyclerList_Label"
+            android:layout_above="@+id/afafaf"
+            android:textColor="#EB8092"
+            android:layout_marginBottom="5dp"
+            android:padding="5dp"
+            android:background="@drawable/circlelist_label_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <RelativeLayout
             android:id="@+id/afafaf"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/CircleList_Name"
-                android:textSize="@dimen/Text_Size_1"
+                android:textSize="@dimen/Text_Size_2"
                 android:ellipsize="end"
                 android:lines="1"
                 android:gravity="center"
@@ -52,7 +65,7 @@
             <TextView
                 android:id="@+id/CircleList_Praise"
                 android:layout_alignParentRight="true"
-                android:textSize="@dimen/Text_Size_1"
+                android:textSize="@dimen/Text_Size_2"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:layout_width="wrap_content"

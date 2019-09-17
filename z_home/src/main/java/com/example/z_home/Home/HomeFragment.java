@@ -186,11 +186,11 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
             mvpPresenter.positioning();
         }else  if(AmapPositioningUtil.getIsPosition()==2||AmapPositioningUtil.getIsPosition()==0){
             SimpleUtils.setViewTypeface(getHome_Fragment_Image_Location(),AmapPositioningUtil.getPositioningSuccessful().getAddress());
-            GlideUtil.drawableImage(48,R.mipmap.positioning_icon,getHome_Fragment_Image_Location(),true);
+            GlideUtil.drawableImage(48,40,R.mipmap.positioning_icon,R.mipmap.bottom_icon,getHome_Fragment_Image_Location());
             AmapPositioningUtil.setServicePositioning();
         }else if (AmapPositioningUtil.getIsPosition()==3){
             SimpleUtils.setViewTypeface(getHome_Fragment_Image_Location(),AmapPositioningUtil.getPositioningSuccessful().getCity());
-            GlideUtil.drawableImage(48,R.mipmap.positioning_icon,getHome_Fragment_Image_Location(),true);
+            GlideUtil.drawableImage(48,40,R.mipmap.positioning_icon,R.mipmap.bottom_icon,getHome_Fragment_Image_Location());
             AmapPositioningUtil.setServicePositioning();
         }
     }

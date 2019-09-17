@@ -13,8 +13,9 @@
         android:orientation="vertical">
         <ImageView
             android:id="@+id/GL_Recycler_information_Image"
+            android:scaleType="fitXY"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="200dp" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
