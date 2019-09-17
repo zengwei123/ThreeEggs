@@ -1,14 +1,12 @@
 package com.example.z_goods.GoodsList;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.z_base.BasePresenter;
-import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
+import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
@@ -211,12 +209,19 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
     public void setGoodsListRecycler(List<GoodsModel.PageBean.ListBean> goodsRecyclers,boolean isNoScroll){
         SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback= (helper, item) -> {
             GoodsModel.PageBean.ListBean goodsRecycler = (GoodsModel.PageBean.ListBean) item;
+            //图片
             GlideUtil.displayImage(mvpView.getThisActivity(),goodsRecycler.getImage(), helper.getView(R.id.GL_Recycler_information_Image));
+            //标题
             helper.setText(R.id.GL_Recycler_information_Title, goodsRecycler.getTitle());
-            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Collection),"\ue83a"+goodsRecycler.getCollectNum()+"人收藏");
+            //收藏
+            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Collection),"\ue83a"+goodsRecycler.getCollectNum()+"人");
+            //价格
             helper.setText(R.id.GL_Recycler_information_Price,"￥"+ SimpleUtils.getPrice(goodsRecycler.getPrice()));
+            //标签
             helper.setText(R.id.GL_Recycler_information_Introduce, goodsRecycler.getSellPoint());
-            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Address),"\uea7c"+goodsRecycler.getAddress());
+            //地址
+            SimpleUtils.setViewTypeface(helper.getView(R.id.GL_Recycler_information_Address),goodsRecycler.getAddress());
+            GlideUtil.drawableImage(30,R.mipmap.positioning_icon,helper.getView(R.id.GL_Recycler_information_Address),true);
         };
         /**页面数为1的时候是第一次加载**/
         if (pageindex==1){

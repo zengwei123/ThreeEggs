@@ -1,13 +1,11 @@
 package com.example.z_circle.Circle;
 
-import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.ImageView;
 
 import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_circle.CircleList.CircleListFragment;
-import com.example.z_circle.CircleUtil.CircleListUtil;
 import com.example.z_circle.Model.CircleHome;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
 import com.example.z_circle.R;
@@ -16,11 +14,8 @@ import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Util.SimpleUtils;
-import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
-import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -64,17 +59,16 @@ public class CirclePresenter extends BasePresenter<CircleView> {
             }
         },mvpView.getActivityContext());
     }
-
     /**设置轮播**/
     private void setHeadShuffling(List<CircleHome.CarouselBean> carouselBeans){
-        /**设置轮播**/
+        mvpView.getCircle_Fragment_BGABanner().setData(carouselBeans, null);
         mvpView.getCircle_Fragment_BGABanner().setAdapter((banner, itemView, model, position) ->{
             CircleHome.CarouselBean carouselBean= (CircleHome.CarouselBean) model;
             ImageView imageView= (ImageView) itemView;
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             GlideUtil.displayImage(mvpView.getThisActivity(),carouselBean.getPosterUrl(),(ImageView) itemView);
+            SimpleUtils.setLog("进入没有+"+position);
         });
-        mvpView.getCircle_Fragment_BGABanner().setData(carouselBeans, null);
     }
     /**设置分类**/
     private void setTabLayout(){
@@ -90,5 +84,13 @@ public class CirclePresenter extends BasePresenter<CircleView> {
         FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
         CircleListFragment fragment= (CircleListFragment) RouterPageFragment.grtCircleList(0,null);
         fragmentTransaction.add(R.id.Circle_Fragment_List, fragment,CircleListFragment.class.getName()).commit();
+        mvpView.getCircle_AppBar().addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            TwinklingRefreshLayout twinklingRefreshLayout=fragment.getCircleList_Fragment_TwinklingRefreshLayout();
+            if (twinklingRefreshLayout!=null){
+                /**解决下滑动冲突**/
+                twinklingRefreshLayout.setNestedScrollingEnabled(false);
+            }
+
+        });
     }
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.z_base.MvpFragment;
 import com.example.z_common.Amap.AmapPositioningUtil;
+import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Util.SimpleUtils;
 import com.example.z_home.R;
 
@@ -29,7 +30,10 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     private TextView Home_Fragment_Image_weather;   //天气
     private TextView Home_Fragment_Image_Location;  //位置
     private BGABanner Home_Fragment_BGABanner;    //轮播图
+
     private ImageView Home_HuoDong,Home_HuoDong1,Home_HuoDong2,Home_HuoDong3;  //活动item下面的图片
+    private View Home_HuoDong_View;  //活动图中间的空白
+
     private LinearLayout Home_HuoDong_Layout1,Home_HuoDong_Layout2;//活动图片布局的  用来显示隐藏
     private RecyclerView Home_Fragment_RecyclerView;   //活动栏
     private TextView Home_Fragment_TextView_Search;  //搜索界面按钮
@@ -37,6 +41,8 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     private TextView Home_HotArticle_Title;    //热文推荐的标题
     private TextView Home_HotArticle_Content;   //热文的简略内容
     private ImageView Home_HotArticle_Image;    //文章图片
+    private TextView Home_HotArticle_Praise;  //热文推荐的点赞数
+    private TextView Home_HotArticle_Collection;  //热文推荐的收藏数
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.home_fragment,null,false);
@@ -60,6 +66,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         Home_HuoDong3=view.findViewById(R.id.Home_HuoDong3);
         Home_HuoDong_Layout1=view.findViewById(R.id.Home_HuoDong_Layout1);
         Home_HuoDong_Layout2=view.findViewById(R.id.Home_HuoDong_Layout2);
+        Home_HuoDong_View=view.findViewById(R.id.Home_HuoDong_View);
 
         Home_Fragment_RecyclerView=view.findViewById(R.id.Home_Fragment_RecyclerView);
         Home_Fragment_TextView_Search=view.findViewById(R.id.Home_Fragment_TextView_Search);
@@ -67,6 +74,8 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
         Home_HotArticle_Title=view.findViewById(R.id.Home_HotArticle_Title);
         Home_HotArticle_Content=view.findViewById(R.id.Home_HotArticle_Content);
         Home_HotArticle_Image=view.findViewById(R.id.Home_HotArticle_Image);
+        Home_HotArticle_Praise=view.findViewById(R.id.Home_HotArticle_Praise);
+        Home_HotArticle_Collection=view.findViewById(R.id.Home_HotArticle_Collection);
     }
 
     @Override
@@ -121,6 +130,11 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     }
 
     @Override
+    public View getHome_HuoDong_View() {
+        return Home_HuoDong_View;
+    }
+
+    @Override
     public LinearLayout getHome_HuoDong_layout1() {
         return Home_HuoDong_Layout1;
     }
@@ -155,16 +169,28 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeView
     }
 
     @Override
+    public TextView getHome_HotArticle_Praise() {
+        return Home_HotArticle_Praise;
+    }
+
+    @Override
+    public TextView getHome_HotArticle_Collection() {
+        return Home_HotArticle_Collection;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         /**在这里获取定位  防止第一次进入无法获取位置**/
         if(AmapPositioningUtil.getIsPosition()==-1){
             mvpPresenter.positioning();
         }else  if(AmapPositioningUtil.getIsPosition()==2||AmapPositioningUtil.getIsPosition()==0){
-            SimpleUtils.setViewTypeface(getHome_Fragment_Image_Location(),"\uec74"+AmapPositioningUtil.getPositioningSuccessful().getAddress());
+            SimpleUtils.setViewTypeface(getHome_Fragment_Image_Location(),AmapPositioningUtil.getPositioningSuccessful().getAddress());
+            GlideUtil.drawableImage(48,R.mipmap.positioning_icon,getHome_Fragment_Image_Location(),true);
             AmapPositioningUtil.setServicePositioning();
         }else if (AmapPositioningUtil.getIsPosition()==3){
-            SimpleUtils.setViewTypeface(getHome_Fragment_Image_Location(),"\uec74"+AmapPositioningUtil.getPositioningSuccessful().getCity());
+            SimpleUtils.setViewTypeface(getHome_Fragment_Image_Location(),AmapPositioningUtil.getPositioningSuccessful().getCity());
+            GlideUtil.drawableImage(48,R.mipmap.positioning_icon,getHome_Fragment_Image_Location(),true);
             AmapPositioningUtil.setServicePositioning();
         }
     }

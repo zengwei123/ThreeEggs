@@ -5,6 +5,7 @@
     android:background="#ffffff"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--位置栏和天气按钮-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="36dp">
@@ -15,6 +16,7 @@
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:textColor="@color/CFD404E"
             android:gravity="center"
             android:text="？°C"
             android:padding="5dp" />
@@ -26,10 +28,13 @@
             android:lines="1"
             android:paddingLeft="120dp"
             android:paddingRight="120dp"
+            android:textSize="@dimen/Text_Size_3"
+            android:textColor="@color/C2B2B2B"
             android:layout_height="match_parent"
             android:gravity="center" />
 
     </RelativeLayout>
+    <!--搜索按钮-->
     <TextView
         android:id="@+id/Home_Fragment_TextView_Search"
         android:background="@drawable/home_edittext_background"
@@ -55,18 +60,20 @@
             <cn.bingoogolapple.bgabanner.BGABanner
                 android:id="@+id/Home_Fragment_BGABanner"
                 android:scaleType="fitXY"
+                app:banner_pointDrawable="@drawable/banner_style"
                 app:banner_pointAutoPlayInterval="5000"
-                app:banner_pointContainerBackground="#802b2b2b"
+                app:banner_pointContainerBackground="#002b2b2b"
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
             </cn.bingoogolapple.bgabanner.BGABanner>
-            <!--item-->
+            <!--菜单item-->
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/Home_Fragment_RecyclerView"
                 android:overScrollMode="never"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            <!--活动广告图-->
             <ImageView
                 android:id="@+id/Home_HuoDong"
                 android:layout_marginRight="10dp"
@@ -74,17 +81,17 @@
                 android:scaleType="fitXY"
                 android:layout_width="match_parent"
                 android:layout_height="80dp" />
-            <!--活动广告图-->
             <LinearLayout
                 android:id="@+id/Home_HuoDong_Layout1"
                 android:visibility="gone"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
                 <ImageView
                     android:id="@+id/Home_HuoDong1"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
+                    android:layout_margin="5dp"
                     android:src="@mipmap/common_nodata"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
@@ -93,7 +100,7 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:visibility="gone"
-                    android:padding="5dp"
+                    android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <ImageView
@@ -101,41 +108,63 @@
                         android:layout_weight="1"
                         android:scaleType="fitXY"
                         android:src="@mipmap/common_nodata"
-                        android:paddingBottom="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="70dp" />
+                    <View
+                        android:id="@+id/Home_HuoDong_View"
+                        android:background="#ffffff"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"></View>
                     <ImageView
                         android:id="@+id/Home_HuoDong3"
                         android:layout_weight="1"
                         android:scaleType="fitXY"
-                        android:paddingTop="5dp"
                         android:visibility="gone"
                         android:src="@mipmap/common_nodata"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="70dp" />
                 </LinearLayout>
             </LinearLayout>
-            <!--好物热狗-->
+            <!--好物热购物-->
             <LinearLayout
                 android:layout_margin="10dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RelativeLayout
+                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:text=" 好 物 热 购\n\tHOT STUFF"
-                        android:textSize="@dimen/Text_Size_2"
-                        android:gravity="center"
-                        android:textColor="@color/C2B2B2B"
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:text="好 物 热 购"
+                            android:textSize="@dimen/Text_Size_4"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textColor="@color/C2B2B2B"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:text="HOT STUFF"
+                            android:textSize="@dimen/Text_Size_1"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textColor="@color/C999999"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
                     <TextView
                         android:text="MORE >"
                         android:gravity="center|top"
                         android:layout_alignParentRight="true"
                         android:textSize="@dimen/Text_Size_1"
+                        android:textColor="@color/C999999"
                         android:layout_height="match_parent"
                         android:layout_width="wrap_content"/>
                 </RelativeLayout>
@@ -158,7 +187,7 @@
             <View
                 android:background="#f2f2f2"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"></View>
+                android:layout_height="15dp"></View>
             <!--热文推荐-->
             <LinearLayout
                 android:layout_margin="10dp"
@@ -166,59 +195,104 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RelativeLayout
+                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:text=" 热 文 推 荐\n\tHOT SHARE"
-                        android:textSize="@dimen/Text_Size_2"
-                        android:gravity="center"
-                        android:textColor="@color/C2B2B2B"
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:text="热 门 推 荐"
+                            android:textSize="@dimen/Text_Size_4"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textColor="@color/C2B2B2B"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:text="HOT SHARE"
+                            android:textSize="@dimen/Text_Size_1"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textColor="@color/C999999"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
                     <TextView
                         android:text="MORE >"
                         android:gravity="center|top"
                         android:layout_alignParentRight="true"
                         android:textSize="@dimen/Text_Size_1"
+                        android:textColor="@color/C999999"
                         android:layout_height="match_parent"
                         android:layout_width="wrap_content"/>
                 </RelativeLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
+                        android:id="@+id/Home_HotArticle_Layout"
+                        android:layout_toLeftOf="@+id/Home_HotArticle_Image"
                         android:orientation="vertical"
-                        android:layout_width="200dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/Home_HotArticle_Title"
-                            android:text="标题标题标题标题标题标题标题标题标题"
                             android:gravity="center|left"
                             android:maxLines="2"
+                            android:ellipsize="end"
                             android:textSize="@dimen/Text_Size_3"
                             android:textColor="@color/C2B2B2B"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                         <TextView
                             android:id="@+id/Home_HotArticle_Content"
-                            android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                             android:gravity="center|left|top"
-                            android:maxLines="3"
+                            android:maxLines="4"
+                            android:ellipsize="end"
+                            android:textColor="@color/C999999"
                             android:textSize="@dimen/Text_Size_2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                     <ImageView
                         android:id="@+id/Home_HotArticle_Image"
-                        android:layout_gravity="center"
                         android:src="@mipmap/common_nodata"
+                        android:scaleType="fitXY"
+                        android:layout_marginLeft="10dp"
+                        android:layout_alignParentRight="true"
                         android:layout_width="160dp"
-                        android:layout_height="120dp">
+                        android:layout_height="100dp">
 
                     </ImageView>
-                </LinearLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+                    <TextView
+                        android:id="@+id/Home_HotArticle_Praise"
+                        android:textSize="@dimen/Text_Size_2"
+                        android:gravity="center"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/Home_HotArticle_Collection"
+                        android:textSize="@dimen/Text_Size_2"
+                        android:gravity="center"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
             </LinearLayout>
+            <View
+                android:background="#f2f2f2"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"></View>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

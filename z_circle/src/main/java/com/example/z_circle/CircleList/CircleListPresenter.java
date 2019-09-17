@@ -1,18 +1,16 @@
 package com.example.z_circle.CircleList;
 
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.z_base.BasePresenter;
-import com.example.z_circle.Model.CircleList;
 import com.example.z_circle.Model.CircleModel;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
 import com.example.z_circle.R;
-import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.ImageGallery;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
+import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
@@ -112,7 +110,7 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
     }
 
 
-    /**圈子列表item**/
+    /**主界面圈子列表item**/
     private void setRoundHome(int page,String labelId){
         CircleRequestServiceFactory.HomeItemCircle(new RequestObserver.RequestObserverNext<AllDataState<CircleModel>>() {
             @Override
@@ -136,24 +134,29 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
             }
         },mvpView.getActivityContext(),page,10,labelId);
     }
-    /**圈子列表item布局**/
+    /**主界面圈子列表item布局  瀑布流**/
     public void setRoundHomeGoodsListRecycler(List<CircleModel.PageBean.ListBean> circleRecyclers){
-        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(
-                R.layout.circlerecyclerlist_fragment_item, mvpView.getActivityContext(),circleRecyclers, (helper, item) -> {
-            CircleModel.PageBean.ListBean circleRecycler = (CircleModel.PageBean.ListBean) item;
-            GlideUtil.displayImage(mvpView.getThisActivity(),circleRecycler.getPosterUrl(),helper.getView(R.id.CircleRecyclerList_Recycler_Item_Image));
-            helper.setText(R.id.CircleRecyclerList_Recycler_Item_Context,circleRecycler.getRoundTitle());
-            helper.setText(R.id.CircleRecyclerList_Recycler_Item_Name,circleRecycler.getUserName());
-            /**头像设置**/
+        if (pageindex==1){
+            SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(
+                    R.layout.circlerecyclerlist_fragment_item, mvpView.getActivityContext(),circleRecyclers, (helper, item) -> {
+                CircleModel.PageBean.ListBean circleRecycler = (CircleModel.PageBean.ListBean) item;
+                GlideUtil.displayImage(mvpView.getThisActivity(),circleRecycler.getPosterUrl(),helper.getView(R.id.CircleRecyclerList_Recycler_Item_Image));
+                helper.setText(R.id.CircleRecyclerList_Recycler_Item_Context,circleRecycler.getRoundTitle());
+                helper.setText(R.id.CircleRecyclerList_Recycler_Item_Name,circleRecycler.getUserName());
+                /**头像设置**/
 
-            GlideUtil.drawableUrlImage(mvpView.getThisActivity(),30, ImageGallery.praise,helper.getView(R.id.CircleRecyclerList_Recycler_Item_Name),true,true);
+                GlideUtil.drawableUrlImage(mvpView.getThisActivity(),30, ImageGallery.praise,helper.getView(R.id.CircleRecyclerList_Recycler_Item_Name),true,true);
 
-            /**图标设置**/
-            SimpleUtils.setViewTypeface((helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)),"点赞"+circleRecycler.getLikeNum());
-        });
-        mvpView.getCircleList_Recycler().setAdapter(simpleRecyclerViewAdapter);
-        mvpView.getCircleList_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(2,false));
-
+                /**图标设置**/
+                SimpleUtils.setViewTypeface((helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)),"点赞"+circleRecycler.getLikeNum());
+            });
+            mvpView.getCircleList_Recycler().setAdapter(simpleRecyclerViewAdapter);
+            mvpView.getCircleList_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(2,false));
+        }else {
+            mvpView.getCircleList_Fragment_TwinklingRefreshLayout().finishLoadmore();
+            for (CircleModel.PageBean.ListBean listBean:circleRecyclers)
+            ((SimpleRecyclerViewAdapter)mvpView.getCircleList_Recycler().getAdapter()).addData(listBean);
+        }
     }
 
 

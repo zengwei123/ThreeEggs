@@ -2,33 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:elevation="4dp"
-    android:translationZ="4dp"
+    android:gravity="center"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp"
     android:background="#ffffff"
     android:orientation="vertical">
     <LinearLayout
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <ImageView
             android:id="@+id/GL_Recycler_information_Image"
-            android:padding="5dp"
-            android:layout_width="160dp"
-            android:layout_height="160dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingRight="5dp"
             android:paddingLeft="5dp">
-
             <TextView
                 android:id="@+id/GL_Recycler_information_Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:lines="1"
                 android:gravity="center|left"
-                android:lines="2"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
                 android:textColor="@color/C2B2B2B"
                 android:textSize="@dimen/Text_Size_3" />
 
@@ -37,16 +37,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/GL_Recycler_information_Title"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/GL_Recycler_information_Introduce"
-                    android:textSize="@dimen/Text_Size_2"
+                    android:textSize="@dimen/Text_Size_1"
                     style="@style/Z_GoodsList_Recycler_TextStyle" />
                 <TextView
                     android:id="@+id/GL_Recycler_information_Address"
                     android:textSize="@dimen/Text_Size_1"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     style="@style/Z_GoodsList_Recycler_TextStyle" />
-
                 <RelativeLayout
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -56,19 +56,19 @@
                         android:id="@+id/GL_Recycler_information_Price"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
+                        android:gravity="center|left"
                         android:textSize="@dimen/Text_Size_3"
-                        android:textColor="#ff0000" />
+                        android:textColor="@color/CFD404E" />
                     <TextView
                         android:layout_alignParentRight="true"
                         android:id="@+id/GL_Recycler_information_Collection"
                         android:layout_width="wrap_content"
+                        android:gravity="center|right"
                         android:layout_height="30dp"
                         android:textSize="@dimen/Text_Size_1" />
                 </RelativeLayout>
 
             </LinearLayout>
-
-
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

@@ -33,7 +33,7 @@ public class IssuePresenter extends BasePresenter<IssueView>{
     }
 
     private void setRcycler(){
-        List<Integer> integers= Arrays.asList(R.mipmap.a1,R.mipmap.a2,R.mipmap.xiangji);
+        List<Integer> integers= Arrays.asList(R.mipmap.common_nodata,R.mipmap.common_nodata,R.mipmap.xiangji);
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(R.layout.issue_recycler_item, mvpView.getActivityContext(), integers, (helper, item) -> {
             if (((int)item)==R.mipmap.xiangji){
                 GlideUtil.displayImage(mvpView.getThisActivity(),item,helper.getView(R.id.Issue_Recycler_Item_Image));

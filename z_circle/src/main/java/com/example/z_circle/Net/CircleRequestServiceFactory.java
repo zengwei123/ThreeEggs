@@ -3,6 +3,7 @@ package com.example.z_circle.Net;
 import android.content.Context;
 
 import com.example.z_base.BaseActivity;
+import com.example.z_circle.Model.CircleHome;
 import com.example.z_circle.Model.CircleModel;
 import com.example.z_common.Custom.Dialog.LottieDialog;
 import com.example.z_common.Model.AllDataState;
@@ -40,7 +41,7 @@ public class CircleRequestServiceFactory {
         Observable observable= homeRequestService.RoundHome(SimpleUtils.getToken(BaseActivity.getInstance()));
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RequestObserver<AllDataState<CircleModel>>(requestObserverNext){});
+                .subscribe(new RequestObserver<AllDataState<CircleHome>>(requestObserverNext){});
     }
 
 

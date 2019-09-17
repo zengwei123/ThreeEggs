@@ -30,7 +30,7 @@ public class CircleHome {
         private long id;
         private String roundTitle;
         private String posterUrl;
-        private int sellerId;
+        private long sellerId;
         private long goodsId;
 
         public long getId() {
@@ -57,11 +57,11 @@ public class CircleHome {
             this.posterUrl = posterUrl;
         }
 
-        public int getSellerId() {
+        public long getSellerId() {
             return sellerId;
         }
 
-        public void setSellerId(int sellerId) {
+        public void setSellerId(long sellerId) {
             this.sellerId = sellerId;
         }
 
@@ -71,6 +71,17 @@ public class CircleHome {
 
         public void setGoodsId(long goodsId) {
             this.goodsId = goodsId;
+        }
+
+        @Override
+        public String toString() {
+            return "CarouselBean{" +
+                    "id=" + id +
+                    ", roundTitle='" + roundTitle + '\'' +
+                    ", posterUrl='" + posterUrl + '\'' +
+                    ", sellerId=" + sellerId +
+                    ", goodsId=" + goodsId +
+                    '}';
         }
     }
 }

@@ -75,11 +75,13 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             mvpView.getHome_Fragment_Image_Location().setText("定位中");
             AmapPositioningUtil.getAmapPositioningUtil().StartPositioning(aMapLocation -> {
                 String str=AmapPositioningUtil.ParsingAMapLocation(aMapLocation);
-                SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_Image_Location(),"\uec74"+str);
+                SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_Image_Location(),str);
+                GlideUtil.drawableImage(48,R.mipmap.positioning_icon,mvpView.getHome_Fragment_Image_Location(),true);
                 AmapPositioningUtil.setServicePositioning();
             });
         }else {
-            SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_Image_Location(),"\uec74定位失败");
+            SimpleUtils.setViewTypeface(mvpView.getHome_Fragment_Image_Location(),"定位失败");
+            GlideUtil.drawableImage(48,R.mipmap.positioning_icon,mvpView.getHome_Fragment_Image_Location(),true);
         }
     }
 
@@ -135,15 +137,16 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             mvpView.getHome_HuoDong_layout1().setVisibility(View.VISIBLE);
             switch (i){
                 case 1:
-                    GlideUtil.roundAngleImage(mvpView.getThisActivity(),adBeans.get(i).getImagePath(),mvpView.getHome_HuoDong1(),10); //活动图
+                    GlideUtil.displayImage(mvpView.getThisActivity(),adBeans.get(i).getImagePath(),mvpView.getHome_HuoDong1()); //活动图
                     break;
                 case 2:
                     mvpView.getHome_HuoDong_layout2().setVisibility(View.VISIBLE);
-                    GlideUtil.roundAngleImage(mvpView.getThisActivity(),adBeans.get(i).getImagePath(),mvpView.getHome_HuoDong2(),10); //活动图
+                    GlideUtil.displayImage(mvpView.getThisActivity(),adBeans.get(i).getImagePath(),mvpView.getHome_HuoDong2()); //活动图
                     break;
                 case 3:
+                    mvpView.getHome_HuoDong_View().setVisibility(View.VISIBLE);
                     mvpView.getHome_HuoDong3().setVisibility(View.VISIBLE);
-                    GlideUtil.roundAngleImage(mvpView.getThisActivity(),adBeans.get(i).getImagePath(),mvpView.getHome_HuoDong3(),10); //活动图
+                    GlideUtil.displayImage(mvpView.getThisActivity(),adBeans.get(i).getImagePath(),mvpView.getHome_HuoDong3()); //活动图
                     break;
             }
         }
@@ -197,14 +200,19 @@ class HomePresenter extends BasePresenter<HomeView> implements View.OnClickListe
             case 27: image=ImageGallery.weather_20;break;
             case 28: image=ImageGallery.weather_4;break;
         }
-        GlideUtil.drawableImage(46,image,mvpView.getHome_Fragment_Image_weather(),true);
+        GlideUtil.drawableImage(48,image,mvpView.getHome_Fragment_Image_weather(),true);
         mvpView.getHome_Fragment_Image_weather().setText(wndu);
     }
 
 
     /**设置热文推荐**/
     private void setHomeHotArticle(){
-        HomeHotArticle.setHomeHotArticle(mvpView.getThisActivity(),mvpView.getHome_HotArticle_Title(),mvpView.getHome_HotArticle_Content(),mvpView.getHome_HotArticle_Image());
+        HomeHotArticle.setHomeHotArticle(mvpView.getThisActivity(),
+                mvpView.getHome_HotArticle_Title(),
+                mvpView.getHome_HotArticle_Content(),
+                mvpView.getHome_HotArticle_Image(),
+                mvpView.getHome_HotArticle_Collection(),
+                mvpView.getHome_HotArticle_Praise());
     }
     /**设置好物热购**/
     private void setHomeHotGoods(){

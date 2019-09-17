@@ -16,6 +16,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_base.MvpFragment;
 import com.example.z_circle.R;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+
+/**
+ * 圈子列表的模块
+ */
 @Route(path = "/Circle/CircleListFragment")
 public class CircleListFragment extends MvpFragment<CircleListPresenter> implements CircleListView {
     /**这里是推荐的商品**/

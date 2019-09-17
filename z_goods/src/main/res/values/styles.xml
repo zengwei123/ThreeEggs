@@ -30,6 +30,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center|left</item>
+        <item name="android:textColor">@color/C999999</item>
     </style>
 
 </resources>

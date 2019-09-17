@@ -5,8 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +17,18 @@ import com.example.z_circle.R;
 import com.example.z_common.Amap.AmapPositioningUtil;
 import com.example.z_common.Custom.WanTextView;
 import com.example.z_common.Util.SimpleUtils;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
+/**
+ * 主界面的fragment
+ */
 public class CircleFragment extends MvpFragment<CirclePresenter> implements CircleView {
     private TextView Circle_Fragment_Address;   //位置
     private WanTextView Circle_Fragment_TextView_Search;  //圈子搜索
     private BGABanner Circle_Fragment_BGABanner;// 轮播图
     private TabLayout Circle_Fragment_TabLayout;
+    private AppBarLayout Circle_AppBar;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.circle_fragment,null,false);
@@ -60,6 +63,7 @@ public class CircleFragment extends MvpFragment<CirclePresenter> implements Circ
         Circle_Fragment_TextView_Search=view.findViewById(R.id.Circle_Fragment_TextView_Search);
         Circle_Fragment_BGABanner=view.findViewById(R.id.Circle_Fragment_BGABanner);
         Circle_Fragment_TabLayout=view.findViewById(R.id.Circle_Fragment_TabLayout);
+        Circle_AppBar=view.findViewById(R.id.Circle_AppBar);
     }
 
     @Override
@@ -80,6 +84,11 @@ public class CircleFragment extends MvpFragment<CirclePresenter> implements Circ
     @Override
     public TabLayout getCircle_Fragment_TabLayout() {
         return Circle_Fragment_TabLayout;
+    }
+
+    @Override
+    public AppBarLayout getCircle_AppBar() {
+        return Circle_AppBar;
     }
 
     @Override

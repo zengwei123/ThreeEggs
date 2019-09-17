@@ -20,6 +20,7 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 /**
  * Created by zengwei on 2019/7/24.
+ * 商品列表的数据
  */
 @Route(path="/Goods/GoodsList")
 public class GoodsListFragment extends MvpFragment<GoodsListPresenter> implements GoodsListView {

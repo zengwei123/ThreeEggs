@@ -61,7 +61,6 @@
                     <cn.bingoogolapple.bgabanner.BGABanner
                         android:id="@+id/Circle_Fragment_BGABanner"
                         app:banner_pointAutoPlayInterval="5000"
-                        android:scaleType="fitXY"
                         app:banner_pointContainerBackground="#802b2b2b"
                         android:layout_width="match_parent"
                         android:layout_height="120dp">
