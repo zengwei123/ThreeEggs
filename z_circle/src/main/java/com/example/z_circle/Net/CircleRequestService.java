@@ -1,5 +1,6 @@
 package com.example.z_circle.Net;
 
+import com.example.z_circle.Model.CircleDetails;
 import com.example.z_circle.Model.CircleHome;
 import com.example.z_circle.Model.CircleModel;
 import com.example.z_common.Model.AllDataState;
@@ -30,5 +31,10 @@ public interface CircleRequestService {
     @GET("round/home")
     Observable<AllDataState<CircleHome>> RoundHome(@Query("devicesToken") String devicesToken);
 
+
+    /**圈子详情内容**/
+    @FormUrlEncoded
+    @POST("round/detail")
+    Observable<AllDataState<CircleDetails>> Detail(@Field("devicesToken") String devicesToken, @Field("roundId")String roundId);
 
 }

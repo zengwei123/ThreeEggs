@@ -83,7 +83,7 @@ public class CirclePresenter extends BasePresenter<CircleView> {
                 if (tab.getPosition()==0){
                     fragment.categoryName(null);
                 }else {
-                    fragment.categoryName(labelsBeans.get((tab.getPosition()+1)).getId()+"");
+                    fragment.categoryName(labelsBeans.get((tab.getPosition()-1)).getId()+"");
                 }
             }
 

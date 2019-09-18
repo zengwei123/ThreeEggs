@@ -3,14 +3,17 @@ package com.example.z_circle.CircleList;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.z_base.BasePresenter;
 import com.example.z_circle.Model.CircleModel;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
 import com.example.z_circle.R;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
+import com.example.z_common.RoutePage.RoutePageActivity;
 import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
@@ -25,7 +28,7 @@ import io.reactivex.disposables.Disposable;
 public class CircleListPresenter extends BasePresenter<CircleListView> {
     public boolean isRecyclerState=true;   //当前布局形态
     public int pageindex=1;   //页数
-    private SimpleRecyclerViewAdapter RecyclerStyleState1,RecyclerStyleState2;   //切换咨询的
+    private SimpleRecyclerViewAdapter RecyclerStyleState;   //切换咨询的
     private CircleModel circleModel;
     @Override
     public void init() {
@@ -54,10 +57,9 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
                 }
             }
         });
-
         setRecycler(mvpView.getCircleType());
-
         mvpView.getCircleList_Fragment_TwinklingRefreshLayout().setTargetView(mvpView.getCircleList_Recycler());
+
     }
 
     @Override
@@ -90,6 +92,7 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
             case 0:setRoundHome(pageindex,categoryName);break;
             case 1: setHomeItemCircle(pageindex,categoryName);break;
         }
+
 
     }
 
@@ -156,17 +159,18 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
         /**页面数为1的时候是第一次加载**/
         if (pageindex==1){
             /**准备切换的布局**/
-            RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.circlelist_recycler_item, mvpView.getActivityContext(), circleRecyclers,simpleRecyclerViewAdapterCallback);
-            RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.circlelist_recycler_item1, mvpView.getActivityContext(), circleRecyclers,simpleRecyclerViewAdapterCallback);
-            switchRecycler(isRecyclerState,mvpView.getCircleList_Recycler(),null);
+            RecyclerStyleState=new SimpleRecyclerViewAdapter(R.layout.circlelist_recycler_item, mvpView.getActivityContext(), circleRecyclers,simpleRecyclerViewAdapterCallback);
+            mvpView.getCircleList_Recycler().setAdapter(RecyclerStyleState);
+            mvpView.getCircleList_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
         }else {
             /**其他的时候是加载更多**/
             mvpView.getCircleList_Fragment_TwinklingRefreshLayout().finishLoadmore();
             for (CircleModel.PageBean.ListBean listBean:circleRecyclers){
-                RecyclerStyleState1.addData(listBean);
-                RecyclerStyleState2.addData(listBean);
+                RecyclerStyleState.addData(listBean);
             }
         }
+
+        setItemClick();
 
     }
 
@@ -203,7 +207,7 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
     /**主界面圈子列表item布局  瀑布流**/
     public void setRoundHomeGoodsListRecycler(List<CircleModel.PageBean.ListBean> circleRecyclers){
         if (pageindex==1){
-            SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(
+            RecyclerStyleState=new SimpleRecyclerViewAdapter(
                     R.layout.circlerecyclerlist_fragment_item, mvpView.getActivityContext(),circleRecyclers, (helper, item) -> {
                 CircleModel.PageBean.ListBean circleRecycler = (CircleModel.PageBean.ListBean) item;
                 //图片
@@ -226,44 +230,23 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
                     GlideUtil.drawableImage(40,R.mipmap.praise_9_icon,helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise),true);
                 }
             });
-            mvpView.getCircleList_Recycler().setAdapter(simpleRecyclerViewAdapter);
+            mvpView.getCircleList_Recycler().setAdapter(RecyclerStyleState);
             mvpView.getCircleList_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(2,false));
         }else {
             mvpView.getCircleList_Fragment_TwinklingRefreshLayout().finishLoadmore();
             for (CircleModel.PageBean.ListBean listBean:circleRecyclers)
             ((SimpleRecyclerViewAdapter)mvpView.getCircleList_Recycler().getAdapter()).addData(listBean);
         }
+        setItemClick();
     }
 
 
     //********************************************************************************************************
-
-
-    /**切换布局状态方法**/
-    public void setSWitch(TextView textView){
-        /**显示默认的布局状态**/
-        switchRecycler(isRecyclerState,mvpView.getCircleList_Recycler(),textView);
-        if (textView!=null){
-            textView.setOnClickListener(v -> {
-                /**切换布局状态**/
-                switchRecycler(isRecyclerState,mvpView.getCircleList_Recycler(),textView);
-            });
-        }
+    /**点击事件**/
+    private void setItemClick(){
+        RecyclerStyleState.setOnItemClickListener((adapter, view, position) -> {
+            RoutePageActivity.getDetailsActivity("1172119067230765058");
+        });
     }
-    /**切换推荐商品布局状态**/
-    private void switchRecycler(boolean b, RecyclerView recyclerView, TextView textView){
-        if(b){
-            recyclerView.setAdapter(RecyclerStyleState1);
-            recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));
-            isRecyclerState=false;
-            if (textView!=null)
-                SimpleUtils.setViewTypeface(textView,"\ue90d");
-        }else {
-            recyclerView.setAdapter(RecyclerStyleState2);
-            recyclerView.setLayoutManager(SimpleUtils.getRecyclerLayoutManager(false,2));
-            isRecyclerState=true;
-            if (textView!=null)
-                SimpleUtils.setViewTypeface(textView,"\ue90c");
-        }
-    }
+
 }

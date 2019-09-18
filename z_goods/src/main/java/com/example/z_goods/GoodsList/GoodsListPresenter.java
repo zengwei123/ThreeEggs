@@ -274,7 +274,7 @@ public class GoodsListPresenter extends BasePresenter<GoodsListView>{
         }
     }
 
-    /**切换推荐商品布局状态**/
+    /**首页禁止滑动的布局状态**/
     private void NoScrollswitchRecycler(boolean b, RecyclerView recyclerView,  TextView textView){
         if(b){
             recyclerView.setAdapter(RecyclerStyleState1);

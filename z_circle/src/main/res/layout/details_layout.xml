@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--头部-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/Title_Height">
+
+        <ImageView
+            android:id="@+id/Details_Close"
+            android:layout_width="@dimen/Title_Height"
+            android:layout_height="@dimen/Title_Height"
+            android:padding="10dp"
+            android:src="@mipmap/exam_right" />
+
+        <TextView
+            android:id="@+id/Details_UserName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/Text_Size_4"
+            android:layout_toRightOf="@+id/Details_Close"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/Details_Share"
+            android:layout_width="@dimen/Title_Height"
+            android:layout_height="@dimen/Title_Height"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:src="@mipmap/share_icon" />
+    </RelativeLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--轮播-->
+            <cn.bingoogolapple.bgabanner.BGABanner
+                android:id="@+id/Details_Banner"
+                app:banner_isNumberIndicator="true"
+                android:scaleType="fitXY"
+                app:banner_pointDrawable="@drawable/banner_style"
+                app:banner_pointAutoPlayInterval="5000"
+                app:banner_pointContainerBackground="#002b2b2b"
+                android:layout_width="match_parent"
+                android:layout_height="350dp">
+
+            </cn.bingoogolapple.bgabanner.BGABanner>
+            <!--标题-->
+            <TextView
+                android:id="@+id/Details_Title"
+                android:padding="5dp"
+                android:textSize="@dimen/Text_Size_4"
+                android:textColor="@color/C2B2B2B"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <!--内容-->
+            <TextView
+                android:id="@+id/Details_Content"
+                android:padding="5dp"
+                android:textSize="@dimen/Text_Size_3"
+                android:textColor="@color/C2B2B2B"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <!--地址 日期-->
+            <RelativeLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/Details_Address"
+                    android:textSize="@dimen/Text_Size_3"
+                    android:textColor="@color/C999999"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/Details_Time"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/Text_Size_3"
+                    android:textColor="@color/C999999"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <!--文章商品-->
+            <RelativeLayout
+                android:id="@+id/Details_Goods_Layout"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+
+                android:layout_width="match_parent"
+                android:background="@drawable/details_goods"
+                android:elevation="3dp"
+                android:translationZ="3dp"
+                android:layout_height="70dp">
+                <ImageView
+                    android:id="@+id/Details_Goods_Image"
+                    android:padding="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp" />
+                <LinearLayout
+                    android:layout_toRightOf="@+id/Details_Goods_Image"
+                    android:layout_toLeftOf="@+id/AAAAACCCC"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/Details_Goods_Title"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/Text_Size_4"
+                        android:ellipsize="end"
+                        android:gravity="center|bottom|left"
+                        android:textColor="@color/C2B2B2B"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/Details_Goods_Price"
+                        android:layout_weight="1"
+                        android:textColor="@color/CFD404E"
+                        android:gravity="center|top|left"
+                        android:textSize="@dimen/Text_Size_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/AAAAACCCC"
+                    android:src="@mipmap/exam_left"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/Details_Label"
+                android:textColor="#EB8092"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:background="@drawable/circlelist_label_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>
