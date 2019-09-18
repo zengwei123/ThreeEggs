@@ -11,11 +11,22 @@ public class CircleHome {
 
 
     private List<CarouselBean> carousel;
+    private List<LabelsBean> labels;
+
     public List<CarouselBean> getCarousel() {
         return carousel;
     }
+
     public void setCarousel(List<CarouselBean> carousel) {
         this.carousel = carousel;
+    }
+
+    public List<LabelsBean> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<LabelsBean> labels) {
+        this.labels = labels;
     }
 
     public static class CarouselBean {
@@ -30,7 +41,7 @@ public class CircleHome {
         private long id;
         private String roundTitle;
         private String posterUrl;
-        private long sellerId;
+        private int sellerId;
         private long goodsId;
 
         public long getId() {
@@ -57,11 +68,11 @@ public class CircleHome {
             this.posterUrl = posterUrl;
         }
 
-        public long getSellerId() {
+        public int getSellerId() {
             return sellerId;
         }
 
-        public void setSellerId(long sellerId) {
+        public void setSellerId(int sellerId) {
             this.sellerId = sellerId;
         }
 
@@ -72,16 +83,31 @@ public class CircleHome {
         public void setGoodsId(long goodsId) {
             this.goodsId = goodsId;
         }
+    }
 
-        @Override
-        public String toString() {
-            return "CarouselBean{" +
-                    "id=" + id +
-                    ", roundTitle='" + roundTitle + '\'' +
-                    ", posterUrl='" + posterUrl + '\'' +
-                    ", sellerId=" + sellerId +
-                    ", goodsId=" + goodsId +
-                    '}';
+    public static class LabelsBean {
+        /**
+         * id : 7
+         * labelName : 热文推荐
+         */
+
+        private int id;
+        private String labelName;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getLabelName() {
+            return labelName;
+        }
+
+        public void setLabelName(String labelName) {
+            this.labelName = labelName;
         }
     }
 }

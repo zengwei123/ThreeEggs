@@ -1,6 +1,6 @@
 package com.example.zengwei.threeeggs;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_common.CommonRequestServiceFactory;
@@ -13,7 +13,7 @@ import com.example.zengwei.threeeggs.Net.MainRequestServiceFactory;
 
 import io.reactivex.disposables.Disposable;
 
-public class ThreeEggsApplication extends Application {
+public class ThreeEggsApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();

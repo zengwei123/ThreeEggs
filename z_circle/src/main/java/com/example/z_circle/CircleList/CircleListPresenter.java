@@ -1,6 +1,7 @@
 package com.example.z_circle.CircleList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -8,7 +9,6 @@ import com.example.z_base.BasePresenter;
 import com.example.z_circle.Model.CircleModel;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
 import com.example.z_circle.R;
-import com.example.z_common.ImageGallery;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.Util.GlideUtil;
@@ -76,18 +76,40 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
                 break;
         }
     }
+    /**首页穿搭推荐发按分类查询**/
+    public void  categoryName(String categoryName){
+        isRecyclerState=true;    //设置显示布局
+        pageindex=1;   //设置初始页面
+        mvpView.getCircleList_Fragment_TwinklingRefreshLayout().finishLoadmore();  //设置结束加载跟多  允许加载
+        mvpView.getCircleList_Fragment_TwinklingRefreshLayout().setEnableLoadmore(true);   //设置允许上拉
+        /**判断是哪个加载
+         * 0：首页的穿搭推荐
+         * 1：圈子界面的内容
+         * **/
+        switch (mvpView.getCircleType()){
+            case 0:setRoundHome(pageindex,categoryName);break;
+            case 1: setHomeItemCircle(pageindex,categoryName);break;
+        }
+
+    }
+
+    //********************************************************************************************************
+
 
     /**首页item 穿搭推荐**/
     private void setHomeItemCircle(int page,String labelId){
+        /**如果是上拉 就不需要显示加载框**/
         Context context=mvpView.getActivityContext();
         if (page!=1){
             context=null;
         }
+        /**加载数据**/
         CircleRequestServiceFactory.HomeItemCircle(new RequestObserver.RequestObserverNext<AllDataState<CircleModel>>() {
             @Override
             public void Next(AllDataState<CircleModel> o) {
                 if (o.isSuccess()){
                     circleModel=o.getData();
+                    /**这个就是普通的列表布局**/
                     setGoodsListRecycler(circleModel.getPage().getList());
                 }else {
                     SimpleUtils.setToast(o.getMessage());
@@ -105,15 +127,50 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
             }
         },context,page,10,labelId);
     }
-    /**首页穿搭推荐发按分类查询**/
-    public void  categoryName(String categoryName){
-        isRecyclerState=true;    //设置显示布局
-        pageindex=1;   //设置初始页面
-        mvpView.getCircleList_Fragment_TwinklingRefreshLayout().finishLoadmore();  //设置结束加载跟多  允许加载
-        mvpView.getCircleList_Fragment_TwinklingRefreshLayout().setEnableLoadmore(true);   //设置允许上拉
-        setHomeItemCircle(pageindex,categoryName);
+    /**这个是布局的切换 及数据的显示**/
+    public void setGoodsListRecycler(List<CircleModel.PageBean.ListBean> circleRecyclers){
+        /**列表布局的显示  切换布局其实没用 因为不需要切换**/
+        SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback= (helper, item) -> {
+            CircleModel.PageBean.ListBean circleRecycler = (CircleModel.PageBean.ListBean) item;
+            new GlideUtil().roundAngleImage(mvpView.getThisActivity(),circleRecycler.getPosterUrl(),helper.getView(R.id.CircleList_Image),8);
+            //标签
+            helper.setText(R.id.CircleRecyclerList_Label,circleRecycler.getLabelName());
+            //标题内容
+            helper.setText(R.id.CircleList_Title,circleRecycler.getRoundTitle());
+            //简略内容
+            helper.setText(R.id.CircleList_Content,circleRecycler.getRoundDesc());
+            //用户名
+            helper.setText(R.id.CircleList_Name," "+circleRecycler.getUserName());
+            //头像
+            GlideUtil.drawableUrlImage(mvpView.getThisActivity(),50, circleRecycler.getHandImg(),helper.getView(R.id.CircleList_Name),true,false);
+            //点赞
+            SimpleUtils.setViewTypeface((helper.getView(R.id.CircleList_Praise))," "+circleRecycler.getLikeNum());
+            if (circleRecycler.isHasLike()){
+                ((TextView)helper.getView(R.id.CircleList_Praise)).setTextColor(Color.parseColor("#FD404E"));
+                GlideUtil.drawableImage(40,R.mipmap.praise_f_icon,helper.getView(R.id.CircleList_Praise),true);
+            }else {
+                ((TextView)helper.getView(R.id.CircleList_Praise)).setTextColor(Color.parseColor("#999999"));
+                GlideUtil.drawableImage(40,R.mipmap.praise_9_icon,helper.getView(R.id.CircleList_Praise),true);
+            }
+        };
+        /**页面数为1的时候是第一次加载**/
+        if (pageindex==1){
+            /**准备切换的布局**/
+            RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.circlelist_recycler_item, mvpView.getActivityContext(), circleRecyclers,simpleRecyclerViewAdapterCallback);
+            RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.circlelist_recycler_item1, mvpView.getActivityContext(), circleRecyclers,simpleRecyclerViewAdapterCallback);
+            switchRecycler(isRecyclerState,mvpView.getCircleList_Recycler(),null);
+        }else {
+            /**其他的时候是加载更多**/
+            mvpView.getCircleList_Fragment_TwinklingRefreshLayout().finishLoadmore();
+            for (CircleModel.PageBean.ListBean listBean:circleRecyclers){
+                RecyclerStyleState1.addData(listBean);
+                RecyclerStyleState2.addData(listBean);
+            }
+        }
+
     }
 
+    //********************************************************************************************************
 
     /**主界面圈子列表item**/
     private void setRoundHome(int page,String labelId){
@@ -152,7 +209,7 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
                 //图片
                 new GlideUtil().roundAngleImage(mvpView.getThisActivity(),circleRecycler.getPosterUrl(),helper.getView(R.id.CircleRecyclerList_Recycler_Item_Image),8);
                 //标签
-                helper.setText(R.id.CircleRecyclerList_Recycler_Item_Label,circleRecycler.getAddress());
+                helper.setText(R.id.CircleRecyclerList_Recycler_Item_Label,circleRecycler.getLabelName());
                 //标题内容
                 helper.setText(R.id.CircleRecyclerList_Recycler_Item_Context,circleRecycler.getRoundTitle());
                 //用户名
@@ -161,7 +218,13 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
                 GlideUtil.drawableUrlImage(mvpView.getThisActivity(),50, circleRecycler.getHandImg(),helper.getView(R.id.CircleRecyclerList_Recycler_Item_Name),true,false);
                 //点赞
                 SimpleUtils.setViewTypeface((helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise))," "+circleRecycler.getLikeNum());
-                GlideUtil.drawableImage(40,R.mipmap.praise_9_icon,helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise),true);
+                if (circleRecycler.isHasLike()){
+                    ((TextView)helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)).setTextColor(Color.parseColor("#FD404E"));
+                    GlideUtil.drawableImage(40,R.mipmap.praise_f_icon,helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise),true);
+                }else {
+                    ((TextView)helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise)).setTextColor(Color.parseColor("#999999"));
+                    GlideUtil.drawableImage(40,R.mipmap.praise_9_icon,helper.getView(R.id.CircleRecyclerList_Recycler_Item_Praise),true);
+                }
             });
             mvpView.getCircleList_Recycler().setAdapter(simpleRecyclerViewAdapter);
             mvpView.getCircleList_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(2,false));
@@ -173,43 +236,9 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
     }
 
 
+    //********************************************************************************************************
 
 
-    /**这个是布局的切换 及数据的显示**/
-    public void setGoodsListRecycler(List<CircleModel.PageBean.ListBean> circleRecyclers){
-        SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback= (helper, item) -> {
-            CircleModel.PageBean.ListBean circleRecycler = (CircleModel.PageBean.ListBean) item;
-            new GlideUtil().roundAngleImage(mvpView.getThisActivity(),circleRecycler.getPosterUrl(),helper.getView(R.id.CircleList_Image),8);
-            //标签
-            helper.setText(R.id.CircleRecyclerList_Label,circleRecycler.getAddress());
-            //标题内容
-            helper.setText(R.id.CircleList_Title,circleRecycler.getRoundTitle());
-            //简略内容
-            helper.setText(R.id.CircleList_Content,circleRecycler.getRoundDesc());
-            //用户名
-            helper.setText(R.id.CircleList_Name," "+circleRecycler.getUserName());
-            //头像
-            GlideUtil.drawableUrlImage(mvpView.getThisActivity(),50, circleRecycler.getHandImg(),helper.getView(R.id.CircleList_Name),true,false);
-            //点赞
-            SimpleUtils.setViewTypeface((helper.getView(R.id.CircleList_Praise))," "+circleRecycler.getLikeNum());
-            GlideUtil.drawableImage(40,R.mipmap.praise_9_icon,helper.getView(R.id.CircleList_Praise),true);
-        };
-        /**页面数为1的时候是第一次加载**/
-        if (pageindex==1){
-            /**准备切换的布局**/
-            RecyclerStyleState1=new SimpleRecyclerViewAdapter(R.layout.circlelist_recycler_item, mvpView.getActivityContext(), circleRecyclers,simpleRecyclerViewAdapterCallback);
-            RecyclerStyleState2=new SimpleRecyclerViewAdapter(R.layout.circlelist_recycler_item1, mvpView.getActivityContext(), circleRecyclers,simpleRecyclerViewAdapterCallback);
-            switchRecycler(isRecyclerState,mvpView.getCircleList_Recycler(),null);
-        }else {
-            /**其他的时候是加载更多**/
-            mvpView.getCircleList_Fragment_TwinklingRefreshLayout().finishLoadmore();
-            for (CircleModel.PageBean.ListBean listBean:circleRecyclers){
-                RecyclerStyleState1.addData(listBean);
-                RecyclerStyleState2.addData(listBean);
-            }
-        }
-
-    }
     /**切换布局状态方法**/
     public void setSWitch(TextView textView){
         /**显示默认的布局状态**/

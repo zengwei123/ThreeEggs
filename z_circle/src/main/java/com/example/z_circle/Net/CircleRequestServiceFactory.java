@@ -34,7 +34,7 @@ public class CircleRequestServiceFactory {
     }
 
     /**
-     * 首页穿搭推荐
+     * 圈子的轮播和分类列表
      */
     public static void  Roundhome(RequestObserver.RequestObserverNext requestObserverNext, Context context ){
         LottieDialog.setDialogWindow(context);

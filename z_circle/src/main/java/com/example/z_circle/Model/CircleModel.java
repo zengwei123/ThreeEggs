@@ -259,6 +259,8 @@ public class CircleModel {
             private int lookNum;
             private int collectNum;
             private int commentNum;
+            private String labelName;
+            private boolean hasLike;
 
             public long getId() {
                 return id;
@@ -450,6 +452,22 @@ public class CircleModel {
 
             public void setCommentNum(int commentNum) {
                 this.commentNum = commentNum;
+            }
+
+            public String getLabelName() {
+                return labelName;
+            }
+
+            public void setLabelName(String labelName) {
+                this.labelName = labelName;
+            }
+
+            public boolean isHasLike() {
+                return hasLike;
+            }
+
+            public void setHasLike(boolean hasLike) {
+                this.hasLike = hasLike;
             }
 
             @Override

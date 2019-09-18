@@ -1,5 +1,6 @@
 package com.example.z_circle.Circle;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.ImageView;
 
@@ -21,6 +22,7 @@ import java.util.List;
 import io.reactivex.disposables.Disposable;
 
 public class CirclePresenter extends BasePresenter<CircleView> {
+    private CircleListFragment fragment;
     @Override
     public void init() {
         getHomeData();
@@ -45,7 +47,7 @@ public class CirclePresenter extends BasePresenter<CircleView> {
             @Override
             public void Next(AllDataState<CircleHome> o) {
                 setHeadShuffling(o.getData().getCarousel());
-                setTabLayout();
+                setTabLayout(o.getData().getLabels());
             }
 
             @Override
@@ -67,22 +69,39 @@ public class CirclePresenter extends BasePresenter<CircleView> {
             ImageView imageView= (ImageView) itemView;
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             GlideUtil.displayImage(mvpView.getThisActivity(),carouselBean.getPosterUrl(),(ImageView) itemView);
-            SimpleUtils.setLog("进入没有+"+position);
         });
     }
     /**设置分类**/
-    private void setTabLayout(){
-        mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("推荐"));
-        mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("关注"));
-        mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("附近"));
-        mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("点亮数"));
-        mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("点亮数"));
-        mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("点亮数"));
+    private void setTabLayout(List<CircleHome.LabelsBean> labelsBeans){
+        mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText("全部"));
+        for (int i=0;i<labelsBeans.size();i++){
+            mvpView.getCircle_Fragment_TabLayout().addTab( mvpView.getCircle_Fragment_TabLayout().newTab().setText(labelsBeans.get(i).getLabelName()));
+        }
+        mvpView.getCircle_Fragment_TabLayout().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition()==0){
+                    fragment.categoryName(null);
+                }else {
+                    fragment.categoryName(labelsBeans.get((tab.getPosition()+1)).getId()+"");
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     public void setContentRecycler() {
         FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
-        CircleListFragment fragment= (CircleListFragment) RouterPageFragment.grtCircleList(0,null);
+        fragment= (CircleListFragment) RouterPageFragment.grtCircleList(0,null);
         fragmentTransaction.add(R.id.Circle_Fragment_List, fragment,CircleListFragment.class.getName()).commit();
         mvpView.getCircle_AppBar().addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             TwinklingRefreshLayout twinklingRefreshLayout=fragment.getCircleList_Fragment_TwinklingRefreshLayout();

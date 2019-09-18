@@ -74,6 +74,8 @@ dependencies {
     api project(":z_base")
     api project(":lottie")
 
+    api 'com.android.support:multidex:1.0.0'
+
     api files('libs/open_sdk_r6019_lite.jar')    //qq登陆
     api files('libs/core-3.2.1.jar')      //qq登陆
 }
