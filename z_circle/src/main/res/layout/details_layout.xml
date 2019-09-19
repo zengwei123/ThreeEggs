@@ -56,6 +56,8 @@
             <TextView
                 android:id="@+id/Details_Title"
                 android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:textSize="@dimen/Text_Size_4"
                 android:textColor="@color/C2B2B2B"
                 android:layout_width="match_parent"
@@ -64,6 +66,8 @@
             <TextView
                 android:id="@+id/Details_Content"
                 android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:textSize="@dimen/Text_Size_3"
                 android:textColor="@color/C2B2B2B"
                 android:layout_width="match_parent"
@@ -71,6 +75,8 @@
             <!--地址 日期-->
             <RelativeLayout
                 android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -90,9 +96,11 @@
             <!--文章商品-->
             <RelativeLayout
                 android:id="@+id/Details_Goods_Layout"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:visibility="gone"
-
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:background="@drawable/details_goods"
                 android:elevation="3dp"
@@ -140,7 +148,7 @@
             <TextView
                 android:id="@+id/Details_Label"
                 android:textColor="#EB8092"
-                android:layout_margin="5dp"
+                android:layout_margin="10dp"
                 android:padding="5dp"
                 android:background="@drawable/circlelist_label_background"
                 android:layout_width="wrap_content"

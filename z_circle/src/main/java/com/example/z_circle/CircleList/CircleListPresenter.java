@@ -234,8 +234,9 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
             mvpView.getCircleList_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(2,false));
         }else {
             mvpView.getCircleList_Fragment_TwinklingRefreshLayout().finishLoadmore();
-            for (CircleModel.PageBean.ListBean listBean:circleRecyclers)
-            ((SimpleRecyclerViewAdapter)mvpView.getCircleList_Recycler().getAdapter()).addData(listBean);
+            for (CircleModel.PageBean.ListBean listBean:circleRecyclers){
+                ((SimpleRecyclerViewAdapter)mvpView.getCircleList_Recycler().getAdapter()).addData(listBean);
+            }
         }
         setItemClick();
     }
@@ -245,7 +246,8 @@ public class CircleListPresenter extends BasePresenter<CircleListView> {
     /**点击事件**/
     private void setItemClick(){
         RecyclerStyleState.setOnItemClickListener((adapter, view, position) -> {
-            RoutePageActivity.getDetailsActivity("1172119067230765058");
+            List<CircleModel.PageBean.ListBean> listBeans=adapter.getData();
+            RoutePageActivity.getDetailsActivity(listBeans.get(position).getId()+"");
         });
     }
 
