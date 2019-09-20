@@ -1,5 +1,6 @@
 package com.example.z_circle.Net;
 
+import com.example.z_circle.Model.CircleComment;
 import com.example.z_circle.Model.CircleDetails;
 import com.example.z_circle.Model.CircleHome;
 import com.example.z_circle.Model.CircleModel;
@@ -36,5 +37,13 @@ public interface CircleRequestService {
     @FormUrlEncoded
     @POST("round/detail")
     Observable<AllDataState<CircleDetails>> Detail(@Field("devicesToken") String devicesToken, @Field("roundId")String roundId);
+
+    /**圈子评论**/
+    @FormUrlEncoded
+    @POST("round/comment/list")
+    Observable<AllDataState<CircleComment>> Comment(@Field("devicesToken") String devicesToken,
+                                                    @Field("roundId")String roundId,
+                                                    @Field("pageNum")String pageNum,
+                                                    @Field("pageSize")String pageSize);
 
 }

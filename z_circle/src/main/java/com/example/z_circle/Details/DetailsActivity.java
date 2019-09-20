@@ -3,6 +3,7 @@ package com.example.z_circle.Details;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,6 +38,16 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
     private TextView Details_Goods_Price;//价格
 
     private TextView Details_Label;  //分类/标签
+
+    private RecyclerView Details_CommentsShow_Recycler;//评论展示数据列表
+    private TextView Details_CommentsShow_Sum;  //评论数量
+    private TextView Details_CommentsShow_But; //评论展开按钮
+
+    private TextView Details_Refresh;   //相关推荐刷新按钮
+
+    private TextView Details_Praise;// 全部点赞
+    private TextView Details_Collection;// 全部收藏
+    private TextView Details_Comments;// 全部评论
 
     @Autowired
     public String roundId;  //获取圈子的文章id
@@ -85,6 +96,15 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
         Details_Goods_Price=findViewById(R.id.Details_Goods_Price);
 
         Details_Label=findViewById(R.id.Details_Label);
+
+        Details_CommentsShow_Recycler=findViewById(R.id.Details_CommentsShow_Recycler);
+        Details_CommentsShow_But=findViewById(R.id.Details_CommentsShow_But);
+        Details_CommentsShow_Sum=findViewById(R.id.Details_CommentsShow_Sum);
+        Details_Refresh=findViewById(R.id.Details_Refresh);
+
+        Details_Praise=findViewById(R.id.Details_Praise);
+        Details_Collection=findViewById(R.id.Details_Collection);
+        Details_Comments=findViewById(R.id.Details_Comments);
     }
 
     @Override
@@ -155,5 +175,40 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
     @Override
     public String getRoundId() {
         return roundId;
+    }
+
+    @Override
+    public RecyclerView getDetails_CommentsShow_Recycler() {
+        return Details_CommentsShow_Recycler;
+    }
+
+    @Override
+    public TextView getDetails_CommentsShow_But() {
+        return Details_CommentsShow_But;
+    }
+
+    @Override
+    public TextView getDetails_CommentsShow_Sum() {
+        return Details_CommentsShow_Sum;
+    }
+
+    @Override
+    public TextView getDetails_Refresh() {
+        return Details_Refresh;
+    }
+
+    @Override
+    public TextView getDetails_Praise() {
+        return Details_Praise;
+    }
+
+    @Override
+    public TextView getDetails_Collection() {
+        return Details_Collection;
+    }
+
+    @Override
+    public TextView getDetails_Comments() {
+        return Details_Comments;
     }
 }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/Comment_UserHard"
+            android:layout_centerVertical="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <LinearLayout
+            android:layout_toRightOf="@+id/Comment_UserHard"
+            android:layout_toLeftOf="@+id/Comment_ClickPraise"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/Comment_UserName"
+                android:textColor="@color/C999999"
+                android:textSize="@dimen/Text_Size_3"
+                android:gravity="center|left"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <TextView
+                android:id="@+id/Comment_Time"
+                android:textColor="#cccccc"
+                android:gravity="center|left"
+                android:textSize="@dimen/Text_Size_2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/Comment_ClickPraise"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp">
+            <ImageView
+                android:src="@mipmap/praise_9_icon"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+            <TextView
+                android:text="1"
+                android:id="@+id/Comment_Praise"
+                android:textColor="@color/C999999"
+                android:textSize="@dimen/Text_Size_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/Comment_Content"
+        android:textColor="@color/C2B2B2B"
+        android:textSize="@dimen/Text_Size_3"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/Comment_CommentSum"
+        android:text="111条回复 >"
+        android:layout_below="@+id/Comment_Content"
+        android:textColor="#01A1FC"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="@dimen/Text_Size_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:background="#E5E5E5"
+        android:layout_below="@+id/Comment_CommentSum"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></View>
+</RelativeLayout>

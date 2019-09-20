@@ -1,6 +1,7 @@
 package com.example.z_circle.Details;
 
 import android.media.Image;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,4 +33,13 @@ public interface DetailsView extends BaseView{
     TextView getDetails_Label();
 
     String getRoundId();
+
+    RecyclerView getDetails_CommentsShow_Recycler();
+    TextView getDetails_CommentsShow_But();
+    TextView getDetails_CommentsShow_Sum();
+
+    TextView getDetails_Refresh();
+    TextView getDetails_Praise();
+    TextView getDetails_Collection();
+    TextView getDetails_Comments();
 }

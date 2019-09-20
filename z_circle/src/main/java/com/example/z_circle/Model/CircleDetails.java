@@ -81,6 +81,7 @@ public class CircleDetails {
         private String userName;
         private String handImg;
         private boolean hasLike;
+        private boolean hasCollect;
         private List<RoundResourcesBean> roundResources;
 
         public long getId() {
@@ -297,6 +298,14 @@ public class CircleDetails {
 
         public void setHasLike(boolean hasLike) {
             this.hasLike = hasLike;
+        }
+
+        public boolean isHasCollect() {
+            return hasCollect;
+        }
+
+        public void setHasCollect(boolean hasCollect) {
+            this.hasCollect = hasCollect;
         }
 
         public List<RoundResourcesBean> getRoundResources() {

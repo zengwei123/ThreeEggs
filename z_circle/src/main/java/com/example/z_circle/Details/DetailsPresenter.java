@@ -1,9 +1,13 @@
 package com.example.z_circle.Details;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.z_base.BasePresenter;
+import com.example.z_circle.Model.CircleComment;
 import com.example.z_circle.Model.CircleDetails;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
 import com.example.z_circle.R;
@@ -11,6 +15,8 @@ import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Util.SimpleUtils;
+import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
+import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +39,8 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
     public void setView() {
         click();
         getDetailsMessage();
+        getComment(null,1,3);
+        setRecommended();
     }
 
     /**获取圈子详情内容**/
@@ -91,8 +99,26 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
         }
         //设置标签或者分类
         mvpView.getDetails_Label().setText(circleDetails.getRound().getLabelName());
-    }
+        //点赞数  是否点赞
+        mvpView.getDetails_Praise().setText(" "+circleDetails.getRound().getLikeNum());
+        if (circleDetails.getRound().isHasLike()){
+            GlideUtil.drawableImage(40,R.mipmap.praise_f_icon,mvpView.getDetails_Praise(),true);
+            mvpView.getDetails_Praise().setTextColor(Color.parseColor("#FD404E"));
+        }else {
+            GlideUtil.drawableImage(40,R.mipmap.praise_9_icon,mvpView.getDetails_Praise(),true);
+            mvpView.getDetails_Praise().setTextColor(Color.parseColor("#999999"));
+        }
+        //收藏数  是否收藏
+        mvpView.getDetails_Collection().setText(" "+circleDetails.getRound().getCollectNum());
+        if (circleDetails.getRound().isHasCollect()){
+            GlideUtil.drawableImage(40,R.mipmap.collection_f_icon,mvpView.getDetails_Collection(),true);
+            mvpView.getDetails_Collection().setTextColor(Color.parseColor("#FD404E"));
+        }else {
+            GlideUtil.drawableImage(40,R.mipmap.collection_9_icon,mvpView.getDetails_Collection(),true);
+            mvpView.getDetails_Collection().setTextColor(Color.parseColor("#999999"));
+        }
 
+    }
     /**设置轮播图**/
     private void setBanner(List<String> imageUrl){
         mvpView.getDetails_Banner().setAdapter((banner, itemView, model, position) ->{
@@ -101,6 +127,68 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
             GlideUtil.displayImage(mvpView.getThisActivity(),model,imageView);
         });
         mvpView.getDetails_Banner().setData(imageUrl, null);
+    }
+
+    /**获取评论**/
+    private void getComment(Context context,int pageNum,int pageSize){
+        CircleRequestServiceFactory.Comment(new RequestObserver.RequestObserverNext<AllDataState<CircleComment>>() {
+            @Override
+            public void Next(AllDataState<CircleComment> o) {
+                if (o.isSuccess()){
+                    setDetails_CommentsShow_Recycler(o.getData().getPage().getList());
+                    /**下面的都是评论数设置**/
+                    mvpView.getDetails_CommentsShow_Sum().setText("共"+o.getData().getPage().getTotal()+"条评论");
+                    SimpleUtils.setLog(o.getData().toString());
+
+                    mvpView.getDetails_Comments().setText(" "+o.getData().getPage().getTotal());
+                    GlideUtil.drawableImage(40,R.mipmap.comments_icon,mvpView.getDetails_Comments(),true);
+
+                }else {
+                    SimpleUtils.setToast(o.getMessage());
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void getDisposable(Disposable d) {
+
+            }
+        },context,"1172119067230765058",pageNum+"",pageSize+"");
+    }
+    private void setDetails_CommentsShow_Recycler(List<CircleComment.PageBean.ListBean> listBeans){
+        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(R.layout.comment_recycler_item, mvpView.getActivityContext(), listBeans, (helper, item) -> {
+            CircleComment.PageBean.ListBean listBean= (CircleComment.PageBean.ListBean) item;
+            /**评论用户信息**/
+            SimpleUtils.setLog("用户名："+listBean.getCommentUserName());
+            helper.setText(R.id.Comment_UserName,listBean.getCommentUserName());
+            /**头像**/
+            GlideUtil.roundImage(mvpView.getThisActivity(),listBean.getCommentHeadImg(),helper.getView(R.id.Comment_UserHard));
+            /**评论时间**/
+            helper.setText(R.id.Comment_Time,listBean.getCreateTime());
+            /**评论内容**/
+            helper.setText(R.id.Comment_Content,listBean.getContent());
+            /**点赞数**/
+            helper.setText(R.id.Comment_Praise,listBean.getLikeNum());
+            /**评论的评论数**/
+            if (listBean.getCommentNum().equals("0")){
+                helper.getView(R.id.Comment_CommentSum).setVisibility(View.GONE);
+            }else {
+                helper.setText(R.id.Comment_CommentSum,listBean.getCommentNum()+"条回复");
+            }
+        });
+        mvpView.getDetails_CommentsShow_Recycler().setAdapter(simpleRecyclerViewAdapter);
+        mvpView.getDetails_CommentsShow_Recycler().setLayoutManager(SimpleUtils.getNoScrollRecyclerLayoutManager(true,0));
+
+    }
+
+    /**相关推荐**/
+    private void setRecommended(){
+        mvpView.getDetails_Refresh().setText(" 换一换");
+        GlideUtil.drawableImage(50,R.mipmap.refresh_icon,mvpView.getDetails_Refresh(),true);
     }
 
     private void click(){
