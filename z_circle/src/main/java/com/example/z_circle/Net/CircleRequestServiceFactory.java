@@ -104,9 +104,11 @@ public class CircleRequestServiceFactory {
                         int  id = R.mipmap.praise_9_icon;
                         if (o.getCode()==10003){
                             id = R.mipmap.praise_f_icon;
+                            textView.setText((String) o.getData());
                             textView.setTextColor(Color.parseColor("#FD404E"));
                         }else if (o.getCode()==10004){
                             id = R.mipmap.praise_9_icon;
+                            textView.setText((String) o.getData());
                             textView.setTextColor(Color.parseColor("#999999"));
                         }else if(o.getCode()==32006){
                             SnackbarUtil.IndefiniteSnackbar(view,o.getMessage(),3000,1).setAction("点击登录", v -> SimpleUtils.setToast("登录")).show();
@@ -133,10 +135,12 @@ public class CircleRequestServiceFactory {
                         if (o.getCode()==10001){
                             id = R.mipmap.collection_f_icon;
                             textView.setTextColor(Color.parseColor("#FD404E"));
+                            textView.setText((String) o.getData());
                         }else if (o.getCode()==10002){
                             id = R.mipmap.collection_9_icon;
                             textView.setTextColor(Color.parseColor("#999999"));
                         }else if(o.getCode()==32006){
+                            textView.setText((String) o.getData());
                             SnackbarUtil.IndefiniteSnackbar(view,"未登录，是否登录？",3000,1).setAction("点击登录", v -> RoutePageActivity.getLRActivity()).show();
                         }
                         GlideUtil.drawableImage(40,id,textView,true);
