@@ -62,7 +62,7 @@
         <activity android:name="com.example.z_home.HomeItem.GoodsItem.GoodsItemActivity"></activity>
         <activity android:name="com.example.z_home.HomeItem.CircleList.CircleListActivity"></activity>
 
-        <activity android:name="com.example.z_circle.Details.DetailsActivity"></activity>
+        <activity android:name="com.example.z_circle.Details.DetailsActivity" ></activity>
 
         <!--高德定位的服务组件-->
         <service android:name="com.amap.api.location.APSService"></service>

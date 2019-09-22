@@ -7,19 +7,25 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
+import com.example.z_common.R;
+
 public class WanEditText extends AppCompatEditText {
+    private Context context;
     public WanEditText(Context context) {
         super(context);
+        this.context=context;
         init();
     }
 
     public WanEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context=context;
         init();
     }
 
     public WanEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context=context;
         init();
     }
     /**
@@ -31,10 +37,13 @@ public class WanEditText extends AppCompatEditText {
         mRightDrawable = getCompoundDrawables()[2];
         if (mRightDrawable == null) {
             //这里当没有设置右侧图标时你可以给它设置个默认的右侧图标，当然根据你的项目需求来
+            mRightDrawable=context.getDrawable(R.mipmap.close_icon);
+            mRightDrawable.setBounds(0, 0, 30, 30);
+            setCompoundDrawables(null,null,mRightDrawable,null);
             return;
         }
         //这里当设置了右侧图标时，我们对图标做了一些自定义设置，你也可以做其他设置
-        mRightDrawable.setBounds(0, 0, mRightDrawable.getIntrinsicWidth(), mRightDrawable.getIntrinsicHeight());
+        mRightDrawable.setBounds(0, 0, 30, 30);
     }
     public void setRightPicOnclickListener(RightPicOnclickListener rightPicOnclickListener) {
         this.rightPicOnclickListener = rightPicOnclickListener;

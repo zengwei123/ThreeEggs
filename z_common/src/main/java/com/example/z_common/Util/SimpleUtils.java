@@ -258,7 +258,10 @@ public class SimpleUtils {
     /**价格单位换算  单位：分 ---单外：元**/
     public static String getPrice(int price){
         DecimalFormat df=new DecimalFormat("0.00");//设置保留位数
-        return df.format((double) price/(double)100);
+        if (price>0)
+            return df.format((double) price/(double)100);
+        else
+            return 0+"";
     }
 
 

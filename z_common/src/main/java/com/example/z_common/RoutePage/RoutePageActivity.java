@@ -1,5 +1,7 @@
 package com.example.z_common.RoutePage;
 
+import android.app.Activity;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 
 /**
@@ -83,9 +85,10 @@ public class RoutePageActivity {
     /********************************************************************************************************************************************************************/
     /********************************************************************************************************************************************************************/
     /**圈子-文章详情界面**/
-    public static void getDetailsActivity(String roundId){
-        ARouter.getInstance().build("/Circle/DetailsActivity")
+    public static void getDetailsActivity(String roundId,boolean isAdd){
+      ARouter.getInstance().build("/Circle/DetailsActivity")
                 .withString("roundId",roundId+"")
+                .withBoolean("isAdd",isAdd)
                 .navigation();
     }
 

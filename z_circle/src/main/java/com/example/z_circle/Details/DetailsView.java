@@ -2,12 +2,15 @@ package com.example.z_circle.Details;
 
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.z_base.BaseView;
 import com.example.z_circle.R;
+import com.example.z_common.Custom.WanEditText;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
@@ -39,7 +42,15 @@ public interface DetailsView extends BaseView{
     TextView getDetails_CommentsShow_Sum();
 
     TextView getDetails_Refresh();
+    RecyclerView getDetails_Replacement();
     TextView getDetails_Praise();
     TextView getDetails_Collection();
     TextView getDetails_Comments();
+
+    WanEditText getDetails_Comments_EditText();
+    TextView getDetails_Comments_TextBut();
+    RelativeLayout getDetails_Comments_EditTextLayout();
+    LinearLayout getDetails_Comments_Layout();
+
+    RelativeLayout getDetails_Layout();
 }

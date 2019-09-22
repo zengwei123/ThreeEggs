@@ -182,10 +182,10 @@ public class LRViewPageFragment_C extends Fragment {
     }
 
     private void login(String code){
-        SimpleUtils.setToast(getQqOpenId());
         LRRequestServiceFactory.login(new RequestObserver.RequestObserverNext<AllDataState>() {
             @Override
             public void Next(AllDataState o) {
+                SimpleUtils.setLog("看看是否登录");
                 if (o.isSuccess()){
                     SimpleUtils.setToast("登陆成功");
                     new SharedPreferencesHelper(BaseActivity.getInstance(),"TOKEN").put("ISLogin",true);

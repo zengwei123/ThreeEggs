@@ -28,6 +28,7 @@ public interface CircleRequestService {
                                                         @Field("pageNum") int pageNum,
                                                         @Field("pageSize") int pageSize);
 
+
     /**圈子轮播图和下面的分类列表图**/
     @GET("round/home")
     Observable<AllDataState<CircleHome>> RoundHome(@Query("devicesToken") String devicesToken);
@@ -45,5 +46,22 @@ public interface CircleRequestService {
                                                     @Field("roundId")String roundId,
                                                     @Field("pageNum")String pageNum,
                                                     @Field("pageSize")String pageSize);
+
+    /**圈子详情中的推荐**/
+    @FormUrlEncoded
+    @POST("round/recommend")
+    Observable<AllDataState<CircleModel>> Recommend(@Field("devicesToken") String devicesToken,@Field("labelId") String labelId,
+                                                   @Field("pageNum") String current, @Field("pageSize") String pageSize);
+
+
+    /**圈子文章点赞**/
+    @FormUrlEncoded
+    @POST("round/like")
+    Observable<AllDataState> Like(@Field("devicesToken") String devicesToken, @Field("roundId") String roundId);
+
+    /**圈子文章点赞**/
+    @FormUrlEncoded
+    @POST("round/collect")
+    Observable<AllDataState> Collect(@Field("devicesToken") String devicesToken, @Field("roundId") String roundId);
 
 }

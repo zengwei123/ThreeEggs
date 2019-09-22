@@ -4,16 +4,24 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_base.MvpActivity;
 import com.example.z_circle.R;
+import com.example.z_common.Custom.WanEditText;
+import com.example.z_common.Util.SimpleUtils;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
@@ -44,14 +52,23 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
     private TextView Details_CommentsShow_But; //评论展开按钮
 
     private TextView Details_Refresh;   //相关推荐刷新按钮
+    private RecyclerView Details_Replacement;  //换一换
 
     private TextView Details_Praise;// 全部点赞
     private TextView Details_Collection;// 全部收藏
-    private TextView Details_Comments;// 全部评论
 
+    private TextView Details_Comments;// 全部评论
+    private WanEditText Details_Comments_EditText;  //评论
+    private TextView Details_Comments_TextBut;  //评论发布按钮
+    private RelativeLayout Details_Comments_EditTextLayout;  //评论editext 布局
+
+    private LinearLayout Details_Comments_Layout;   //点赞 收藏 评论数的布局
+
+    private RelativeLayout Details_Layout;
     @Autowired
     public String roundId;  //获取圈子的文章id
-
+    @Autowired
+    public boolean isAdd;   //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /**启动页的图片设置为空**/
@@ -62,6 +79,9 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
         mvpPresenter.attachView(this);
         getViews();
         mvpPresenter.init();
+        if(isAdd){
+            ((BaseActivity)getThisActivity()).addActivity(this);
+        }
     }
 
     @Override
@@ -105,6 +125,13 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
         Details_Praise=findViewById(R.id.Details_Praise);
         Details_Collection=findViewById(R.id.Details_Collection);
         Details_Comments=findViewById(R.id.Details_Comments);
+
+        Details_Comments_EditText=findViewById(R.id.Details_Comments_EditText);
+        Details_Comments_TextBut=findViewById(R.id.Details_Comments_TextBut);
+        Details_Comments_EditTextLayout=findViewById(R.id.Details_Comments_EditTextLayout);
+        Details_Comments_Layout=findViewById(R.id.Details_Comments_Layout);
+
+        Details_Layout=findViewById(R.id.Details_Layout);
     }
 
     @Override
@@ -177,6 +204,7 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
         return roundId;
     }
 
+
     @Override
     public RecyclerView getDetails_CommentsShow_Recycler() {
         return Details_CommentsShow_Recycler;
@@ -198,6 +226,11 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
     }
 
     @Override
+    public RecyclerView getDetails_Replacement() {
+        return Details_Replacement;
+    }
+
+    @Override
     public TextView getDetails_Praise() {
         return Details_Praise;
     }
@@ -210,5 +243,85 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
     @Override
     public TextView getDetails_Comments() {
         return Details_Comments;
+    }
+
+    @Override
+    public WanEditText getDetails_Comments_EditText() {
+        return Details_Comments_EditText;
+    }
+
+    @Override
+    public TextView getDetails_Comments_TextBut() {
+        return Details_Comments_TextBut;
+    }
+
+    @Override
+    public RelativeLayout getDetails_Comments_EditTextLayout() {
+        return Details_Comments_EditTextLayout;
+    }
+
+    @Override
+    public LinearLayout getDetails_Comments_Layout() {
+        return Details_Comments_Layout;
+    }
+
+    @Override
+    public RelativeLayout getDetails_Layout() {
+        return Details_Layout;
+    }
+
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (isShouldHideInput(v, ev)) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+        // 必不可少，否则所有的组件都不会有TouchEvent了
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+        return onTouchEvent(ev);
+    }
+
+    public boolean isShouldHideInput(View v, MotionEvent event) {
+        SimpleUtils.setLog("看看id:"+v.getId()+"---"+R.id.Details_Comments_TextBut);
+        if (v != null && (v instanceof EditText)) {
+            int[] leftTop = {0, 0};
+            //获取输入框当前的location位置
+            v.getLocationInWindow(leftTop);
+            int left = leftTop[0];
+            int top = leftTop[1];
+            int bottom = top + v.getHeight();
+            int right = SimpleUtils.getWindowSize(true);
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 点击的是输入框区域，保留点击EditText的事件
+                return false;
+            } else {
+                mvpPresenter.EditTextAnim(false);
+                getDetails_Comments_TextBut().setVisibility(View.GONE);
+
+                //使EditText触发一次失去焦点事件
+                v.setFocusable(false);
+//                v.setFocusable(true); //这里不需要是因为下面一句代码会同时实现这个功能
+                v.setFocusableInTouchMode(true);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ((BaseActivity)getThisActivity()).finishAllActivity();
     }
 }

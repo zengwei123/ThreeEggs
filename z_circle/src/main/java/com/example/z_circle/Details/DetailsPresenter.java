@@ -1,18 +1,32 @@
 package com.example.z_circle.Details;
 
+import android.animation.IntEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.airbnb.lottie.utils.Utils;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
+import com.example.z_circle.CircleList.CircleListFragment;
 import com.example.z_circle.Model.CircleComment;
 import com.example.z_circle.Model.CircleDetails;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
 import com.example.z_circle.R;
+import com.example.z_common.Custom.WanEditText;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
+import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
@@ -30,6 +44,8 @@ import io.reactivex.disposables.Disposable;
 
 public class DetailsPresenter extends BasePresenter<DetailsView> implements View.OnClickListener{
     private CircleDetails circleDetails;
+    private CircleListFragment fragment;
+    private int Details_Comments_Layout_Width=-1;
     @Override
     public void init() {
         setView();
@@ -37,10 +53,10 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
 
     @Override
     public void setView() {
-        click();
         getDetailsMessage();
         getComment(null,1,3);
-        setRecommended();
+        Comments_EditText();
+        click();
     }
 
     /**获取圈子详情内容**/
@@ -51,6 +67,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
                 circleDetails=o.getData();
                 if (circleDetails!=null){
                     setDetailsMessage();
+                    setRecommended();
                 }else {
                     SimpleUtils.setToast(o.getMessage());
                 }
@@ -188,18 +205,86 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
     /**相关推荐**/
     private void setRecommended(){
         mvpView.getDetails_Refresh().setText(" 换一换");
-        GlideUtil.drawableImage(50,R.mipmap.refresh_icon,mvpView.getDetails_Refresh(),true);
+        GlideUtil.drawableImage(40,R.mipmap.refresh_icon,mvpView.getDetails_Refresh(),true);
+
+        /**添加推荐布局内容**/
+        FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
+        fragment= (CircleListFragment) RouterPageFragment.grtCircleList(2,circleDetails.getRound().getLabelId()+"");
+        fragmentTransaction.add(R.id.Details_FrameLayout, fragment,CircleListFragment.class.getName()).commit();
     }
+
+    /**下面评论条的东西**/
+    private void Comments_EditText(){
+        SimpleUtils.setViewTypeface(mvpView.getDetails_Comments_EditText(),"");
+        mvpView.getDetails_Comments_EditText().setHint("\ue254 说点什么");
+        mvpView.getDetails_Comments_EditText().setRightPicOnclickListener(editText -> {
+            removeEditText();
+        });
+        mvpView.getDetails_Comments_EditText().setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                // 此处为得到焦点时的处理内容
+                EditTextAnim(true);
+            }
+        });
+    }
+    public void EditTextAnim(boolean b){
+        mvpView.getDetails_Comments_TextBut().setVisibility(View.VISIBLE);
+
+        ValueAnimator valueAnimator=ValueAnimator.ofInt(1,100);     //一个区间
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            IntEvaluator intEvaluator=new IntEvaluator();   //一个估值器
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                //动画过程的监听方法
+                float f=valueAnimator.getAnimatedFraction();   //获取当前整个动画所占比例
+                 if (Details_Comments_Layout_Width==-1){
+                     ViewGroup.LayoutParams  layoutParams= mvpView.getDetails_Comments_Layout().getLayoutParams();
+                     Details_Comments_Layout_Width=mvpView.getDetails_Comments_Layout().getMeasuredWidth();
+                 }
+                if (b){
+                    ViewGroup.LayoutParams  layoutParams= mvpView.getDetails_Comments_Layout().getLayoutParams();
+                    layoutParams.width=intEvaluator.evaluate(f,mvpView.getDetails_Comments_Layout().getMeasuredWidth(),0);    //按照当前比例计算出所占的值   f-比例   0-初始值  600-结束值
+                    mvpView.getDetails_Comments_Layout().setLayoutParams(layoutParams);
+                }else {
+                    ViewGroup.LayoutParams  layoutParams= mvpView.getDetails_Comments_Layout().getLayoutParams();
+                    layoutParams.width=intEvaluator.evaluate(f,0,Details_Comments_Layout_Width);    //按照当前比例计算出所占的值   f-比例   0-初始值  600-结束值
+                    mvpView.getDetails_Comments_Layout().setLayoutParams(layoutParams);
+                }
+            }
+        });
+        valueAnimator.setDuration(400).start();   //设置过渡时间  启动
+    }
+
 
     private void click(){
         mvpView.getDetails_Close().setOnClickListener(this);
+        mvpView.getDetails_Comments_TextBut().setOnClickListener(this);
+        mvpView.getDetails_Refresh().setOnClickListener(this);
+        mvpView.getDetails_Praise().setOnClickListener(this);
+        mvpView.getDetails_Collection().setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.Details_Close) {
-        }else if(i == R.id.Details_Close){
+        if (i == R.id.Details_Comments_TextBut) {  //评论发布按钮
+            removeEditText();
+        }else if(i == R.id.Details_Close){  //关闭按钮
             mvpView.getThisActivity().finish();
+        }else if (i == R.id.Details_Refresh){  //换一换
+            fragment.categoryName(circleDetails.getRound().getLabelId()+"");
+        }else if(i == R.id.Details_Praise){   //点赞按钮
+            CircleRequestServiceFactory.Like(mvpView.getDetails_Layout(),circleDetails.getRound().getId()+"",mvpView.getDetails_Praise());
+        }else if(i == R.id.Details_Collection){   //收藏按钮
+            CircleRequestServiceFactory.Collect(mvpView.getDetails_Layout(),circleDetails.getRound().getId()+"",mvpView.getDetails_Collection());
         }
+    }
+
+    private void removeEditText(){
+        EditTextAnim(false);
+        mvpView.getDetails_Comments_TextBut().setVisibility(View.GONE);
+        ((InputMethodManager)mvpView.getThisActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mvpView.getThisActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        mvpView.getDetails_Comments_EditText().setFocusable(false);
+        mvpView.getDetails_Comments_EditText().setFocusableInTouchMode(true);
+        mvpView.getDetails_Comments_EditText().setText("");
     }
 }
