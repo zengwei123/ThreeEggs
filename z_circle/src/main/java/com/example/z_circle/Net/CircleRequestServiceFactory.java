@@ -1,9 +1,10 @@
 package com.example.z_circle.Net;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.z_base.BaseActivity;
@@ -24,7 +25,6 @@ import com.example.z_common.Util.SnackbarUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.http.Field;
 
 /**
  * Created by zengwei on 2019/8/4.
@@ -90,7 +90,7 @@ public class CircleRequestServiceFactory {
     }
 
     /**
-     * 圈子详情推荐文章
+     * 圈子详情点赞
      */
     public static void  Like(View view, String roundId, TextView textView){
         LottieDialog.setDialogWindow(null);
@@ -111,7 +111,7 @@ public class CircleRequestServiceFactory {
                             textView.setText((String) o.getData());
                             textView.setTextColor(Color.parseColor("#999999"));
                         }else if(o.getCode()==32006){
-                            SnackbarUtil.IndefiniteSnackbar(view,o.getMessage(),3000,1).setAction("点击登录", v -> SimpleUtils.setToast("登录")).show();
+                            SnackbarUtil.IndefiniteSnackbar(view,o.getMessage(),3000,1).setAction("点击登录", v -> RoutePageActivity.getLRActivity()).show();
                         }
                         GlideUtil.drawableImage(40,id,textView,true);
                         SimpleUtils.setToast(o.getMessage());
@@ -120,7 +120,7 @@ public class CircleRequestServiceFactory {
     }
 
     /**
-     * 圈子详情推荐文章
+     * 圈子详情收藏
      */
     public static void  Collect(View view, String roundId, TextView textView){
         LottieDialog.setDialogWindow(null);
@@ -148,4 +148,38 @@ public class CircleRequestServiceFactory {
                     }
                 });
     }
+
+    /**
+     * 圈子详情点赞
+     */
+    public static void  Comment_Like(View view, Activity activity, String commentId, ImageView imageView, TextView textView){
+
+        LottieDialog.setDialogWindow(null);
+        Observable observable= homeRequestService.Comment_Like(SimpleUtils.getToken(BaseActivity.getInstance()),commentId);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RequestObserver<AllDataState>(){
+                    @Override
+                    public void onNext(AllDataState o) {
+                        super.onNext(o);
+                        SimpleUtils.setLog("评论id:"+commentId+"----点赞数："+o.getMessage());
+                        int  id = R.mipmap.praise_9_icon;
+                        if (o.getCode()==10003){
+                            id = R.mipmap.praise_f_icon;
+                            textView.setText((String) o.getData());
+                            textView.setTextColor(Color.parseColor("#FD404E"));
+                        }else if (o.getCode()==10004){
+                            id = R.mipmap.praise_9_icon;
+                            textView.setText((String) o.getData());
+                            textView.setTextColor(Color.parseColor("#999999"));
+                        }else if(o.getCode()==32006){
+                            SnackbarUtil.IndefiniteSnackbar(view,o.getMessage(),3000,1).setAction("点击登录", v -> RoutePageActivity.getLRActivity()).show();
+                        }
+                        GlideUtil.displayImage(activity,id,imageView);
+                        SimpleUtils.setToast(o.getMessage());
+                    }
+                });
+    }
+
+
 }

@@ -33,6 +33,17 @@ public class SimpleRecyclerViewAdapter extends BaseQuickAdapter<Object, BaseView
             this.setEmptyView(view);
         }
     }
+    /**这个是评论的  就是显示了一个暂无评论**/
+    public SimpleRecyclerViewAdapter(int i,int layoutResId, Context context, List data, SimpleRecyclerViewAdapterCallback simpleRecyclerViewAdapterCallback) {
+        super(layoutResId, data);
+        mContext=context;
+        this.simpleRecyclerViewAdapterCallback=simpleRecyclerViewAdapterCallback;
+        if (mContext!=null){
+            View view=View.inflate(mContext, R.layout.common_comments_layout,null);
+            this.setEmptyView(view);
+        }
+    }
+
 
     @Override
     protected void convert(BaseViewHolder helper, Object item) {

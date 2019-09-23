@@ -1,7 +1,6 @@
 package com.example.z_circle.Details;
 
 import android.animation.IntEvaluator;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
@@ -9,13 +8,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.airbnb.lottie.utils.Utils;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_circle.CircleList.CircleListFragment;
@@ -23,16 +18,13 @@ import com.example.z_circle.Model.CircleComment;
 import com.example.z_circle.Model.CircleDetails;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
 import com.example.z_circle.R;
-import com.example.z_common.Custom.WanEditText;
 import com.example.z_common.Model.AllDataState;
 import com.example.z_common.NET.RequestObserver;
 import com.example.z_common.RoutePage.RouterPageFragment;
 import com.example.z_common.Util.GlideUtil;
 import com.example.z_common.Util.SimpleUtils;
 import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapter;
-import com.example.z_common.UtilRecyclerAdapter.SimpleRecyclerViewAdapterCallback;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -177,7 +169,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
         },context,"1172119067230765058",pageNum+"",pageSize+"");
     }
     private void setDetails_CommentsShow_Recycler(List<CircleComment.PageBean.ListBean> listBeans){
-        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(R.layout.comment_recycler_item, mvpView.getActivityContext(), listBeans, (helper, item) -> {
+        SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(1,R.layout.comment_recycler_item, mvpView.getActivityContext(), listBeans, (helper, item) -> {
             CircleComment.PageBean.ListBean listBean= (CircleComment.PageBean.ListBean) item;
             /**评论用户信息**/
             SimpleUtils.setLog("用户名："+listBean.getCommentUserName());
@@ -190,16 +182,40 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
             helper.setText(R.id.Comment_Content,listBean.getContent());
             /**点赞数**/
             helper.setText(R.id.Comment_Praise,listBean.getLikeNum());
+            /**是否点赞**/
+            if (listBean.isHasLike()){
+                ((TextView)helper.getView(R.id.Comment_Praise)).setTextColor(0XffFD404E);
+                GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.praise_f_icon, helper.getView(R.id.Comment_Praise_image));
+            }else {
+                ((TextView)helper.getView(R.id.Comment_Praise)).setTextColor(0Xff999999);
+                GlideUtil.displayImage(mvpView.getThisActivity(),R.mipmap.praise_9_icon, helper.getView(R.id.Comment_Praise_image));
+            }
+
             /**评论的评论数**/
             if (listBean.getCommentNum().equals("0")){
                 helper.getView(R.id.Comment_CommentSum).setVisibility(View.GONE);
             }else {
                 helper.setText(R.id.Comment_CommentSum,listBean.getCommentNum()+"条回复");
             }
+            helper.addOnClickListener(R.id.Comment_ClickPraise);
         });
         mvpView.getDetails_CommentsShow_Recycler().setAdapter(simpleRecyclerViewAdapter);
         mvpView.getDetails_CommentsShow_Recycler().setLayoutManager(SimpleUtils.getNoScrollRecyclerLayoutManager(true,0));
+        simpleRecyclerViewAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            int vid=view.getId();
+            if (vid == R.id.Comment_ClickPraise) { //评论点赞
+                TextView textView=view.findViewById(R.id.Comment_Praise);
+                ImageView imageView=view.findViewById(R.id.Comment_Praise_image);
+                CircleRequestServiceFactory.Comment_Like(mvpView.getDetails_Layout(),
+                        mvpView.getThisActivity(),
+                        listBeans.get(position).getId(),
+                        imageView,
+                        textView
+                        );
+            } else if (vid == R.id.Comment_CommentSum) {
 
+            }
+        });
     }
 
     /**相关推荐**/
