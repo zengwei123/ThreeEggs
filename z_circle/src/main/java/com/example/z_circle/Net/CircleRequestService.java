@@ -69,4 +69,12 @@ public interface CircleRequestService {
     @POST("round/comment/like")
     Observable<AllDataState> Comment_Like(@Field("devicesToken") String devicesToken, @Field("commentId") String commentId);
 
+
+    /**圈子文章收藏**/
+    @FormUrlEncoded
+    @POST("round/comment/save")
+    Observable<AllDataState> Comment_Save(@Field("devicesToken") String devicesToken,
+                                          @Field("content") String content,
+                                          @Field("roundId") String roundId,@Field("commentId")String commentId);
+
 }

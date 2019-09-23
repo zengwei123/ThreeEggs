@@ -46,7 +46,6 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
     @Override
     public void setView() {
         getDetailsMessage();
-        getComment(null,1,3);
         Comments_EditText();
         click();
     }
@@ -60,6 +59,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
                 if (circleDetails!=null){
                     setDetailsMessage();
                     setRecommended();
+                    getComment(null,1,3);
                 }else {
                     SimpleUtils.setToast(o.getMessage());
                 }
@@ -166,7 +166,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
             public void getDisposable(Disposable d) {
 
             }
-        },context,"1172119067230765058",pageNum+"",pageSize+"");
+        },context,circleDetails.getRound().getId()+"",pageNum+"",pageSize+"");
     }
     private void setDetails_CommentsShow_Recycler(List<CircleComment.PageBean.ListBean> listBeans){
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(1,R.layout.comment_recycler_item, mvpView.getActivityContext(), listBeans, (helper, item) -> {
@@ -283,7 +283,32 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.Details_Comments_TextBut) {  //评论发布按钮
-            removeEditText();
+            if (mvpView.getDetails_Comments_EditText().getText().toString().trim().equals("")){
+                SimpleUtils.setToast(mvpView.getDetails_Comments_EditText().getText().toString().trim());
+                return;
+            }
+            CircleRequestServiceFactory.Comment_Save(
+                    new RequestObserver.RequestObserverNext<AllDataState>() {
+                        @Override
+                        public void Next(AllDataState o) {
+                            if (o.isSuccess()){
+                                removeEditText();
+                            }
+                            SimpleUtils.setToast(o.getMessage());
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+
+                        @Override
+                        public void getDisposable(Disposable d) {
+
+                        }
+                    },mvpView.getActivityContext(), mvpView.getDetails_Comments_EditText().getText().toString(),
+                    circleDetails.getRound().getId() + "", null
+            );
         }else if(i == R.id.Details_Close){  //关闭按钮
             mvpView.getThisActivity().finish();
         }else if (i == R.id.Details_Refresh){  //换一换

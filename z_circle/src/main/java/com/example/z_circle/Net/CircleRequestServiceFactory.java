@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -181,5 +182,14 @@ public class CircleRequestServiceFactory {
                 });
     }
 
+
+    /**评论文章**/
+    public static void  Comment_Save(RequestObserver.RequestObserverNext requestObserverNext,Context context, String content,String roundId, String commentId){
+        LottieDialog.setDialogWindow(context);
+        Observable observable= homeRequestService.Comment_Save(SimpleUtils.getToken(BaseActivity.getInstance()),content,roundId,commentId);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RequestObserver<AllDataState>(requestObserverNext){});
+    }
 
 }
