@@ -44,7 +44,7 @@ public interface CircleRequestService {
     @POST("round/comment/list")
     Observable<AllDataState<CircleComment>> Comment(@Field("devicesToken") String devicesToken,
                                                     @Field("roundId")String roundId,
-                                                    @Field("comment_id ")String comment_id ,
+                                                    @Field("commentId")String comment_id ,
                                                     @Field("pageNum")String pageNum,
                                                     @Field("pageSize")String pageSize);
 

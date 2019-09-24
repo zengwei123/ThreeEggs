@@ -63,7 +63,7 @@ public class CommentsPresenter extends BasePresenter<CommentsView> implements Vi
             public void getDisposable(Disposable d) {
 
             }
-        },mvpView.getActivityContext(),mvpView.getRoundId(),mvpView.getComment_id(),pageNum+"",pageSize+"");
+        },mvpView.getActivityContext(),mvpView.getRoundId(),"0",pageNum+"",pageSize+"");
     }
     private void setCommentsRecycler(List<CircleComment.PageBean.ListBean> listBeans){
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(1,R.layout.comment_recycler_item, mvpView.getActivityContext(), listBeans, (helper, item) -> {
@@ -96,8 +96,6 @@ public class CommentsPresenter extends BasePresenter<CommentsView> implements Vi
                 helper.setText(R.id.Comment_CommentSum,listBean.getCommentNum()+"条回复");
             }
             helper.addOnClickListener(R.id.Comment_ClickPraise).addOnClickListener(R.id.Comment_But);
-
-
         });
         mvpView.getComment_Recycler().setAdapter(simpleRecyclerViewAdapter);
         mvpView.getComment_Recycler().setLayoutManager(SimpleUtils.getRecyclerLayoutManager(true,0));

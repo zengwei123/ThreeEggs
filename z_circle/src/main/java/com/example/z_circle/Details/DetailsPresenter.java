@@ -173,6 +173,8 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
     private void setDetails_CommentsShow_Recycler(List<CircleComment.PageBean.ListBean> listBeans){
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(1,R.layout.comment_recycler_item, mvpView.getActivityContext(), listBeans, (helper, item) -> {
             CircleComment.PageBean.ListBean listBean= (CircleComment.PageBean.ListBean) item;
+
+            SimpleUtils.setLog(listBean.toString());
             /**评论用户信息**/
             SimpleUtils.setLog("用户名："+listBean.getCommentUserName());
             helper.setText(R.id.Comment_UserName,listBean.getCommentUserName());

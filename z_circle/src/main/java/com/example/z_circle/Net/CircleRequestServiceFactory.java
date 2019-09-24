@@ -73,6 +73,7 @@ public class CircleRequestServiceFactory {
     public static void  Comment(RequestObserver.RequestObserverNext requestObserverNext,
                                 Context context,String roundId, String comment_id ,String pageNum, String pageSize){
         LottieDialog.setDialogWindow(context);
+        SimpleUtils.setLog("请求评论的：roundId"+roundId+"--comment_id"+comment_id);
         Observable observable= homeRequestService.Comment(SimpleUtils.getToken(BaseActivity.getInstance()),roundId,comment_id,pageNum,pageSize);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
