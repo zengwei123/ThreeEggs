@@ -20,7 +20,7 @@ public interface MainRequestService {
      */
     @FormUrlEncoded
     @POST("apk/detection")
-    Observable<AllDataState<ApkUpdate>> ApkDetection(@Field("version")String version);  /**apk更新接口**/
+    Observable<AllDataState<ApkUpdate>> ApkDetection(@Field("version")int version);  /**apk更新接口**/
 
     /**
      * token接口

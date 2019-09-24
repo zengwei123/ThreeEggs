@@ -283,7 +283,11 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.Details_Comments_TextBut) {  //评论发布按钮
+            String str=SimpleUtils.stringToUnicode(mvpView.getDetails_Comments_EditText().getText().toString());
+            SimpleUtils.setLog("看看表情："+str);
             removeEditText();
+            SimpleUtils.setLog("看看表情："+SimpleUtils.unicode2String(str).toString());
+            mvpView.getDetails_Content().setText(SimpleUtils.unicode2String(str));
         }else if(i == R.id.Details_Close){  //关闭按钮
             mvpView.getThisActivity().finish();
         }else if (i == R.id.Details_Refresh){  //换一换

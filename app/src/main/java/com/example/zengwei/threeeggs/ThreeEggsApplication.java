@@ -1,6 +1,8 @@
 package com.example.zengwei.threeeggs;
 
 import android.support.multidex.MultiDexApplication;
+import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.z_common.CommonRequestServiceFactory;
@@ -59,5 +61,9 @@ public class ThreeEggsApplication extends MultiDexApplication {
 
             }
         },getApplicationContext());
+
+        /**表情的初始化**/
+        EmojiCompat.Config config = new BundledEmojiCompatConfig(getApplicationContext());
+        EmojiCompat.init(config);
     }
 }
