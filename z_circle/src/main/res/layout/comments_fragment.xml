@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/Title_Height">
+
+        <ImageView
+            android:id="@+id/Comment_Close"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:src="@mipmap/close_icon" />
+
+        <TextView
+            android:id="@+id/Comment_Sum"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/Comment_Sorting"
+            android:layout_width="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@mipmap/sorting_up_icon" />
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Comment_Recycler"
+        android:layout_marginTop="@dimen/Title_Height"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

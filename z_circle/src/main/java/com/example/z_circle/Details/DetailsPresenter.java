@@ -179,7 +179,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
             /**评论时间**/
             helper.setText(R.id.Comment_Time,listBean.getCreateTime());
             /**评论内容**/
-            helper.setText(R.id.Comment_Content,listBean.getContent());
+            helper.setText(R.id.Comment_Content,SimpleUtils.unicode2String(listBean.getContent()));
             /**点赞数**/
             helper.setText(R.id.Comment_Praise,listBean.getLikeNum());
             /**是否点赞**/
@@ -287,6 +287,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
                 SimpleUtils.setToast(mvpView.getDetails_Comments_EditText().getText().toString().trim());
                 return;
             }
+            String str=SimpleUtils.stringToUnicode(mvpView.getDetails_Comments_EditText().getText().toString());
             CircleRequestServiceFactory.Comment_Save(
                     new RequestObserver.RequestObserverNext<AllDataState>() {
                         @Override
@@ -306,9 +307,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
                         public void getDisposable(Disposable d) {
 
                         }
-                    },mvpView.getActivityContext(), mvpView.getDetails_Comments_EditText().getText().toString(),
-                    circleDetails.getRound().getId() + "", null
-            );
+                    },mvpView.getActivityContext(), str, circleDetails.getRound().getId() + "", null);
         }else if(i == R.id.Details_Close){  //关闭按钮
             mvpView.getThisActivity().finish();
         }else if (i == R.id.Details_Refresh){  //换一换

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.support.text.emoji.EmojiCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -117,17 +118,17 @@ public class SimpleUtils {
     }
 
     /**获取版本号**/
-    public static String getAppVersion(){
+    public static int getAppVersion(){
         try {
             // 获取packagemanager的实例
             PackageManager packageManager = BaseActivity.getInstance().getPackageManager();
             // getPackageName()是你当前类的包名，0代表是获取版本信息
             PackageInfo packInfo = packageManager.getPackageInfo(BaseActivity.getInstance().getPackageName(),0);
-            String version = packInfo.versionName;
+            int version = packInfo.versionCode;
             return version;
         } catch (PackageManager.NameNotFoundException e) {
             //出错返回默认1.0版本
-            return "1.0";
+            return 1;
         }
     }
 
@@ -264,7 +265,41 @@ public class SimpleUtils {
             return 0+"";
     }
 
+    /**字符和表情转换**/
+    public static String stringToUnicode(String string) {
 
+        StringBuffer unicode = new StringBuffer();
+
+        for (int i = 0; i < string.length(); i++) {
+
+            // 取出每一个字符
+            char c = string.charAt(i);
+
+            // 转换为unicode
+            unicode.append("\\u" + Integer.toHexString(c));
+        }
+
+        return unicode.toString();
+    }
+
+    /**转成字符 和表情**/
+    public static CharSequence unicode2String(String unicode) {
+
+        StringBuffer string = new StringBuffer();
+
+        String[] hex = unicode.split("\\\\u");
+
+        for (int i = 1; i < hex.length; i++) {
+
+            // 转换出每一个代码点
+            int data = Integer.parseInt(hex[i], 16);
+
+            // 追加成string
+            string.append((char) data);
+        }
+
+        return EmojiCompat.get().process(string.toString());
+    }
 
     /**控制 log**/
     public static void setLog(String str){
