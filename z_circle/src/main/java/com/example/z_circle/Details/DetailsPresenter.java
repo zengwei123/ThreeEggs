@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.z_base.BaseActivity;
 import com.example.z_base.BasePresenter;
 import com.example.z_circle.CircleList.CircleListFragment;
+import com.example.z_circle.Comments.CommentsFragment;
 import com.example.z_circle.Model.CircleComment;
 import com.example.z_circle.Model.CircleDetails;
 import com.example.z_circle.Net.CircleRequestServiceFactory;
@@ -60,6 +61,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
                     setDetailsMessage();
                     setRecommended();
                     getComment(null,1,3);
+                    AllComments();
                 }else {
                     SimpleUtils.setToast(o.getMessage());
                 }
@@ -166,7 +168,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
             public void getDisposable(Disposable d) {
 
             }
-        },context,circleDetails.getRound().getId()+"",pageNum+"",pageSize+"");
+        },context,circleDetails.getRound().getId()+"",0+"",pageNum+"",pageSize+"");
     }
     private void setDetails_CommentsShow_Recycler(List<CircleComment.PageBean.ListBean> listBeans){
         SimpleRecyclerViewAdapter simpleRecyclerViewAdapter=new SimpleRecyclerViewAdapter(1,R.layout.comment_recycler_item, mvpView.getActivityContext(), listBeans, (helper, item) -> {
@@ -307,7 +309,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
                         public void getDisposable(Disposable d) {
 
                         }
-                    },mvpView.getActivityContext(), str, circleDetails.getRound().getId() + "", null);
+                    },mvpView.getActivityContext(), str, circleDetails.getRound().getId() + "", 0+"");
         }else if(i == R.id.Details_Close){  //关闭按钮
             mvpView.getThisActivity().finish();
         }else if (i == R.id.Details_Refresh){  //换一换
@@ -318,7 +320,7 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
             CircleRequestServiceFactory.Collect(mvpView.getDetails_Layout(),circleDetails.getRound().getId()+"",mvpView.getDetails_Collection());
         }
     }
-
+    /**关闭评论输入框**/
     private void removeEditText(){
         EditTextAnim(false);
         mvpView.getDetails_Comments_TextBut().setVisibility(View.GONE);
@@ -326,5 +328,12 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
         mvpView.getDetails_Comments_EditText().setFocusable(false);
         mvpView.getDetails_Comments_EditText().setFocusableInTouchMode(true);
         mvpView.getDetails_Comments_EditText().setText("");
+    }
+
+    /**全部评论**/
+    private void AllComments(){
+        FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
+        CommentsFragment  fragment= (CommentsFragment) RouterPageFragment.grtCommentsFragment(circleDetails.getRound().getId()+"",0+"");
+        fragmentTransaction.add(R.id.Details_Comments_FrameLayout, fragment,CommentsFragment.class.getName()).commit();
     }
 }

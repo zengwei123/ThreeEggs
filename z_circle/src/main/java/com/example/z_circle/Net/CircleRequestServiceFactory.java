@@ -71,9 +71,9 @@ public class CircleRequestServiceFactory {
      * 圈子评论
      */
     public static void  Comment(RequestObserver.RequestObserverNext requestObserverNext,
-                                Context context,String roundId, String pageNum, String pageSize){
+                                Context context,String roundId, String comment_id ,String pageNum, String pageSize){
         LottieDialog.setDialogWindow(context);
-        Observable observable= homeRequestService.Comment(SimpleUtils.getToken(BaseActivity.getInstance()),roundId,pageNum,pageSize);
+        Observable observable= homeRequestService.Comment(SimpleUtils.getToken(BaseActivity.getInstance()),roundId,comment_id,pageNum,pageSize);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RequestObserver<AllDataState<CircleComment>>(requestObserverNext){});

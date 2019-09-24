@@ -28,6 +28,13 @@ public class RouterPageFragment {
                 .withString("SearchParameter",SearchParameter)
                 .navigation();
     }
+    /**圈子-文章评论列表**/
+    public static Fragment grtCommentsFragment(String roundId,String comment_id){
+        return (Fragment) ARouter.getInstance().build("/Circle/CommentsFragment")
+                .withString("roundId",roundId)
+                .withString("comment_id",comment_id)
+                .navigation();
+    }
 
 
     /**消息列表**/

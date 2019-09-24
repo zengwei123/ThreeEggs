@@ -311,4 +311,11 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     </RelativeLayout>
+    <!--全部评论-->
+    <FrameLayout
+        android:id="@+id/Details_Comments_FrameLayout"
+        android:translationZ="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 </RelativeLayout>

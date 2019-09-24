@@ -44,6 +44,7 @@ public interface CircleRequestService {
     @POST("round/comment/list")
     Observable<AllDataState<CircleComment>> Comment(@Field("devicesToken") String devicesToken,
                                                     @Field("roundId")String roundId,
+                                                    @Field("comment_id ")String comment_id ,
                                                     @Field("pageNum")String pageNum,
                                                     @Field("pageSize")String pageSize);
 
@@ -70,11 +71,12 @@ public interface CircleRequestService {
     Observable<AllDataState> Comment_Like(@Field("devicesToken") String devicesToken, @Field("commentId") String commentId);
 
 
-    /**圈子文章收藏**/
+    /**圈子文章评论**/
     @FormUrlEncoded
     @POST("round/comment/save")
     Observable<AllDataState> Comment_Save(@Field("devicesToken") String devicesToken,
                                           @Field("content") String content,
-                                          @Field("roundId") String roundId,@Field("commentId")String commentId);
+                                          @Field("roundId") String roundId,
+                                          @Field("commentId")String commentId);
 
 }
