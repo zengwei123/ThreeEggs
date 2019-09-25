@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.example.z_circle.R;
 
 @Route(path = "/Circle/CommentsFragment")
 public class CommentsFragment extends MvpFragment<CommentsPresenter> implements CommentsView{
+    private RelativeLayout Comments_Fragment_id;
+
     private ImageView Comment_Close;  //关闭按钮
     private ImageView Comment_Sorting;   //排序
     private TextView Comment_Sum;   //评论数
@@ -32,7 +35,9 @@ public class CommentsFragment extends MvpFragment<CommentsPresenter> implements 
     private TextView Comment_UserName; //评论的用户
     private ImageView Comment_UserName_Close;//  关闭回复
     private RelativeLayout Comment_UserName_layout; //回复用户评论布局
+    private SwipeRefreshLayout Comment_SwipeRefreshLayout;  //刷新
 
+    private ThisView thisView;
     @Autowired
     public String roundId;
     @Autowired
@@ -50,6 +55,9 @@ public class CommentsFragment extends MvpFragment<CommentsPresenter> implements 
         mvpPresenter.attachView(this);
         getViews(view);
         mvpPresenter.init();
+        if(thisView!=null){
+            thisView.setView();
+        }
     }
 
     @Override
@@ -69,6 +77,7 @@ public class CommentsFragment extends MvpFragment<CommentsPresenter> implements 
 
     @Override
     public void getViews(View view) {
+        Comments_Fragment_id=view.findViewById(R.id.Comments_Fragment_id);
         Comment_Close=view.findViewById(R.id.Comment_Close);
         Comment_Sorting=view.findViewById(R.id.Comment_Sorting);
         Comment_Sum=view.findViewById(R.id.Comment_Sum);
@@ -78,6 +87,12 @@ public class CommentsFragment extends MvpFragment<CommentsPresenter> implements 
         Comment_UserName=view.findViewById(R.id.Comment_UserName);
         Comment_UserName_Close=view.findViewById(R.id.Comment_UserName_Close);
         Comment_UserName_layout=view.findViewById(R.id.Comment_UserName_layout);
+        Comment_SwipeRefreshLayout=view.findViewById(R.id.Comment_SwipeRefreshLayout);
+    }
+
+    @Override
+    public RelativeLayout getComments_Fragment_id() {
+        return Comments_Fragment_id;
     }
 
     @Override
@@ -126,6 +141,11 @@ public class CommentsFragment extends MvpFragment<CommentsPresenter> implements 
     }
 
     @Override
+    public SwipeRefreshLayout getComment_SwipeRefreshLayout() {
+        return Comment_SwipeRefreshLayout;
+    }
+
+    @Override
     public String getRoundId() {
         return roundId;
     }
@@ -135,4 +155,18 @@ public class CommentsFragment extends MvpFragment<CommentsPresenter> implements 
         return comment_id;
     }
 
+    @Override
+    public void setThisView(ThisView thisView) {
+        this.thisView=thisView;
+    }
+
+    @Override
+    public ThisView getThisView() {
+        return thisView;
+    }
+
+    public interface ThisView{
+        void setView();
+        void setOpComments(String RoundId,String commentid);
+    }
 }

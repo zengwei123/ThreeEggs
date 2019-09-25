@@ -48,6 +48,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api 'com.android.support:design:27.1.1'   //官方控件库
+    api 'com.android.support:cardview-v7:27.1.1'
 
     api 'com.github.bumptech.glide:glide:4.5.0'  //图片加载库
     api 'com.alibaba:arouter-api:1.4.1'   //阿里路由库

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/Comment_UserHard"
+            android:layout_centerVertical="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <LinearLayout
+            android:layout_toRightOf="@+id/Comment_UserHard"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/Comment_UserName"
+                android:textColor="@color/C999999"
+                android:textSize="@dimen/Text_Size_3"
+                android:gravity="center|left"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <TextView
+                android:id="@+id/Comment_Time"
+                android:textColor="#cccccc"
+                android:gravity="center|left"
+                android:textSize="@dimen/Text_Size_2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/Comment_Content"
+        android:textColor="@color/C2B2B2B"
+        android:textSize="@dimen/Text_Size_3"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_below="@+id/Comment_Content"
+        android:background="#F1F1F1"
+        android:padding="5dp"
+        android:id="@+id/Comment_User_Content"
+        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/zvfdgs"
+        android:layout_below="@+id/Comment_User_Content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+        <LinearLayout
+            android:id="@+id/Comment_ClickPraise"
+            android:layout_toLeftOf="@+id/Comment_But"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp">
+            <ImageView
+                android:id="@+id/Comment_Praise_image"
+                android:src="@mipmap/praise_9_icon"
+                android:layout_marginRight="3dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+            <TextView
+                android:text="1"
+                android:id="@+id/Comment_Praise"
+                android:textColor="@color/C999999"
+                android:textSize="@dimen/Text_Size_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/Comment_But"
+            android:src="@mipmap/comments_icon"
+            android:layout_alignParentRight="true"
+            android:padding="5dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+    </RelativeLayout>
+
+    <View
+        android:background="#E5E5E5"
+        android:layout_below="@+id/zvfdgs"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></View>
+</RelativeLayout>

@@ -21,7 +21,8 @@
             android:id="@+id/Details_UserName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="@dimen/Text_Size_4"
+            android:textColor="@color/C2B2B2B"
+            android:textSize="@dimen/Text_Size_3"
             android:layout_toRightOf="@+id/Details_Close"
             android:gravity="center" />
 
@@ -33,215 +34,226 @@
             android:padding="10dp"
             android:src="@mipmap/share_icon" />
     </RelativeLayout>
-    <android.support.v4.widget.NestedScrollView
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/Details_SwipeRefreshLayout"
+        android:layout_marginTop="@dimen/Title_Height"
+        android:layout_marginBottom="@dimen/Title_Height"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <!--轮播-->
-            <cn.bingoogolapple.bgabanner.BGABanner
-                android:id="@+id/Details_Banner"
-                app:banner_isNumberIndicator="true"
-                android:scaleType="fitXY"
-                app:banner_pointDrawable="@drawable/banner_style"
-                app:banner_pointAutoPlayInterval="5000"
-                app:banner_pointContainerBackground="#002b2b2b"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="350dp">
-
-            </cn.bingoogolapple.bgabanner.BGABanner>
-            <!--标题-->
-            <TextView
-                android:id="@+id/Details_Title"
-                android:padding="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:textSize="@dimen/Text_Size_4"
-                android:textColor="@color/C2B2B2B"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <!--内容-->
-            <TextView
-                android:id="@+id/Details_Content"
-                android:padding="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:textSize="@dimen/Text_Size_3"
-                android:textColor="@color/C2B2B2B"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <!--地址 日期-->
-            <RelativeLayout
-                android:padding="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/Details_Address"
-                    android:textSize="@dimen/Text_Size_3"
-                    android:textColor="@color/C999999"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/Details_Time"
-                    android:layout_alignParentRight="true"
-                    android:textSize="@dimen/Text_Size_3"
-                    android:textColor="@color/C999999"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </RelativeLayout>
-            <!--文章商品-->
-            <RelativeLayout
-                android:id="@+id/Details_Goods_Layout"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:background="@drawable/details_goods"
-                android:elevation="2dp"
-                android:layout_height="70dp">
-                <ImageView
-                    android:id="@+id/Details_Goods_Image"
-                    android:padding="5dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp" />
-                <LinearLayout
-                    android:layout_toRightOf="@+id/Details_Goods_Image"
-                    android:layout_toLeftOf="@+id/AAAAACCCC"
-                    android:orientation="vertical"
+                android:layout_height="match_parent">
+                <!--轮播-->
+                <cn.bingoogolapple.bgabanner.BGABanner
+                    android:id="@+id/Details_Banner"
+                    app:banner_isNumberIndicator="true"
+                    android:scaleType="fitXY"
+                    app:banner_pointDrawable="@drawable/banner_style"
+                    app:banner_pointAutoPlayInterval="5000"
+                    app:banner_pointContainerBackground="#002b2b2b"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/Details_Goods_Title"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/Text_Size_4"
-                        android:ellipsize="end"
-                        android:gravity="center|bottom|left"
-                        android:textColor="@color/C2B2B2B"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:id="@+id/Details_Goods_Price"
-                        android:layout_weight="1"
-                        android:textColor="@color/CFD404E"
-                        android:gravity="center|top|left"
-                        android:textSize="@dimen/Text_Size_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-                <ImageView
-                    android:id="@+id/AAAAACCCC"
-                    android:src="@mipmap/exam_left"
-                    android:layout_alignParentRight="true"
-                    android:layout_margin="5dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp" />
-            </RelativeLayout>
-            <!--分类-->
-            <TextView
-                android:id="@+id/Details_Label"
-                android:textColor="#EB8092"
-                android:layout_margin="10dp"
-                android:padding="5dp"
-                android:background="@drawable/circlelist_label_background"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <View
-                android:background="#E5E5E5"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"></View>
-            <!--评论数目-->
-            <RelativeLayout
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="40dp">
-                <TextView
-                    android:text="评论"
-                    android:textColor="@color/C2B2B2B"
-                    android:gravity="center"
-                    android:textSize="@dimen/Text_Size_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:id="@+id/Details_CommentsShow_Sum"
-                    android:textColor="@color/C2B2B2B"
-                    android:gravity="center"
-                    android:layout_alignParentRight="true"
-                    android:textSize="@dimen/Text_Size_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-            </RelativeLayout>
-            <View
-                android:background="#E5E5E5"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"></View>
-            <!--评论-->
-            <android.support.v7.widget.RecyclerView
-                android:layout_marginTop="5dp"
-                android:id="@+id/Details_CommentsShow_Recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_height="350dp">
 
-            </android.support.v7.widget.RecyclerView>
-            <!--查看全部评论-->
-            <TextView
-                android:id="@+id/Details_CommentsShow_But"
-                android:textSize="@dimen/Text_Size_2"
-                android:gravity="center"
-                android:textColor="#3AA3FF"
-                android:text="展开全部评论"
-                android:layout_width="match_parent"
-                android:layout_height="35dp" />
-            <View
-                android:background="#E5E5E5"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"></View>
-            <!--相关推荐-->
-            <RelativeLayout
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
+                </cn.bingoogolapple.bgabanner.BGABanner>
+                <!--标题-->
                 <TextView
-                    android:text="相关推荐"
-                    android:gravity="center"
+                    android:id="@+id/Details_Title"
+                    android:padding="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:textSize="@dimen/Text_Size_4"
                     android:textColor="@color/C2B2B2B"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <!--内容-->
                 <TextView
-                    android:text="换一换"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center"
-                    android:textSize="@dimen/Text_Size_2"
-                    android:textColor="@color/C999999"
-                    android:id="@+id/Details_Refresh"
+                    android:id="@+id/Details_Content"
+                    android:padding="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="@dimen/Text_Size_3"
+                    android:textColor="#3B3B3B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <!--地址 日期-->
+                <RelativeLayout
+                    android:padding="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/Details_Address"
+                        android:textSize="@dimen/Text_Size_3"
+                        android:textColor="@color/C999999"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/Details_Time"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/Text_Size_3"
+                        android:textColor="@color/C999999"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <!--文章商品-->
+                <android.support.v7.widget.CardView
+                    android:id="@+id/Details_Goods_Layout"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:background="#ffffff"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="1dp"
+                    app:cardMaxElevation="1dp"
+                    android:layout_height="70dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/Details_Goods_Image"
+                            android:padding="5dp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp" />
+                        <LinearLayout
+                            android:layout_toRightOf="@+id/Details_Goods_Image"
+                            android:layout_toLeftOf="@+id/AAAAACCCC"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:id="@+id/Details_Goods_Title"
+                                android:layout_weight="1"
+                                android:textSize="@dimen/Text_Size_4"
+                                android:ellipsize="end"
+                                android:gravity="center|bottom|left"
+                                android:textColor="@color/C2B2B2B"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                            <TextView
+                                android:id="@+id/Details_Goods_Price"
+                                android:layout_weight="1"
+                                android:textColor="@color/CFD404E"
+                                android:gravity="center|top|left"
+                                android:textSize="@dimen/Text_Size_4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                        <ImageView
+                            android:id="@+id/AAAAACCCC"
+                            android:src="@mipmap/exam_left"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="5dp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" />
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+                <!--分类-->
+                <TextView
+                    android:id="@+id/Details_Label"
+                    android:textColor="#EB8092"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    android:background="@drawable/circlelist_label_background"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-            </RelativeLayout>
-            <FrameLayout
-                android:id="@+id/Details_FrameLayout"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_height="wrap_content" />
+                <View
+                    android:background="#E5E5E5"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"></View>
+                <!--评论数目-->
+                <RelativeLayout
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <TextView
+                        android:text="评论"
+                        android:textColor="@color/C2B2B2B"
+                        android:gravity="center"
+                        android:textSize="@dimen/Text_Size_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/Details_CommentsShow_Sum"
+                        android:textColor="@color/C2B2B2B"
+                        android:gravity="center"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/Text_Size_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+                <View
+                    android:background="#E5E5E5"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"></View>
+                <!--评论-->
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/Details_CommentsShow_Recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            </FrameLayout>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                </android.support.v7.widget.RecyclerView>
+                <!--查看全部评论-->
+                <TextView
+                    android:id="@+id/Details_CommentsShow_But"
+                    android:textSize="@dimen/Text_Size_2"
+                    android:gravity="center"
+                    android:textColor="#3AA3FF"
+                    android:text="展开全部评论"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp" />
+                <View
+                    android:background="#E5E5E5"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"></View>
+                <!--相关推荐-->
+                <RelativeLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:text="相关推荐"
+                        android:gravity="center"
+                        android:textSize="@dimen/Text_Size_4"
+                        android:textColor="@color/C2B2B2B"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:text="换一换"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center"
+                        android:textSize="@dimen/Text_Size_2"
+                        android:textColor="@color/C999999"
+                        android:id="@+id/Details_Refresh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+                <FrameLayout
+                    android:id="@+id/Details_FrameLayout"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </FrameLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
     <RelativeLayout
         android:background="#ffffffff"
         android:elevation="3dp"
@@ -314,6 +326,14 @@
     <!--全部评论-->
     <FrameLayout
         android:id="@+id/Details_Comments_FrameLayout"
+        android:translationZ="10dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+    <!--评论的评论-->
+    <FrameLayout
+        android:id="@+id/Details_Comments_FrameLayout_1"
         android:translationZ="10dp"
         android:visibility="gone"
         android:layout_width="match_parent"

@@ -1,10 +1,14 @@
 package com.example.z_circle.Details;
 
+import android.animation.Animator;
 import android.animation.IntEvaluator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -36,9 +40,10 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class DetailsPresenter extends BasePresenter<DetailsView> implements View.OnClickListener{
-    private CircleDetails circleDetails;
-    private CircleListFragment fragment;
-    private int Details_Comments_Layout_Width=-1;
+    private CircleDetails circleDetails;   //
+    private int Details_Comments_Layout_Width=-1;   //做动画的
+    private FragmentTransaction fragmentTransaction;   //管理fragment布局
+    private CircleListFragment circleListFragment;  //用来换一换
     @Override
     public void init() {
         setView();
@@ -46,13 +51,20 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
 
     @Override
     public void setView() {
-        getDetailsMessage();
+        getDetailsMessage(mvpView.getActivityContext());
         Comments_EditText();
         click();
+
+        mvpView.getDetails_SwipeRefreshLayout().setOnRefreshListener(() -> {
+            getDetailsMessage(null); //下拉刷新
+        });
+        mvpView.getDetails_SwipeRefreshLayout().setColorSchemeResources(
+                R.color.CFD404E, R.color.Yellow,R.color.Blue
+        );
     }
 
     /**获取圈子详情内容**/
-    private void getDetailsMessage(){
+    private void getDetailsMessage(Context context){
         CircleRequestServiceFactory.Detail(new RequestObserver.RequestObserverNext<AllDataState<CircleDetails>>() {
             @Override
             public void Next(AllDataState<CircleDetails> o) {
@@ -61,23 +73,22 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
                     setDetailsMessage();
                     setRecommended();
                     getComment(null,1,3);
-                    AllComments();
                 }else {
                     SimpleUtils.setToast(o.getMessage());
                 }
-
+                mvpView.getDetails_SwipeRefreshLayout().setRefreshing(false);   //下拉结束
             }
 
             @Override
             public void onError() {
-
+                mvpView.getDetails_SwipeRefreshLayout().setRefreshing(false);   //下拉结束
             }
 
             @Override
             public void getDisposable(Disposable d) {
 
             }
-        },mvpView.getActivityContext(),mvpView.getRoundId());
+        },context,mvpView.getRoundId());
     }
     /**详情内容设置**/
     private void setDetailsMessage(){
@@ -197,11 +208,12 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
 
             /**评论的评论数**/
             if (listBean.getCommentNum().equals("0")){
-                helper.getView(R.id.Comment_CommentSum).setVisibility(View.GONE);
+                helper.getView(R.id.zvfdgs).setVisibility(View.GONE);
             }else {
+                helper.getView(R.id.zvfdgs).setVisibility(View.VISIBLE);
                 helper.setText(R.id.Comment_CommentSum,listBean.getCommentNum()+"条回复");
             }
-            helper.addOnClickListener(R.id.Comment_ClickPraise);
+            helper.addOnClickListener(R.id.Comment_ClickPraise).addOnClickListener(R.id.Comment_CommentSum);
         });
         mvpView.getDetails_CommentsShow_Recycler().setAdapter(simpleRecyclerViewAdapter);
         mvpView.getDetails_CommentsShow_Recycler().setLayoutManager(SimpleUtils.getNoScrollRecyclerLayoutManager(true,0));
@@ -216,8 +228,9 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
                         imageView,
                         textView
                         );
-            } else if (vid == R.id.Comment_CommentSum) {
-
+            } else if (vid == R.id.Comment_CommentSum) {  //打开二级评论的评论
+                CommentsIsComments(listBeans.get(position).getRoundId(),listBeans.get(position).getId());
+                open_close_fragmen(mvpView.getDetails_Comments_FrameLayout_1(),true);
             }
         });
     }
@@ -228,9 +241,13 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
         GlideUtil.drawableImage(40,R.mipmap.refresh_icon,mvpView.getDetails_Refresh(),true);
 
         /**添加推荐布局内容**/
-        FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
-        fragment= (CircleListFragment) RouterPageFragment.grtCircleList(2,circleDetails.getRound().getLabelId()+"");
-        fragmentTransaction.add(R.id.Details_FrameLayout, fragment,CircleListFragment.class.getName()).commit();
+        fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
+        circleListFragment= (CircleListFragment) RouterPageFragment.grtCircleList(2,circleDetails.getRound().getLabelId()+"");
+        if (BaseActivity.getInstance().getSupportFragmentManager().findFragmentById(R.id.Details_FrameLayout)!=null){
+            fragmentTransaction.replace(R.id.Details_FrameLayout, circleListFragment).commit();
+        }else {
+            fragmentTransaction.add(R.id.Details_FrameLayout, circleListFragment,CircleListFragment.class.getName()).commit();
+        }
     }
 
     /**下面评论条的东西**/
@@ -282,13 +299,17 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
         mvpView.getDetails_Refresh().setOnClickListener(this);
         mvpView.getDetails_Praise().setOnClickListener(this);
         mvpView.getDetails_Collection().setOnClickListener(this);
+        mvpView.getDetails_Comments().setOnClickListener(this);
+        mvpView.getDetails_CommentsShow_But().setOnClickListener(this);
+
     }
     @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.Details_Comments_TextBut) {  //评论发布按钮
             if (mvpView.getDetails_Comments_EditText().getText().toString().trim().equals("")){
-                SimpleUtils.setToast(mvpView.getDetails_Comments_EditText().getText().toString().trim());
+                SimpleUtils.setLog("看看id"+circleDetails.getRound().getId());
+                SimpleUtils.setToast("评论内容不能为空");
                 return;
             }
             String str=SimpleUtils.stringToUnicode(mvpView.getDetails_Comments_EditText().getText().toString());
@@ -311,15 +332,21 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
                         public void getDisposable(Disposable d) {
 
                         }
-                    },mvpView.getActivityContext(), str, circleDetails.getRound().getId() + "", 0+"");
+                    },mvpView.getActivityContext(), str, circleDetails.getRound().getId() + "", null);
         }else if(i == R.id.Details_Close){  //关闭按钮
             mvpView.getThisActivity().finish();
         }else if (i == R.id.Details_Refresh){  //换一换
-            fragment.categoryName(circleDetails.getRound().getLabelId()+"");
+            circleListFragment.categoryName(circleDetails.getRound().getLabelId()+"");
         }else if(i == R.id.Details_Praise){   //点赞按钮
             CircleRequestServiceFactory.Like(mvpView.getDetails_Layout(),circleDetails.getRound().getId()+"",mvpView.getDetails_Praise());
         }else if(i == R.id.Details_Collection){   //收藏按钮
             CircleRequestServiceFactory.Collect(mvpView.getDetails_Layout(),circleDetails.getRound().getId()+"",mvpView.getDetails_Collection());
+        }else if(i==R.id.Details_Comments){  //底部的评论按钮
+            AllComments();
+            open_close_fragmen(mvpView.getDetails_Comments_FrameLayout(),true);
+        }else if(i==R.id.Details_CommentsShow_But){
+            AllComments();
+            open_close_fragmen(mvpView.getDetails_Comments_FrameLayout(),true);
         }
     }
     /**关闭评论输入框**/
@@ -334,8 +361,85 @@ public class DetailsPresenter extends BasePresenter<DetailsView> implements View
 
     /**全部评论**/
     private void AllComments(){
-        FragmentTransaction fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
         CommentsFragment  fragment= (CommentsFragment) RouterPageFragment.grtCommentsFragment(circleDetails.getRound().getId()+"",0+"");
-        fragmentTransaction.add(R.id.Details_Comments_FrameLayout, fragment,CommentsFragment.class.getName()).commit();
+        if(BaseActivity.getInstance().getSupportFragmentManager().findFragmentById(R.id.Details_Comments_FrameLayout)!=null){
+            fragmentTransaction.replace(R.id.Details_Comments_FrameLayout, fragment).commit();
+        }else {
+            fragmentTransaction.add(R.id.Details_Comments_FrameLayout, fragment,CommentsFragment.class.getName()).commit();
+        }
+        fragment.setThisView(new CommentsFragment.ThisView() {
+            @Override
+            public void setView() {
+                fragment.getComment_Close().setOnClickListener(v -> open_close_fragmen(mvpView.getDetails_Comments_FrameLayout(),false));
+            }
+
+            @Override
+            public void setOpComments(String RoundId,String commentid) {
+                //评论列表中打卡评论
+                CommentsIsComments(RoundId,commentid);
+                open_close_fragmen(mvpView.getDetails_Comments_FrameLayout_1(),true);
+            }
+        });  //全部评论的关闭按钮
+    }
+    /**评论的评论**/
+    private void CommentsIsComments(String RoundId,String comment_id){
+        fragmentTransaction= BaseActivity.getInstance().getSupportFragmentManager().beginTransaction();
+        CommentsFragment  fragment= (CommentsFragment) RouterPageFragment.grtCommentsFragment(RoundId+"",comment_id+"");
+        if(BaseActivity.getInstance().getSupportFragmentManager().findFragmentById(R.id.Details_Comments_FrameLayout_1)!=null){
+            fragmentTransaction.replace(R.id.Details_Comments_FrameLayout_1, fragment).commit();
+        }else {
+            fragmentTransaction.add(R.id.Details_Comments_FrameLayout_1, fragment,CommentsFragment.class.getName()).commit();
+        }
+        fragment.setThisView(new CommentsFragment.ThisView() {
+            @Override
+            public void setView() {
+                //显示布局
+                fragment.getComment_Close().setOnClickListener(v -> open_close_fragmen(mvpView.getDetails_Comments_FrameLayout_1(),false));
+            }
+
+            @Override
+            public void setOpComments(String RoundId,String commentid) {
+
+            }
+        });  //全部评论的关闭按钮
+    }
+
+
+
+    /**开启关闭去全部评论**/
+    public void open_close_fragmen(View view,boolean b){
+        if (b){
+            view.setVisibility(View.VISIBLE);
+            ObjectAnimator objectAnimator=ObjectAnimator.ofFloat( view,"translationY", SimpleUtils.getWindowSize(false),0f);
+            objectAnimator.setDuration(400);
+            objectAnimator.start();
+        }else {
+            ObjectAnimator objectAnimator=ObjectAnimator.ofFloat( view,"translationY", 0f,SimpleUtils.getWindowSize(false));
+            objectAnimator.setDuration(400);
+            objectAnimator.start();
+            objectAnimator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    if (view!=null)
+                        view.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+        }
     }
 }

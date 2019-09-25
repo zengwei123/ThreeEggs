@@ -1,8 +1,11 @@
 package com.example.z_circle.Details;
 
 import android.media.Image;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -28,7 +31,7 @@ public interface DetailsView extends BaseView{
     TextView getDetails_Address();
     TextView getDetails_Time();
 
-    RelativeLayout getDetails_Goods_Layout();
+    CardView getDetails_Goods_Layout();
     ImageView getDetails_Goods_Image();
     TextView getDetails_Goods_Title();
     TextView getDetails_Goods_Price();
@@ -53,4 +56,8 @@ public interface DetailsView extends BaseView{
     LinearLayout getDetails_Comments_Layout();
 
     RelativeLayout getDetails_Layout();
+
+    FrameLayout getDetails_Comments_FrameLayout();
+    FrameLayout getDetails_Comments_FrameLayout_1();
+    SwipeRefreshLayout getDetails_SwipeRefreshLayout();
 }

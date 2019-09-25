@@ -3,11 +3,14 @@ package com.example.z_circle.Details;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -40,7 +43,7 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
     private TextView Details_Address;//地址
     private TextView Details_Time;  //日期
 
-    private RelativeLayout Details_Goods_Layout;  //推荐商品的布局
+    private CardView Details_Goods_Layout;  //推荐商品的布局
     private ImageView Details_Goods_Image; //分享商品的图片
     private TextView Details_Goods_Title; //标题
     private TextView Details_Goods_Price;//价格
@@ -64,7 +67,12 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
 
     private LinearLayout Details_Comments_Layout;   //点赞 收藏 评论数的布局
 
-    private RelativeLayout Details_Layout;
+    private RelativeLayout Details_Layout;   //总布局  用来弹出提示框登录的
+
+    private FrameLayout Details_Comments_FrameLayout;  //全部评论
+    private FrameLayout Details_Comments_FrameLayout_1;  //评论的评论
+
+    private SwipeRefreshLayout Details_SwipeRefreshLayout;  //下拉刷新
     @Autowired
     public String roundId;  //获取圈子的文章id
     @Autowired
@@ -132,6 +140,10 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
         Details_Comments_Layout=findViewById(R.id.Details_Comments_Layout);
 
         Details_Layout=findViewById(R.id.Details_Layout);
+
+        Details_Comments_FrameLayout=findViewById(R.id.Details_Comments_FrameLayout);
+        Details_Comments_FrameLayout_1=findViewById(R.id.Details_Comments_FrameLayout_1);
+        Details_SwipeRefreshLayout=findViewById(R.id.Details_SwipeRefreshLayout);
     }
 
     @Override
@@ -175,7 +187,7 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
     }
 
     @Override
-    public RelativeLayout getDetails_Goods_Layout() {
+    public CardView getDetails_Goods_Layout() {
         return Details_Goods_Layout;
     }
 
@@ -270,6 +282,21 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
         return Details_Layout;
     }
 
+    @Override
+    public FrameLayout getDetails_Comments_FrameLayout() {
+        return Details_Comments_FrameLayout;
+    }
+
+    @Override
+    public FrameLayout getDetails_Comments_FrameLayout_1() {
+        return Details_Comments_FrameLayout_1;
+    }
+
+    @Override
+    public SwipeRefreshLayout getDetails_SwipeRefreshLayout() {
+        return Details_SwipeRefreshLayout;
+    }
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -321,7 +348,13 @@ public class DetailsActivity extends MvpActivity<DetailsPresenter>implements Det
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        ((BaseActivity)getThisActivity()).finishAllActivity();
+        if (getDetails_Comments_FrameLayout_1().getVisibility()==View.VISIBLE){
+            mvpPresenter.open_close_fragmen(getDetails_Comments_FrameLayout_1(),false);
+        }else if (getDetails_Comments_FrameLayout().getVisibility()==View.VISIBLE){
+            mvpPresenter.open_close_fragmen(getDetails_Comments_FrameLayout(),false);
+        }else {
+            super.onBackPressed();
+            ((BaseActivity)getThisActivity()).finishAllActivity();
+        }
     }
 }

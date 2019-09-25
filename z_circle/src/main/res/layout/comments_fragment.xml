@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
+    android:id="@+id/Comments_Fragment_id"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -33,14 +34,19 @@
             android:padding="8dp"
             android:src="@mipmap/sorting_up_icon" />
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/Comment_Recycler"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/Comment_SwipeRefreshLayout"
         android:layout_marginTop="@dimen/Title_Height"
         android:layout_above="@+id/Comment_Text_Layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/Comment_Recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
     <RelativeLayout
         android:id="@+id/Comment_Text_Layout"
         android:background="#ffffffff"
